@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volume Booster GOODEV & Web Audio Studio Suite</title>
+  <meta name="description" content="All-in-one audio utilities: Volume booster, pitch shifter, decibel meter, 8D audio, voice changer, speaker cleaner, and hearing test.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Volume Booster GOODEV Studio</h1>
+    <p>Professional & fun browser-based audio toolkit. Process audio securely on device without server uploads.</p>
+  </header>
+
+  <!-- Category 1: Utilities -->
+  <div class="category-title">Core Utilities</div>
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('tab-boost')">Volume Booster</button>
+    <button class="tab-btn" onclick="switchTab('tab-pitch')">Pitch & Speed</button>
+    <button class="tab-btn" onclick="switchTab('tab-v2a')">Video to Audio</button>
+    <button class="tab-btn" onclick="switchTab('tab-cleaner')">Water Ejector</button>
+    <button class="tab-btn" onclick="switchTab('tab-db')">Decibel Meter</button>
+    <button class="tab-btn" onclick="switchTab('tab-latency')">Audio Latency</button>
+    <button class="tab-btn" onclick="switchTab('tab-clarity')">Vocal Clarity</button>
+  </div>
+
+  <!-- Category 2: Interactive & Fun -->
+  <div class="category-title">Fun & Experiments</div>
+  <div class="nav-tabs">
+    <button class="tab-btn" onclick="switchTab('tab-8d')">8D Spatial Sound</button>
+    <button class="tab-btn" onclick="switchTab('tab-voice')">Voice Transformer</button>
+    <button class="tab-btn" onclick="switchTab('tab-hearing')">Hearing Age Test</button>
+    <button class="tab-btn" onclick="switchTab('tab-binaural')">Binaural Study Waves</button>
+    <button class="tab-btn" onclick="switchTab('tab-reverse')">Reverse Audio</button>
+  </div>
+
+  <main>
+    <!-- 1. Volume Booster -->
+    <div class="tool-card active" id="tab-boost">
+      <h2>Volume & Gain Booster</h2>
+      <p class="subtext">Boost media sound levels up to 400% with real-time gain amplification.</p>
+      <div class="upload-zone" onclick="document.getElementById('boost-file').click()">
+        <span id="boost-name">Click or Drag Audio/Video file</span>
+        <input type="file" id="boost-file" accept="audio/*,video/*" style="display:none" onchange="handleBoostUpload(event)">
+      </div>
+      <div class="control-group">
+        <label>Boost Multiplier: <span id="boost-val">100%</span></label>
+        <input type="range" id="boost-slider" min="1" max="4" step="0.1" value="1" oninput="updateBoost(this.value)">
+      </div>
+      <audio id="boost-player" controls style="display:none;"></audio>
+    </div>
+
+    <!-- 2. Pitch & Speed -->
+    <div class="tool-card" id="tab-pitch">
+      <h2>Audio Pitch & Speed Shifter</h2>
+      <p class="subtext">Speed up or slow down tracks from 0.5x to 2.0x smoothly.</p>
+      <div class="upload-zone" onclick="document.getElementById('pitch-file').click()">
+        <span id="pitch-name">Select Audio file</span>
+        <input type="file" id="pitch-file" accept="audio/*" style="display:none" onchange="handlePitchUpload(event)">
+      </div>
+      <div class="control-group">
+        <label>Playback Speed: <span id="speed-val">1.0x</span></label>
+        <input type="range" id="speed-slider" min="0.5" max="2.0" step="0.05" value="1.0" oninput="updateSpeed(this.value)">
+      </div>
+      <audio id="pitch-player" controls style="display:none;"></audio>
+    </div>
+
+    <!-- 3. Video to Audio -->
+    <div class="tool-card" id="tab-v2a">
+      <h2>Video to Audio Converter</h2>
+      <p class="subtext">Extract audio tracks from MP4, WebM, or MOV files locally.</p>
+      <div class="upload-zone" onclick="document.getElementById('v2a-file').click()">
+        <span id="v2a-name">Select Video file</span>
+        <input type="file" id="v2a-file" accept="video/*" style="display:none" onchange="handleV2AUpload(event)">
+      </div>
+      <button class="btn" id="v2a-btn" onclick="extractAudio()" style="display:none;">Extract & Save Audio</button>
+      <div id="v2a-status" class="status-msg"></div>
+    </div>
+
+    <!-- 4. Water Ejector -->
+    <div class="tool-card" id="tab-cleaner">
+      <h2>Speaker Cleaner & Water Ejector <span class="badge">165Hz</span></h2>
+      <p class="subtext">Generates kinetic acoustic pulses to help clear water and dust from mobile speakers.</p>
+      <button class="btn" id="cleaner-btn" onclick="toggleWaterEject()">Start Ejection Frequency</button>
+    </div>
+
+    <!-- 5. Decibel Meter -->
+    <div class="tool-card" id="tab-db">
+      <h2>Real-Time Decibel & Sound Meter</h2>
+      <p class="subtext">Detect live environmental noise levels using your microphone.</p>
+      <div class="meter-box">
+        <div class="db-num"><span id="db-val">0</span> <small>dB</small></div>
+        <div class="db-bar-bg"><div class="db-bar-fill" id="db-fill"></div></div>
+        <div id="db-status" class="status-msg">Microphone ready</div>
+      </div>
+      <button class="btn" id="db-btn" onclick="toggleDecibelMeter()">Start Measurement</button>
+    </div>
+
+    <!-- 6. Latency Sync -->
+    <div class="tool-card" id="tab-latency">
+      <h2>Bluetooth Audio Latency Sync</h2>
+      <p class="subtext">Test audio-visual synchronization and delay for wireless earbuds.</p>
+      <div id="latency-flash" class="flash-box">Press Trigger to Sync</div>
+      <button class="btn" onclick="triggerLatencyTest()">Trigger Audio-Visual Pulse</button>
+    </div>
+
+    <!-- 7. Vocal Clarity -->
+    <div class="tool-card" id="tab-clarity">
+      <h2>Speech & Vocal Clarity Enhancer</h2>
+      <p class="subtext">Filters low rumble and boosts dialogue presence for clearer speech.</p>
+      <div class="upload-zone" onclick="document.getElementById('clarity-file').click()">
+        <span id="clarity-name">Select Voice Recording</span>
+        <input type="file" id="clarity-file" accept="audio/*" style="display:none" onchange="handleClarityUpload(event)">
+      </div>
+      <button class="btn" onclick="toggleClarityFilter()">Toggle Clarity Boost</button>
+      <audio id="clarity-player" controls style="display:none;"></audio>
+    </div>
+
+    <!-- 8. 8D Spatial Audio -->
+    <div class="tool-card" id="tab-8d">
+      <h2>8D Spatial Audio Converter</h2>
+      <p class="subtext">Simulates dynamic 360-degree rotating sound (Use headphones!).</p>
+      <div class="upload-zone" onclick="document.getElementById('8d-file').click()">
+        <span id="8d-name">Select Music track</span>
+        <input type="file" id="8d-file" accept="audio/*" style="display:none" onchange="handle8DUpload(event)">
+      </div>
+      <button class="btn" id="8d-btn" onclick="toggle8DEffect()">Activate 8D Sound Experience</button>
+    </div>
+
+    <!-- 9. Funny Voice Transformer -->
+    <div class="tool-card" id="tab-voice">
+      <h2>Funny Voice Transformer</h2>
+      <p class="subtext">Record a short clip and apply instant voice filters.</p>
+      <button class="btn" id="rec-btn" onclick="toggleVoiceRecord()">Record Voice (Mic)</button>
+      <div class="voice-buttons" style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn btn-sm" onclick="playVoiceEffect('helium')">Helium Voice</button>
+        <button class="btn btn-sm" onclick="playVoiceEffect('robot')">Robot Voice</button>
+        <button class="btn btn-sm" onclick="playVoiceEffect('deep')">Deep Monster</button>
+      </div>
+    </div>
+
+    <!-- 10. Hearing Age Challenge -->
+    <div class="tool-card" id="tab-hearing">
+      <h2>Hearing Age Frequency Challenge</h2>
+      <p class="subtext">Test high-frequency thresholds to estimate biological ear age.</p>
+      <div class="hearing-slider">
+        <label>Current Frequency: <span id="freq-val">12000 Hz</span></label>
+        <input type="range" id="freq-slider" min="8000" max="20000" step="500" value="12000" oninput="updateFreq(this.value)">
+      </div>
+      <div id="hearing-estimate" class="status-msg" style="margin: 14px 0;">Estimated Hearing Age: Under 50</div>
+      <button class="btn" id="tone-btn" onclick="toggleTone()">Play Test Tone</button>
+    </div>
+
+    <!-- 11. Binaural Study Waves -->
+    <div class="tool-card" id="tab-binaural">
+      <h2>Binaural Study & Focus Waves</h2>
+      <p class="subtext">Continuous pure-tone beats to aid concentration and deep work.</p>
+      <div class="control-group">
+        <button class="btn btn-sm" onclick="playBinaural(10)">Alpha Waves (10Hz - Focus)</button>
+        <button class="btn btn-sm" onclick="playBinaural(6)">Theta Waves (6Hz - Relaxation)</button>
+        <button class="btn btn-sm btn-danger" onclick="stopBinaural()">Stop Waves</button>
+      </div>
+    </div>
+
+    <!-- 12. Reverse Audio -->
+    <div class="tool-card" id="tab-reverse">
+      <h2>Reverse Audio Player</h2>
+      <p class="subtext">Reverse sound tracks in memory and listen backwards instantly.</p>
+      <div class="upload-zone" onclick="document.getElementById('rev-file').click()">
+        <span id="rev-name">Select Audio file</span>
+        <input type="file" id="rev-file" accept="audio/*" style="display:none" onchange="handleReverseUpload(event)">
+      </div>
+      <button class="btn" onclick="processReverseAudio()">Reverse & Play</button>
+      <audio id="rev-player" controls style="display:none;"></audio>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 Volume Booster GOODEV Studio. High-performance client-side audio tool suite.
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
