@@ -334,3 +334,21 @@ function bufferToWave(abuffer, len) {
   }
   return new Blob([buffer], { type: "audio/wav" });
 }
+
+// Legal Modals Control (AdSense Requirements)
+function openModal(modalId) {
+  document.querySelectorAll('.modal-tab').forEach(m => m.style.display = 'none');
+  const target = document.getElementById(modalId);
+  if (target) target.style.display = 'block';
+  document.getElementById('modal-container').style.display = 'flex';
+}
+
+function closeModalDirect() {
+  document.getElementById('modal-container').style.display = 'none';
+}
+
+function closeModal(event) {
+  if (event.target.id === 'modal-container') {
+    closeModalDirect();
+  }
+}
