@@ -177,9 +177,48 @@
     </div>
   </main>
 
-  <footer>
-    &copy; 2026 Volume Booster GOODEV Studio. High-performance client-side audio tool suite.
+    <footer>
+    <div class="footer-links">
+      <button class="footer-btn" onclick="openModal('modal-about')">About Us</button>
+      <button class="footer-btn" onclick="openModal('modal-privacy')">Privacy Policy</button>
+      <button class="footer-btn" onclick="openModal('modal-terms')">Terms of Service</button>
+      <button class="footer-btn" onclick="openModal('modal-contact')">Contact</button>
+    </div>
+    <p>&copy; 2026 Volume Booster GOODEV Studio. High-performance client-side audio tool suite.</p>
   </footer>
+
+  <!-- Legal & Info Modals -->
+  <div id="modal-container" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModalDirect()">&times;</button>
+      
+      <!-- About -->
+      <div id="modal-about" class="modal-tab" style="display:none;">
+        <h3>About GOODEV Audio Studio</h3>
+        <p>GOODEV Audio Studio is a lightweight, browser-based digital audio workstation delivering instant sound utilities without software installation. All processing executes locally on client hardware using high-precision Web Audio API buffers, ensuring maximum user data privacy and zero upload latency.</p>
+      </div>
+
+      <!-- Privacy -->
+      <div id="modal-privacy" class="modal-tab" style="display:none;">
+        <h3>Privacy Policy</h3>
+        <p>Your privacy is strictly respected. This web suite does NOT upload, store, or transmit your audio or video files to external servers. All operations—including gain amplification, frequency synthesis, filtering, and video extraction—are performed entirely inside your device's memory.</p>
+        <p>Third-party vendors, including Google, may use cookies to serve ads based on prior visits to our website. Users may opt out of personalized advertising by visiting Google Ads Settings.</p>
+      </div>
+
+      <!-- Terms -->
+      <div id="modal-terms" class="modal-tab" style="display:none;">
+        <h3>Terms of Service</h3>
+        <p>By using Volume Booster GOODEV Studio, you agree to utilize its sound-processing capabilities responsibly. High-gain amplification above 100% can generate substantial sound pressure; users are advised to monitor volume levels to protect physical hearing and prevent speaker driver damage.</p>
+      </div>
+
+      <!-- Contact -->
+      <div id="modal-contact" class="modal-tab" style="display:none;">
+        <h3>Contact Us</h3>
+        <p>For inquiries, support requests, or feature feedback regarding our browser audio utilities, contact the development team at: <strong>support@volumebooster-studio.pages.dev</strong></p>
+      </div>
+    </div>
+  </div>
+
 
   <script src="app.js"></script>
 </body>
