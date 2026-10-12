@@ -242,6 +242,29 @@ audio {
   vertical-align: middle;
 }
 
+/* Tool Explanation Guide Box */
+.tool-guide {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--border);
+}
+
+.tool-guide h4 {
+  font-size: 0.95rem;
+  color: var(--accent);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tool-guide p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
 /* Footer & Legal Modals */
 footer {
   margin-top: auto;
