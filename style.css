@@ -242,6 +242,7 @@ audio {
   vertical-align: middle;
 }
 
+/* Footer & Legal Modals */
 footer {
   margin-top: auto;
   padding: 36px 0 16px;
@@ -250,7 +251,6 @@ footer {
   font-size: 0.85rem;
 }
 
-/* Footer Links & Modals */
 .footer-links {
   display: flex;
   justify-content: center;
