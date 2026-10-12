@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Volume Booster GOODEV & Web Audio Studio Suite</title>
-  <meta name="description" content="All-in-one audio utilities: Volume booster, pitch shifter, decibel meter, 8D audio, voice changer, speaker cleaner, and hearing test.">
+  <meta name="description" content="All-in-one browser audio toolkit: Volume booster, pitch shifter, decibel meter, 8D audio, voice changer, speaker cleaner, and hearing test.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -50,6 +50,12 @@
         <input type="range" id="boost-slider" min="1" max="4" step="0.1" value="1" oninput="updateBoost(this.value)">
       </div>
       <audio id="boost-player" controls style="display:none;"></audio>
+      
+      <div class="tool-guide">
+        <h4>What is this tool and how does it work?</h4>
+        <p>Ever received a voice note, podcast, or lecture recording that was recorded so quietly you could barely hear it even at maximum device volume? This tool acts as an audio amplifier right in your browser.</p>
+        <p>Instead of merely adjusting device output, it multiplies the digital audio signal gain directly via the Web Audio API. Simply upload your audio or video file, drag the slider above 100%, and enjoy crisp, amplified playback without needing any desktop software.</p>
+      </div>
     </div>
 
     <!-- 2. Pitch & Speed -->
@@ -65,6 +71,12 @@
         <input type="range" id="speed-slider" min="0.5" max="2.0" step="0.05" value="1.0" oninput="updateSpeed(this.value)">
       </div>
       <audio id="pitch-player" controls style="display:none;"></audio>
+
+      <div class="tool-guide">
+        <h4>What is this tool and how does it work?</h4>
+        <p>Whether you are transcribing a fast-paced interview, learning a complex guitar solo note-by-note, or practicing choreography, controlling playback tempo is essential.</p>
+        <p>This controller alters the playback rate instantly. Slowing down to 0.7x helps pick up fast speech nuances, while speeding up to 1.5x lets you skim through lengthy audio recordings in half the time.</p>
+      </div>
     </div>
 
     <!-- 3. Video to Audio -->
@@ -77,6 +89,12 @@
       </div>
       <button class="btn" id="v2a-btn" onclick="extractAudio()" style="display:none;">Extract & Save Audio</button>
       <div id="v2a-status" class="status-msg"></div>
+
+      <div class="tool-guide">
+        <h4>What is this tool and how does it work?</h4>
+        <p>Have an MP4 screen recording, music video, or lecture clip and just need the soundtrack as an audio file? Many online converters force you to upload large gigabyte videos to remote servers, which is slow and risks privacy.</p>
+        <p>Our tool runs 100% inside your browser memory. It decodes the video's audio track locally on your processor and renders an uncompressed WAV audio file ready for instant download—no waiting, no data usage, and complete privacy.</p>
+      </div>
     </div>
 
     <!-- 4. Water Ejector -->
@@ -84,6 +102,12 @@
       <h2>Speaker Cleaner & Water Ejector <span class="badge">165Hz</span></h2>
       <p class="subtext">Generates kinetic acoustic pulses to help clear water and dust from mobile speakers.</p>
       <button class="btn" id="cleaner-btn" onclick="toggleWaterEject()">Start Ejection Frequency</button>
+
+      <div class="tool-guide">
+        <h4>What is this tool and how does it work?</h4>
+        <p>Accidentally dropped your phone in water or noticed muffled sound after a shower? Surface tension often traps water droplets inside speaker mesh grills.</p>
+        <p>This utility generates a specific 165Hz low-frequency sawtooth acoustic tone. This frequency induces physical air movement and speaker membrane vibrations, pushing trapped moisture and micro-dust particles out of the speaker cavities.</p>
+      </div>
     </div>
 
     <!-- 5. Decibel Meter -->
@@ -96,6 +120,12 @@
         <div id="db-status" class="status-msg">Microphone ready</div>
       </div>
       <button class="btn" id="db-btn" onclick="toggleDecibelMeter()">Start Measurement</button>
+
+      <div class="tool-guide">
+        <h4>What is this tool and how does it work?</h4>
+        <p>Curious if your workspace is quiet enough for podcast recording, or checking if neighborhood traffic exceeds healthy sound limits? This sound meter uses your device's built-in microphone to capture live ambient noise levels.</p>
+        <p>It converts live sound pressure into approximate decibels (dB), giving you visual real-time feedback from whisper-quiet ambient levels (under 30dB) to loud traffic exposure (over 80dB).</p>
+      </div>
     </div>
 
     <!-- 6. Latency Sync -->
@@ -104,6 +134,12 @@
       <p class="subtext">Test audio-visual synchronization and delay for wireless earbuds.</p>
       <div id="latency-flash" class="flash-box">Press Trigger to Sync</div>
       <button class="btn" onclick="triggerLatencyTest()">Trigger Audio-Visual Pulse</button>
+
+      <div class="tool-guide">
+        <h4>What is this tool and how does it work?</h4>
+        <p>Bluetooth headphones often suffer from slight audio lag that can ruin gaming or movie experiences. When a character speaks, the lip movement and sound should match up perfectly.</p>
+        <p>This sync tool triggers an instantaneous screen flash paired precisely with an 880Hz audio beep. If you see the flash before hearing the beep in your earphones, your audio connection has noticeable latency.</p>
+      </div>
     </div>
 
     <!-- 7. Vocal Clarity -->
@@ -116,6 +152,12 @@
       </div>
       <button class="btn" onclick="toggleClarityFilter()">Toggle Clarity Boost</button>
       <audio id="clarity-player" controls style="display:none;"></audio>
+
+      <div class="tool-guide">
+        <h4>What is this tool and how does it work?</h4>
+        <p>Phone voice notes and meeting recordings often capture heavy desk thumps, air conditioner hums, or low rumble, making voices sound muddy and hard to understand.</p>
+        <p>The clarity filter applies a targeted parametric EQ profile that emphasizes human voice fundamentals (around 3kHz) while cutting unneeded low bass frequencies, bringing speech right to the front.</p>
+      </div>
     </div>
 
     <!-- 8. 8D Spatial Audio -->
@@ -127,6 +169,12 @@
         <input type="file" id="8d-file" accept="audio/*" style="display:none" onchange="handle8DUpload(event)">
       </div>
       <button class="btn" id="8d-btn" onclick="toggle8DEffect()">Activate 8D Sound Experience</button>
+
+      <div class="tool-guide">
+        <h4>What is this tool and how does it work?</h4>
+        <p>8D audio creates an immersive spatial illusion where music seems to circle around your head in a physical room rather than playing flat inside your ears.</p>
+        <p>Using a stereo panning algorithm driven by sinusoidal modulation, it shifts sound phases dynamically between your left and right ears. <em>Note: Headphones or earbuds are required to experience the full rotating effect.</em></p>
+      </div>
     </div>
 
     <!-- 9. Funny Voice Transformer -->
@@ -138,6 +186,12 @@
         <button class="btn btn-sm" onclick="playVoiceEffect('helium')">Helium Voice</button>
         <button class="btn btn-sm" onclick="playVoiceEffect('robot')">Robot Voice</button>
         <button class="btn btn-sm" onclick="playVoiceEffect('deep')">Deep Monster</button>
+      </div>
+
+      <div class="tool-guide">
+        <h4>What is this tool and how does it work?</h4>
+        <p>A fun audio playground for creating funny voice memos and sound effects. Record a quick greeting using your microphone, then click a preset to transform your voice instantly.</p>
+        <p>The Helium preset speeds up and pitches your formant higher like breathing helium gas, while the Deep Monster filter drops playback into an ominous cinematic rumble.</p>
       </div>
     </div>
 
@@ -151,6 +205,12 @@
       </div>
       <div id="hearing-estimate" class="status-msg" style="margin: 14px 0;">Estimated Hearing Age: Under 50</div>
       <button class="btn" id="tone-btn" onclick="toggleTone()">Play Test Tone</button>
+
+      <div class="tool-guide">
+        <h4>What is this tool and how does it work?</h4>
+        <p>As humans age, the tiny hair cells inside the inner ear naturally degrade, gradually reducing our ability to hear high-pitched frequencies above 15,000 Hz.</p>
+        <p>This interactive test plays pure sine waves starting from 8,000 Hz up to 20,000 Hz. Adjust the slider to see the highest pitch you can perceive and compare your biological hearing threshold against age averages.</p>
+      </div>
     </div>
 
     <!-- 11. Binaural Study Waves -->
@@ -161,6 +221,12 @@
         <button class="btn btn-sm" onclick="playBinaural(10)">Alpha Waves (10Hz - Focus)</button>
         <button class="btn btn-sm" onclick="playBinaural(6)">Theta Waves (6Hz - Relaxation)</button>
         <button class="btn btn-sm btn-danger" onclick="stopBinaural()">Stop Waves</button>
+      </div>
+
+      <div class="tool-guide">
+        <h4>What is this tool and how does it work?</h4>
+        <p>Binaural beats occur when two slightly different tone frequencies are played independently into each ear (for example, 200Hz in the left and 210Hz in the right). Your brain perceives the 10Hz difference as an auditory pulse.</p>
+        <p>Alpha waves (around 10Hz) are widely used by programmers, writers, and students to encourage deep flow states, while Theta waves (6Hz) support calm meditation and winding down.</p>
       </div>
     </div>
 
@@ -174,10 +240,17 @@
       </div>
       <button class="btn" onclick="processReverseAudio()">Reverse & Play</button>
       <audio id="rev-player" controls style="display:none;"></audio>
+
+      <div class="tool-guide">
+        <h4>What is this tool and how does it work?</h4>
+        <p>Curious what famous melodies sound like when played backwards, or looking for reversed atmospheric sound effects for video editing?</p>
+        <p>This tool reads your audio data into an uncompressed memory buffer, reverses each sound channel array sample-by-sample, and plays it back in reverse order with zero quality loss.</p>
+      </div>
     </div>
   </main>
 
-    <footer>
+  <!-- Footer & Legal Links -->
+  <footer>
     <div class="footer-links">
       <button class="footer-btn" onclick="openModal('modal-about')">About Us</button>
       <button class="footer-btn" onclick="openModal('modal-privacy')">Privacy Policy</button>
@@ -218,7 +291,6 @@
       </div>
     </div>
   </div>
-
 
   <script src="app.js"></script>
 </body>
