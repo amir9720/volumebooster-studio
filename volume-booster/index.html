@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Volume Booster - Boost Audio & Video Sound up to 400%</title>
+  <meta name="description" content="Free online volume booster tool. Increase audio or video volume up to 400% directly in your browser with zero data uploads.">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --border: #1f2937;
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 16px 40px; }
+    
+    /* Top Header */
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+    .brand { color: #fff; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand span { color: var(--accent); }
+    .back-home { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+    .back-home:hover { color: #fff; }
+
+    /* Tool Container */
+    .container { width: 100%; max-width: 700px; }
+    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 32px 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); text-align: center; }
+    h1 { font-size: 1.8rem; margin-bottom: 8px; color: #fff; }
+    .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; line-height: 1.5; }
+    
+    .dropzone { border: 2px dashed #374151; border-radius: 14px; padding: 36px 20px; cursor: pointer; transition: 0.2s; background: rgba(255,255,255,0.01); margin-bottom: 24px; }
+    .dropzone:hover { border-color: var(--accent); background: rgba(99,102,241,0.05); }
+    .dropzone-icon { font-size: 2.2rem; margin-bottom: 8px; }
+    .dropzone-text { font-size: 0.95rem; color: #cbd5e1; font-weight: 500; }
+    .dropzone-sub { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+
+    .control-panel { display: none; margin-top: 20px; text-align: left; background: #0c121e; padding: 20px; border-radius: 12px; border: 1px solid var(--border); }
+    .control-label { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: 600; font-size: 0.95rem; }
+    .control-label span { color: var(--accent); font-size: 1.1rem; }
+    input[type=range] { width: 100%; accent-color: var(--accent); height: 8px; border-radius: 4px; outline: none; background: #1e293b; cursor: pointer; }
+    audio { width: 100%; margin-top: 18px; }
+
+    /* SEO Article (AdSense Requirement) */
+    .seo-article { margin-top: 50px; background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 28px; line-height: 1.7; color: #cbd5e1; font-size: 0.95rem; }
+    .seo-article h2 { color: #fff; font-size: 1.3rem; margin-bottom: 12px; }
+    .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 20px 0 8px; }
+    .seo-article p { margin-bottom: 14px; }
+    .seo-article ul { padding-left: 20px; margin-bottom: 14px; }
+    .seo-article li { margin-bottom: 6px; }
+
+    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="nav">
+    <a href="/" class="brand">⚡ GOODEV<span>Audio</span></a>
+    <a href="/" class="back-home">&larr; Back to All Tools</a>
+  </header>
+
+  <main class="container">
+    <div class="tool-box">
+      <h1>Volume & Gain Booster</h1>
+      <p class="lead">Boost the sound of quiet audio and video files up to 400% without quality distortion.</p>
+
+      <div class="dropzone" onclick="document.getElementById('file-input').click()">
+        <div class="dropzone-icon">🔊</div>
+        <div class="dropzone-text" id="file-label">Click or Drag & Drop audio/video file here</div>
+        <div class="dropzone-sub">Supports MP3, WAV, AAC, MP4, WebM (Max 500MB)</div>
+        <input type="file" id="file-input" accept="audio/*,video/*" style="display:none" onchange="loadFile(event)">
+      </div>
+
+      <div class="control-panel" id="controls">
+        <div class="control-label">
+          <label>Volume Level:</label>
+          <span id="boost-indicator">100%</span>
+        </div>
+        <input type="range" id="boost-range" min="1" max="4" step="0.1" value="1" oninput="changeGain(this.value)">
+        <audio id="player" controls></audio>
+      </div>
+    </div>
+
+    <!-- SEO & AdSense Content Section -->
+    <article class="seo-article">
+      <h2>How Does Online Volume Booster Work?</h2>
+      <p>Have you ever downloaded a webinar, voice note, or interview recording that was barely audible even at your phone's maximum loudness? Traditional media players simply output whatever amplitude was originally encoded into the audio file. Our online volume booster utilizes modern client-side digital signal processing (DSP) to amplify audio waveforms up to four times their original volume.</p>
+
+      <h3>Complete Data Privacy: Zero Server Uploads</h3>
+      <p>Most online converters require you to upload personal recordings to cloud servers, introducing security vulnerabilities and bandwidth delays. This tool processes your audio directly in your browser using the high-performance Web Audio API. Your files never leave your device.</p>
+
+      <h3>Key Features:</h3>
+      <ul>
+        <li><strong>Boost up to 400%:</strong> Safely multiply amplitude levels for hard-to-hear media.</li>
+        <li><strong>Dual Compatibility:</strong> Works seamlessly with both standalone audio tracks (MP3, WAV, M4A) and video files (MP4, WebM).</li>
+        <li><strong>Hardware Acceleration:</strong> Uses your computer or phone's native audio engine for real-time lag-free processing.</li>
+      </ul>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 GOODEV Audio Studio. Free browser-based audio tools.</p>
+  </footer>
+
+  <script>
+    let audioCtx, gainNode, sourceNode;
+    function loadFile(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      document.getElementById('file-label').innerText = file.name;
+      const player = document.getElementById('player');
+      player.src = URL.createObjectURL(file);
+      document.getElementById('controls').style.display = 'block';
+
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        gainNode = audioCtx.createGain();
+        sourceNode = audioCtx.createMediaElementSource(player);
+        sourceNode.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+      }
+    }
+
+    function changeGain(val) {
+      document.getElementById('boost-indicator').innerText = Math.round(val * 100) + '%';
+      if (gainNode) gainNode.gain.value = parseFloat(val);
+    }
+  </script>
+</body>
+</html>
