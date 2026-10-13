@@ -1,12 +1,42 @@
-// Tab Switching
-function switchTab(tabId) {
+// URL-Friendly Route Switching (Updates Address Bar on each click)
+function switchRoute(routeId) {
+  // Update URL in browser address bar without reload
+  if (history.pushState) {
+    history.pushState(null, null, '#' + routeId);
+  }
+  
+  // Highlight active button
   document.querySelectorAll('.tab-btn').forEach(b => {
-    b.classList.toggle('active', b.getAttribute('onclick').includes(tabId));
+    b.classList.toggle('active', b.getAttribute('onclick') && b.getAttribute('onclick').includes(routeId));
   });
+
+  // Display selected tool card
   document.querySelectorAll('.tool-card').forEach(c => {
-    c.classList.toggle('active', c.id === tabId);
+    c.classList.toggle('active', c.id === 'view-' + routeId);
   });
+
+  // Scroll smoothly to tool on mobile
+  const activeCard = document.getElementById('view-' + routeId);
+  if (activeCard && window.innerWidth < 768) {
+    activeCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
+
+// Handle Browser Back / Forward buttons
+window.addEventListener('popstate', () => {
+  const hash = window.location.hash.replace('#', '') || 'volume-booster';
+  if (document.getElementById('view-' + hash)) {
+    switchRoute(hash);
+  }
+});
+
+// Auto open tool on direct link or reload (e.g., site.com/#speaker-cleaner)
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash.replace('#', '') || 'volume-booster';
+  if (document.getElementById('view-' + hash)) {
+    switchRoute(hash);
+  }
+});
 
 // 1. Volume Booster
 let boostCtx, boostGain, boostSource;
@@ -71,7 +101,7 @@ async function extractAudio() {
   a.href = URL.createObjectURL(wavBlob);
   a.download = v2aVideo.name.split('.')[0] + '_audio.wav';
   a.click();
-  status.innerText = "Extraction complete! Download started.";
+  status.innerText = "Extraction complete! Download ready.";
 }
 
 // 4. Water Ejector (165Hz)
@@ -86,7 +116,7 @@ function toggleWaterEject() {
     cleanerOsc.connect(ctx.destination);
     cleanerOsc.start();
     cleanerActive = true;
-    btn.innerText = "Stop Ejection Wave";
+    btn.innerText = "Stop Ejection Frequency";
     btn.style.background = "var(--danger)";
   } else {
     if (cleanerOsc) cleanerOsc.stop();
@@ -112,7 +142,7 @@ async function toggleDecibelMeter() {
       btn.style.background = "var(--danger)";
       measureDb();
     } catch {
-      alert("Mic permission required for dB meter.");
+      alert("Microphone permission required for Decibel Meter.");
     }
   } else {
     if (dbStream) dbStream.getTracks().forEach(t => t.stop());
@@ -222,10 +252,10 @@ async function toggleVoiceRecord() {
     mediaRecorder.ondataavailable = e => voiceChunks.push(e.data);
     mediaRecorder.onstop = () => {
       recordedBlob = new Blob(voiceChunks, { type: 'audio/wav' });
-      btn.innerText = "Record Voice (Mic) - Done!";
+      btn.innerText = "Voice Recorded!";
     };
     mediaRecorder.start();
-    btn.innerText = "Recording... Click to Stop";
+    btn.innerText = "Recording... Stop";
     btn.style.background = "var(--danger)";
   } else {
     mediaRecorder.stop();
@@ -233,7 +263,7 @@ async function toggleVoiceRecord() {
   }
 }
 function playVoiceEffect(type) {
-  if (!recordedBlob) { alert("Please record your voice first!"); return; }
+  if (!recordedBlob) { alert("Record your voice first!"); return; }
   const audio = new Audio(URL.createObjectURL(recordedBlob));
   if (type === 'helium') audio.playbackRate = 1.6;
   if (type === 'deep') audio.playbackRate = 0.7;
@@ -335,7 +365,7 @@ function bufferToWave(abuffer, len) {
   return new Blob([buffer], { type: "audio/wav" });
 }
 
-// Legal Modals Control (AdSense Requirements)
+// Legal Modals Control
 function openModal(modalId) {
   document.querySelectorAll('.modal-tab').forEach(m => m.style.display = 'none');
   const target = document.getElementById(modalId);
