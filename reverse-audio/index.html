@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reverse Audio Player - Play and Reverse Sound Backwards Online</title>
+  <meta name="description" content="Invert and play audio backwards directly in your browser. Fast client-side audio reversal without server uploads or quality loss.">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --border: #1f2937;
+      --accent: #ec4899;
+      --accent-hover: #db2777;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 16px 40px; }
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+    .brand { color: #fff; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand span { color: var(--accent); }
+    .back-home { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+    .back-home:hover { color: #fff; }
+    .container { width: 100%; max-width: 700px; }
+    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); text-align: center; }
+    h1 { font-size: 1.8rem; margin-bottom: 8px; color: #fff; }
+    .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 28px; line-height: 1.5; }
+
+    .dropzone { border: 2px dashed #374151; border-radius: 14px; padding: 36px 20px; cursor: pointer; transition: 0.2s; background: rgba(255,255,255,0.01); margin-bottom: 24px; }
+    .dropzone:hover { border-color: var(--accent); background: rgba(236,72,153,0.05); }
+    .dropzone-icon { font-size: 2.2rem; margin-bottom: 8px; }
+    .dropzone-text { font-size: 0.95rem; color: #cbd5e1; font-weight: 500; }
+    .dropzone-sub { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+
+    .btn { background: var(--accent); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.2s; width: 100%; max-width: 360px; margin-top: 10px; }
+    .btn:hover { background: var(--accent-hover); }
+    .btn:disabled { background: #374151; color: var(--muted); cursor: not-allowed; }
+
+    .player-zone { display: none; margin-top: 24px; background: #0c121e; border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: left; }
+    .player-title { color: #fff; font-size: 0.95rem; font-weight: 600; margin-bottom: 12px; }
+    audio { width: 100%; }
+
+    .seo-article { margin-top: 50px; background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 28px; line-height: 1.7; color: #cbd5e1; font-size: 0.95rem; text-align: left; }
+    .seo-article h2 { color: #fff; font-size: 1.3rem; margin-bottom: 12px; }
+    .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 20px 0 8px; }
+    .seo-article p { margin-bottom: 14px; }
+    .seo-article ul { padding-left: 20px; margin-bottom: 14px; }
+    .seo-article li { margin-bottom: 6px; }
+    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <a href="/" class="brand">⚡ GOODEV<span>Audio</span></a>
+    <a href="/" class="back-home">&larr; Back to All Tools</a>
+  </header>
+
+  <main class="container">
+    <div class="tool-box">
+      <h1>Reverse Audio Player</h1>
+      <p class="lead">Reverse your audio clips in memory and listen backwards with zero quality degradation.</p>
+
+      <div class="dropzone" onclick="document.getElementById('file-input').click()">
+        <div class="dropzone-icon">🔄</div>
+        <div class="dropzone-text" id="file-label">Select Audio File (MP3, WAV, OGG, AAC)</div>
+        <div class="dropzone-sub">Inverts sound arrays directly inside your browser memory</div>
+        <input type="file" id="file-input" accept="audio/*" style="display:none" onchange="handleFile(event)">
+      </div>
+
+      <button class="btn" id="rev-btn" style="display:none;" onclick="reverseAudio()">Reverse Audio Track</button>
+
+      <div class="player-zone" id="player-zone">
+        <div class="player-title">Reversed Playback:</div>
+        <audio id="player" controls></audio>
+      </div>
+    </div>
+
+    <!-- Human-Written SEO Guide -->
+    <article class="seo-article">
+      <h2>The Fascinating World of Backmasking and Reversed Sound</h2>
+      <p>Have you ever listened to an eerie transition in a movie trailer where a cymbal seems to swell backwards out of nowhere, or wondered what your favorite vocal melody sounds like when flipped end to start? Reversing sound—often called backmasking—has a rich history stretching back to the tape-splicing experiments of early 1960s psychedelic rock.</p>
+      <p>When you play a natural sound backwards, you invert its acoustic envelope. Sounds in the physical world normally have a sharp, instantaneous onset (the attack) followed by a gradual decay. Flipping this envelope creates a long, swelling crescendo that terminates abruptly, turning ordinary door slams, guitar strums, or piano chords into surreal, dreamlike sound effects.</p>
+
+      <h3>How In-Memory Array Reversal Works</h3>
+      <p>Unlike old analog tape decks that required physical spool rewinding, digital audio is simply a long series of numerical floating-point samples (usually 44,100 or 48,000 numbers per second). This tool uses the Web Audio API to decode your file into raw Pulse-Code Modulation (PCM) audio buffers, traverses each channel array, and reverses the sample indices mathematically in temporary RAM. The reversed buffer is then synthesized into a fresh WAV file.</p>
+
+      <h3>Creative Applications</h3>
+      <ul>
+        <li><strong>Sound Design & Foley:</strong> Create haunting risers, sci-fi swooshes, and atmospheric pads for game development and video editing.</li>
+        <li><strong>Subconscious Word Games:</strong> Discover humorous and strange phonetics hidden inside backwards speech.</li>
+        <li><strong>Mystery & Puzzle Design:</strong> Craft audio clues for escape rooms, podcasts, or online scavenger hunts.</li>
+      </ul>
+
+      <h3>Privacy Assured</h3>
+      <p>Your songs and voice recordings remain completely confined to your machine. No bytes are sent over the internet or logged on cloud databases.</p>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 GOODEV Audio Studio. Free browser-based audio tools.</p>
+  </footer>
+
+  <script>
+    let rawFile;
+    const fileLabel = document.getElementById('file-label');
+    const revBtn = document.getElementById('rev-btn');
+    const playerZone = document.getElementById('player-zone');
+    const player = document.getElementById('player');
+
+    function handleFile(e) {
+      rawFile = e.target.files[0];
+      if (!rawFile) return;
+      fileLabel.innerText = rawFile.name;
+      revBtn.style.display = 'inline-block';
+    }
+
+    async function reverseAudio() {
+      if (!rawFile) return;
+      revBtn.disabled = true;
+      revBtn.innerText = 'Reversing in memory...';
+
+      try {
+        const actx = new (window.AudioContext || window.webkitAudioContext)();
+        const arrayBuf = await rawFile.arrayBuffer();
+        const audioBuf = await actx.decodeAudioData(arrayBuf);
+
+        // Reverse channels sample arrays
+        for (let i = 0; i < audioBuf.numberOfChannels; i++) {
+          Array.prototype.reverse.call(audioBuf.getChannelData(i));
+        }
+
+        const offlineCtx = new OfflineAudioContext(audioBuf.numberOfChannels, audioBuf.length, audioBuf.sampleRate);
+        const source = offlineCtx.createBufferSource();
+        source.buffer = audioBuf;
+        source.connect(offlineCtx.destination);
+        source.start();
+
+        const rendered = await offlineCtx.startRendering();
+        const wavBlob = bufferToWave(rendered, rendered.length);
+
+        player.src = URL.createObjectURL(wavBlob);
+        playerZone.style.display = 'block';
+        player.play();
+
+        revBtn.disabled = false;
+        revBtn.innerText = 'Reverse Again';
+      } catch (err) {
+        alert('Could not decode audio. Please ensure the file format is valid.');
+        revBtn.disabled = false;
+        revBtn.innerText = 'Reverse Audio Track';
+      }
+    }
+
+    function bufferToWave(abuffer, len) {
+      let numOfChan = abuffer.numberOfChannels,
+          length = len * numOfChan * 2 + 44,
+          buffer = new ArrayBuffer(length),
+          view = new DataView(buffer),
+          channels = [], i, sample, offset = 0, pos = 0;
+      function setUint16(data) { view.setUint16(pos, data, true); pos += 2; }
+      function setUint32(data) { view.setUint32(pos, data, true); pos += 4; }
+      setUint32(0x46464952); setUint32(length - 8); setUint32(0x45564157);
+      setUint32(0x20746d66); setUint32(16); setUint16(1); setUint16(numOfChan);
+      setUint32(abuffer.sampleRate); setUint32(abuffer.sampleRate * 2 * numOfChan);
+      setUint16(numOfChan * 2); setUint16(16); setUint32(0x61746164); setUint32(length - pos - 4);
+      for (i = 0; i < abuffer.numberOfChannels; i++) channels.push(abuffer.getChannelData(i));
+      while (offset < len) {
+        for (i = 0; i < numOfChan; i++) {
+          sample = Math.max(-1, Math.min(1, channels[i][offset]));
+          sample = (0.5 + sample < 0 ? sample * 32768 : sample * 32767) | 0;
+          view.setInt16(pos, sample, true); pos += 2;
+        }
+        offset++;
+      }
+      return new Blob([buffer], { type: "audio/wav" });
+    }
+  </script>
+</body>
+</html>
