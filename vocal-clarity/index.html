@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speech & Vocal Clarity Enhancer - Make Muffled Voices Clear</title>
+  <meta name="description" content="Enhance voice recordings, cut background bass rumble, and boost dialogue clarity online. Private in-browser audio filtering with zero uploads.">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --border: #1f2937;
+      --accent: #14b8a6;
+      --accent-hover: #0d9488;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 16px 40px; }
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+    .brand { color: #fff; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand span { color: var(--accent); }
+    .back-home { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+    .back-home:hover { color: #fff; }
+    .container { width: 100%; max-width: 700px; }
+    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); text-align: center; }
+    h1 { font-size: 1.8rem; margin-bottom: 8px; color: #fff; }
+    .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 28px; line-height: 1.5; }
+    .dropzone { border: 2px dashed #374151; border-radius: 14px; padding: 36px 20px; cursor: pointer; transition: 0.2s; background: rgba(255,255,255,0.01); margin-bottom: 24px; }
+    .dropzone:hover { border-color: var(--accent); background: rgba(20,184,166,0.05); }
+    .dropzone-icon { font-size: 2.2rem; margin-bottom: 8px; }
+    .dropzone-text { font-size: 0.95rem; color: #cbd5e1; font-weight: 500; }
+    .dropzone-sub { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+    
+    .control-panel { display: none; margin-top: 20px; text-align: left; background: #0c121e; padding: 20px; border-radius: 12px; border: 1px solid var(--border); }
+    .toggle-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .btn { background: var(--accent); color: #fff; border: none; padding: 12px 20px; border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    .btn:hover { background: var(--accent-hover); }
+    .btn.active-filter { background: #10b981; }
+    audio { width: 100%; margin-top: 14px; }
+
+    .seo-article { margin-top: 50px; background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 28px; line-height: 1.7; color: #cbd5e1; font-size: 0.95rem; text-align: left; }
+    .seo-article h2 { color: #fff; font-size: 1.3rem; margin-bottom: 12px; }
+    .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 20px 0 8px; }
+    .seo-article p { margin-bottom: 14px; }
+    .seo-article ul { padding-left: 20px; margin-bottom: 14px; }
+    .seo-article li { margin-bottom: 6px; }
+    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <a href="/" class="brand">⚡ GOODEV<span>Audio</span></a>
+    <a href="/" class="back-home">&larr; Back to All Tools</a>
+  </header>
+
+  <main class="container">
+    <div class="tool-box">
+      <h1>Speech & Vocal Clarity Enhancer</h1>
+      <p class="lead">Brighten muddy dialogue, reduce low hums, and bring spoken vocals to the front.</p>
+
+      <div class="dropzone" onclick="document.getElementById('file-input').click()">
+        <div class="dropzone-icon">🗣️</div>
+        <div class="dropzone-text" id="file-label">Select Voice Recording or Audio Clip</div>
+        <div class="dropzone-sub">Supports MP3, WAV, M4A, AAC (Max 150MB)</div>
+        <input type="file" id="file-input" accept="audio/*" style="display:none" onchange="loadFile(event)">
+      </div>
+
+      <div class="control-panel" id="controls">
+        <div class="toggle-row">
+          <div>
+            <strong style="color:#fff;">Clarity Filter Profile:</strong>
+            <div style="font-size:0.8rem; color:var(--muted); margin-top:2px;">Cuts <150Hz rumble, boosts ~3kHz presence</div>
+          </div>
+          <button class="btn" id="filter-btn" onclick="toggleClarity()">Turn Filter ON</button>
+        </div>
+        <audio id="player" controls></audio>
+      </div>
+    </div>
+
+    <!-- Human-Written SEO Guide -->
+    <article class="seo-article">
+      <h2>Why Do Smartphone Voice Memos Often Sound Muffled and Unclear?</h2>
+      <p>Have you ever tried listening back to a quick lecture memo, a voice recording taken during a noisy meeting, or an interview conducted in a coffee shop, only to realize the speaker sounds like they are talking from inside a cardboard box? The human ear easily filters these issues in person, but microphones capture everything indiscriminately.</p>
+      <p>Microphones placed on desks pick up low-frequency mechanical vibrations—HVAC airflow, computer fan hum, traffic rumble, and table taps—which usually sit between 40Hz and 150Hz. This muddy bass energy masks the delicate consonant sounds (like T, S, K, and P) that live between 2,500Hz and 4,000Hz, making sentences slur together.</p>
+
+      <h3>How Real-Time Parametric Filtering Works</h3>
+      <p>Instead of requiring you to learn complex audio mastering software, this tool applies an engineered dual-stage equalization filter directly in browser memory:</p>
+      <ul>
+        <li><strong>High-Pass Low Cut:</strong> Rolls off frequencies below 120Hz to eliminate background rumble and table thump without making the voice sound thin.</li>
+        <li><strong>Presence Boost:</strong> Gently lifts the 3,000Hz speech articulation band by +10dB, enhancing dialogue intelligibility so words pop out clearly.</li>
+      </ul>
+
+      <h3>Client-Side Security</h3>
+      <p>All signal equalization occurs directly inside your browser Web Audio context. Your sensitive voice notes and personal conversations are never sent across remote web servers.</p>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 GOODEV Audio Studio. Free browser-based audio tools.</p>
+  </footer>
+
+  <script>
+    let actx, player, source, highPass, peakFilter, isFiltered = false;
+
+    function loadFile(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      document.getElementById('file-label').innerText = file.name;
+      player = document.getElementById('player');
+      player.src = URL.createObjectURL(file);
+      document.getElementById('controls').style.display = 'block';
+
+      if (!actx) {
+        actx = new (window.AudioContext || window.webkitAudioContext)();
+        source = actx.createMediaElementSource(player);
+
+        // Stage 1: Highpass filter to eliminate bass mud
+        highPass = actx.createBiquadFilter();
+        highPass.type = 'highpass';
+        highPass.frequency.value = 20; // default flat
+
+        // Stage 2: Peaking presence filter
+        peakFilter = actx.createBiquadFilter();
+        peakFilter.type = 'peaking';
+        peakFilter.frequency.value = 3000;
+        peakFilter.Q.value = 1.2;
+        peakFilter.gain.value = 0; // default flat
+
+        source.connect(highPass);
+        highPass.connect(peakFilter);
+        peakFilter.connect(actx.destination);
+      }
+    }
+
+    function toggleClarity() {
+      if (!peakFilter) return;
+      const btn = document.getElementById('filter-btn');
+      isFiltered = !isFiltered;
+
+      if (isFiltered) {
+        highPass.frequency.value = 140; // Roll off low rumble
+        peakFilter.gain.value = 10;     // Boost clarity band
+        btn.innerText = 'Filter is ACTIVE (Enhanced)';
+        btn.classList.add('active-filter');
+      } else {
+        highPass.frequency.value = 20;
+        peakFilter.gain.value = 0;
+        btn.innerText = 'Turn Filter ON';
+        btn.classList.remove('active-filter');
+      }
+    }
+  </script>
+</body>
+</html>
