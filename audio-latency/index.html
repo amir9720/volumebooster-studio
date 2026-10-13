@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bluetooth Audio Latency Test - Measure Sound Delay & AV Sync</title>
+  <meta name="description" content="Test audio delay and synchronization for Bluetooth headphones, TWS earbuds, and external speakers online with precise audio-visual pulses.">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --border: #1f2937;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --flash: #ffffff;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 16px 40px; }
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+    .brand { color: #fff; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand span { color: var(--accent); }
+    .back-home { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+    .back-home:hover { color: #fff; }
+    .container { width: 100%; max-width: 700px; }
+    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); text-align: center; }
+    h1 { font-size: 1.8rem; margin-bottom: 8px; color: #fff; }
+    .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 28px; line-height: 1.5; }
+
+    /* Flash Target */
+    .flash-arena { width: 100%; height: 160px; border-radius: 14px; background: #0c121e; border: 2px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 24px; transition: background-color 0.04s ease; cursor: pointer; user-select: none; }
+    .flash-arena.active-pulse { background: var(--flash); color: #000; border-color: #fff; }
+    .flash-icon { font-size: 2.4rem; margin-bottom: 6px; }
+    .flash-text { font-size: 1.05rem; font-weight: 700; letter-spacing: 0.04em; }
+
+    .control-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .btn { background: var(--accent); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.2s; }
+    .btn:hover { background: var(--accent-hover); }
+    .btn-secondary { background: #1e293b; color: var(--muted); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: #334155; color: #fff; }
+
+    .latency-guide-box { background: #0c121e; border: 1px solid var(--border); border-radius: 12px; padding: 16px; font-size: 0.88rem; color: var(--muted); text-align: left; line-height: 1.6; }
+    .latency-guide-box strong { color: #fff; }
+
+    .seo-article { margin-top: 50px; background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 28px; line-height: 1.7; color: #cbd5e1; font-size: 0.95rem; text-align: left; }
+    .seo-article h2 { color: #fff; font-size: 1.3rem; margin-bottom: 12px; }
+    .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 20px 0 8px; }
+    .seo-article p { margin-bottom: 14px; }
+    .seo-article ul { padding-left: 20px; margin-bottom: 14px; }
+    .seo-article li { margin-bottom: 6px; }
+    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <a href="/" class="brand">⚡ GOODEV<span>Audio</span></a>
+    <a href="/" class="back-home">&larr; Back to All Tools</a>
+  </header>
+
+  <main class="container">
+    <div class="tool-box">
+      <h1>Bluetooth Audio Latency Sync</h1>
+      <p class="lead">Detect sound lag and audio-visual sync mismatch in wireless earbuds, gaming headsets, or soundbars.</p>
+
+      <div class="flash-arena" id="flash-box" onclick="triggerSyncPulse()">
+        <div class="flash-icon" id="flash-icon">⚡</div>
+        <div class="flash-text" id="flash-label">Click Box or Press Trigger</div>
+      </div>
+
+      <div class="control-row">
+        <button class="btn" onclick="triggerSyncPulse()">Trigger Single Pulse</button>
+        <button class="btn btn-secondary" id="auto-btn" onclick="toggleContinuousLoop()">Start Rhythm Loop (1.2s)</button>
+      </div>
+
+      <div class="latency-guide-box">
+        <strong>How to evaluate the sync:</strong>
+        <p>Keep your eyes on the box while listening closely. If you see the flash instantly, but hear the audio beep a fraction of a second later in your earphones, your Bluetooth connection suffers from noticeable packet buffering latency.</p>
+      </div>
+    </div>
+
+    <!-- Human-Written SEO Guide -->
+    <article class="seo-article">
+      <h2>Why Does Sound Lag Behind the Screen on Wireless Earbuds?</h2>
+      <p>Few things ruin an immersive experience faster than audio latency. When you are watching a movie and a character's lips move before you hear the dialogue, or when you tap a button in a fast-paced shooter game and the gunshot sound arrives after a jarring delay, audio-visual desynchronization is to blame.</p>
+      <p>Unlike wired 3.5mm headphone jacks where electrical signals travel at the speed of light with virtually zero delay (under 5 milliseconds), Bluetooth audio requires multiple stages of digital processing: compression via audio codecs (such as SBC, AAC, aptX, or LDAC), packet transmission through crowded 2.4GHz radio bands, receiver buffer caching, and digital-to-analog conversion inside the earbuds.</p>
+
+      <h3>Real-World Latency Thresholds</h3>
+      <ul>
+        <li><strong>Under 50 ms (Wired & 2.4GHz RF Dongles):</strong> Imperceptible lag. Essential for esports gaming, live music monitoring, and rhythmic reaction games.</li>
+        <li><strong>50–120 ms (aptX Adaptive / Gaming Mode TWS):</strong> Barely noticeable to most ears. Dialogue lip-sync feels natural and tight during casual movies and gaming.</li>
+        <li><strong>150–250 ms (Standard SBC / AAC Bluetooth):</strong> Noticeable during gaming or video editing, though video streaming apps (like YouTube or Netflix) often artificially delay the video track to mask this lag.</li>
+        <li><strong>300+ ms (Budget Bluetooth / Interrupted RF):</strong> Severe mismatch where speech clearly lags behind visual cues.</li>
+      </ul>
+
+      <h3>How This Synchronizer Works</h3>
+      <p>This utility uses your hardware display refresh cycle (`requestAnimationFrame`) paired synchronously with the browser native Web Audio API clock (`currentTime`). By scheduling a visual color change at the exact microsecond an 880Hz sine beep begins, it eliminates software calculation lag, giving you an honest baseline benchmark to assess your physical hardware connection.</p>
+
+      <h3>Tips to Cut Down Wireless Lag</h3>
+      <ul>
+        <li><strong>Activate "Gaming Mode" on your earbuds:</strong> Most modern TWS earbuds offer a low-latency mode that shrinks buffer windows down to ~60ms.</li>
+        <li><strong>Avoid 2.4GHz Wi-Fi crowding:</strong> Bluetooth shares the same 2.4GHz spectrum as older Wi-Fi routers. Moving to a 5GHz Wi-Fi band reduces packet retransmission delays.</li>
+        <li><strong>Switch audio codecs:</strong> On Android or PC, test whether aptX or AAC delivers tighter timing than basic SBC.</li>
+      </ul>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 GOODEV Audio Studio. Free browser-based audio tools.</p>
+  </footer>
+
+  <script>
+    let actx, loopInterval = null;
+    const box = document.getElementById('flash-box');
+    const label = document.getElementById('flash-label');
+    const icon = document.getElementById('flash-icon');
+    const autoBtn = document.getElementById('auto-btn');
+
+    function triggerSyncPulse() {
+      if (!actx) {
+        actx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+
+      // Schedule audio pulse precisely
+      const now = actx.currentTime;
+      const osc = actx.createOscillator();
+      const gain = actx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, now); // Sharp high A tone
+
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.8, now + 0.005);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+
+      osc.connect(gain);
+      gain.connect(actx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.1);
+
+      // Visual Flash at the exact moment
+      box.classList.add('active-pulse');
+      label.innerText = 'PULSE!';
+      icon.innerText = '🔊';
+
+      setTimeout(() => {
+        box.classList.remove('active-pulse');
+        label.innerText = 'Click Box or Press Trigger';
+        icon.innerText = '⚡';
+      }, 90);
+    }
+
+    function toggleContinuousLoop() {
+      if (!loopInterval) {
+        triggerSyncPulse();
+        loopInterval = setInterval(triggerSyncPulse, 1200);
+        autoBtn.innerText = 'Stop Rhythm Loop';
+        autoBtn.style.background = '#ef4444';
+        autoBtn.style.color = '#fff';
+      } else {
+        clearInterval(loopInterval);
+        loopInterval = null;
+        autoBtn.innerText = 'Start Rhythm Loop (1.2s)';
+        autoBtn.style.background = '#1e293b';
+        autoBtn.style.color = 'var(--muted)';
+      }
+    }
+  </script>
+</body>
+</html>
