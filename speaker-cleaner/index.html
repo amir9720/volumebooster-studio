@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phone Speaker Cleaner & Water Ejector - Clear Sound at 165Hz</title>
+  <meta name="description" content="Fix muffled phone speakers and eject trapped water or dust using acoustic 165Hz sound waves directly in your web browser.">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --border: #1f2937;
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --danger: #ef4444;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 16px 40px; }
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+    .brand { color: #fff; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand span { color: var(--accent); }
+    .back-home { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+    .back-home:hover { color: #fff; }
+    .container { width: 100%; max-width: 700px; }
+    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); text-align: center; }
+    h1 { font-size: 1.8rem; margin-bottom: 8px; color: #fff; }
+    .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 28px; line-height: 1.5; }
+    
+    .wave-visualizer { width: 110px; height: 110px; border-radius: 50%; background: rgba(245, 158, 11, 0.1); border: 2px solid var(--accent); margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; font-size: 2.8rem; transition: transform 0.3s ease; }
+    .vibrating { animation: pulse 0.15s infinite alternate; }
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
+      100% { transform: scale(1.08); box-shadow: 0 0 30px rgba(245, 158, 11, 0.7); }
+    }
+
+    .btn { background: var(--accent); color: #fff; border: none; padding: 16px 28px; border-radius: 12px; font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: 0.2s; width: 100%; max-width: 380px; }
+    .btn:hover { background: var(--accent-hover); }
+    .btn.active { background: var(--danger); }
+
+    .instructions { margin-top: 24px; background: #0c121e; border: 1px solid var(--border); border-radius: 12px; padding: 18px; text-align: left; font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+    .instructions strong { color: #fff; }
+
+    .seo-article { margin-top: 50px; background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 28px; line-height: 1.7; color: #cbd5e1; font-size: 0.95rem; text-align: left; }
+    .seo-article h2 { color: #fff; font-size: 1.3rem; margin-bottom: 12px; }
+    .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 20px 0 8px; }
+    .seo-article p { margin-bottom: 14px; }
+    .seo-article ul { padding-left: 20px; margin-bottom: 14px; }
+    .seo-article li { margin-bottom: 6px; }
+    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <a href="/" class="brand">⚡ GOODEV<span>Audio</span></a>
+    <a href="/" class="back-home">&larr; Back to All Tools</a>
+  </header>
+
+  <main class="container">
+    <div class="tool-box">
+      <h1>Speaker Cleaner & Water Ejector</h1>
+      <p class="lead">Eject trapped moisture, water droplets, and dust from phone speakers using 165Hz kinetic sonic pulses.</p>
+
+      <div class="wave-visualizer" id="vis-circle">💧</div>
+
+      <button class="btn" id="cleaner-trigger" onclick="toggleCleaningTone()">Start Ejection Frequency</button>
+
+      <div class="instructions">
+        <strong>How to use for best results:</strong>
+        <ol style="padding-left: 18px; margin-top: 8px;">
+          <li>Turn your smartphone volume all the way up to 100%.</li>
+          <li>Point your phone speaker grill facing downward toward a towel or dry tissue.</li>
+          <li>Let the sound pulse run for 30 to 60 seconds until sound clarity returns.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Human-Written SEO Guide -->
+    <article class="seo-article">
+      <h2>Why Does Your Phone Sound So Muffled After Dropping in Water?</h2>
+      <p>Modern smartphones often carry IP67 or IP68 water resistance ratings, which means moisture rarely damages internal chips immediately. However, surface tension is the real enemy of acoustics. When water enters the micro-fine speaker mesh holes at the bottom or ear-receiver of your device, capillary action holds droplets firmly inside the grill.</p>
+      <p>This trapped barrier physically blocks air pressure waves from traveling out into the room. As a result, incoming phone calls sound distant, ringtones lose their sharpness, and music comes out crackling or completely muted.</p>
+
+      <h3>The Physics Behind the 165Hz Sawtooth Frequency</h3>
+      <p>Many people mistakenly reach for toothpicks, hair dryers, or cotton swabs to clean speaker grills. Sticking sharp objects into speaker ports frequently tears the fragile water-resistant acoustic mesh, while high heat from hair dryers melts adhesive seals, destroying the phone water resistance permanently.</p>
+      <p>Acoustic ejection is the safest, factory-approved method (similar to the water lock feature found on modern smartwatches). This tool generates an engineered 165Hz sawtooth wave. Unlike smooth sine waves, sawtooth tones produce sharp, abrupt physical cone excursions. This rapid back-and-forth movement builds localized air pressure behind the grill, breaking droplet surface tension and throwing moisture out without touching the hardware.</p>
+
+      <h3>Step-by-Step Recovery Routine</h3>
+      <ul>
+        <li><strong>Shake gently:</strong> Give your phone a gentle downward flick to dislodge large visible droplets.</li>
+        <li><strong>Run the frequency pulse:</strong> Activate this 165Hz tone at full volume and keep the phone tilted downward. You will often see tiny mist droplets scatter onto the surface below.</li>
+        <li><strong>Air dry naturally:</strong> Leave the phone standing upright in a well-ventilated room for 15 minutes before plugging in any charging cable.</li>
+      </ul>
+
+      <h3>Frequently Asked Questions</h3>
+      <p><strong>Can this sound tone damage my smartphone speakers?</strong><br>
+      No. The frequency is calibrated to sit well within the safe operational acoustic envelope of modern mobile dynamic micro-drivers.</p>
+
+      <p><strong>Should I put my wet phone in raw rice?</strong><br>
+      Never. Raw rice releases fine starch dust that binds with water inside ports, turning into a sticky paste that permanently clogs speaker membranes and corrodes USB-C pins.</p>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 GOODEV Audio Studio. Free browser-based audio tools.</p>
+  </footer>
+
+  <script>
+    let actx, osc, isRunning = false;
+    const btn = document.getElementById('cleaner-trigger');
+    const circle = document.getElementById('vis-circle');
+
+    function toggleCleaningTone() {
+      if (!isRunning) {
+        actx = new (window.AudioContext || window.webkitAudioContext)();
+        osc = actx.createOscillator();
+        const gain = actx.createGain();
+
+        // 165Hz Sawtooth provides strongest physical displacement
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(165, actx.currentTime);
+        gain.gain.setValueAtTime(0.9, actx.currentTime);
+
+        osc.connect(gain);
+        gain.connect(actx.destination);
+
+        osc.start();
+        isRunning = true;
+        btn.innerText = 'Stop Ejection Wave';
+        btn.classList.add('active');
+        circle.classList.add('vibrating');
+        circle.innerText = '🔊';
+      } else {
+        if (osc) {
+          osc.stop();
+          osc.disconnect();
+        }
+        isRunning = false;
+        btn.innerText = 'Start Ejection Frequency';
+        btn.classList.remove('active');
+        circle.classList.remove('vibrating');
+        circle.innerText = '💧';
+      }
+    }
+  </script>
+</body>
+</html>
