@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Video to Audio Converter - Extract WAV/MP3 Locally</title>
+  <meta name="description" content="Extract clear audio from MP4, WebM, or MOV files directly inside your browser. No server uploads, zero file size limits, completely private.">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --border: #1f2937;
+      --accent: #10b981;
+      --accent-hover: #059669;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 16px 40px; }
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+    .brand { color: #fff; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand span { color: var(--accent); }
+    .back-home { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+    .back-home:hover { color: #fff; }
+    .container { width: 100%; max-width: 700px; }
+    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 32px 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); text-align: center; }
+    h1 { font-size: 1.8rem; margin-bottom: 8px; color: #fff; }
+    .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; line-height: 1.5; }
+    .dropzone { border: 2px dashed #374151; border-radius: 14px; padding: 36px 20px; cursor: pointer; transition: 0.2s; background: rgba(255,255,255,0.01); margin-bottom: 24px; }
+    .dropzone:hover { border-color: var(--accent); background: rgba(16,185,129,0.05); }
+    .dropzone-icon { font-size: 2.2rem; margin-bottom: 8px; }
+    .dropzone-text { font-size: 0.95rem; color: #cbd5e1; font-weight: 500; }
+    .dropzone-sub { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+    .btn { background: var(--accent); color: #fff; border: none; padding: 14px 22px; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.2s; width: 100%; margin-top: 14px; }
+    .btn:hover { background: var(--accent-hover); }
+    .status-box { margin-top: 18px; font-size: 0.9rem; color: var(--muted); padding: 12px; border-radius: 8px; background: #0c121e; border: 1px solid var(--border); display: none; }
+    .seo-article { margin-top: 50px; background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 28px; line-height: 1.7; color: #cbd5e1; font-size: 0.95rem; text-align: left; }
+    .seo-article h2 { color: #fff; font-size: 1.3rem; margin-bottom: 12px; }
+    .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 20px 0 8px; }
+    .seo-article p { margin-bottom: 14px; }
+    .seo-article ul { padding-left: 20px; margin-bottom: 14px; }
+    .seo-article li { margin-bottom: 6px; }
+    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <a href="/" class="brand">⚡ GOODEV<span>Audio</span></a>
+    <a href="/" class="back-home">&larr; Back to All Tools</a>
+  </header>
+
+  <main class="container">
+    <div class="tool-box">
+      <h1>Video to Audio Converter</h1>
+      <p class="lead">Rip crystal-clear uncompressed audio from video clips right on your device.</p>
+
+      <div class="dropzone" onclick="document.getElementById('file-input').click()">
+        <div class="dropzone-icon">🎬</div>
+        <div class="dropzone-text" id="file-label">Select or drop a video file (MP4, WebM, MOV)</div>
+        <div class="dropzone-sub">Runs 100% in browser memory — no data uploaded</div>
+        <input type="file" id="file-input" accept="video/*" style="display:none" onchange="handleVideo(event)">
+      </div>
+
+      <button class="btn" id="convert-btn" style="display:none;" onclick="convertVideo()">Extract Audio Track (WAV)</button>
+      <div class="status-box" id="status-log"></div>
+    </div>
+
+    <!-- Human-Written SEO Guide -->
+    <article class="seo-article">
+      <h2>Why Do Most Online Video Converters Feel So Risky and Slow?</h2>
+      <p>If you have ever tried extracting an audio track from a video online, you know the frustration. Typical converter websites make you upload entire multi-hundred-megabyte video files across slow servers, force you through multiple countdown timers, bombard you with shady pop-ups, and then hit you with strict daily file limits.</p>
+      <p>More importantly, uploading personal smartphone clips, webinar screen captures, or proprietary business presentations to unknown cloud servers exposes your private data to potential storage leaks.</p>
+
+      <h3>How In-Browser Extraction Works</h3>
+      <p>Your web browser is already equipped with hardware-accelerated media decoders. Instead of sending your video across the internet, this tool reads the raw binary data locally via your device processor. Using the Web Audio API and local offline audio rendering, it separates the audio stream from the visual containers, samples the raw waveform channels, and wraps them into a pristine, uncompressed WAV file ready for instant saving.</p>
+
+      <h3>When is Local Extraction Especially Useful?</h3>
+      <ul>
+        <li><strong>Podcast & Voice Memo Archiving:</strong> Extract spoken conversations from Zoom or Google Meet recordings without handling massive video file sizes.</li>
+        <li><strong>Music Production & Sampling:</strong> Grab clean instrumental riffs or speech snippets from live footage without compression artifacts.</li>
+        <li><strong>Language Study & Dictation:</strong> Turn recorded video lectures into lightweight audio tracks you can listen to while commuting or exercising.</li>
+      </ul>
+
+      <h3>Frequently Asked Questions</h3>
+      <p><strong>Is there any file size limit?</strong><br>
+      Because processing happens entirely within your computer or phone RAM, there is no server-imposed file cap. The only boundary is your device available memory.</p>
+
+      <p><strong>Does this use my internet bandwidth?</strong><br>
+      Only a few kilobytes to load this single web page initially. The actual audio extraction uses zero internet data, meaning you can even use it on limited mobile data plans without worry.</p>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 GOODEV Audio Studio. Free browser-based audio tools.</p>
+  </footer>
+
+  <script>
+    let videoFile;
+    function handleVideo(e) {
+      videoFile = e.target.files[0];
+      if (!videoFile) return;
+      document.getElementById('file-label').innerText = videoFile.name + ' (' + (videoFile.size / (1024*1024)).toFixed(1) + ' MB)';
+      document.getElementById('convert-btn').style.display = 'block';
+    }
+
+    async function convertVideo() {
+      const status = document.getElementById('status-log');
+      const btn = document.getElementById('convert-btn');
+      status.style.display = 'block';
+      status.innerText = 'Decoding audio stream locally... Please wait a few seconds.';
+      btn.disabled = true;
+
+      try {
+        const actx = new (window.AudioContext || window.webkitAudioContext)();
+        const arrayBuf = await videoFile.arrayBuffer();
+        const audioBuf = await actx.decodeAudioData(arrayBuf);
+        
+        status.innerText = 'Encoding uncompressed WAV file...';
+        const offlineCtx = new OfflineAudioContext(audioBuf.numberOfChannels, audioBuf.length, audioBuf.sampleRate);
+        const source = offlineCtx.createBufferSource();
+        source.buffer = audioBuf;
+        source.connect(offlineCtx.destination);
+        source.start();
+
+        const renderedBuffer = await offlineCtx.startRendering();
+        const wavBlob = bufferToWave(renderedBuffer, renderedBuffer.length);
+        
+        const downloadUrl = URL.createObjectURL(wavBlob);
+        const a = document.createElement('a');
+        a.href = downloadUrl;
+        a.download = videoFile.name.replace(/\.[^/.]+$/, '') + '_audio.wav';
+        a.click();
+
+        status.innerText = 'Extraction complete! Your file has been downloaded.';
+        btn.disabled = false;
+      } catch (err) {
+        status.innerText = 'Error decoding video track. Ensure the video contains a valid audio stream.';
+        btn.disabled = false;
+      }
+    }
+
+    function bufferToWave(abuffer, len) {
+      let numOfChan = abuffer.numberOfChannels,
+          length = len * numOfChan * 2 + 44,
+          buffer = new ArrayBuffer(length),
+          view = new DataView(buffer),
+          channels = [], i, sample, offset = 0, pos = 0;
+      function setUint16(data) { view.setUint16(pos, data, true); pos += 2; }
+      function setUint32(data) { view.setUint32(pos, data, true); pos += 4; }
+      setUint32(0x46464952); setUint32(length - 8); setUint32(0x45564157);
+      setUint32(0x20746d66); setUint32(16); setUint16(1); setUint16(numOfChan);
+      setUint32(abuffer.sampleRate); setUint32(abuffer.sampleRate * 2 * numOfChan);
+      setUint16(numOfChan * 2); setUint16(16); setUint32(0x61746164); setUint32(length - pos - 4);
+      for (i = 0; i < abuffer.numberOfChannels; i++) channels.push(abuffer.getChannelData(i));
+      while (offset < len) {
+        for (i = 0; i < numOfChan; i++) {
+          sample = Math.max(-1, Math.min(1, channels[i][offset]));
+          sample = (0.5 + sample < 0 ? sample * 32768 : sample * 32767) | 0;
+          view.setInt16(pos, sample, true); pos += 2;
+        }
+        offset++;
+      }
+      return new Blob([buffer], { type: "audio/wav" });
+    }
+  </script>
+</body>
+</html>
