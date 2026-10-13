@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Hearing Age Test - Test High Frequency Threshold (Hz)</title>
+  <meta name="description" content="Check your biological ear age using high-frequency pure sine tones up to 20kHz. Free online hearing threshold challenge running directly in your browser.">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --border: #1f2937;
+      --accent: #06b6d4;
+      --accent-hover: #0891b2;
+      --danger: #ef4444;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 16px 40px; }
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+    .brand { color: #fff; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand span { color: var(--accent); }
+    .back-home { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+    .back-home:hover { color: #fff; }
+    .container { width: 100%; max-width: 700px; }
+    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); text-align: center; }
+    h1 { font-size: 1.8rem; margin-bottom: 8px; color: #fff; }
+    .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 28px; line-height: 1.5; }
+
+    /* Frequency Readout */
+    .freq-box { width: 170px; height: 170px; border-radius: 50%; background: #0c121e; border: 4px solid var(--border); margin: 0 auto 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .freq-val { font-size: 2.3rem; font-weight: 800; color: #fff; line-height: 1.1; }
+    .freq-unit { font-size: 0.9rem; color: var(--accent); font-weight: 700; margin-top: 4px; }
+
+    .slider-zone { margin: 20px 0 14px; text-align: left; }
+    .slider-labels { display: flex; justify-content: space-between; color: var(--muted); font-size: 0.85rem; margin-bottom: 8px; }
+    input[type=range] { width: 100%; accent-color: var(--accent); height: 8px; border-radius: 4px; outline: none; background: #1e293b; cursor: pointer; }
+
+    .estimate-pill { background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3); color: #67e8f9; padding: 10px 16px; border-radius: 10px; font-size: 0.95rem; font-weight: 600; margin-bottom: 24px; display: inline-block; }
+
+    .btn { background: var(--accent); color: #fff; border: none; padding: 15px 30px; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.2s; width: 100%; max-width: 360px; }
+    .btn:hover { background: var(--accent-hover); }
+    .btn.active-tone { background: var(--danger); }
+
+    .seo-article { margin-top: 50px; background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 28px; line-height: 1.7; color: #cbd5e1; font-size: 0.95rem; text-align: left; }
+    .seo-article h2 { color: #fff; font-size: 1.3rem; margin-bottom: 12px; }
+    .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 20px 0 8px; }
+    .seo-article p { margin-bottom: 14px; }
+    .seo-article ul { padding-left: 20px; margin-bottom: 14px; }
+    .seo-article li { margin-bottom: 6px; }
+    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <a href="/" class="brand">⚡ GOODEV<span>Audio</span></a>
+    <a href="/" class="back-home">&larr; Back to All Tools</a>
+  </header>
+
+  <main class="container">
+    <div class="tool-box">
+      <h1>Hearing Age Frequency Challenge</h1>
+      <p class="lead">Test your upper frequency hearing threshold with precision sine waves to estimate your biological ear age.</p>
+
+      <div class="freq-box">
+        <div class="freq-val" id="freq-num">12,000</div>
+        <div class="freq-unit">Hz</div>
+      </div>
+
+      <div class="slider-zone">
+        <div class="slider-labels">
+          <span>8,000 Hz</span>
+          <span>14,000 Hz</span>
+          <span>20,000 Hz</span>
+        </div>
+        <input type="range" id="freq-slider" min="8000" max="20000" step="500" value="12000" oninput="handleFreq(this.value)">
+      </div>
+
+      <div class="estimate-pill" id="age-estimate">Biological Hearing Estimate: Age 50 or Younger</div>
+
+      <div>
+        <button class="btn" id="tone-btn" onclick="toggleTone()">Play Test Tone</button>
+      </div>
+    </div>
+
+    <!-- Human-Written SEO Guide -->
+    <article class="seo-article">
+      <h2>Why Do We Lose High-Pitched Hearing as We Get Older?</h2>
+      <p>Inside your inner ear lies the cochlea, a spiral fluid-filled chamber lined with tens of thousands of microscopic sensory hair cells (stereocilia). When sound vibrations enter the ear, different hair cells respond to different frequencies. Hair cells located at the base of the cochlea register ultra-high-pitched frequencies, while those deeper inside near the apex register deep bass tones.</p>
+      <p>Because every single sound wave entering your ear must first travel through the base, the high-frequency hair cells endure the most wear and tear over a lifetime. This natural, age-related degradation is known as <em>Presbycusis</em>. Unlike skin or bone cells, these auditory hair cells cannot regenerate once damaged.</p>
+
+      <h3>Average Biological Hearing Frequency Benchmarks</h3>
+      <ul>
+        <li><strong>17,400 Hz to 19,000 Hz:</strong> Typically audible only to teenagers and individuals under 24 years old. (Often called the "Mosquito tone").</li>
+        <li><strong>15,000 Hz to 16,000 Hz:</strong> Commonly heard by adults under 30.</li>
+        <li><strong>12,000 Hz to 14,000 Hz:</strong> Typical upper threshold for adults under 45 to 50.</li>
+        <li><strong>Under 10,000 Hz:</strong> Common threshold for individuals over 60, or those who have had high exposure to loud machinery or concerts.</li>
+      </ul>
+
+      <h3>Hardware Calibration & Safety Tips</h3>
+      <p>Please note that consumer hardware can influence test results. Cheap phone speakers frequently have steep frequency roll-offs above 15kHz and physically cannot vibrate fast enough to emit the tone. For the most accurate personal benchmark, use a decent pair of wired or quality wireless headphones, keep your volume at a moderate level (40–50%), and never crank volume to maximum to avoid ear strain.</p>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 GOODEV Audio Studio. Free browser-based audio tools.</p>
+  </footer>
+
+  <script>
+    let actx, osc, isTonePlaying = false;
+    const freqNum = document.getElementById('freq-num');
+    const ageEstimate = document.getElementById('age-estimate');
+    const slider = document.getElementById('freq-slider');
+    const toneBtn = document.getElementById('tone-btn');
+
+    function handleFreq(val) {
+      const freq = parseInt(val);
+      freqNum.innerText = freq.toLocaleString();
+
+      if (osc && isTonePlaying) {
+        osc.frequency.setValueAtTime(freq, actx.currentTime);
+      }
+
+      // Benchmark estimation logic
+      if (freq >= 17500) {
+        ageEstimate.innerText = 'Biological Hearing Estimate: Teens & Under 24';
+      } else if (freq >= 15000) {
+        ageEstimate.innerText = 'Biological Hearing Estimate: Under 30 Years Old';
+      } else if (freq >= 12000) {
+        ageEstimate.innerText = 'Biological Hearing Estimate: Under 50 Years Old';
+      } else {
+        ageEstimate.innerText = 'Biological Hearing Estimate: 50+ Years Old';
+      }
+    }
+
+    function toggleTone() {
+      if (!isTonePlaying) {
+        actx = new (window.AudioContext || window.webkitAudioContext)();
+        osc = actx.createOscillator();
+        const gain = actx.createGain();
+
+        const currentFreq = parseInt(slider.value);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(currentFreq, actx.currentTime);
+
+        // Keep gain safe and smooth
+        gain.gain.setValueAtTime(0.3, actx.currentTime);
+
+        osc.connect(gain);
+        gain.connect(actx.destination);
+
+        osc.start();
+        isTonePlaying = true;
+        toneBtn.innerText = 'Stop Test Tone';
+        toneBtn.classList.add('active-tone');
+      } else {
+        if (osc) {
+          osc.stop();
+          osc.disconnect();
+        }
+        isTonePlaying = false;
+        toneBtn.innerText = 'Play Test Tone';
+        toneBtn.classList.remove('active-tone');
+      }
+    }
+  </script>
+</body>
+</html>
