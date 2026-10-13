@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Audio Pitch & Speed Shifter - Free Tempo Controller</title>
+  <meta name="description" content="Change audio playback speed and tempo from 0.5x to 2.0x online. Zero server uploads, private client-side processing.">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --border: #1f2937;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 16px 40px; }
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+    .brand { color: #fff; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand span { color: var(--accent); }
+    .back-home { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+    .back-home:hover { color: #fff; }
+    .container { width: 100%; max-width: 700px; }
+    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 32px 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); text-align: center; }
+    h1 { font-size: 1.8rem; margin-bottom: 8px; color: #fff; }
+    .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; line-height: 1.5; }
+    .dropzone { border: 2px dashed #374151; border-radius: 14px; padding: 36px 20px; cursor: pointer; transition: 0.2s; background: rgba(255,255,255,0.01); margin-bottom: 24px; }
+    .dropzone:hover { border-color: var(--accent); background: rgba(59,130,246,0.05); }
+    .dropzone-icon { font-size: 2.2rem; margin-bottom: 8px; }
+    .dropzone-text { font-size: 0.95rem; color: #cbd5e1; font-weight: 500; }
+    .dropzone-sub { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+    .control-panel { display: none; margin-top: 20px; text-align: left; background: #0c121e; padding: 20px; border-radius: 12px; border: 1px solid var(--border); }
+    .control-label { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: 600; font-size: 0.95rem; }
+    .control-label span { color: var(--accent); font-size: 1.1rem; }
+    input[type=range] { width: 100%; accent-color: var(--accent); height: 8px; border-radius: 4px; outline: none; background: #1e293b; cursor: pointer; }
+    .presets { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+    .preset-btn { background: #1f293d; color: var(--muted); border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+    .preset-btn:hover { background: var(--accent); color: #fff; }
+    audio { width: 100%; margin-top: 18px; }
+    .seo-article { margin-top: 50px; background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 28px; line-height: 1.7; color: #cbd5e1; font-size: 0.95rem; }
+    .seo-article h2 { color: #fff; font-size: 1.3rem; margin-bottom: 12px; }
+    .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 20px 0 8px; }
+    .seo-article p { margin-bottom: 14px; }
+    .seo-article ul { padding-left: 20px; margin-bottom: 14px; }
+    .seo-article li { margin-bottom: 6px; }
+    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <a href="/" class="brand">⚡ GOODEV<span>Audio</span></a>
+    <a href="/" class="back-home">&larr; Back to All Tools</a>
+  </header>
+
+  <main class="container">
+    <div class="tool-box">
+      <h1>Audio Pitch & Speed Shifter</h1>
+      <p class="lead">Smoothly speed up or slow down tracks from 0.5x to 2.0x in real time.</p>
+
+      <div class="dropzone" onclick="document.getElementById('file-input').click()">
+        <div class="dropzone-icon">⚡</div>
+        <div class="dropzone-text" id="file-label">Click or Drag & Drop audio file here</div>
+        <div class="dropzone-sub">Supports MP3, WAV, AAC, OGG (Max 200MB)</div>
+        <input type="file" id="file-input" accept="audio/*" style="display:none" onchange="loadFile(event)">
+      </div>
+
+      <div class="control-panel" id="controls">
+        <div class="control-label">
+          <label>Playback Speed:</label>
+          <span id="speed-indicator">1.0x</span>
+        </div>
+        <input type="range" id="speed-range" min="0.5" max="2.0" step="0.05" value="1.0" oninput="changeSpeed(this.value)">
+        
+        <div class="presets">
+          <button class="preset-btn" onclick="setSpeed(0.75)">0.75x (Transcribe)</button>
+          <button class="preset-btn" onclick="setSpeed(1.0)">1.0x (Normal)</button>
+          <button class="preset-btn" onclick="setSpeed(1.25)">1.25x</button>
+          <button class="preset-btn" onclick="setSpeed(1.5)">1.5x (Speed Learn)</button>
+          <button class="preset-btn" onclick="setSpeed(2.0)">2.0x (Skim)</button>
+        </div>
+
+        <audio id="player" controls></audio>
+      </div>
+    </div>
+
+    <article class="seo-article">
+      <h2>Why Adjust Playback Speed and Audio Tempo?</h2>
+      <p>Whether you are transcribing a rapid-fire podcast interview, analyzing an intricate guitar solo note-by-note, or practicing foreign language pronunciation, fixed playback speeds are limiting. Most default media players only offer rigid preset speeds or distort sound unpleasantly.</p>
+      
+      <h3>Practical Use Cases</h3>
+      <ul>
+        <li><strong>Interviewers & Writers:</strong> Slowing speech to 0.75x makes manual transcription effortless without having to pause every three seconds.</li>
+        <li><strong>Musicians & Dancers:</strong> Slow down fast musical phrases to practice timing, then gradually ramp speed back up to 1.0x.</li>
+        <li><strong>Students & Researchers:</strong> Skim lengthy two-hour academic seminars at 1.5x speed to grasp core insights in a fraction of the time.</li>
+      </ul>
+
+      <h3>100% Private Client-Side Processing</h3>
+      <p>Your audio file stays safely on your machine. We leverage the HTML5 Media Engine and Web Audio buffers directly in your browser. No files are transferred or stored on remote servers.</p>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 GOODEV Audio Studio. Free browser-based audio tools.</p>
+  </footer>
+
+  <script>
+    const player = document.getElementById('player');
+    const indicator = document.getElementById('speed-indicator');
+    const range = document.getElementById('speed-range');
+
+    function loadFile(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      document.getElementById('file-label').innerText = file.name;
+      player.src = URL.createObjectURL(file);
+      document.getElementById('controls').style.display = 'block';
+    }
+
+    function changeSpeed(val) {
+      indicator.innerText = parseFloat(val).toFixed(2) + 'x';
+      player.playbackRate = parseFloat(val);
+    }
+
+    function setSpeed(val) {
+      range.value = val;
+      changeSpeed(val);
+    }
+  </script>
+</body>
+</html>
