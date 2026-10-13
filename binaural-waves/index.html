@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Binaural Beats Generator - Alpha & Theta Waves for Deep Focus</title>
+  <meta name="description" content="Generate pure-tone binaural beats online for studying, flow-state productivity, and deep relaxation. Uses clean stereo sine synthesis in your browser.">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --border: #1f2937;
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
+      --danger: #ef4444;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 16px 40px; }
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+    .brand { color: #fff; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand span { color: var(--accent); }
+    .back-home { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+    .back-home:hover { color: #fff; }
+    .container { width: 100%; max-width: 700px; }
+    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); text-align: center; }
+    h1 { font-size: 1.8rem; margin-bottom: 8px; color: #fff; }
+    .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 28px; line-height: 1.5; }
+
+    .pulse-avatar { width: 130px; height: 130px; border-radius: 50%; background: #0c121e; border: 3px solid var(--border); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 3rem; transition: all 0.3s ease; }
+    .pulse-active { border-color: var(--accent); box-shadow: 0 0 30px rgba(99, 102, 241, 0.4); animation: breathe 3s infinite alternate ease-in-out; }
+    @keyframes breathe {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.08); }
+    }
+
+    .status-text { font-size: 1rem; color: #fff; font-weight: 600; margin-bottom: 24px; }
+    .status-sub { color: var(--muted); font-size: 0.85rem; margin-top: 4px; font-weight: 400; }
+
+    .btn-group { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .preset-btn { background: #1e293b; color: #fff; border: 1px solid var(--border); padding: 14px 20px; border-radius: 12px; font-size: 0.92rem; font-weight: 600; cursor: pointer; transition: 0.2s; flex: 1; min-width: 160px; }
+    .preset-btn:hover { background: #334155; }
+    .preset-btn.active { background: var(--accent); border-color: var(--accent); box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3); }
+
+    .stop-btn { background: #334155; color: var(--muted); border: 1px solid var(--border); padding: 12px 24px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    .stop-btn:hover { background: var(--danger); color: #fff; }
+
+    .notice { margin-top: 20px; font-size: 0.85rem; color: #a5b4fc; background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.25); padding: 10px; border-radius: 8px; }
+
+    .seo-article { margin-top: 50px; background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 28px; line-height: 1.7; color: #cbd5e1; font-size: 0.95rem; text-align: left; }
+    .seo-article h2 { color: #fff; font-size: 1.3rem; margin-bottom: 12px; }
+    .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 20px 0 8px; }
+    .seo-article p { margin-bottom: 14px; }
+    .seo-article ul { padding-left: 20px; margin-bottom: 14px; }
+    .seo-article li { margin-bottom: 6px; }
+    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <a href="/" class="brand">⚡ GOODEV<span>Audio</span></a>
+    <a href="/" class="back-home">&larr; Back to All Tools</a>
+  </header>
+
+  <main class="container">
+    <div class="tool-box">
+      <h1>Binaural Study & Focus Waves</h1>
+      <p class="lead">Synthesize continuous pure-tone binaural beats to help you stay in the flow and boost concentration.</p>
+
+      <div class="pulse-avatar" id="avatar-icon">🧠</div>
+
+      <div class="status-text" id="wave-status">
+        Ready to generate
+        <div class="status-sub">Select an entrainment frequency below</div>
+      </div>
+
+      <div class="btn-group">
+        <button class="preset-btn" id="btn-alpha" onclick="startBinaural('alpha', 10)">
+          ⚡ Alpha Waves (10Hz)<br>
+          <small style="color:var(--muted); font-weight:400;">Focus & Deep Study</small>
+        </button>
+        <button class="preset-btn" id="btn-theta" onclick="startBinaural('theta', 6)">
+          🌿 Theta Waves (6Hz)<br>
+          <small style="color:var(--muted); font-weight:400;">Calm & Meditation</small>
+        </button>
+      </div>
+
+      <div>
+        <button class="stop-btn" onclick="stopBinaural()">⏹️ Stop Audio Waves</button>
+      </div>
+
+      <div class="notice">
+        🎧 <strong>Stereo Headphones Required:</strong> Binaural beats require separate independent acoustic frequencies in each ear to trigger brainwave entrainment.
+      </div>
+    </div>
+
+    <!-- Human-Written SEO Guide -->
+    <article class="seo-article">
+      <h2>How Do Binaural Beats Actually Influence Focus and Attention?</h2>
+      <p>Have you ever struggled to settle your mind during an intense study block or programming sprint? Constant browser notifications, background office chatter, and mental restlessness make entering a flow state notoriously difficult. Many people turn to white noise or lo-fi beats, but binaural auditory entrainment works through a different neuro-acoustic mechanism.</p>
+      <p>When you present a pure 200Hz sine wave to your left ear and a 210Hz sine wave to your right ear, your auditory cortex cannot treat them as separate sounds. Instead, the brain superior olivary complex blends the two signals together, perceiving a phantom rhythmic pulsing tone at exactly <strong>10Hz</strong>—the mathematical difference between the two carriers.</p>
+
+      <h3>Target Brainwave Frequency Bands</h3>
+      <ul>
+        <li><strong>Alpha Waves (8Hz – 12Hz):</strong> Associated with "relaxed alertness." This is the ideal state for writing, coding, academic memorization, and creative problem-solving without feeling over-caffeinated or anxious.</li>
+        <li><strong>Theta Waves (4Hz – 7Hz):</strong> Linked with deep meditation, hypnagogic states, daydreaming, and winding down before sleep.</li>
+      </ul>
+
+      <h3>Why Pure Sine Synthesis Beats Pre-Recorded MP3s</h3>
+      <p>Most binaural audio streams on YouTube or Spotify are heavily compressed into lossy MP3 or AAC formats. Lossy audio compression algorithms frequently discard the delicate micro-phase relationships between the left and right channels to save file size, essentially degrading the binaural illusion. This tool uses uncompressed, hardware-generated mathematical sine oscillators running in real time via the Web Audio API.</p>
+
+      <h3>Recommended Listening Routine</h3>
+      <p>Keep your headphone volume at a comfortable, non-intrusive level (around 30–40%). The tone should sit quietly as an acoustic background anchor while you read, study, or draft notes. Give your ears about 5 to 7 minutes to adapt to the gentle harmonic pulse.</p>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 GOODEV Audio Studio. Free browser-based audio tools.</p>
+  </footer>
+
+  <script>
+    let actx, oscL, oscR, merger, isPlaying = false;
+    const avatar = document.getElementById('avatar-icon');
+    const statusText = document.getElementById('wave-status');
+    const btnAlpha = document.getElementById('btn-alpha');
+    const btnTheta = document.getElementById('btn-theta');
+
+    function startBinaural(type, beatDiff) {
+      stopBinaural();
+
+      actx = new (window.AudioContext || window.webkitAudioContext)();
+      merger = actx.createChannelMerger(2);
+
+      const baseFreq = 200; // Comfortable warm carrier pitch
+      oscL = actx.createOscillator();
+      oscR = actx.createOscillator();
+
+      oscL.type = 'sine';
+      oscL.frequency.setValueAtTime(baseFreq, actx.currentTime);
+
+      oscR.type = 'sine';
+      oscR.frequency.setValueAtTime(baseFreq + beatDiff, actx.currentTime);
+
+      const gain = actx.createGain();
+      gain.gain.setValueAtTime(0.2, actx.currentTime); // Soft background volume
+
+      // Left oscillator to left channel
+      oscL.connect(merger, 0, 0);
+      // Right oscillator to right channel
+      oscR.connect(merger, 0, 1);
+
+      merger.connect(gain);
+      gain.connect(actx.destination);
+
+      oscL.start();
+      oscR.start();
+      isPlaying = true;
+
+      avatar.classList.add('pulse-active');
+      if (type === 'alpha') {
+        btnAlpha.classList.add('active');
+        btnTheta.classList.remove('active');
+        statusText.innerHTML = 'Playing Alpha Waves (10Hz)<div class="status-sub">200Hz Left / 210Hz Right — Flow & Productivity</div>';
+      } else {
+        btnTheta.classList.add('active');
+        btnAlpha.classList.remove('active');
+        statusText.innerHTML = 'Playing Theta Waves (6Hz)<div class="status-sub">200Hz Left / 206Hz Right — Relaxation & Calm</div>';
+      }
+    }
+
+    function stopBinaural() {
+      if (actx) {
+        actx.close();
+        actx = null;
+      }
+      isPlaying = false;
+      avatar.classList.remove('pulse-active');
+      btnAlpha.classList.remove('active');
+      btnTheta.classList.remove('active');
+      statusText.innerHTML = 'Ready to generate<div class="status-sub">Select an entrainment frequency below</div>';
+    }
+  </script>
+</body>
+</html>
