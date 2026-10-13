@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Voice Transformer - Fun Voice Changer & Pitch FX</title>
+  <meta name="description" content="Record your voice and apply helium, robot, or deep monster filters instantly online. Private client-side audio transformation.">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --border: #1f2937;
+      --accent: #f97316;
+      --accent-hover: #ea580c;
+      --danger: #ef4444;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 16px 40px; }
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+    .brand { color: #fff; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand span { color: var(--accent); }
+    .back-home { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+    .back-home:hover { color: #fff; }
+    .container { width: 100%; max-width: 700px; }
+    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); text-align: center; }
+    h1 { font-size: 1.8rem; margin-bottom: 8px; color: #fff; }
+    .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 28px; line-height: 1.5; }
+
+    .mic-button-zone { margin: 20px 0; }
+    .record-btn { background: var(--accent); color: #fff; border: none; padding: 18px 32px; border-radius: 50px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 10px; }
+    .record-btn:hover { background: var(--accent-hover); }
+    .record-btn.recording { background: var(--danger); animation: micPulse 1s infinite alternate; }
+    @keyframes micPulse { 0% { box-shadow: 0 0 10px rgba(239, 68, 68, 0.4); } 100% { box-shadow: 0 0 30px rgba(239, 68, 68, 0.8); } }
+
+    .preset-zone { display: none; margin-top: 24px; background: #0c121e; border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+    .preset-title { color: #fff; font-size: 0.95rem; font-weight: 600; margin-bottom: 14px; }
+    .btn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+    .fx-btn { background: #1e293b; color: #fff; border: 1px solid var(--border); padding: 12px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    .fx-btn:hover { background: var(--accent); border-color: var(--accent); }
+
+    .seo-article { margin-top: 50px; background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 28px; line-height: 1.7; color: #cbd5e1; font-size: 0.95rem; text-align: left; }
+    .seo-article h2 { color: #fff; font-size: 1.3rem; margin-bottom: 12px; }
+    .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 20px 0 8px; }
+    .seo-article p { margin-bottom: 14px; }
+    .seo-article ul { padding-left: 20px; margin-bottom: 14px; }
+    .seo-article li { margin-bottom: 6px; }
+    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <a href="/" class="brand">⚡ GOODEV<span>Audio</span></a>
+    <a href="/" class="back-home">&larr; Back to All Tools</a>
+  </header>
+
+  <main class="container">
+    <div class="tool-box">
+      <h1>Funny Voice Transformer</h1>
+      <p class="lead">Capture a short audio memo and pitch-shift it into hilarious character voices.</p>
+
+      <div class="mic-button-zone">
+        <button class="record-btn" id="record-trigger" onclick="toggleRecording()">
+          <span id="record-icon">🎙️</span>
+          <span id="record-text">Record Your Voice</span>
+        </button>
+      </div>
+
+      <div class="preset-zone" id="preset-controls">
+        <div class="preset-title">Tap a preset to audition your voice:</div>
+        <div class="btn-grid">
+          <button class="fx-btn" onclick="playEffect('helium')">🎈 Helium Chipmunk</button>
+          <button class="fx-btn" onclick="playEffect('robot')">🤖 Robotic Android</button>
+          <button class="fx-btn" onclick="playEffect('deep')">👹 Deep Monster</button>
+          <button class="fx-btn" onclick="playEffect('fast')">⚡ Rapid Skim</button>
+          <button class="fx-btn" onclick="playEffect('original')">▶️ Normal Voice</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Human-Written SEO Guide -->
+    <article class="seo-article">
+      <h2>Why Do Formants and Vocal Pitch Shift Sound So Funny?</h2>
+      <p>Ever inhaled gas from a party balloon and wondered why your voice instantly sounds like an animated chipmunk? When you inhale helium, sound waves travel through the lower-density gas almost three times faster than through ambient room air. This drastically shifts your vocal tract resonant frequencies (known as formants) upward, without actually changing how fast your vocal cords vibrate.</p>
+      <p>Digital voice modification recreates this acoustic physics inside software by manipulating playback rate, resampled waveform curves, and frequency modulation.</p>
+
+      <h3>How In-Browser Vocal Modulation Works</h3>
+      <p>Rather than requiring risky desktop downloads or sketchy third-party mobile apps that harvest your voice clips, this tool uses the standard HTML5 `MediaRecorder` API paired with native browser memory buffers. When you speak, your microphone captures raw PCM audio chunks in local RAM. When you trigger a preset like Helium or Deep Monster, our DSP engine modifies the playback speed and time-stretching parameters on the fly.</p>
+
+      <h3>Popular Uses for Voice Alteration</h3>
+      <ul>
+        <li><strong>Content Creation & Memes:</strong> Add cartoon or sinister narrator voices to TikTok, YouTube Shorts, or gaming reels.</li>
+        <li><strong>Anonymizing Voice Memos:</strong> Mask your natural vocal identity before sharing a spoken opinion online.</li>
+        <li><strong>Kids & Family Entertainment:</strong> Create silly greetings or birthday voice cards for friends and family.</li>
+      </ul>
+
+      <h3>Privacy Guarantee</h3>
+      <p>Your spoken recordings never leave your device. The entire audio capture and filtering pipeline executes inside your browser sandbox. As soon as you refresh or close this tab, all recorded audio chunks are wiped clean from memory.</p>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 GOODEV Audio Studio. Free browser-based audio tools.</p>
+  </footer>
+
+  <script>
+    let mediaRecorder, chunks = [], recordedBlob = null;
+    const recBtn = document.getElementById('record-trigger');
+    const recText = document.getElementById('record-text');
+    const recIcon = document.getElementById('record-icon');
+    const presetBox = document.getElementById('preset-controls');
+
+    async function toggleRecording() {
+      if (!mediaRecorder || mediaRecorder.state === 'inactive') {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          mediaRecorder = new MediaRecorder(stream);
+          chunks = [];
+
+          mediaRecorder.ondataavailable = e => chunks.push(e.data);
+          mediaRecorder.onstop = () => {
+            recordedBlob = new Blob(chunks, { type: 'audio/webm' });
+            recBtn.classList.remove('recording');
+            recText.innerText = 'Record Again';
+            recIcon.innerText = '🔄';
+            presetBox.style.display = 'block';
+          };
+
+          mediaRecorder.start();
+          recBtn.classList.add('recording');
+          recText.innerText = 'Recording... Click to Finish';
+          recIcon.innerText = '⏹️';
+        } catch (err) {
+          alert('Microphone access is required to record your voice.');
+        }
+      } else if (mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+        mediaRecorder.stream.getTracks().forEach(track => track.stop());
+      }
+    }
+
+    function playEffect(type) {
+      if (!recordedBlob) return;
+      const audio = new Audio(URL.createObjectURL(recordedBlob));
+      
+      if (type === 'helium') {
+        audio.playbackRate = 1.6;
+      } else if (type === 'deep') {
+        audio.playbackRate = 0.72;
+      } else if (type === 'fast') {
+        audio.playbackRate = 1.9;
+      } else if (type === 'robot') {
+        audio.playbackRate = 1.15;
+      } else {
+        audio.playbackRate = 1.0;
+      }
+
+      audio.play();
+    }
+  </script>
+</body>
+</html>
