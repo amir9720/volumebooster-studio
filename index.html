@@ -3,295 +3,146 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Volume Booster GOODEV & Web Audio Studio Suite</title>
-  <meta name="description" content="All-in-one browser audio toolkit: Volume booster, pitch shifter, decibel meter, 8D audio, voice changer, speaker cleaner, and hearing test.">
+  <title>GOODEV Audio Studio - Free Online Browser Audio Tools</title>
+  <meta name="description" content="Free professional browser audio toolkit. Boost volume, shift pitch, extract audio from video, clean speakers, and generate 8D sound.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header>
-    <h1>Volume Booster GOODEV Studio</h1>
-    <p>Professional & fun browser-based audio toolkit. Process audio securely on device without server uploads.</p>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="brand-logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">GOODEV<strong>Audio</strong></span>
+      </a>
+      <div class="nav-tags">
+        <span class="tag-badge">100% Free</span>
+        <span class="tag-badge">Client-Side Secure</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <h1>All-in-One Online Audio Studio</h1>
+    <p>Fast, high-fidelity sound utilities directly in your browser. No file size limits, no server uploads, and completely private.</p>
   </header>
 
-  <!-- Category 1: Utilities -->
-  <div class="category-title">Core Utilities</div>
-  <div class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('tab-boost')">Volume Booster</button>
-    <button class="tab-btn" onclick="switchTab('tab-pitch')">Pitch & Speed</button>
-    <button class="tab-btn" onclick="switchTab('tab-v2a')">Video to Audio</button>
-    <button class="tab-btn" onclick="switchTab('tab-cleaner')">Water Ejector</button>
-    <button class="tab-btn" onclick="switchTab('tab-db')">Decibel Meter</button>
-    <button class="tab-btn" onclick="switchTab('tab-latency')">Audio Latency</button>
-    <button class="tab-btn" onclick="switchTab('tab-clarity')">Vocal Clarity</button>
-  </div>
-
-  <!-- Category 2: Interactive & Fun -->
-  <div class="category-title">Fun & Experiments</div>
-  <div class="nav-tabs">
-    <button class="tab-btn" onclick="switchTab('tab-8d')">8D Spatial Sound</button>
-    <button class="tab-btn" onclick="switchTab('tab-voice')">Voice Transformer</button>
-    <button class="tab-btn" onclick="switchTab('tab-hearing')">Hearing Age Test</button>
-    <button class="tab-btn" onclick="switchTab('tab-binaural')">Binaural Study Waves</button>
-    <button class="tab-btn" onclick="switchTab('tab-reverse')">Reverse Audio</button>
-  </div>
-
-  <main>
-    <!-- 1. Volume Booster -->
-    <div class="tool-card active" id="tab-boost">
-      <h2>Volume & Gain Booster</h2>
-      <p class="subtext">Boost media sound levels up to 400% with real-time gain amplification.</p>
-      <div class="upload-zone" onclick="document.getElementById('boost-file').click()">
-        <span id="boost-name">Click or Drag Audio/Video file</span>
-        <input type="file" id="boost-file" accept="audio/*,video/*" style="display:none" onchange="handleBoostUpload(event)">
-      </div>
-      <div class="control-group">
-        <label>Boost Multiplier: <span id="boost-val">100%</span></label>
-        <input type="range" id="boost-slider" min="1" max="4" step="0.1" value="1" oninput="updateBoost(this.value)">
-      </div>
-      <audio id="boost-player" controls style="display:none;"></audio>
-      
-      <div class="tool-guide">
-        <h4>What is this tool and how does it work?</h4>
-        <p>Ever received a voice note, podcast, or lecture recording that was recorded so quietly you could barely hear it even at maximum device volume? This tool acts as an audio amplifier right in your browser.</p>
-        <p>Instead of merely adjusting device output, it multiplies the digital audio signal gain directly via the Web Audio API. Simply upload your audio or video file, drag the slider above 100%, and enjoy crisp, amplified playback without needing any desktop software.</p>
-      </div>
+  <!-- Tools Grid -->
+  <main class="container">
+    <div class="section-heading">
+      <h2>Core Audio Utilities</h2>
+      <p>Precision tools for daily sound editing and enhancement</p>
     </div>
 
-    <!-- 2. Pitch & Speed -->
-    <div class="tool-card" id="tab-pitch">
-      <h2>Audio Pitch & Speed Shifter</h2>
-      <p class="subtext">Speed up or slow down tracks from 0.5x to 2.0x smoothly.</p>
-      <div class="upload-zone" onclick="document.getElementById('pitch-file').click()">
-        <span id="pitch-name">Select Audio file</span>
-        <input type="file" id="pitch-file" accept="audio/*" style="display:none" onchange="handlePitchUpload(event)">
-      </div>
-      <div class="control-group">
-        <label>Playback Speed: <span id="speed-val">1.0x</span></label>
-        <input type="range" id="speed-slider" min="0.5" max="2.0" step="0.05" value="1.0" oninput="updateSpeed(this.value)">
-      </div>
-      <audio id="pitch-player" controls style="display:none;"></audio>
+    <div class="tools-grid">
+      <a href="/volume-booster" class="tool-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, #6366f1, #a855f7);">🔊</div>
+        <div class="card-body">
+          <h3>Volume Booster</h3>
+          <p>Amplify audio and video gain up to 400% with distortion prevention.</p>
+          <span class="card-btn">Open Tool &rarr;</span>
+        </div>
+      </a>
 
-      <div class="tool-guide">
-        <h4>What is this tool and how does it work?</h4>
-        <p>Whether you are transcribing a fast-paced interview, learning a complex guitar solo note-by-note, or practicing choreography, controlling playback tempo is essential.</p>
-        <p>This controller alters the playback rate instantly. Slowing down to 0.7x helps pick up fast speech nuances, while speeding up to 1.5x lets you skim through lengthy audio recordings in half the time.</p>
-      </div>
+      <a href="/pitch-shifter" class="tool-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);">⚡</div>
+        <div class="card-body">
+          <h3>Pitch & Speed Shifter</h3>
+          <p>Alter tempo (0.5x to 2x) and audio key pitch in real-time.</p>
+          <span class="card-btn">Open Tool &rarr;</span>
+        </div>
+      </a>
+
+      <a href="/video-to-audio" class="tool-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, #10b981, #14b8a6);">🎬</div>
+        <div class="card-body">
+          <h3>Video to Audio Extractor</h3>
+          <p>Fast offline extraction of high-quality WAV tracks from MP4, MOV, and WebM.</p>
+          <span class="card-btn">Open Tool &rarr;</span>
+        </div>
+      </a>
+
+      <a href="/speaker-cleaner" class="tool-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">💧</div>
+        <div class="card-body">
+          <h3>Water Ejector (165Hz)</h3>
+          <p>High-kinetic sonic pulses to clear trapped water and dust from phone speakers.</p>
+          <span class="card-btn">Open Tool &rarr;</span>
+        </div>
+      </a>
+
+      <a href="/decibel-meter" class="tool-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">🎙️</div>
+        <div class="card-body">
+          <h3>Decibel & Sound Meter</h3>
+          <p>Measure live ambient acoustic pressure (dB) using your device microphone.</p>
+          <span class="card-btn">Open Tool &rarr;</span>
+        </div>
+      </a>
+
+      <a href="/vocal-clarity" class="tool-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, #14b8a6, #3b82f6);">🎙️</div>
+        <div class="card-body">
+          <h3>Vocal Clarity Booster</h3>
+          <p>Filter low-end hums and boost dialogue frequencies for muffled speech.</p>
+          <span class="card-btn">Open Tool &rarr;</span>
+        </div>
+      </a>
     </div>
 
-    <!-- 3. Video to Audio -->
-    <div class="tool-card" id="tab-v2a">
-      <h2>Video to Audio Converter</h2>
-      <p class="subtext">Extract audio tracks from MP4, WebM, or MOV files locally.</p>
-      <div class="upload-zone" onclick="document.getElementById('v2a-file').click()">
-        <span id="v2a-name">Select Video file</span>
-        <input type="file" id="v2a-file" accept="video/*" style="display:none" onchange="handleV2AUpload(event)">
-      </div>
-      <button class="btn" id="v2a-btn" onclick="extractAudio()" style="display:none;">Extract & Save Audio</button>
-      <div id="v2a-status" class="status-msg"></div>
-
-      <div class="tool-guide">
-        <h4>What is this tool and how does it work?</h4>
-        <p>Have an MP4 screen recording, music video, or lecture clip and just need the soundtrack as an audio file? Many online converters force you to upload large gigabyte videos to remote servers, which is slow and risks privacy.</p>
-        <p>Our tool runs 100% inside your browser memory. It decodes the video's audio track locally on your processor and renders an uncompressed WAV audio file ready for instant download—no waiting, no data usage, and complete privacy.</p>
-      </div>
+    <!-- Fun & Creative Grid -->
+    <div class="section-heading" style="margin-top: 48px;">
+      <h2>Fun & Experimental Studio</h2>
+      <p>Interactive spatial sound, audio toys, and auditory challenges</p>
     </div>
 
-    <!-- 4. Water Ejector -->
-    <div class="tool-card" id="tab-cleaner">
-      <h2>Speaker Cleaner & Water Ejector <span class="badge">165Hz</span></h2>
-      <p class="subtext">Generates kinetic acoustic pulses to help clear water and dust from mobile speakers.</p>
-      <button class="btn" id="cleaner-btn" onclick="toggleWaterEject()">Start Ejection Frequency</button>
+    <div class="tools-grid">
+      <a href="/8d-audio" class="tool-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);">🎧</div>
+        <div class="card-body">
+          <h3>8D Spatial Audio</h3>
+          <p>Create realistic 360-degree rotating headphone audio illusions.</p>
+          <span class="card-btn">Open Tool &rarr;</span>
+        </div>
+      </a>
 
-      <div class="tool-guide">
-        <h4>What is this tool and how does it work?</h4>
-        <p>Accidentally dropped your phone in water or noticed muffled sound after a shower? Surface tension often traps water droplets inside speaker mesh grills.</p>
-        <p>This utility generates a specific 165Hz low-frequency sawtooth acoustic tone. This frequency induces physical air movement and speaker membrane vibrations, pushing trapped moisture and micro-dust particles out of the speaker cavities.</p>
-      </div>
-    </div>
+      <a href="/voice-transformer" class="tool-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, #f97316, #eab308);">🤖</div>
+        <div class="card-body">
+          <h3>Voice Transformer</h3>
+          <p>Apply fun helium, robot, and monster vocal filters to your voice recordings.</p>
+          <span class="card-btn">Open Tool &rarr;</span>
+        </div>
+      </a>
 
-    <!-- 5. Decibel Meter -->
-    <div class="tool-card" id="tab-db">
-      <h2>Real-Time Decibel & Sound Meter</h2>
-      <p class="subtext">Detect live environmental noise levels using your microphone.</p>
-      <div class="meter-box">
-        <div class="db-num"><span id="db-val">0</span> <small>dB</small></div>
-        <div class="db-bar-bg"><div class="db-bar-fill" id="db-fill"></div></div>
-        <div id="db-status" class="status-msg">Microphone ready</div>
-      </div>
-      <button class="btn" id="db-btn" onclick="toggleDecibelMeter()">Start Measurement</button>
+      <a href="/hearing-test" class="tool-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">👂</div>
+        <div class="card-body">
+          <h3>Hearing Age Challenge</h3>
+          <p>Determine biological ear age threshold by testing high frequencies up to 20kHz.</p>
+          <span class="card-btn">Open Tool &rarr;</span>
+        </div>
+      </a>
 
-      <div class="tool-guide">
-        <h4>What is this tool and how does it work?</h4>
-        <p>Curious if your workspace is quiet enough for podcast recording, or checking if neighborhood traffic exceeds healthy sound limits? This sound meter uses your device's built-in microphone to capture live ambient noise levels.</p>
-        <p>It converts live sound pressure into approximate decibels (dB), giving you visual real-time feedback from whisper-quiet ambient levels (under 30dB) to loud traffic exposure (over 80dB).</p>
-      </div>
-    </div>
-
-    <!-- 6. Latency Sync -->
-    <div class="tool-card" id="tab-latency">
-      <h2>Bluetooth Audio Latency Sync</h2>
-      <p class="subtext">Test audio-visual synchronization and delay for wireless earbuds.</p>
-      <div id="latency-flash" class="flash-box">Press Trigger to Sync</div>
-      <button class="btn" onclick="triggerLatencyTest()">Trigger Audio-Visual Pulse</button>
-
-      <div class="tool-guide">
-        <h4>What is this tool and how does it work?</h4>
-        <p>Bluetooth headphones often suffer from slight audio lag that can ruin gaming or movie experiences. When a character speaks, the lip movement and sound should match up perfectly.</p>
-        <p>This sync tool triggers an instantaneous screen flash paired precisely with an 880Hz audio beep. If you see the flash before hearing the beep in your earphones, your audio connection has noticeable latency.</p>
-      </div>
-    </div>
-
-    <!-- 7. Vocal Clarity -->
-    <div class="tool-card" id="tab-clarity">
-      <h2>Speech & Vocal Clarity Enhancer</h2>
-      <p class="subtext">Filters low rumble and boosts dialogue presence for clearer speech.</p>
-      <div class="upload-zone" onclick="document.getElementById('clarity-file').click()">
-        <span id="clarity-name">Select Voice Recording</span>
-        <input type="file" id="clarity-file" accept="audio/*" style="display:none" onchange="handleClarityUpload(event)">
-      </div>
-      <button class="btn" onclick="toggleClarityFilter()">Toggle Clarity Boost</button>
-      <audio id="clarity-player" controls style="display:none;"></audio>
-
-      <div class="tool-guide">
-        <h4>What is this tool and how does it work?</h4>
-        <p>Phone voice notes and meeting recordings often capture heavy desk thumps, air conditioner hums, or low rumble, making voices sound muddy and hard to understand.</p>
-        <p>The clarity filter applies a targeted parametric EQ profile that emphasizes human voice fundamentals (around 3kHz) while cutting unneeded low bass frequencies, bringing speech right to the front.</p>
-      </div>
-    </div>
-
-    <!-- 8. 8D Spatial Audio -->
-    <div class="tool-card" id="tab-8d">
-      <h2>8D Spatial Audio Converter</h2>
-      <p class="subtext">Simulates dynamic 360-degree rotating sound (Use headphones!).</p>
-      <div class="upload-zone" onclick="document.getElementById('8d-file').click()">
-        <span id="8d-name">Select Music track</span>
-        <input type="file" id="8d-file" accept="audio/*" style="display:none" onchange="handle8DUpload(event)">
-      </div>
-      <button class="btn" id="8d-btn" onclick="toggle8DEffect()">Activate 8D Sound Experience</button>
-
-      <div class="tool-guide">
-        <h4>What is this tool and how does it work?</h4>
-        <p>8D audio creates an immersive spatial illusion where music seems to circle around your head in a physical room rather than playing flat inside your ears.</p>
-        <p>Using a stereo panning algorithm driven by sinusoidal modulation, it shifts sound phases dynamically between your left and right ears. <em>Note: Headphones or earbuds are required to experience the full rotating effect.</em></p>
-      </div>
-    </div>
-
-    <!-- 9. Funny Voice Transformer -->
-    <div class="tool-card" id="tab-voice">
-      <h2>Funny Voice Transformer</h2>
-      <p class="subtext">Record a short clip and apply instant voice filters.</p>
-      <button class="btn" id="rec-btn" onclick="toggleVoiceRecord()">Record Voice (Mic)</button>
-      <div class="voice-buttons" style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
-        <button class="btn btn-sm" onclick="playVoiceEffect('helium')">Helium Voice</button>
-        <button class="btn btn-sm" onclick="playVoiceEffect('robot')">Robot Voice</button>
-        <button class="btn btn-sm" onclick="playVoiceEffect('deep')">Deep Monster</button>
-      </div>
-
-      <div class="tool-guide">
-        <h4>What is this tool and how does it work?</h4>
-        <p>A fun audio playground for creating funny voice memos and sound effects. Record a quick greeting using your microphone, then click a preset to transform your voice instantly.</p>
-        <p>The Helium preset speeds up and pitches your formant higher like breathing helium gas, while the Deep Monster filter drops playback into an ominous cinematic rumble.</p>
-      </div>
-    </div>
-
-    <!-- 10. Hearing Age Challenge -->
-    <div class="tool-card" id="tab-hearing">
-      <h2>Hearing Age Frequency Challenge</h2>
-      <p class="subtext">Test high-frequency thresholds to estimate biological ear age.</p>
-      <div class="hearing-slider">
-        <label>Current Frequency: <span id="freq-val">12000 Hz</span></label>
-        <input type="range" id="freq-slider" min="8000" max="20000" step="500" value="12000" oninput="updateFreq(this.value)">
-      </div>
-      <div id="hearing-estimate" class="status-msg" style="margin: 14px 0;">Estimated Hearing Age: Under 50</div>
-      <button class="btn" id="tone-btn" onclick="toggleTone()">Play Test Tone</button>
-
-      <div class="tool-guide">
-        <h4>What is this tool and how does it work?</h4>
-        <p>As humans age, the tiny hair cells inside the inner ear naturally degrade, gradually reducing our ability to hear high-pitched frequencies above 15,000 Hz.</p>
-        <p>This interactive test plays pure sine waves starting from 8,000 Hz up to 20,000 Hz. Adjust the slider to see the highest pitch you can perceive and compare your biological hearing threshold against age averages.</p>
-      </div>
-    </div>
-
-    <!-- 11. Binaural Study Waves -->
-    <div class="tool-card" id="tab-binaural">
-      <h2>Binaural Study & Focus Waves</h2>
-      <p class="subtext">Continuous pure-tone beats to aid concentration and deep work.</p>
-      <div class="control-group">
-        <button class="btn btn-sm" onclick="playBinaural(10)">Alpha Waves (10Hz - Focus)</button>
-        <button class="btn btn-sm" onclick="playBinaural(6)">Theta Waves (6Hz - Relaxation)</button>
-        <button class="btn btn-sm btn-danger" onclick="stopBinaural()">Stop Waves</button>
-      </div>
-
-      <div class="tool-guide">
-        <h4>What is this tool and how does it work?</h4>
-        <p>Binaural beats occur when two slightly different tone frequencies are played independently into each ear (for example, 200Hz in the left and 210Hz in the right). Your brain perceives the 10Hz difference as an auditory pulse.</p>
-        <p>Alpha waves (around 10Hz) are widely used by programmers, writers, and students to encourage deep flow states, while Theta waves (6Hz) support calm meditation and winding down.</p>
-      </div>
-    </div>
-
-    <!-- 12. Reverse Audio -->
-    <div class="tool-card" id="tab-reverse">
-      <h2>Reverse Audio Player</h2>
-      <p class="subtext">Reverse sound tracks in memory and listen backwards instantly.</p>
-      <div class="upload-zone" onclick="document.getElementById('rev-file').click()">
-        <span id="rev-name">Select Audio file</span>
-        <input type="file" id="rev-file" accept="audio/*" style="display:none" onchange="handleReverseUpload(event)">
-      </div>
-      <button class="btn" onclick="processReverseAudio()">Reverse & Play</button>
-      <audio id="rev-player" controls style="display:none;"></audio>
-
-      <div class="tool-guide">
-        <h4>What is this tool and how does it work?</h4>
-        <p>Curious what famous melodies sound like when played backwards, or looking for reversed atmospheric sound effects for video editing?</p>
-        <p>This tool reads your audio data into an uncompressed memory buffer, reverses each sound channel array sample-by-sample, and plays it back in reverse order with zero quality loss.</p>
-      </div>
+      <a href="/binaural-waves" class="tool-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, #6366f1, #3b82f6);">🧠</div>
+        <div class="card-body">
+          <h3>Binaural Study Waves</h3>
+          <p>Pure Alpha (10Hz) & Theta (6Hz) acoustic pulses for focus and deep learning.</p>
+          <span class="card-btn">Open Tool &rarr;</span>
+        </div>
+      </a>
     </div>
   </main>
 
-  <!-- Footer & Legal Links -->
-  <footer>
-    <div class="footer-links">
-      <button class="footer-btn" onclick="openModal('modal-about')">About Us</button>
-      <button class="footer-btn" onclick="openModal('modal-privacy')">Privacy Policy</button>
-      <button class="footer-btn" onclick="openModal('modal-terms')">Terms of Service</button>
-      <button class="footer-btn" onclick="openModal('modal-contact')">Contact</button>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p>&copy; 2026 GOODEV Audio Studio. All processing performed locally in-browser.</p>
     </div>
-    <p>&copy; 2026 Volume Booster GOODEV Studio. High-performance client-side audio tool suite.</p>
   </footer>
 
-  <!-- Legal & Info Modals -->
-  <div id="modal-container" class="modal-overlay" onclick="closeModal(event)">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeModalDirect()">&times;</button>
-      
-      <!-- About -->
-      <div id="modal-about" class="modal-tab" style="display:none;">
-        <h3>About GOODEV Audio Studio</h3>
-        <p>GOODEV Audio Studio is a lightweight, browser-based digital audio workstation delivering instant sound utilities without software installation. All processing executes locally on client hardware using high-precision Web Audio API buffers, ensuring maximum user data privacy and zero upload latency.</p>
-      </div>
-
-      <!-- Privacy -->
-      <div id="modal-privacy" class="modal-tab" style="display:none;">
-        <h3>Privacy Policy</h3>
-        <p>Your privacy is strictly respected. This web suite does NOT upload, store, or transmit your audio or video files to external servers. All operations—including gain amplification, frequency synthesis, filtering, and video extraction—are performed entirely inside your device's memory.</p>
-        <p>Third-party vendors, including Google, may use cookies to serve ads based on prior visits to our website. Users may opt out of personalized advertising by visiting Google Ads Settings.</p>
-      </div>
-
-      <!-- Terms -->
-      <div id="modal-terms" class="modal-tab" style="display:none;">
-        <h3>Terms of Service</h3>
-        <p>By using Volume Booster GOODEV Studio, you agree to utilize its sound-processing capabilities responsibly. High-gain amplification above 100% can generate substantial sound pressure; users are advised to monitor volume levels to protect physical hearing and prevent speaker driver damage.</p>
-      </div>
-
-      <!-- Contact -->
-      <div id="modal-contact" class="modal-tab" style="display:none;">
-        <h3>Contact Us</h3>
-        <p>For inquiries, support requests, or feature feedback regarding our browser audio utilities, contact the development team at: <strong>support@volumebooster-studio.pages.dev</strong></p>
-      </div>
-    </div>
-  </div>
-
-  <script src="app.js"></script>
 </body>
 </html>
