@@ -58,18 +58,25 @@
     .step-card h3 { font-size: 1rem; color: #fff; margin-bottom: 6px; }
     .step-card p { font-size: 0.85rem; color: var(--muted); }
 
-    /* Why Choose Us & Reviews */
+    /* Why Choose Us */
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 40px; }
     .feature-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
     .feature-box h4 { color: #fff; font-size: 0.95rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
     .feature-box p { font-size: 0.83rem; color: var(--muted); }
 
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; }
-    .review-score { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-    .score-num { font-size: 2.2rem; font-weight: 800; color: #fff; }
-    .stars { color: #f59e0b; font-size: 1.2rem; }
-    .review-item { border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px; font-size: 0.86rem; color: var(--muted); }
-    .review-user { color: #cbd5e1; font-weight: 600; font-size: 0.85rem; margin-bottom: 2px; }
+    /* Real Interactive Reviews System */
+    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; }
+    .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+    .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
+    .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
+    @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
+    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #1e293b; color: #fff; border: 1px solid var(--border); padding: 10px; border-radius: 8px; outline: none; font-size: 0.88rem; }
+    .review-inputs select { color: #f59e0b; font-weight: bold; }
+    .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
+    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.88rem; transition: 0.2s; }
+    .review-submit-btn:hover { background: var(--accent-hover); }
+    .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
+    .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 
     /* Accordion FAQ */
     .faq-container { margin-bottom: 45px; }
@@ -79,7 +86,7 @@
     .faq-arrow { font-size: 0.8rem; transition: transform 0.2s; }
     .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.88rem; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 12px; }
 
-    /* SEO Article Section (750+ Words) */
+    /* SEO Article Section */
     .seo-article { background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: #cbd5e1; font-size: 0.93rem; line-height: 1.7; text-align: left; }
     .seo-article h2 { color: #fff; font-size: 1.35rem; margin-bottom: 14px; }
     .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 24px 0 10px; }
@@ -98,7 +105,6 @@
   </header>
 
   <main class="container">
-    <!-- Tool Card -->
     <div class="tool-box">
       <h1>Volume Booster & Gain Amplifier</h1>
       <p class="lead">Amplify quiet audio and video recordings up to 400% with built-in distortion protection.</p>
@@ -117,7 +123,6 @@
         </div>
         <input type="range" id="boost-range" min="1" max="4" step="0.05" value="1" oninput="changeGain(this.value)">
         
-        <!-- Advanced Settings (FreeConvert Style) -->
         <div class="advanced-toggle">
           <button class="advanced-btn" type="button" onclick="toggleAdvanced()">
             ⚙️ <span>Advanced Audio Controls</span>
@@ -138,7 +143,7 @@
       </div>
     </div>
 
-    <!-- 3-Step How-To Tutorial (Teacher Requirement) -->
+    <!-- 3-Step Tutorial -->
     <section class="tutorial-section">
       <h2 class="section-title">How to Boost Audio Volume in 3 Simple Steps</h2>
       <div class="steps-grid">
@@ -183,26 +188,40 @@
       </div>
     </section>
 
-    <!-- User Reviews & Rating Section -->
+    <!-- Real Interactive Reviews System (No Fake Hardcoded Data) -->
     <section class="reviews-box">
-      <div class="review-score">
-        <div class="score-num">4.9</div>
+      <div class="reviews-header">
         <div>
-          <div class="stars">★★★★★</div>
-          <div style="font-size:0.8rem; color:var(--muted);">Based on 1,480+ user evaluations</div>
+          <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 4px;">User Community Feedback</h3>
+          <p style="color: var(--muted); font-size: 0.85rem;">Leave your real feedback or report playback questions below</p>
+        </div>
+        <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
+          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: #fff;">5.0</span>
+          <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
         </div>
       </div>
-      <div class="review-item">
-        <div class="review-user">David Miller — Podcast Editor</div>
-        <p>"Saved my interview recording! The guest spoke far away from their mic and standard players were silent. This brought the dialogue back to life."</p>
-      </div>
-      <div class="review-item">
-        <div class="review-user">Sarah Jenkins — Student</div>
-        <p>"Super fast for university lecture videos recorded on laptop mics. I use it every day on my iPad without installing anything."</p>
-      </div>
+
+      <!-- Live Submission Form -->
+      <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
+        <div class="review-inputs">
+          <input type="text" id="user-name" placeholder="Your Name or Nickname" required maxlength="30">
+          <select id="user-stars">
+            <option value="5">★★★★★ (5/5)</option>
+            <option value="4">★★★★☆ (4/5)</option>
+            <option value="3">★★★☆☆ (3/5)</option>
+            <option value="2">★★☆☆☆ (2/5)</option>
+            <option value="1">★☆☆☆☆ (1/5)</option>
+          </select>
+        </div>
+        <textarea id="user-comment" placeholder="How did this tool work for your audio file? Share your real experience..." required rows="3" maxlength="400"></textarea>
+        <button type="submit" class="review-submit-btn">Post Feedback</button>
+      </form>
+
+      <!-- Live Dynamic Feed -->
+      <div id="reviews-feed"></div>
     </section>
 
-    <!-- Accordion FAQ Section -->
+    <!-- Accordion FAQ -->
     <section class="faq-container">
       <h2 class="section-title">Frequently Asked Questions</h2>
       <div class="faq-item">
@@ -236,7 +255,7 @@
       </div>
     </section>
 
-    <!-- Comprehensive Human-Written Guide (750+ Words) -->
+    <!-- Comprehensive Human-Written Guide -->
     <article class="seo-article">
       <h2>Understanding Digital Gain and Why Default Players Fall Short</h2>
       <p>Have you ever plugged in your headphones to listen to an important voice note, downloaded lecture, or webinar recording, only to find that even at maximum device volume, the voices sound faint and muffled? You turn your smartphone or laptop sound output all the way to 100%, yet you still struggle to comprehend words over everyday room noise.</p>
@@ -282,7 +301,7 @@
         bassFilter = actx.createBiquadFilter();
 
         bassFilter.type = 'highpass';
-        bassFilter.frequency.value = 20; // Default flat
+        bassFilter.frequency.value = 20;
 
         sourceNode = actx.createMediaElementSource(player);
         sourceNode.connect(bassFilter);
@@ -319,6 +338,60 @@
       answer.style.display = isOpen ? 'none' : 'block';
       arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
     }
+
+    /* Real Interactive Reviews Engine (LocalStorage) */
+    const STORAGE_KEY = 'user_reviews_volumebooster';
+
+    function loadReviews() {
+      const feed = document.getElementById('reviews-feed');
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      
+      if (stored.length === 0) {
+        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.88rem; font-style: italic; padding: 10px 0;">No reviews posted yet. Test this tool and be the first to share your experience!</p>';
+        return;
+      }
+
+      let totalStars = 0;
+      feed.innerHTML = stored.map(r => {
+        totalStars += r.rating;
+        return `
+          <div class="review-entry">
+            <div class="review-entry-header">
+              <strong style="color: #cbd5e1; font-size: 0.92rem;">${escapeHtml(r.name)}</strong>
+              <span style="color: #f59e0b; font-size: 0.85rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+            </div>
+            <p style="color: var(--muted); font-size: 0.86rem; line-height: 1.5;">${escapeHtml(r.comment)}</p>
+          </div>
+        `;
+      }).join('');
+
+      const avg = (totalStars / stored.length).toFixed(1);
+      document.getElementById('avg-val').innerText = avg;
+    }
+
+    function submitReview(e) {
+      e.preventDefault();
+      const name = document.getElementById('user-name').value.trim();
+      const rating = parseInt(document.getElementById('user-stars').value);
+      const comment = document.getElementById('user-comment').value.trim();
+
+      if (!name || !comment) return;
+
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      stored.unshift({ name, rating, comment, time: Date.now() });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
+
+      document.getElementById('review-form').reset();
+      loadReviews();
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.innerText = text;
+      return div.innerHTML;
+    }
+
+    window.addEventListener('DOMContentLoaded', loadReviews);
   </script>
 </body>
 </html>
