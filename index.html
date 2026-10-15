@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GOODEV Audio Studio - Professional In-Browser Audio Tools & DSP Engine</title>
+  <title>MiMusic - Professional In-Browser Audio Tools & DSP Engine</title>
   <meta name="description" content="A comprehensive suite of 12 studio-grade audio utilities powered by the Web Audio API. Boost volume, shift pitch, extract tracks, clean speakers, and analyze sound with 100% device privacy.">
   <style>
     :root {
@@ -25,7 +25,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { 
       background: var(--bg); 
-      background-image: linear-gradient(180deg, #f0f4ff 0%, #f8fafc 400px); /* Subtle attractive top gradient */
+      background-image: linear-gradient(180deg, #f0f4ff 0%, #f8fafc 400px); 
       color: var(--text); 
       min-height: 100vh; 
       line-height: 1.6; 
@@ -156,7 +156,8 @@
   <!-- Top Sticky Navigation Bar -->
   <header class="header-nav">
     <div class="nav-inner">
-      <a href="/" class="brand-logo">⚡ GOODEV<span>Audio</span></a>
+      <!-- Changed Brand Name to MiMusic -->
+      <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
       <nav class="nav-links">
         <a href="#suite-enhance" class="nav-link">Enhancement</a>
         <a href="#suite-creative" class="nav-link">Creative FX</a>
@@ -391,7 +392,7 @@
     <section class="feature-showcase" id="brand-tech">
       <div class="showcase-box">
         <h4>🔒 100% In-Memory Privacy</h4>
-        <p>Traditional converter services upload your sensitive interviews, voice notes, and audio stems to foreign cloud servers. GOODEV executes entirely inside local browser volatile memory (RAM). Not a single audio frame is ever stored or transmitted across external networks.</p>
+        <p>Traditional converter services upload your sensitive interviews, voice notes, and audio stems to foreign cloud servers. MiMusic executes entirely inside local browser volatile memory (RAM). Not a single audio frame is ever stored or transmitted across external networks.</p>
       </div>
       <div class="showcase-box">
         <h4>⚡ Zero Conversion Latency</h4>
@@ -407,7 +408,7 @@
     <article class="brand-article">
       <h2>Transforming Digital Audio Processing Through Modern Browser Architecture</h2>
       <p>For over two decades, working with digital audio required a compromise between two extremes. On one hand, professionals relied on heavy, resource-intensive Digital Audio Workstations (DAWs) like Pro Tools, Ableton Live, or Audacity—software suites that consume gigabytes of disk space and demand steep technical learning curves. On the other hand, everyday consumers turned to ad-cluttered online conversion websites that forced users to upload private files across remote servers, exposing confidential speech and unreleased music stems to unknown cloud providers.</p>
-      <p><strong>GOODEV Audio Studio</strong> was engineered to dissolve this compromise entirely. By leveraging the modern W3C Web Audio API and hardware-accelerated WebAssembly modules, our platform brings laboratory-grade digital signal processing directly into your browser tab.</p>
+      <p><strong>MiMusic.net</strong> was engineered to dissolve this compromise entirely. By leveraging the modern W3C Web Audio API and hardware-accelerated WebAssembly modules, our platform brings laboratory-grade digital signal processing directly into your browser tab.</p>
 
       <h3>How In-Memory Client-Side DSP Operates</h3>
       <p>When you load an audio file into any of our 12 specialized tools, the file never travels across an internet cable. Instead, the browser decodes the binary media container locally, unpacking compressed formats (such as MP3, AAC, or Opus) into raw Pulse-Code Modulation (PCM) sample arrays within your system RAM.</p>
@@ -466,7 +467,7 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          No. GOODEV Audio Studio operates strictly via client-side Web Audio API and HTML5 Canvas architecture. All file demuxing, frequency filtering, and amplification calculations execute locally within your device's memory (RAM). Not a single byte of your media leaves your computer or phone.
+          No. MiMusic operates strictly via client-side Web Audio API and HTML5 Canvas architecture. All file demuxing, frequency filtering, and amplification calculations execute locally within your device's memory (RAM). Not a single byte of your media leaves your computer or phone.
         </div>
       </div>
 
@@ -492,7 +493,7 @@
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Can I use audio processed by GOODEV commercially?
+          Can I use audio processed by MiMusic commercially?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
@@ -507,7 +508,8 @@
   <footer>
     <div class="footer-grid">
       <div class="footer-col">
-        <h5>⚡ GOODEV Audio Studio</h5>
+        <!-- Changed Brand Name -->
+        <h5>🎵 MiMusic.net</h5>
         <p style="margin-bottom: 14px; font-size: 0.88rem; font-weight: 500; line-height: 1.6;">A modern suite of 12 studio-grade audio micro-tools running 100% client-side in your browser. Engineered for privacy, speed, and acoustic accuracy.</p>
         <p style="font-size: 0.85rem; color: #64748b; font-weight: 600;">Contact: Sobl5910@gmail.com</p>
       </div>
@@ -544,7 +546,7 @@
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; 2026 GOODEV Audio Studio. Free, open, and private in-browser digital signal processing.</p>
+      <p>&copy; 2026 MiMusic.net Studio. Free, open, and private in-browser digital signal processing.</p>
     </div>
   </footer>
 
@@ -558,7 +560,7 @@
     }
 
     /* Platform Level Interactive Feedback System (LocalStorage) */
-    const STORAGE_KEY = 'platform_reviews_goodevaudio';
+    const STORAGE_KEY = 'platform_reviews_mimusic';
 
     function loadReviews() {
       const feed = document.getElementById('reviews-feed');
