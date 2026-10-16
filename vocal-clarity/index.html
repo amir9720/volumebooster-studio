@@ -3,363 +3,306 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Speech & Vocal Clarity Enhancer - Make Muffled Voices Crisp & Clear</title>
-  <meta name="description" content="Enhance voice recordings, cut background bass rumble, and boost dialogue clarity online. Client-side audio filtering with zero uploads or tracking.">
+  <title>Mi Sound Enhancer & Vocal Clarity | MiMusic Web Tools</title>
+  <meta name="description" content="Improve Xiaomi sound quality and vocal clarity online. Use our advanced Mi sound enhancer to fix muddy audio, optimize MIUI audio settings, and isolate speech.">
   <style>
     :root {
-      --bg: #090d16;
-      --card-bg: #111827;
-      --border: #1f2937;
-      --accent: #14b8a6;
-      --accent-hover: #0d9488;
-      --text: #f9fafb;
-      --muted: #9ca3af;
-      --surface: #0c121e;
+      /* MiMusic Clean Light Theme */
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --accent: #4f46e5;
+      --accent-hover: #4338ca;
+      --text: #334155;
+      --text-dark: #0f172a;
+      --muted: #64748b;
+      --surface: #f1f5f9;
+      --green: #10b981;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 16px 60px; line-height: 1.6; }
 
-    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
-    .brand { color: #fff; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); margin-bottom: 30px; }
+    .brand { color: var(--text-dark); font-size: 1.25rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
     .brand span { color: var(--accent); }
-    .back-home { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
-    .back-home:hover { color: #fff; }
+    .back-home { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .back-home:hover { color: var(--accent); }
 
     .container { width: 100%; max-width: 820px; }
-    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); text-align: center; }
-    h1 { font-size: 2rem; margin-bottom: 8px; color: #fff; }
-    .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; }
+    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); text-align: center; }
+    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
+    .lead { color: var(--muted); font-size: 0.95rem; font-weight: 500; margin-bottom: 24px; }
 
-    .dropzone { border: 2px dashed #374151; border-radius: 14px; padding: 40px 20px; cursor: pointer; transition: 0.2s; background: rgba(255,255,255,0.01); margin-bottom: 20px; }
-    .dropzone:hover { border-color: var(--accent); background: rgba(20,184,166,0.05); }
+    .dropzone { border: 2px dashed #cbd5e1; border-radius: 14px; padding: 40px 20px; cursor: pointer; transition: 0.2s; background: var(--surface); margin-bottom: 20px; }
+    .dropzone:hover { border-color: var(--accent); background: #e0e7ff; }
     .dropzone-icon { font-size: 2.5rem; margin-bottom: 8px; }
-    .dropzone-text { font-size: 1rem; color: #cbd5e1; font-weight: 600; }
-    .dropzone-sub { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+    .dropzone-text { font-size: 1.05rem; color: var(--text-dark); font-weight: 700; }
 
-    .control-panel { display: none; margin-top: 24px; text-align: left; background: var(--surface); padding: 24px; border-radius: 14px; border: 1px solid var(--border); }
-    .toggle-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
-    .btn { background: var(--accent); color: #fff; border: none; padding: 12px 22px; border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
-    .btn:hover { background: var(--accent-hover); }
-    .btn.active-filter { background: #10b981; }
+    .controls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 24px 0; text-align: left; }
+    @media (max-width: 600px) { .controls-grid { grid-template-columns: 1fr; } }
+    .control-group { background: var(--surface); padding: 16px; border-radius: 12px; border: 1px solid var(--border); }
+    .control-group label { display: flex; justify-content: space-between; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; font-size: 0.9rem; }
+    .val-display { color: var(--accent); font-weight: 800; }
+    input[type=range] { width: 100%; accent-color: var(--accent); height: 6px; border-radius: 3px; cursor: pointer; }
 
-    /* Advanced Filter Controls */
-    .advanced-toggle { margin-top: 20px; border-top: 1px dashed var(--border); padding-top: 16px; text-align: left; }
-    .advanced-btn { background: none; border: none; color: var(--accent); font-size: 0.9rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-    .advanced-content { display: none; margin-top: 14px; padding: 14px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid var(--border); }
-    .adv-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.88rem; color: var(--muted); }
-    .adv-row:last-child { margin-bottom: 0; }
-    select { background: #1e293b; color: #fff; border: 1px solid var(--border); padding: 5px 10px; border-radius: 6px; outline: none; }
-    audio { width: 100%; margin-top: 18px; }
+    .btn { background: var(--accent); color: #fff; border: none; padding: 14px 28px; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); width: 100%; max-width: 300px; margin-top: 10px; }
+    .btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .btn:disabled { background: #94a3b8; box-shadow: none; cursor: not-allowed; transform: none; }
 
-    /* Step-by-Step Tutorial Box */
-    .tutorial-section { margin-top: 45px; }
-    .section-title { font-size: 1.4rem; color: #fff; margin-bottom: 18px; font-weight: 700; text-align: left; }
-    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; }
-    .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
-    .step-card h3 { font-size: 1rem; color: #fff; margin-bottom: 6px; }
-    .step-card p { font-size: 0.85rem; color: var(--muted); }
+    .player-zone { display: none; margin-top: 24px; text-align: left; padding: 20px; background: var(--surface); border-radius: 14px; border: 1px solid var(--border); }
+    audio { width: 100%; border-radius: 8px; margin-bottom: 12px; }
 
-    /* Why Choose Us */
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .feature-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
-    .feature-box h4 { color: #fff; font-size: 0.95rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-    .feature-box p { font-size: 0.83rem; color: var(--muted); }
+    /* Features Grid */
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 40px 0; }
+    .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
-    /* Real Interactive Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; }
+    /* Reviews System */
+    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
     .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
     .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
     .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
     @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #1e293b; color: #fff; border: 1px solid var(--border); padding: 10px; border-radius: 8px; outline: none; font-size: 0.88rem; }
-    .review-inputs select { color: #f59e0b; font-weight: bold; }
+    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
+    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); }
+    .review-inputs select { color: #d97706; font-weight: bold; }
     .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.88rem; transition: 0.2s; }
-    .review-submit-btn:hover { background: var(--accent-hover); }
+    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; }
+    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
     .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
     .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 
-    /* Accordion FAQ */
-    .faq-container { margin-bottom: 45px; }
-    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
-    .faq-question { width: 100%; padding: 16px 20px; text-align: left; background: none; border: none; color: #fff; font-size: 0.95rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-question:hover { color: var(--accent); }
-    .faq-arrow { font-size: 0.8rem; transition: transform 0.2s; }
-    .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.88rem; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 12px; }
+    /* SEO Article & FAQ */
+    .seo-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: var(--text); font-size: 0.95rem; line-height: 1.7; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 40px; }
+    .seo-article h2, .seo-article h3 { color: var(--text-dark); font-weight: 800; margin-bottom: 14px; }
+    .seo-article h3 { font-size: 1.15rem; margin-top: 24px; }
+    
+    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+    .faq-question { width: 100%; padding: 16px 20px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-question:hover { color: var(--accent); background: var(--surface); }
+    .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.95rem; font-weight: 500; line-height: 1.6; border-top: 1px solid var(--surface); padding-top: 12px; }
 
-    /* Comprehensive SEO Article */
-    .seo-article { background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: #cbd5e1; font-size: 0.93rem; line-height: 1.7; text-align: left; }
-    .seo-article h2 { color: #fff; font-size: 1.35rem; margin-bottom: 14px; }
-    .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 24px 0 10px; }
-    .seo-article p { margin-bottom: 16px; }
-    .seo-article ul { padding-left: 20px; margin-bottom: 16px; }
-    .seo-article li { margin-bottom: 6px; }
-
-    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+    footer { text-align: center; color: var(--muted); font-size: 0.85rem; font-weight: 500; border-top: 1px solid var(--border); padding-top: 24px; margin-top: 20px; }
   </style>
 </head>
 <body>
 
   <header class="nav">
-    <a href="/" class="brand">⚡ GOODEV<span>Audio</span></a>
-    <a href="/" class="back-home">&larr; Back to All Tools</a>
+    <a href="/" class="brand">🎵 MiMusic<span>.net</span></a>
+    <a href="/" class="back-home">&larr; Studio Home</a>
   </header>
 
   <main class="container">
     <div class="tool-box">
-      <h1>Speech & Vocal Clarity Enhancer</h1>
-      <p class="lead">Eliminate low-end mud, reduce hollow room boxiness, and push spoken dialogue into crisp focus.</p>
+      <h1>Mi Sound Enhancer & Vocal Clarity</h1>
+      <p class="lead">Optimize your MIUI audio settings online. Cut through muddy bass frequencies and isolate human speech for crystal clear podcast and lecture playback.</p>
 
       <div class="dropzone" onclick="document.getElementById('file-input').click()">
         <div class="dropzone-icon">🗣️</div>
-        <div class="dropzone-text" id="file-label">Select Voice Recording or Audio Clip</div>
-        <div class="dropzone-sub">Supports MP3, WAV, M4A, AAC, OGG (Max 200MB)</div>
-        <input type="file" id="file-input" accept="audio/*" style="display:none" onchange="loadFile(event)">
+        <div class="dropzone-text" id="file-label">Select Audio File (MP3, WAV, M4A)</div>
+        <input type="file" id="file-input" accept="audio/*,video/*" style="display:none" onchange="handleFile(event)">
       </div>
 
-      <div class="control-panel" id="controls">
-        <div class="toggle-row">
-          <div>
-            <strong style="color:#fff;">Dual-Band Clarity Filter:</strong>
-            <div style="font-size:0.8rem; color:var(--muted); margin-top:2px;">Cuts low mechanical thumps while brightening speech formants</div>
-          </div>
-          <button class="btn" id="filter-btn" onclick="toggleClarity()">Turn Filter ON</button>
+      <div class="controls-grid">
+        <div class="control-group">
+          <label>Mud Cut (High-Pass) <span class="val-display" id="hp-val">120 Hz</span></label>
+          <input type="range" id="hp-slider" min="20" max="400" value="120" oninput="document.getElementById('hp-val').innerText = this.value + ' Hz'">
         </div>
-
-        <div class="advanced-toggle">
-          <button class="advanced-btn" type="button" onclick="toggleAdvanced()">
-            ⚙️ <span>Advanced Equalizer & Frequency Tuning</span>
-          </button>
-          <div class="advanced-content" id="advanced-box">
-            <div class="adv-row">
-              <label>Low-Cut Rumble Roll-Off:</label>
-              <select id="low-cut-freq" onchange="updateFilterParams()">
-                <option value="120" selected>120 Hz (Standard Speech Clean-Up)</option>
-                <option value="80">80 Hz (Preserve Deep Voice Resonance)</option>
-                <option value="160">160 Hz (Heavy HVAC / Traffic Elimination)</option>
-              </select>
-            </div>
-            <div class="adv-row">
-              <label>Speech Articulation Boost (3kHz):</label>
-              <select id="presence-boost" onchange="updateFilterParams()">
-                <option value="9" selected>+9 dB (Moderate Crisp Intelligibility)</option>
-                <option value="5">+5 dB (Subtle Dialogue Lift)</option>
-                <option value="13">+13 dB (Aggressive Cuts for Muffled Voice)</option>
-              </select>
-            </div>
-          </div>
+        <div class="control-group">
+          <label>Vocal Presence Boost <span class="val-display" id="pres-val">4.0 dB</span></label>
+          <input type="range" id="pres-slider" min="0" max="12" step="0.5" value="4.0" oninput="document.getElementById('pres-val').innerText = this.value + ' dB'">
         </div>
+      </div>
 
+      <button class="btn" id="process-btn" disabled onclick="enhanceVocals()">Enhance Audio Quality</button>
+
+      <div class="player-zone" id="player-zone">
+        <h3 style="margin-bottom:10px; color:var(--text-dark); font-size:1rem; font-weight:700;">Enhanced Playback:</h3>
         <audio id="player" controls></audio>
+        <div>
+          <a id="download-link" class="btn" style="display:inline-block; text-decoration:none; text-align:center; font-size:0.9rem;" download="mimusic_enhanced.wav">Download Clear WAV</a>
+        </div>
       </div>
     </div>
 
-    <!-- 3-Step Tutorial -->
-    <section class="tutorial-section">
-      <h2 class="section-title">How to Enhance Voice Clarity in 3 Steps</h2>
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-badge">1</div>
-          <h3>Upload Recording</h3>
-          <p>Drop your smartphone voice note, interview clip, or recorded meeting into the tool.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-badge">2</div>
-          <h3>Activate Clarity Filter</h3>
-          <p>Toggle the dual-stage filter to instantly shave off bass mud and lift vocal presence.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-badge">3</div>
-          <h3>Compare A/B Sound</h3>
-          <p>Switch the filter on and off during playback to audition the clean, articulate dialogue.</p>
-        </div>
+    <!-- Why Choose Us -->
+    <section class="features-grid">
+      <div class="feature-box">
+        <h4>🎙️ Speech Isolation</h4>
+        <p>Boosts the 2kHz-5kHz frequency range where human consonants reside, making muffled voices intelligible.</p>
+      </div>
+      <div class="feature-box">
+        <h4>🎛️ MIUI Audio Equalizer Alt</h4>
+        <p>Works directly in your browser memory without needing complex system equalizer settings or root access.</p>
+      </div>
+      <div class="feature-box">
+        <h4>🔇 Remove Rumble</h4>
+        <p>The high-pass filter eliminates low-frequency air conditioning hum and traffic noise from voice memos.</p>
       </div>
     </section>
 
-    <!-- Why Choose Our Tool Section -->
-    <section>
-      <h2 class="section-title">Why Choose Our Speech Clarity Enhancer?</h2>
-      <div class="features-grid">
-        <div class="feature-box">
-          <h4>🔒 Confidential Dictation</h4>
-          <p>Medical, legal, and personal memos are filtered in local RAM with zero cloud transmission.</p>
-        </div>
-        <div class="feature-box">
-          <h4>🎛️ Dual-Stage Biquad Engine</h4>
-          <p>High-pass filtering coupled with parametric presence bell curves targets intelligibility zones.</p>
-        </div>
-        <div class="feature-box">
-          <h4>🎧 Real-Time A/B Testing</h4>
-          <p>Instantly compare the raw track against the enhanced profile with zero playback interruption.</p>
-        </div>
-        <div class="feature-box">
-          <h4>📱 Perfect for Mobile Clips</h4>
-          <p>Removes the hollow, boomy boxiness characteristic of phone microphone voice memos.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Real Interactive Reviews System (No Fake Data) -->
+    <!-- Reviews System -->
     <section class="reviews-box">
       <div class="reviews-header">
         <div>
-          <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem;">Did this filter improve your voice clarity? Share your results below</p>
+          <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
+          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">Did this sound enhancer improve your audio quality? Share below!</p>
         </div>
         <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: #fff;">5.0</span>
+          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
           <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
         </div>
       </div>
 
-      <!-- Live Submission Form -->
       <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
         <div class="review-inputs">
-          <input type="text" id="user-name" placeholder="Your Name or Nickname" required maxlength="30">
+          <input type="text" id="user-name" placeholder="Your Name" required maxlength="30">
           <select id="user-stars">
             <option value="5">★★★★★ (5/5)</option>
             <option value="4">★★★★☆ (4/5)</option>
             <option value="3">★★★☆☆ (3/5)</option>
-            <option value="2">★★☆☆☆ (2/5)</option>
-            <option value="1">★☆☆☆☆ (1/5)</option>
           </select>
         </div>
-        <textarea id="user-comment" placeholder="What kind of recording did you clean up (podcast, lecture, interview)? Share your feedback..." required rows="3" maxlength="400"></textarea>
+        <textarea id="user-comment" placeholder="How did this tool help clear up your audio files?" required rows="3" maxlength="300"></textarea>
         <button type="submit" class="review-submit-btn">Post Feedback</button>
       </form>
 
-      <!-- Live Dynamic Feed -->
       <div id="reviews-feed"></div>
     </section>
 
     <!-- Accordion FAQ -->
-    <section class="faq-container">
-      <h2 class="section-title">Frequently Asked Questions</h2>
+    <div style="margin-bottom: 30px;">
+      <h2 style="color: var(--text-dark); font-size: 1.3rem; font-weight: 800; margin-bottom: 16px;">Frequently Asked Questions</h2>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Why does low-frequency rumble make voices hard to understand?
+          How can I improve Xiaomi sound quality for podcasts?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Human ears prioritize the loudest acoustic frequencies. Low-frequency rumbles (traffic hum, air conditioners, desk thumps) contain massive vibrational energy that masks higher frequency consonant sounds (T, S, K, and P). Because consonants convey over 70% of speech intelligibility, eliminating bass mud instantly restores conversational clarity.
+          Standard music equalizers boost bass, which makes speech sound "muddy" and hard to understand. To improve Xiaomi sound quality for speech, you need to cut frequencies below 150Hz (using a High-Pass filter) and boost the "presence" frequencies between 3kHz and 5kHz. Our Mi Sound Enhancer tool applies these exact DSP filters automatically.
         </div>
       </div>
-
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Does this tool use noisy AI voice cloning or synthetic recreation?
+          Does this tool change my system MIUI audio settings?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          No. This tool uses pure analog-modeled digital filtering (Biquad equalization). It does not hallucinate, re-synthesize, or alter the natural timbre of the speaker's vocal cords. It purely subtracts unwanted acoustic noise and sculpts the natural frequency envelope.
+          No. This is a browser-based utility that processes the specific audio file you upload. It permanently applies the clarity filters and exports a new WAV file. It does not alter your device's global MIUI audio settings or hardware equalizer.
         </div>
       </div>
+    </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          Can I process long voice recordings without crashing my browser?
-          <span class="faq-arrow">▼</span>
-        </button>
-        <div class="faq-answer">
-          Yes! By streaming the audio buffer through a hardware Web Audio graph rather than processing the entire track offline, playback begins instantly regardless of whether your recording is 2 minutes or 2 hours long.
-        </div>
-      </div>
-    </section>
-
-    <!-- Expert Human-Written SEO Guide -->
+    <!-- SEO Article -->
     <article class="seo-article">
-      <h2>The Acoustic Anatomy of Muddy Dialogue and Vocal Intelligibility</h2>
-      <p>Have you ever tried listening back to a quick voice note recorded on a smartphone, a recorded Zoom conference, or an academic lecture captured from the back of an amphitheater, only to realize the speaker sounds like they are talking through a thick blanket? You crank up the volume, but turning the sound up only makes the booming, muffled room hum louder without making words any easier to understand.</p>
-      <p>This pervasive sound flaw is caused by fundamental acoustic physics: the battle between <strong>vocal fundamental frequencies</strong> and <strong>formant articulation bands</strong>. While human vocal cords generate deep fundamental pitches between 85Hz and 255Hz, the linguistic meaning of speech lives much higher up the acoustic spectrum. Vowels provide vocal weight, but delicate consonant sounds—such as 'T', 'D', 'S', 'Sh', and 'P'—occupy the 2,000Hz to 5,000Hz range.</p>
-
-      <h3>The Double Threat: Proximity Effect and Room Modes</h3>
-      <p>When media is captured without professional acoustic treatment, two common variables degrade the vocal track:</p>
+      <h2>Optimizing Audio Clarity and Mi Sound Enhancer Settings</h2>
+      <p>Listening to poorly recorded lectures, interviews, or voice memos can be a frustrating experience. Often, background room rumble and excessive low-end frequencies mask the consonants of human speech, making the audio sound muffled or "muddy." While many users search for the perfect <strong>MIUI audio settings</strong> or system-level <strong>Mi sound enhancer</strong> profiles to fix this, applying a global equalizer to your device isn't always the best solution, as it will also negatively affect how your music sounds.</p>
+      
+      <h3>The Science of Speech Intelligibility</h3>
+      <p>Human speech intelligibility primarily relies on a specific band of frequencies. When we struggle to understand spoken words, the solution is rarely to simply turn up the volume. Instead, we must reshape the audio spectrum:</p>
       <ul>
-        <li><strong>Room Reverberation & Standing Waves:</strong> Uncarpeted rooms, parallel drywall, and large windows reflect sound waves thousands of times per second. Lower midrange frequencies (around 300Hz to 500Hz) stack up into standing waves, giving spoken dialogue a hollow, "boxy" tone reminiscent of speaking inside a cardboard barrel.</li>
-        <li><strong>Microphone Handling & Mechanical Rumble:</strong> Phones sitting flat on conference desks pick up subtle physical vibrations: typing on keyboards, air conditioning compressors, street traffic outside, and HVAC air vents. This sub-100Hz rumble eats up dynamic headroom, pushing the microphone's pre-amp to distortion.</li>
+        <li><strong>High-Pass Filtering (Mud Cut):</strong> Frequencies below 100Hz-120Hz contain almost no useful speech information. They mostly consist of microphone handling noise, wind, air conditioning hum, and traffic rumble. By completely cutting these frequencies, we instantly remove the "mud" masking the voice.</li>
+        <li><strong>Presence Boost:</strong> The crispness of consonants (like T, K, P, and S) lives in the 2.5kHz to 5kHz range. A gentle EQ boost in this specific zone brings the voice forward in the mix, drastically improving clarity.</li>
       </ul>
-
-      <h3>How Real-Time Parametric Biquad Filtering Restores Dialogue</h3>
-      <p>Instead of relying on destructive noise-cancellation algorithms that leave voices sounding watery, phasey, and robotic, audio engineers rely on surgical parametric equalization. Our in-browser enhancer deploys a precision dual-stage Web Audio filter graph:</p>
-      <ol style="padding-left: 20px; margin-bottom: 16px;">
-        <li><strong>High-Pass Butterworth Stage:</strong> A steep roll-off cuts mechanical energy below 120Hz. Spoken speech contains almost zero useful linguistic data in this extreme sub-bass band. Shaving this off immediately cleans up the acoustic floor.</li>
-        <li><strong>Targeted Formant Peaking Filter:</strong> A calibrated parametric bell boost centered at 3,000Hz (with a Q-factor of 1.2) gently lifts consonant transient spikes by up to +9dB. This brings the speaker's vocal presence forward in the soundstage, making rapid syllables effortlessly intelligible.</li>
-      </ol>
-
-      <h3>Practical Guidelines for Best Vocal Enhancement Results</h3>
-      <ul>
-        <li><strong>Audition with Quality Earphones:</strong> Small laptop speakers cannot accurately reproduce frequencies below 200Hz. Use headphones or decent external speakers to properly judge low-cut parameters.</li>
-        <li><strong>Fine-Tune for Speaker Gender:</strong> For naturally deep, baritone male voices, set the Low-Cut to 80Hz in Advanced Options to retain chest resonance. For higher-pitched voices or children's speech, you can safely slide the Low-Cut up to 160Hz to aggressively sweep away traffic rumble.</li>
-        <li><strong>Avoid Over-Boosting:</strong> Extreme presence boosts above +14dB can accentuate harsh sibilance ("sss" sounds). Keep articulation boosts between +6dB and +10dB for clean, broadcast-ready results.</li>
-      </ul>
+      <p>Our web-based audio tool applies these precise studio-grade EQ curves directly to your file inside your browser's memory, providing a permanent fix without requiring you to tweak your phone's internal equalizer settings every time you switch between podcasts and music.</p>
     </article>
+
   </main>
 
   <footer>
-    <p>&copy; 2026 GOODEV Audio Studio. Free browser-based audio tools.</p>
+    <p>&copy; 2026 MiMusic.net Studio. Independent Web Audio Tools.</p>
   </footer>
 
   <script>
-    let actx, player, source, highPass, peakFilter, isFiltered = false;
+    let rawFile;
+    const fileLabel = document.getElementById('file-label');
+    const processBtn = document.getElementById('process-btn');
+    const playerZone = document.getElementById('player-zone');
+    const player = document.getElementById('player');
+    const downloadLink = document.getElementById('download-link');
 
-    function loadFile(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      document.getElementById('file-label').innerText = file.name;
-      player = document.getElementById('player');
-      player.src = URL.createObjectURL(file);
-      document.getElementById('controls').style.display = 'block';
+    function handleFile(e) {
+      rawFile = e.target.files[0];
+      if (!rawFile) return;
+      fileLabel.innerText = rawFile.name;
+      processBtn.disabled = false;
+    }
 
-      if (!actx) {
-        actx = new (window.AudioContext || window.webkitAudioContext)();
-        source = actx.createMediaElementSource(player);
+    async function enhanceVocals() {
+      if (!rawFile) return;
+      processBtn.disabled = true;
+      processBtn.innerText = 'Applying EQ Filters...';
 
-        highPass = actx.createBiquadFilter();
-        highPass.type = 'highpass';
-        highPass.frequency.value = 20;
+      try {
+        const actx = new (window.AudioContext || window.webkitAudioContext)();
+        const arrayBuf = await rawFile.arrayBuffer();
+        const audioBuf = await actx.decodeAudioData(arrayBuf);
 
-        peakFilter = actx.createBiquadFilter();
-        peakFilter.type = 'peaking';
-        peakFilter.frequency.value = 3000;
-        peakFilter.Q.value = 1.2;
-        peakFilter.gain.value = 0;
+        const offlineCtx = new OfflineAudioContext(audioBuf.numberOfChannels, audioBuf.length, audioBuf.sampleRate);
+        const source = offlineCtx.createBufferSource();
+        source.buffer = audioBuf;
 
-        source.connect(highPass);
-        highPass.connect(peakFilter);
-        peakFilter.connect(actx.destination);
+        // Highpass Filter (Mud Cut)
+        const hpFilter = offlineCtx.createBiquadFilter();
+        hpFilter.type = 'highpass';
+        hpFilter.frequency.value = parseFloat(document.getElementById('hp-slider').value);
+        hpFilter.Q.value = 0.707;
+
+        // Peaking EQ (Presence Boost)
+        const presenceEQ = offlineCtx.createBiquadFilter();
+        presenceEQ.type = 'peaking';
+        presenceEQ.frequency.value = 3500; // Human vocal presence center
+        presenceEQ.Q.value = 1.2;
+        presenceEQ.gain.value = parseFloat(document.getElementById('pres-slider').value);
+
+        // Limiter to prevent clipping from the EQ boost
+        const compressor = offlineCtx.createDynamicsCompressor();
+        compressor.threshold.value = -2;
+        compressor.ratio.value = 4;
+        compressor.attack.value = 0.005;
+
+        source.connect(hpFilter);
+        hpFilter.connect(presenceEQ);
+        presenceEQ.connect(compressor);
+        compressor.connect(offlineCtx.destination);
+
+        source.start();
+        const rendered = await offlineCtx.startRendering();
+
+        const outBlob = bufferToWave(rendered, rendered.length);
+        const blobUrl = URL.createObjectURL(outBlob);
+
+        player.src = blobUrl;
+        downloadLink.href = blobUrl;
+        downloadLink.download = rawFile.name.replace(/\.[^/.]+$/, "") + '_mimusic_clear.wav';
+
+        playerZone.style.display = 'block';
+        player.play();
+
+        processBtn.disabled = false;
+        processBtn.innerText = 'Enhance Again';
+      } catch (err) {
+        alert('Could not decode audio file.');
+        processBtn.disabled = false;
+        processBtn.innerText = 'Enhance Audio Quality';
       }
     }
 
-    function toggleClarity() {
-      if (!peakFilter) return;
-      const btn = document.getElementById('filter-btn');
-      isFiltered = !isFiltered;
-
-      if (isFiltered) {
-        updateFilterParams();
-        btn.innerText = 'Filter is ACTIVE (Enhanced)';
-        btn.classList.add('active-filter');
-      } else {
-        highPass.frequency.value = 20;
-        peakFilter.gain.value = 0;
-        btn.innerText = 'Turn Filter ON';
-        btn.classList.remove('active-filter');
+    function bufferToWave(abuffer, len) {
+      let numOfChan = abuffer.numberOfChannels, length = len * numOfChan * 2 + 44, buffer = new ArrayBuffer(length), view = new DataView(buffer), channels = [], i, sample, offset = 0, pos = 0;
+      function setUint16(data) { view.setUint16(pos, data, true); pos += 2; }
+      function setUint32(data) { view.setUint32(pos, data, true); pos += 4; }
+      setUint32(0x46464952); setUint32(length - 8); setUint32(0x45564157); setUint32(0x20746d66); setUint32(16); setUint16(1); setUint16(numOfChan); setUint32(abuffer.sampleRate); setUint32(abuffer.sampleRate * 2 * numOfChan); setUint16(numOfChan * 2); setUint16(16); setUint32(0x61746164); setUint32(length - pos - 4);
+      for (i = 0; i < abuffer.numberOfChannels; i++) channels.push(abuffer.getChannelData(i));
+      while (offset < len) {
+        for (i = 0; i < numOfChan; i++) {
+          sample = Math.max(-1, Math.min(1, channels[i][offset]));
+          sample = (0.5 + sample < 0 ? sample * 32768 : sample * 32767) | 0;
+          view.setInt16(pos, sample, true); pos += 2;
+        } offset++;
       }
-    }
-
-    function updateFilterParams() {
-      if (!isFiltered || !highPass || !peakFilter) return;
-      const cutFreq = parseFloat(document.getElementById('low-cut-freq').value) || 120;
-      const boostGain = parseFloat(document.getElementById('presence-boost').value) || 9;
-
-      highPass.frequency.setValueAtTime(cutFreq, actx.currentTime);
-      peakFilter.gain.setValueAtTime(boostGain, actx.currentTime);
-    }
-
-    function toggleAdvanced() {
-      const box = document.getElementById('advanced-box');
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+      return new Blob([buffer], { type: "audio/wav" });
     }
 
     function toggleFaq(btn) {
@@ -370,58 +313,38 @@
       arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
     }
 
-    /* Real Interactive Reviews Engine (LocalStorage) */
-    const STORAGE_KEY = 'user_reviews_vocalclarity';
-
+    /* Reviews Engine */
+    const STORAGE_KEY = 'tool_reviews_vocalclarity';
     function loadReviews() {
       const feed = document.getElementById('reviews-feed');
       const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      
       if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.88rem; font-style: italic; padding: 10px 0;">No reviews posted yet. Test this tool on your voice memos and share your feedback!</p>';
+        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-style: italic;">No reviews yet. Share your experience!</p>';
         return;
       }
-
       let totalStars = 0;
       feed.innerHTML = stored.map(r => {
         totalStars += r.rating;
-        return `
-          <div class="review-entry">
-            <div class="review-entry-header">
-              <strong style="color: #cbd5e1; font-size: 0.92rem;">${escapeHtml(r.name)}</strong>
-              <span style="color: #f59e0b; font-size: 0.85rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
-            </div>
-            <p style="color: var(--muted); font-size: 0.86rem; line-height: 1.5;">${escapeHtml(r.comment)}</p>
-          </div>
-        `;
+        return `<div class="review-entry">
+            <div class="review-entry-header"><strong style="color: var(--text-dark);">${escapeHtml(r.name)}</strong><span style="color: #f59e0b;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span></div>
+            <p style="color: var(--muted); font-size: 0.9rem; margin-top: 4px;">${escapeHtml(r.comment)}</p>
+          </div>`;
       }).join('');
-
-      const avg = (totalStars / stored.length).toFixed(1);
-      document.getElementById('avg-val').innerText = avg;
+      document.getElementById('avg-val').innerText = (totalStars / stored.length).toFixed(1);
     }
-
     function submitReview(e) {
       e.preventDefault();
       const name = document.getElementById('user-name').value.trim();
       const rating = parseInt(document.getElementById('user-stars').value);
       const comment = document.getElementById('user-comment').value.trim();
-
       if (!name || !comment) return;
-
       const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
       stored.unshift({ name, rating, comment, time: Date.now() });
       localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-
       document.getElementById('review-form').reset();
       loadReviews();
     }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.innerText = text;
-      return div.innerHTML;
-    }
-
+    function escapeHtml(text) { const div = document.createElement('div'); div.innerText = text; return div.innerHTML; }
     window.addEventListener('DOMContentLoaded', loadReviews);
   </script>
 </body>
