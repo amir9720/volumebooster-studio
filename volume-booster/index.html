@@ -3,111 +3,122 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Volume Booster - Increase Audio & Video Sound up to 400%</title>
-  <meta name="description" content="Free online volume booster tool with advanced gain tuning, EQ limiter, step-by-step guide, and distortion protection. 100% private in-browser processing.">
+  <title>Xiaomi Volume Booster & Mi Music Amplifier Online</title>
+  <meta name="description" content="Increase volume for MIUI audio and fix quiet music files. The ultimate Mi music volume booster online with built-in distortion protection and 400% gain.">
   <style>
     :root {
-      --bg: #090d16;
-      --card-bg: #111827;
-      --border: #1f2937;
-      --accent: #6366f1;
-      --accent-hover: #4f46e5;
-      --text: #f9fafb;
-      --muted: #9ca3af;
-      --surface: #0c121e;
+      /* MiMusic Clean Light Theme Palette (Matches Homepage) */
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --accent: #4f46e5;
+      --accent-hover: #4338ca;
+      --text: #334155;
+      --text-dark: #0f172a;
+      --muted: #64748b;
+      --surface: #f1f5f9;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 16px 60px; line-height: 1.6; }
+    body { 
+      background: var(--bg); 
+      background-image: linear-gradient(180deg, #f0f4ff 0%, #f8fafc 400px); 
+      color: var(--text); 
+      min-height: 100vh; 
+      display: flex; flex-direction: column; align-items: center; 
+      padding: 0 16px 60px; line-height: 1.6; 
+    }
     
-    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
-    .brand { color: #fff; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    /* Top Brand Navigation */
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--surface); margin-bottom: 30px; }
+    .brand { color: var(--text-dark); font-size: 1.25rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
     .brand span { color: var(--accent); }
-    .back-home { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
-    .back-home:hover { color: #fff; }
+    .back-home { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .back-home:hover { color: var(--accent); }
 
     .container { width: 100%; max-width: 820px; }
-    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); text-align: center; }
-    h1 { font-size: 2rem; margin-bottom: 8px; color: #fff; }
-    .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; }
+    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); text-align: center; }
+    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
+    .lead { color: var(--muted); font-size: 0.95rem; font-weight: 500; margin-bottom: 24px; }
     
-    .dropzone { border: 2px dashed #374151; border-radius: 14px; padding: 40px 20px; cursor: pointer; transition: 0.2s; background: rgba(255,255,255,0.01); margin-bottom: 20px; }
-    .dropzone:hover { border-color: var(--accent); background: rgba(99,102,241,0.05); }
+    .dropzone { border: 2px dashed #cbd5e1; border-radius: 14px; padding: 40px 20px; cursor: pointer; transition: 0.2s; background: var(--surface); margin-bottom: 20px; }
+    .dropzone:hover { border-color: var(--accent); background: #e0e7ff; }
     .dropzone-icon { font-size: 2.5rem; margin-bottom: 8px; }
-    .dropzone-text { font-size: 1rem; color: #cbd5e1; font-weight: 600; }
-    .dropzone-sub { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+    .dropzone-text { font-size: 1.05rem; color: var(--text-dark); font-weight: 700; }
+    .dropzone-sub { font-size: 0.85rem; color: var(--muted); margin-top: 4px; font-weight: 500; }
 
     /* Advanced Audio Tool Panel */
     .control-panel { display: none; margin-top: 24px; text-align: left; background: var(--surface); padding: 24px; border-radius: 14px; border: 1px solid var(--border); }
-    .control-label { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: 600; font-size: 0.95rem; }
-    .control-label span { color: var(--accent); font-size: 1.2rem; }
-    input[type=range] { width: 100%; accent-color: var(--accent); height: 8px; border-radius: 4px; outline: none; background: #1e293b; cursor: pointer; }
+    .control-label { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: 700; font-size: 0.95rem; color: var(--text-dark); }
+    .control-label span { color: var(--accent); font-size: 1.2rem; font-weight: 800; }
+    input[type=range] { width: 100%; accent-color: var(--accent); height: 8px; border-radius: 4px; outline: none; background: #cbd5e1; cursor: pointer; }
     
-    .advanced-toggle { margin-top: 18px; border-top: 1px dashed var(--border); padding-top: 14px; }
-    .advanced-btn { background: none; border: none; color: var(--accent); font-size: 0.9rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-    .advanced-content { display: none; margin-top: 14px; padding: 14px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid var(--border); }
-    .adv-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.88rem; color: var(--muted); }
+    .advanced-toggle { margin-top: 18px; border-top: 1px dashed var(--border); padding-top: 16px; }
+    .advanced-btn { background: none; border: none; color: var(--accent); font-size: 0.9rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .advanced-content { display: none; margin-top: 14px; padding: 16px; background: #fff; border-radius: 8px; border: 1px solid var(--border); }
+    .adv-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.9rem; color: var(--text); font-weight: 500; }
     .adv-row:last-child { margin-bottom: 0; }
-    audio { width: 100%; margin-top: 18px; }
+    audio { width: 100%; margin-top: 18px; border-radius: 8px; }
 
     /* Step-by-Step Tutorial Box */
     .tutorial-section { margin-top: 45px; }
-    .section-title { font-size: 1.4rem; color: #fff; margin-bottom: 18px; font-weight: 700; text-align: left; }
+    .section-title { font-size: 1.4rem; color: var(--text-dark); margin-bottom: 18px; font-weight: 800; text-align: left; }
     .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; }
+    .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
-    .step-card h3 { font-size: 1rem; color: #fff; margin-bottom: 6px; }
-    .step-card p { font-size: 0.85rem; color: var(--muted); }
+    .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
+    .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
     /* Why Choose Us */
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .feature-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
-    .feature-box h4 { color: #fff; font-size: 0.95rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-    .feature-box p { font-size: 0.83rem; color: var(--muted); }
+    .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; font-weight: 800; }
+    .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
     /* Real Interactive Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; }
+    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
     .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
     .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
     .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
     @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #1e293b; color: #fff; border: 1px solid var(--border); padding: 10px; border-radius: 8px; outline: none; font-size: 0.88rem; }
-    .review-inputs select { color: #f59e0b; font-weight: bold; }
+    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
+    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); }
+    .review-inputs select { color: #d97706; font-weight: bold; }
     .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.88rem; transition: 0.2s; }
-    .review-submit-btn:hover { background: var(--accent-hover); }
+    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2); }
+    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
     .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
     .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 
     /* Accordion FAQ */
     .faq-container { margin-bottom: 45px; }
-    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
-    .faq-question { width: 100%; padding: 16px 20px; text-align: left; background: none; border: none; color: #fff; font-size: 0.95rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-question:hover { color: var(--accent); }
+    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+    .faq-question { width: 100%; padding: 16px 20px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-question:hover { color: var(--accent); background: var(--surface); }
     .faq-arrow { font-size: 0.8rem; transition: transform 0.2s; }
-    .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.88rem; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 12px; }
+    .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.95rem; font-weight: 500; line-height: 1.6; border-top: 1px solid var(--surface); padding-top: 12px; }
 
     /* SEO Article Section */
-    .seo-article { background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: #cbd5e1; font-size: 0.93rem; line-height: 1.7; text-align: left; }
-    .seo-article h2 { color: #fff; font-size: 1.35rem; margin-bottom: 14px; }
-    .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 24px 0 10px; }
-    .seo-article p { margin-bottom: 16px; }
-    .seo-article ul { padding-left: 20px; margin-bottom: 16px; }
+    .seo-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: var(--text); font-size: 0.95rem; line-height: 1.7; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .seo-article h2 { color: var(--text-dark); font-size: 1.45rem; font-weight: 800; margin-bottom: 14px; }
+    .seo-article h3 { color: var(--text-dark); font-size: 1.15rem; font-weight: 700; margin: 24px 0 10px; }
+    .seo-article p { margin-bottom: 16px; font-weight: 500; }
+    .seo-article ul { padding-left: 20px; margin-bottom: 16px; font-weight: 500; }
     .seo-article li { margin-bottom: 6px; }
 
-    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; font-weight: 500; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
   </style>
 </head>
 <body>
 
   <header class="nav">
-    <a href="/" class="brand">⚡ GOODEV<span>Audio</span></a>
-    <a href="/" class="back-home">&larr; Back to All Tools</a>
+    <a href="/" class="brand">🎵 MiMusic<span>.net</span></a>
+    <a href="/" class="back-home">&larr; Studio Home</a>
   </header>
 
   <main class="container">
     <div class="tool-box">
-      <h1>Volume Booster & Gain Amplifier</h1>
-      <p class="lead">Amplify quiet audio and video recordings up to 400% with built-in distortion protection.</p>
+      <h1>Xiaomi Volume Booster & Amplifier</h1>
+      <p class="lead">Fix quiet MIUI audio files. Amplify music and video recordings up to 400% with built-in distortion protection.</p>
 
       <div class="dropzone" onclick="document.getElementById('file-input').click()">
         <div class="dropzone-icon">🔊</div>
@@ -145,17 +156,17 @@
 
     <!-- 3-Step Tutorial -->
     <section class="tutorial-section">
-      <h2 class="section-title">How to Boost Audio Volume in 3 Simple Steps</h2>
+      <h2 class="section-title">How to Increase Volume for Mi Music Files</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-badge">1</div>
           <h3>Upload Media</h3>
-          <p>Drag and drop any audio track or video clip directly into the upload area above.</p>
+          <p>Select any quiet music track, podcast, or video file directly from your device storage.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">2</div>
           <h3>Adjust Gain Multiplier</h3>
-          <p>Drag the volume slider between 100% and 400% to find your desired loudness.</p>
+          <p>Drag the volume slider to multiply sound up to 400%. The built-in limiter ensures safety.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">3</div>
@@ -167,7 +178,7 @@
 
     <!-- Why Choose Our Tool Section -->
     <section>
-      <h2 class="section-title">Why Choose Our Online Volume Booster?</h2>
+      <h2 class="section-title">Why Use Our Online Volume Booster?</h2>
       <div class="features-grid">
         <div class="feature-box">
           <h4>🔒 100% Private & Local</h4>
@@ -175,33 +186,32 @@
         </div>
         <div class="feature-box">
           <h4>⚡ Zero Upload Wait Time</h4>
-          <p>No waiting for large gigabyte videos to upload over slow internet connections.</p>
+          <p>Extract and boost audio from heavy MP4 video files instantly without internet delays.</p>
         </div>
         <div class="feature-box">
           <h4>🛡️ Built-in Limiter</h4>
-          <p>Prevents harsh digital crackling when multiplying audio levels over 150%.</p>
+          <p>Our Web Audio dynamics compressor catches aggressive peaks, preventing speaker damage.</p>
         </div>
         <div class="feature-box">
-          <h4>📱 Mobile Optimized</h4>
-          <p>Full touch support for iPhones, iPads, and Android smartphones without installing apps.</p>
+          <h4>📱 No App Installation</h4>
+          <p>Get studio-grade DSP functionality right in Safari or Chrome without downloading APKs.</p>
         </div>
       </div>
     </section>
 
-    <!-- Real Interactive Reviews System (No Fake Hardcoded Data) -->
+    <!-- Real Interactive Reviews System -->
     <section class="reviews-box">
       <div class="reviews-header">
         <div>
-          <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem;">Leave your real feedback or report playback questions below</p>
+          <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
+          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">Did this tool help fix your quiet audio files? Share your experience below</p>
         </div>
         <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: #fff;">5.0</span>
+          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
           <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
         </div>
       </div>
 
-      <!-- Live Submission Form -->
       <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
         <div class="review-inputs">
           <input type="text" id="user-name" placeholder="Your Name or Nickname" required maxlength="30">
@@ -217,7 +227,6 @@
         <button type="submit" class="review-submit-btn">Post Feedback</button>
       </form>
 
-      <!-- Live Dynamic Feed -->
       <div id="reviews-feed"></div>
     </section>
 
@@ -226,21 +235,21 @@
       <h2 class="section-title">Frequently Asked Questions</h2>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Does boosting volume over 100% damage my speakers?
+          How does this volume booster differ from turning up my Xiaomi phone volume?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Moderate amplification (between 120% and 200%) is completely safe for all modern phone and laptop speakers. We recommend avoiding 400% on delicate earbuds for extended periods to preserve your hearing and prevent hardware strain.
+          Your device's volume buttons only scale the output voltage of your hardware DAC. If the original digital file was recorded too quietly, maximizing phone volume won't be enough. Our tool mathematically multiplies the digital amplitude values within the file itself, giving you a louder baseline track suitable for any media player.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Why do my files remain private?
+          Will boosting the volume cause distortion or clipping?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Unlike traditional online converters that upload your media to third-party cloud servers, our tool uses client-side Web Audio API technology. All audio processing runs locally on your computer or phone CPU.
+          Normally, pushing digital audio beyond 0dBFS causes harsh "clipping" distortion. To prevent this, our advanced engine routes your audio through a DynamicsCompressorNode. This acts as a protective brickwall limiter, smoothly rounding off aggressive peaks while elevating the quieter sections of the track.
         </div>
       </div>
 
@@ -257,29 +266,22 @@
 
     <!-- Comprehensive Human-Written Guide -->
     <article class="seo-article">
-      <h2>Understanding Digital Gain and Why Default Players Fall Short</h2>
+      <h2>Understanding Digital Gain Staging and Safe Audio Amplification</h2>
       <p>Have you ever plugged in your headphones to listen to an important voice note, downloaded lecture, or webinar recording, only to find that even at maximum device volume, the voices sound faint and muffled? You turn your smartphone or laptop sound output all the way to 100%, yet you still struggle to comprehend words over everyday room noise.</p>
-      <p>This frustrating issue stems from the fundamental difference between <em>output level</em> and <em>signal gain</em>. Standard media players and smartphone operating systems can only amplify audio up to the ceiling originally encoded in the digital file container (known as 0 dB Full Scale). If the person who recorded the media stood too far from the microphone, had low input sensitivity, or forgot to normalize the track before exporting, the recorded waveform remains trapped at a whisper.</p>
+      <p>This frustrating issue stems from the fundamental difference between <em>output level</em> and <em>signal gain</em>. Standard media players like the default <strong>MIUI music app</strong> can only amplify audio up to the ceiling originally encoded in the digital file container (known as 0 dB Full Scale). If the person who recorded the media stood too far from the microphone, had low input sensitivity, or forgot to normalize the track before exporting, the recorded waveform remains trapped at a whisper.</p>
 
       <h3>How Web-Based Digital Signal Processing Works</h3>
-      <p>Rather than requiring users to download massive audio workstations like Audacity or Adobe Audition, modern browsers provide access to the high-performance Web Audio API. When you select an audio track or video clip, our booster routes the sound through an internal <code>GainNode</code> multiplier before dispatching the acoustic waves to your sound card.</p>
-      <p>This architecture allows you to scale amplitudes up to 4x (400%) in real time. Because the math executes through hardware-accelerated floating-point calculations, playback remains instantaneous with zero buffer latency.</p>
+      <p>Rather than requiring users to download massive audio workstations, modern browsers provide access to the high-performance Web Audio API. When you select an audio track or video clip, our booster routes the sound through an internal <code>GainNode</code> multiplier before dispatching the acoustic waves to your sound card.</p>
+      <p>This architecture allows you to scale amplitudes up to 4x (400%) in real time. Because the math executes through hardware-accelerated calculations, playback remains instantaneous with zero buffer latency.</p>
 
       <h3>Preventing Audio Clipping and Distortion</h3>
       <p>When multiplying sound past its original volume ceiling, the greatest technical hazard is digital clipping—the harsh, crackling buzz that occurs when audio peaks flatten against the maximum dynamic limit. To solve this, our tool includes an optional <strong>Anti-Clipping Dynamics Limiter</strong>. The limiter automatically rounds off extreme acoustic peaks, maintaining clear, intelligible dialogue even at high amplification levels.</p>
-
-      <h3>Who Benefits Most from an Online Volume Booster?</h3>
-      <ul>
-        <li><strong>Students & Academics:</strong> Transcribe lecture recordings where professors spoke across large lecture halls without lavalier microphones.</li>
-        <li><strong>Transcriptionists & Journalists:</strong> Uncover low-volume whisper details in field interviews and courtroom recordings.</li>
-        <li><strong>Language Learners:</strong> Discern subtle foreign language accents and consonant pronunciations that get lost in low-volume recordings.</li>
-        <li><strong>Content Creators:</strong> Quickly audition and balance background sound effects before importing them into video editing timelines.</li>
-      </ul>
     </article>
   </main>
 
   <footer>
-    <p>&copy; 2026 GOODEV Audio Studio. Free browser-based audio tools.</p>
+    <p style="margin-bottom: 8px;">&copy; 2026 MiMusic.net Studio. Free browser-based DSP tools.</p>
+    <p style="font-size: 0.75rem; color: #94a3b8;">Disclaimer: MiMusic.net is an independent web utility and is not affiliated with or endorsed by Xiaomi Inc. or the official Mi Music app.</p>
   </footer>
 
   <script>
@@ -347,7 +349,7 @@
       const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
       
       if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.88rem; font-style: italic; padding: 10px 0;">No reviews posted yet. Test this tool and be the first to share your experience!</p>';
+        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Test this tool and be the first to share your experience!</p>';
         return;
       }
 
@@ -357,10 +359,10 @@
         return `
           <div class="review-entry">
             <div class="review-entry-header">
-              <strong style="color: #cbd5e1; font-size: 0.92rem;">${escapeHtml(r.name)}</strong>
-              <span style="color: #f59e0b; font-size: 0.85rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+              <strong style="color: var(--text-dark); font-size: 0.95rem; font-weight: 700;">${escapeHtml(r.name)}</strong>
+              <span style="color: #f59e0b; font-size: 0.9rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
             </div>
-            <p style="color: var(--muted); font-size: 0.86rem; line-height: 1.5;">${escapeHtml(r.comment)}</p>
+            <p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; line-height: 1.6;">${escapeHtml(r.comment)}</p>
           </div>
         `;
       }).join('');
