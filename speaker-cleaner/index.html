@@ -3,112 +3,123 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Phone Speaker Cleaner & Water Ejector - 165Hz Sound Wave Fix</title>
-  <meta name="description" content="Eject trapped water and dust from muffled phone speakers using calibrated 165Hz acoustic vibrations. Safe, browser-based hardware sound generator.">
+  <title>Xiaomi Speaker Cleaner & Water Ejector | MiMusic Online</title>
+  <meta name="description" content="Fix muffled sound on your phone. Clear speaker water and dust using the official MiMusic 165Hz acoustic wave generator. Safe for all Xiaomi & MIUI devices.">
   <style>
     :root {
-      --bg: #090d16;
-      --card-bg: #111827;
-      --border: #1f2937;
+      /* MiMusic Clean Light Theme Palette */
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
       --accent: #f59e0b;
       --accent-hover: #d97706;
       --danger: #ef4444;
-      --text: #f9fafb;
-      --muted: #9ca3af;
-      --surface: #0c121e;
+      --text: #334155;
+      --text-dark: #0f172a;
+      --muted: #64748b;
+      --surface: #f1f5f9;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 16px 60px; line-height: 1.6; }
+    body { 
+      background: var(--bg); 
+      background-image: linear-gradient(180deg, #fffbeb 0%, #f8fafc 400px);
+      color: var(--text); 
+      min-height: 100vh; 
+      display: flex; flex-direction: column; align-items: center; 
+      padding: 0 16px 60px; line-height: 1.6; 
+    }
 
-    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
-    .brand { color: #fff; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    /* Top Brand Navigation */
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--surface); margin-bottom: 30px; }
+    .brand { color: var(--text-dark); font-size: 1.25rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
     .brand span { color: var(--accent); }
-    .back-home { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
-    .back-home:hover { color: #fff; }
+    .back-home { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .back-home:hover { color: var(--accent); }
 
     .container { width: 100%; max-width: 820px; }
-    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); text-align: center; }
-    h1 { font-size: 2rem; margin-bottom: 8px; color: #fff; }
-    .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; }
+    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); text-align: center; }
+    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
+    .lead { color: var(--muted); font-size: 0.95rem; font-weight: 500; margin-bottom: 24px; }
 
-    .wave-visualizer { width: 120px; height: 120px; border-radius: 50%; background: rgba(245, 158, 11, 0.1); border: 2px solid var(--accent); margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; font-size: 3rem; transition: transform 0.3s ease; }
+    .wave-visualizer { width: 130px; height: 130px; border-radius: 50%; background: #fffbeb; border: 3px solid var(--accent); margin: 0 auto 28px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; transition: transform 0.3s ease; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15); }
     .vibrating { animation: pulse 0.15s infinite alternate; }
     @keyframes pulse {
       0% { transform: scale(1); box-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
-      100% { transform: scale(1.08); box-shadow: 0 0 35px rgba(245, 158, 11, 0.7); }
+      100% { transform: scale(1.1); box-shadow: 0 0 40px rgba(245, 158, 11, 0.6); }
     }
 
-    .btn { background: var(--accent); color: #fff; border: none; padding: 16px 28px; border-radius: 12px; font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: 0.2s; width: 100%; max-width: 380px; }
-    .btn:hover { background: var(--accent-hover); }
-    .btn.active { background: var(--danger); }
+    .btn { background: var(--accent); color: #fff; border: none; padding: 16px 28px; border-radius: 12px; font-size: 1.05rem; font-weight: 800; cursor: pointer; transition: 0.2s; width: 100%; max-width: 380px; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25); }
+    .btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .btn.active { background: var(--danger); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3); }
 
     /* Advanced Frequency Controls */
-    .advanced-toggle { margin-top: 24px; border-top: 1px dashed var(--border); padding-top: 16px; text-align: left; }
-    .advanced-btn { background: none; border: none; color: var(--accent); font-size: 0.9rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-    .advanced-content { display: none; margin-top: 14px; padding: 14px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid var(--border); }
-    .adv-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.88rem; color: var(--muted); }
+    .advanced-toggle { margin-top: 28px; border-top: 1px dashed var(--border); padding-top: 16px; text-align: left; }
+    .advanced-btn { background: none; border: none; color: var(--accent); font-size: 0.95rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .advanced-content { display: none; margin-top: 14px; padding: 18px; background: #fff; border-radius: 12px; border: 1px solid var(--border); }
+    .adv-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
     .adv-row:last-child { margin-bottom: 0; }
-    select { background: #1e293b; color: #fff; border: 1px solid var(--border); padding: 5px 10px; border-radius: 6px; outline: none; }
+    select { background: #fff; color: var(--text-dark); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; outline: none; font-weight: 500; }
 
     /* Step-by-Step Tutorial Box */
     .tutorial-section { margin-top: 45px; }
-    .section-title { font-size: 1.4rem; color: #fff; margin-bottom: 18px; font-weight: 700; text-align: left; }
+    .section-title { font-size: 1.4rem; color: var(--text-dark); margin-bottom: 18px; font-weight: 800; text-align: left; }
     .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; }
+    .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
-    .step-card h3 { font-size: 1rem; color: #fff; margin-bottom: 6px; }
-    .step-card p { font-size: 0.85rem; color: var(--muted); }
+    .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
+    .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
     /* Why Choose Us */
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .feature-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
-    .feature-box h4 { color: #fff; font-size: 0.95rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-    .feature-box p { font-size: 0.83rem; color: var(--muted); }
+    .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
-    /* Real Interactive Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; }
+    /* Interactive Reviews System */
+    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
     .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
     .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
     .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
     @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #1e293b; color: #fff; border: 1px solid var(--border); padding: 10px; border-radius: 8px; outline: none; font-size: 0.88rem; }
-    .review-inputs select { color: #f59e0b; font-weight: bold; }
+    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
+    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2); }
+    .review-inputs select { color: #d97706; font-weight: bold; }
     .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.88rem; transition: 0.2s; }
-    .review-submit-btn:hover { background: var(--accent-hover); }
+    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; box-shadow: 0 2px 4px rgba(245, 158, 11, 0.2); }
+    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
     .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
     .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 
     /* Accordion FAQ */
     .faq-container { margin-bottom: 45px; }
-    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
-    .faq-question { width: 100%; padding: 16px 20px; text-align: left; background: none; border: none; color: #fff; font-size: 0.95rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-question:hover { color: var(--accent); }
+    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+    .faq-question { width: 100%; padding: 16px 20px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-question:hover { color: var(--accent); background: var(--surface); }
     .faq-arrow { font-size: 0.8rem; transition: transform 0.2s; }
-    .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.88rem; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 12px; }
+    .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.95rem; font-weight: 500; line-height: 1.6; border-top: 1px solid var(--surface); padding-top: 12px; }
 
     /* Comprehensive SEO Article */
-    .seo-article { background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: #cbd5e1; font-size: 0.93rem; line-height: 1.7; text-align: left; }
-    .seo-article h2 { color: #fff; font-size: 1.35rem; margin-bottom: 14px; }
-    .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 24px 0 10px; }
-    .seo-article p { margin-bottom: 16px; }
-    .seo-article ul { padding-left: 20px; margin-bottom: 16px; }
+    .seo-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: var(--text); font-size: 0.95rem; line-height: 1.7; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .seo-article h2 { color: var(--text-dark); font-size: 1.45rem; font-weight: 800; margin-bottom: 14px; }
+    .seo-article h3 { color: var(--text-dark); font-size: 1.15rem; font-weight: 700; margin: 24px 0 10px; }
+    .seo-article p { margin-bottom: 16px; font-weight: 500; }
+    .seo-article ul { padding-left: 20px; margin-bottom: 16px; font-weight: 500; }
     .seo-article li { margin-bottom: 6px; }
 
-    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; font-weight: 500; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
   </style>
 </head>
 <body>
 
   <header class="nav">
-    <a href="/" class="brand">⚡ GOODEV<span>Audio</span></a>
-    <a href="/" class="back-home">&larr; Back to All Tools</a>
+    <a href="/" class="brand">🎵 MiMusic<span>.net</span></a>
+    <a href="/" class="back-home">&larr; Studio Home</a>
   </header>
 
   <main class="container">
     <div class="tool-box">
-      <h1>Speaker Cleaner & Water Ejector</h1>
-      <p class="lead">Dislodge trapped water droplets and fine lint from phone speakers using kinetic 165Hz sonic pulses.</p>
+      <h1>Xiaomi Speaker Cleaner & Water Fix</h1>
+      <p class="lead">Dislodge trapped water droplets and fine dust from your phone speakers using our calibrated 165Hz acoustic wave generator.</p>
 
       <div class="wave-visualizer" id="vis-circle">💧</div>
 
@@ -138,12 +149,12 @@
 
     <!-- 3-Step Tutorial -->
     <section class="tutorial-section">
-      <h2 class="section-title">How to Eject Water from Your Phone in 3 Steps</h2>
+      <h2 class="section-title">How to Clear Speaker Water in 3 Steps</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-badge">1</div>
           <h3>Maximize Phone Volume</h3>
-          <p>Turn your smartphone volume buttons up to 100% to maximize kinetic cone displacement.</p>
+          <p>Turn your Xiaomi or Android smartphone volume up to 100% to maximize kinetic cone displacement.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">2</div>
@@ -160,7 +171,7 @@
 
     <!-- Why Choose Our Tool Section -->
     <section>
-      <h2 class="section-title">Why Choose Our Acoustic Water Cleaner?</h2>
+      <h2 class="section-title">Why Choose Our Mi Acoustic Cleaner?</h2>
       <div class="features-grid">
         <div class="feature-box">
           <h4>🛡️ Zero Hardware Contact</h4>
@@ -172,7 +183,7 @@
         </div>
         <div class="feature-box">
           <h4>📱 No App Store Downloads</h4>
-          <p>Runs directly in your mobile browser. Zero telemetry tracking or battery drain.</p>
+          <p>Runs directly in your mobile browser. A safe alternative to shady third-party cleaner apps.</p>
         </div>
         <div class="feature-box">
           <h4>💨 Dual Action (Water & Dust)</h4>
@@ -181,20 +192,19 @@
       </div>
     </section>
 
-    <!-- Real Interactive Reviews System (No Fake Data) -->
+    <!-- Interactive Reviews System -->
     <section class="reviews-box">
       <div class="reviews-header">
         <div>
-          <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem;">Did this tone eject water or clear dust from your speaker? Share below</p>
+          <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
+          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">Did this tone eject water or clear dust from your speaker? Share below</p>
         </div>
         <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: #fff;">5.0</span>
+          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
           <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
         </div>
       </div>
 
-      <!-- Live Submission Form -->
       <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
         <div class="review-inputs">
           <input type="text" id="user-name" placeholder="Your Name or Nickname" required maxlength="30">
@@ -210,13 +220,22 @@
         <button type="submit" class="review-submit-btn">Post Feedback</button>
       </form>
 
-      <!-- Live Dynamic Feed -->
       <div id="reviews-feed"></div>
     </section>
 
     <!-- Accordion FAQ -->
     <section class="faq-container">
       <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Is this the same as the "Clear Speaker" feature in MIUI settings?
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          Our tool is an advanced web-based alternative. While some Xiaomi phones have a basic "Clear Speaker" option built-in, our online generator gives you direct control over the waveform (Sawtooth vs Sine) and enables a dynamic frequency sweep (140Hz to 180Hz) to dislodge stubborn water and dust more effectively.
+        </div>
+      </div>
+
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
           Can this acoustic tone rupture my smartphone speaker?
@@ -229,54 +248,41 @@
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Why shouldn't I use a hair dryer or compressed air?
+          Does the rice method actually work to fix muffled sound?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          High heat from hair dryers softens the waterproof adhesive gaskets keeping your phone sealed, permanently destroying water resistance. Compressed air cans fire at extreme pressure, which easily ruptures the delicate hydrophobic acoustic membrane inside the grill.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          Does the rice method actually work?
-          <span class="faq-arrow">▼</span>
-        </button>
-        <div class="faq-answer">
-          No, the rice myth is widely debunked by repair technicians. Raw rice does not absorb internal moisture effectively, and the fine starch dust enters your ports, mixing with trapped moisture to create a gummy paste that clogs speaker ports and corrodes charging contacts.
+          No, the rice myth is widely debunked by repair technicians. Raw rice does not absorb internal moisture effectively, and the fine starch dust enters your ports, mixing with trapped moisture to create a gummy paste that permanently clogs speaker grills. Acoustic ejection is the only safe method.
         </div>
       </div>
     </section>
 
-    <!-- Comprehensive Human-Written SEO Guide -->
+    <!-- Comprehensive SEO Guide -->
     <article class="seo-article">
-      <h2>Understanding Acoustic Displacement and Water Tension in Mobile Speakers</h2>
+      <h2>Understanding Acoustic Displacement and How to Fix a Muffled Speaker</h2>
       <p>Modern flagship smartphones come equipped with impressive IP67 or IP68 water resistance ratings. These ratings give users peace of mind when their phone accidentally falls into a pool, takes a shower splash, or endures heavy rainfall. However, there is a crucial distinction between <em>internal liquid protection</em> and <em>acoustic clarity</em>.</p>
-      <p>Water may not breach the motherboard, but it easily gets sucked into the exterior speaker port. Because speaker grills feature microscopic holes engineered to let acoustic waves pass while blocking dirt, water droplets undergo strong capillary action. Surface tension causes water to latch onto the perimeter of the grill holes, creating an impermeable liquid barrier. When you try to make a phone call or watch a clip, the speaker diaphragm vibrates against trapped liquid, resulting in distant, muffled, or severely distorted sound.</p>
+      <p>Water may not breach the motherboard, but it easily gets sucked into the exterior speaker port. Because speaker grills feature microscopic holes engineered to let acoustic waves pass while blocking dirt, water droplets undergo strong capillary action. Surface tension causes water to latch onto the perimeter of the grill holes, creating an impermeable liquid barrier. When you try to listen to <strong>Mi Music</strong> tracks, the speaker diaphragm vibrates against trapped liquid, resulting in distant, muffled, or severely distorted sound.</p>
 
-      <h3>The Physics of 165Hz Low-Frequency Ejection</h3>
-      <p>To break capillary adhesion, physical force must be applied from <em>behind</em> the grill. This is the exact principle Apple engineered for the Apple Watch water lock feature, and it relies on precise acoustic resonance:</p>
+      <h3>The Physics of the 165Hz Xiaomi Speaker Cleaner</h3>
+      <p>To break capillary adhesion, physical force must be applied from <em>behind</em> the grill. This relies on precise acoustic resonance:</p>
       <ul>
         <li><strong>Why 165Hz?</strong> Higher frequencies (like 1,000Hz or speech) cause tiny, rapid cone shivers that barely displace air. Conversely, 165Hz sits at the mechanical resonance sweet spot of miniature mobile drivers, creating wide physical cone excursions (the speaker diaphragm moves forward and backward as far as physically possible).</li>
-        <li><strong>Why Sawtooth Waves?</strong> Smooth sine waves build and release pressure symmetrically. A sawtooth waveform rises gradually and drops off vertically. This asymmetric air pressure acts like a piston hammer, snapping the air column outward to overcome water surface tension and propel droplets into open air.</li>
+        <li><strong>Why Sawtooth Waves?</strong> Smooth sine waves build and release pressure symmetrically. A sawtooth waveform rises gradually and drops off vertically. This asymmetric air pressure acts like a piston hammer, snapping the air column outward to overcome water surface tension.</li>
       </ul>
 
       <h3>Proper Post-Water Rescue Protocol</h3>
-      <p>If your phone just took an accidental swim, follow this step-by-step restoration procedure to protect both your audio hardware and motherboard:</p>
+      <p>If your phone just took an accidental swim, follow this step-by-step restoration procedure to protect your audio hardware:</p>
       <ul>
-        <li><strong>Dry the chassis immediately:</strong> Wipe down the screen, frame, and back panel with a dry microfiber cloth. Do not shake the phone violently, as that can force moisture past secondary rubber seals.</li>
+        <li><strong>Dry the chassis immediately:</strong> Wipe down the screen and frame with a dry microfiber cloth. Do not shake the phone violently.</li>
         <li><strong>Position the speaker downward:</strong> Gravity is your ally. Keep the bottom edge of your device tilted downward toward a dry paper towel.</li>
-        <li><strong>Activate the 165Hz tone at max volume:</strong> Run our acoustic cleaner. Within 20 to 30 seconds, you should observe fine moisture mist landing on the paper towel.</li>
-        <li><strong>Allow natural evaporation:</strong> Once sound clarity returns, prop the phone upright in a well-ventilated room with gentle air circulation for at least 30 minutes before inserting any charging cable.</li>
+        <li><strong>Activate the tone at max volume:</strong> Run our <strong>Xiaomi speaker cleaner</strong> tone. Within 20 to 30 seconds, you should observe fine moisture mist landing on the paper towel.</li>
       </ul>
-
-      <h3>Clearing Accumulated Lint and Pocket Dust</h3>
-      <p>Even if your phone hasn't touched water, speaker grills collect compressed pocket lint, dead skin cells, and microscopic dust over months of daily use. While water droplets form a liquid film, dust creates a dry acoustic filter that dulls high frequencies. Running our dynamic sweep mode (140Hz to 180Hz) creates acoustic resonance cycles that loosen dried particulate matter, allowing you to gently brush it away with a soft, dry toothbrush without risking damage to the internal hydrophobic mesh.</p>
     </article>
   </main>
 
   <footer>
-    <p>&copy; 2026 GOODEV Audio Studio. Free browser-based audio tools.</p>
+    <p style="margin-bottom: 8px;">&copy; 2026 MiMusic.net Studio. Free browser-based DSP tools.</p>
+    <p style="font-size: 0.75rem; color: #94a3b8;">Disclaimer: MiMusic.net is an independent web utility and is not affiliated with or endorsed by Xiaomi Inc. or the official Mi Music app.</p>
   </footer>
 
   <script>
@@ -358,7 +364,7 @@
       const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
       
       if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.88rem; font-style: italic; padding: 10px 0;">No reviews posted yet. Test this tool on your phone and share your results!</p>';
+        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Test this tool on your phone and share your results!</p>';
         return;
       }
 
@@ -368,10 +374,10 @@
         return `
           <div class="review-entry">
             <div class="review-entry-header">
-              <strong style="color: #cbd5e1; font-size: 0.92rem;">${escapeHtml(r.name)}</strong>
-              <span style="color: #f59e0b; font-size: 0.85rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+              <strong style="color: var(--text-dark); font-size: 0.95rem; font-weight: 700;">${escapeHtml(r.name)}</strong>
+              <span style="color: #f59e0b; font-size: 0.9rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
             </div>
-            <p style="color: var(--muted); font-size: 0.86rem; line-height: 1.5;">${escapeHtml(r.comment)}</p>
+            <p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; line-height: 1.6;">${escapeHtml(r.comment)}</p>
           </div>
         `;
       }).join('');
