@@ -3,120 +3,131 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Audio Pitch & Speed Shifter - Change Key and Tempo in Browser</title>
-  <meta name="description" content="Adjust playback tempo (0.5x-2.0x) and pitch in real-time. Features advanced formant handling, step-by-step guidance, and zero server uploads.">
+  <title>Change Audio Pitch & Speed | MiMusic Player Online</title>
+  <meta name="description" content="Adjust playback tempo and pitch in real-time. The best online Mi music player speed tool to slow down or speed up audio files with zero server uploads.">
   <style>
     :root {
-      --bg: #090d16;
-      --card-bg: #111827;
-      --border: #1f2937;
+      /* MiMusic Clean Light Theme Palette */
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
       --accent: #3b82f6;
       --accent-hover: #2563eb;
-      --text: #f9fafb;
-      --muted: #9ca3af;
-      --surface: #0c121e;
+      --text: #334155;
+      --text-dark: #0f172a;
+      --muted: #64748b;
+      --surface: #eff6ff;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 16px 60px; line-height: 1.6; }
+    body { 
+      background: var(--bg); 
+      background-image: linear-gradient(180deg, #eff6ff 0%, #f8fafc 400px);
+      color: var(--text); 
+      min-height: 100vh; 
+      display: flex; flex-direction: column; align-items: center; 
+      padding: 0 16px 60px; line-height: 1.6; 
+    }
 
-    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
-    .brand { color: #fff; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    /* Top Brand Navigation */
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); margin-bottom: 30px; }
+    .brand { color: var(--text-dark); font-size: 1.25rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
     .brand span { color: var(--accent); }
-    .back-home { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
-    .back-home:hover { color: #fff; }
+    .back-home { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .back-home:hover { color: var(--accent); }
 
     .container { width: 100%; max-width: 820px; }
-    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); text-align: center; }
-    h1 { font-size: 2rem; margin-bottom: 8px; color: #fff; }
-    .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; }
+    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); text-align: center; }
+    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
+    .lead { color: var(--muted); font-size: 0.95rem; font-weight: 500; margin-bottom: 24px; }
 
-    .dropzone { border: 2px dashed #374151; border-radius: 14px; padding: 40px 20px; cursor: pointer; transition: 0.2s; background: rgba(255,255,255,0.01); margin-bottom: 20px; }
-    .dropzone:hover { border-color: var(--accent); background: rgba(59,130,246,0.05); }
+    .dropzone { border: 2px dashed #cbd5e1; border-radius: 14px; padding: 40px 20px; cursor: pointer; transition: 0.2s; background: var(--surface); margin-bottom: 20px; }
+    .dropzone:hover { border-color: var(--accent); background: #dbeafe; }
     .dropzone-icon { font-size: 2.5rem; margin-bottom: 8px; }
-    .dropzone-text { font-size: 1rem; color: #cbd5e1; font-weight: 600; }
-    .dropzone-sub { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+    .dropzone-text { font-size: 1.05rem; color: var(--text-dark); font-weight: 700; }
+    .dropzone-sub { font-size: 0.85rem; color: var(--muted); margin-top: 4px; font-weight: 500; }
 
     /* Control Panel */
-    .control-panel { display: none; margin-top: 24px; text-align: left; background: var(--surface); padding: 24px; border-radius: 14px; border: 1px solid var(--border); }
-    .control-label { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem; }
-    .control-label span { color: var(--accent); font-size: 1.15rem; }
-    input[type=range] { width: 100%; accent-color: var(--accent); height: 8px; border-radius: 4px; outline: none; background: #1e293b; cursor: pointer; margin-bottom: 16px; }
+    .control-panel { display: none; margin-top: 24px; text-align: left; background: #fff; padding: 24px; border-radius: 14px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .control-label { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 700; font-size: 0.95rem; color: var(--text-dark); }
+    .control-label span { color: var(--accent); font-size: 1.15rem; font-weight: 800; }
+    input[type=range] { width: 100%; accent-color: var(--accent); height: 8px; border-radius: 4px; outline: none; background: #cbd5e1; cursor: pointer; margin-bottom: 16px; }
 
     .presets { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-    .preset-btn { background: #1f293d; color: var(--muted); border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.82rem; transition: 0.2s; }
-    .preset-btn:hover { background: var(--accent); color: #fff; }
+    .preset-btn { background: var(--surface); color: var(--text-dark); border: 1px solid #bfdbfe; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: 0.2s; }
+    .preset-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
 
     .advanced-toggle { margin-top: 16px; border-top: 1px dashed var(--border); padding-top: 14px; }
-    .advanced-btn { background: none; border: none; color: var(--accent); font-size: 0.9rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-    .advanced-content { display: none; margin-top: 14px; padding: 14px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid var(--border); }
-    .adv-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.88rem; color: var(--muted); }
+    .advanced-btn { background: none; border: none; color: var(--accent); font-size: 0.95rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .advanced-content { display: none; margin-top: 14px; padding: 18px; background: var(--surface); border-radius: 8px; border: 1px solid #bfdbfe; }
+    .adv-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
     .adv-row:last-child { margin-bottom: 0; }
-    audio { width: 100%; margin-top: 18px; }
+    audio { width: 100%; margin-top: 18px; border-radius: 8px; outline: none; }
 
     /* Step-by-Step Tutorial Box */
     .tutorial-section { margin-top: 45px; }
-    .section-title { font-size: 1.4rem; color: #fff; margin-bottom: 18px; font-weight: 700; text-align: left; }
+    .section-title { font-size: 1.4rem; color: var(--text-dark); margin-bottom: 18px; font-weight: 800; text-align: left; }
     .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; }
+    .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
-    .step-card h3 { font-size: 1rem; color: #fff; margin-bottom: 6px; }
-    .step-card p { font-size: 0.85rem; color: var(--muted); }
+    .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
+    .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
     /* Why Choose Us */
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .feature-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
-    .feature-box h4 { color: #fff; font-size: 0.95rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-    .feature-box p { font-size: 0.83rem; color: var(--muted); }
+    .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
-    /* Real Interactive Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; }
+    /* Interactive Reviews System */
+    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
     .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
     .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
     .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
     @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #1e293b; color: #fff; border: 1px solid var(--border); padding: 10px; border-radius: 8px; outline: none; font-size: 0.88rem; }
-    .review-inputs select { color: #f59e0b; font-weight: bold; }
+    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
+    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
+    .review-inputs select { color: #d97706; font-weight: bold; }
     .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.88rem; transition: 0.2s; }
-    .review-submit-btn:hover { background: var(--accent-hover); }
+    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2); }
+    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
     .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
     .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 
     /* Accordion FAQ */
     .faq-container { margin-bottom: 45px; }
-    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
-    .faq-question { width: 100%; padding: 16px 20px; text-align: left; background: none; border: none; color: #fff; font-size: 0.95rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-question:hover { color: var(--accent); }
+    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+    .faq-question { width: 100%; padding: 16px 20px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-question:hover { color: var(--accent); background: var(--surface); }
     .faq-arrow { font-size: 0.8rem; transition: transform 0.2s; }
-    .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.88rem; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 12px; }
+    .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.95rem; font-weight: 500; line-height: 1.6; border-top: 1px solid var(--surface); padding-top: 12px; }
 
-    /* SEO Article Section */
-    .seo-article { background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: #cbd5e1; font-size: 0.93rem; line-height: 1.7; text-align: left; }
-    .seo-article h2 { color: #fff; font-size: 1.35rem; margin-bottom: 14px; }
-    .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 24px 0 10px; }
-    .seo-article p { margin-bottom: 16px; }
-    .seo-article ul { padding-left: 20px; margin-bottom: 16px; }
+    /* Comprehensive SEO Article */
+    .seo-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: var(--text); font-size: 0.95rem; line-height: 1.7; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .seo-article h2 { color: var(--text-dark); font-size: 1.45rem; font-weight: 800; margin-bottom: 14px; }
+    .seo-article h3 { color: var(--text-dark); font-size: 1.15rem; font-weight: 700; margin: 24px 0 10px; }
+    .seo-article p { margin-bottom: 16px; font-weight: 500; }
+    .seo-article ul { padding-left: 20px; margin-bottom: 16px; font-weight: 500; }
     .seo-article li { margin-bottom: 6px; }
 
-    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; font-weight: 500; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
   </style>
 </head>
 <body>
 
   <header class="nav">
-    <a href="/" class="brand">⚡ GOODEV<span>Audio</span></a>
-    <a href="/" class="back-home">&larr; Back to All Tools</a>
+    <a href="/" class="brand">🎵 MiMusic<span>.net</span></a>
+    <a href="/" class="back-home">&larr; Studio Home</a>
   </header>
 
   <main class="container">
     <div class="tool-box">
       <h1>Audio Pitch & Speed Shifter</h1>
-      <p class="lead">Fine-tune tempo and musical pitch in real-time without robotic digital distortion.</p>
+      <p class="lead">Fine-tune tempo and musical pitch in real-time. Slow down or speed up your Mi Music files instantly without robotic digital distortion.</p>
 
       <div class="dropzone" onclick="document.getElementById('file-input').click()">
         <div class="dropzone-icon">🎚️</div>
         <div class="dropzone-text" id="file-label">Click or Drag & Drop audio file here</div>
-        <div class="dropzone-sub">Supports MP3, WAV, AAC, FLAC, OGG (Max 250MB)</div>
+        <div class="dropzone-sub">Supports MP3, WAV, AAC, FLAC, OGG (Processed locally)</div>
         <input type="file" id="file-input" accept="audio/*" style="display:none" onchange="loadFile(event)">
       </div>
 
@@ -156,7 +167,7 @@
 
     <!-- 3-Step Tutorial -->
     <section class="tutorial-section">
-      <h2 class="section-title">How to Change Audio Pitch and Speed in 3 Steps</h2>
+      <h2 class="section-title">How to Change Audio Pitch and Speed</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-badge">1</div>
@@ -178,7 +189,7 @@
 
     <!-- Why Choose Our Tool Section -->
     <section>
-      <h2 class="section-title">Why Choose Our Online Audio Shifter?</h2>
+      <h2 class="section-title">Why Use Our Mi Music Pitch Shifter?</h2>
       <div class="features-grid">
         <div class="feature-box">
           <h4>🔒 Absolute Privacy</h4>
@@ -199,20 +210,19 @@
       </div>
     </section>
 
-    <!-- Real Interactive Reviews System (No Fake Data) -->
+    <!-- Interactive Reviews System -->
     <section class="reviews-box">
       <div class="reviews-header">
         <div>
-          <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem;">Leave your real feedback or report playback questions below</p>
+          <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
+          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">Leave your real feedback or report playback questions below</p>
         </div>
         <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: #fff;">5.0</span>
+          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
           <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
         </div>
       </div>
 
-      <!-- Live Submission Form -->
       <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
         <div class="review-inputs">
           <input type="text" id="user-name" placeholder="Your Name or Nickname" required maxlength="30">
@@ -228,7 +238,6 @@
         <button type="submit" class="review-submit-btn">Post Feedback</button>
       </form>
 
-      <!-- Live Dynamic Feed -->
       <div id="reviews-feed"></div>
     </section>
 
@@ -237,21 +246,21 @@
       <h2 class="section-title">Frequently Asked Questions</h2>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Does changing the speed alter the musical pitch of the song?
+          How can I change audio pitch on Xiaomi devices?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          By default, modern time-stretching algorithms preserve the natural pitch and key. That means if a track is in the key of C major, it stays in C major even if you accelerate it to 1.5x speed. You can turn this behavior off in Advanced Options if you prefer classic tape-speed effects.
+          If your default MIUI audio player doesn't support pitch shifting, you can use our web-based tool. Simply upload your file, and adjust the tempo slider. You can choose whether to lock the natural pitch or let it shift organically with the speed.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          What is the difference between tempo change and pitch shifting?
+          Does changing the speed alter the musical pitch of the song?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Tempo change alters how quickly the sound progresses through time without moving musical keys. Pitch shifting modifies the frequency (semitones) up or down without altering the duration of the track.
+          By default, modern time-stretching algorithms preserve the natural pitch and key. That means if a track is in the key of C major, it stays in C major even if you accelerate it to 1.5x speed. You can turn this behavior off in Advanced Options if you prefer classic tape-speed effects.
         </div>
       </div>
 
@@ -266,36 +275,21 @@
       </div>
     </section>
 
-    <!-- Expert Human-Written SEO Guide -->
+    <!-- Comprehensive SEO Guide -->
     <article class="seo-article">
       <h2>The Mechanics of Audio Time-Stretching and Pitch Correction</h2>
-      <p>Anyone who has ever tried transcribing a rapid-fire legal deposition, dissecting an elaborate flamenco guitar solo, or reviewing a dense academic lecture understands the frustration of rigid playback speeds. In the days of analog tape recorders, altering playback speed was purely mechanical: spinning the tape reel faster raised both tempo and pitch together, transforming mature voices into squeaky cartoon characters. Slowing the tape down dragged the frequencies into a slurred, cavernous drone.</p>
-      <p>In modern digital signal processing (DSP), separating speed from pitch requires sophisticated mathematical manipulation known as time-stretching. Instead of simply playing recorded samples faster, audio engines slice waveforms into microscopic granular frames, analyze their phase alignment using overlap-add synthesis, and reconstruct the sonic timeline so that vocal formants and musical tonality remain completely natural.</p>
-
-      <h3>Everyday Use Cases for Speed and Pitch Manipulation</h3>
-      <p>While studio engineers often use time-stretching for subtle production tweaks, having instant access to a browser-based shifter solves practical problems for a wide range of professionals:</p>
-      <ul>
-        <li><strong>Musicians & Instrumentalists:</strong> When analyzing complex arpeggios, drum fills, or vocal harmonies, slowing playback down to 0.70x or 0.80x allows you to catch every individual note without detuning your instrument to match altered tape speeds.</li>
-        <li><strong>Journalists & Transcriptionists:</strong> People speak in bursts, pauses, and rapid run-on thoughts. Slowing speech down by just 15% to 20% dramatically reduces the need to constantly press pause and rewind every three seconds.</li>
-        <li><strong>Audiobook & Podcast Enthusiasts:</strong> Standard media apps only give you coarse 1.5x or 2.0x jumps. Dialing in a custom 1.20x or 1.35x pace provides a comfortable middle ground where you finish books faster without sounding rushed.</li>
-        <li><strong>Choreographers & Dance Tutors:</strong> Practicing complex rhythm routines step-by-step requires gradually ramping the tempo from half-speed back up to performance tempo.</li>
-      </ul>
+      <p>Anyone who has ever tried transcribing a rapid-fire legal deposition, dissecting an elaborate flamenco guitar solo, or reviewing a dense academic lecture understands the frustration of rigid playback speeds. In the days of analog tape recorders, altering playback speed was purely mechanical: spinning the tape reel faster raised both tempo and pitch together, transforming mature voices into squeaky cartoon characters.</p>
+      <p>In modern digital signal processing (DSP), separating speed from pitch requires sophisticated mathematical manipulation known as time-stretching. Instead of simply playing recorded samples faster, the <strong>Mi Music player speed</strong> engine slices waveforms into microscopic granular frames, analyzes their phase alignment, and reconstructs the sonic timeline so that vocal formants and musical tonality remain completely natural.</p>
 
       <h3>Why Pure In-Browser Processing Is the Smarter Choice</h3>
-      <p>Most commercial audio tools push you to download bulky, ad-supported desktop programs or upload confidential client voice memos to remote cloud servers. Cloud conversions take valuable minutes to queue, consume high mobile bandwidth, and present clear security vulnerabilities when handling unreleased music or private interviews.</p>
+      <p>Most commercial audio tools push you to download bulky desktop programs or upload confidential client voice memos to remote cloud servers. Cloud conversions take valuable minutes to queue, consume high mobile bandwidth, and present clear security vulnerabilities when handling unreleased music or private interviews.</p>
       <p>Our utility eliminates cloud transit entirely. By tapping into the browser's native HTML5 audio stream and Web Audio API architecture, your source files are loaded directly into device RAM. All DSP adjustments execute locally using your hardware's CPU, ensuring instant playback response and complete data secrecy.</p>
-
-      <h3>Pro Tips for the Clearest Audio Playback</h3>
-      <ul>
-        <li><strong>Stay within the 0.65x to 1.60x sweet spot:</strong> While our tool supports extreme limits down to 0.5x, staying within moderate ranges prevents phase smearing and keeps voice consonants crisp.</li>
-        <li><strong>Use headphones for transcription:</strong> Earbuds reveal subtle vocal articulations that small laptop speakers tend to swallow when audio is slowed down.</li>
-        <li><strong>Toggle Pitch Lock for creative effects:</strong> If you are intentionally looking to create vintage slowed-and-reverbed or vaporwave aesthetics, disable pitch lock in the advanced settings to let frequencies drop naturally with tempo.</li>
-      </ul>
     </article>
   </main>
 
   <footer>
-    <p>&copy; 2026 GOODEV Audio Studio. Free browser-based audio tools.</p>
+    <p style="margin-bottom: 8px;">&copy; 2026 MiMusic.net Studio. Free browser-based DSP tools.</p>
+    <p style="font-size: 0.75rem; color: #94a3b8;">Disclaimer: MiMusic.net is an independent web utility and is not affiliated with or endorsed by Xiaomi Inc. or the official Mi Music app.</p>
   </footer>
 
   <script>
@@ -352,7 +346,7 @@
       const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
       
       if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.88rem; font-style: italic; padding: 10px 0;">No reviews posted yet. Test this tool and be the first to share your experience!</p>';
+        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Test this tool and be the first to share your experience!</p>';
         return;
       }
 
@@ -362,10 +356,10 @@
         return `
           <div class="review-entry">
             <div class="review-entry-header">
-              <strong style="color: #cbd5e1; font-size: 0.92rem;">${escapeHtml(r.name)}</strong>
-              <span style="color: #f59e0b; font-size: 0.85rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+              <strong style="color: var(--text-dark); font-size: 0.95rem; font-weight: 700;">${escapeHtml(r.name)}</strong>
+              <span style="color: #f59e0b; font-size: 0.9rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
             </div>
-            <p style="color: var(--muted); font-size: 0.86rem; line-height: 1.5;">${escapeHtml(r.comment)}</p>
+            <p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; line-height: 1.6;">${escapeHtml(r.comment)}</p>
           </div>
         `;
       }).join('');
