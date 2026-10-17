@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platform User Guide & Help Center | MiMusic.net</title>
+  <meta name="description" content="Learn how to use MiMusic web tools. Official user guide for our browser-based audio utilities, privacy policies, and troubleshooting tips.">
+  <style>
+    :root {
+      /* MiMusic Clean Light Theme */
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --accent: #4f46e5;
+      --accent-hover: #4338ca;
+      --text: #334155;
+      --text-dark: #0f172a;
+      --muted: #64748b;
+      --surface: #f1f5f9;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { 
+      background: var(--bg); 
+      background-image: linear-gradient(180deg, #f0f4ff 0%, #f8fafc 400px);
+      color: var(--text); 
+      min-height: 100vh; 
+      line-height: 1.7; 
+    }
+
+    /* Top Brand Navigation */
+    .header-nav { width: 100%; border-bottom: 1px solid var(--border); background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1000px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .brand-logo { color: var(--text-dark); font-size: 1.25rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand-logo span { color: var(--accent); }
+    .back-btn { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.2s; }
+    .back-btn:hover { color: var(--accent); }
+
+    .main-container { max-width: 900px; margin: 40px auto 60px; padding: 0 20px; display: grid; grid-template-columns: 250px 1fr; gap: 40px; }
+    @media (max-width: 768px) {
+      .main-container { grid-template-columns: 1fr; }
+    }
+
+    /* Table of Contents Sidebar */
+    .toc-sidebar { align-self: start; position: sticky; top: 90px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .toc-title { font-size: 0.9rem; font-weight: 800; color: var(--text-dark); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; border-bottom: 2px solid var(--surface); padding-bottom: 8px; }
+    .toc-link { display: block; color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; margin-bottom: 10px; transition: 0.2s; }
+    .toc-link:hover { color: var(--accent); transform: translateX(4px); }
+
+    /* Main Content Area */
+    .content-area { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 40px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    
+    .page-header { margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 24px; }
+    .page-header h1 { font-size: 2.2rem; color: var(--text-dark); font-weight: 800; margin-bottom: 8px; line-height: 1.2; }
+    .page-header p { font-size: 1.05rem; color: var(--muted); }
+
+    .article-section { margin-bottom: 45px; }
+    .article-section h2 { font-size: 1.5rem; color: var(--text-dark); font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .article-section h3 { font-size: 1.15rem; color: var(--text-dark); font-weight: 700; margin: 24px 0 10px; }
+    .article-section p { margin-bottom: 16px; font-size: 1rem; color: var(--text); }
+    .article-section ul { padding-left: 20px; margin-bottom: 16px; }
+    .article-section li { margin-bottom: 8px; font-size: 1rem; }
+
+    .info-box { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0; font-size: 0.95rem; color: #1e3a8a; }
+    .warning-box { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0; font-size: 0.95rem; color: #92400e; }
+
+    footer { border-top: 1px solid var(--border); padding: 30px 20px; text-align: center; color: var(--muted); font-size: 0.9rem; background: var(--bg); }
+  </style>
+</head>
+<body>
+
+  <header class="header-nav">
+    <div class="nav-inner">
+      <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
+      <a href="/" class="back-btn">← Back to Studio</a>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <!-- Sidebar Navigation -->
+    <aside class="toc-sidebar">
+      <div class="toc-title">Quick Navigation</div>
+      <a href="#welcome" class="toc-link">1. Welcome to the Studio</a>
+      <a href="#how-it-works" class="toc-link">2. How Web Tools Work</a>
+      <a href="#privacy" class="toc-link">3. Privacy & Data Security</a>
+      <a href="#troubleshooting" class="toc-link">4. Web Troubleshooting</a>
+      <a href="#supported-formats" class="toc-link">5. Supported Formats</a>
+    </aside>
+
+    <!-- Main Guide Content -->
+    <main class="content-area">
+      <div class="page-header">
+        <h1>Platform User Guide</h1>
+        <p>Your complete manual for utilizing the MiMusic.net web-based audio tool suite.</p>
+      </div>
+
+      <section class="article-section" id="welcome">
+        <h2>👋 Welcome to the Web Studio</h2>
+        <p>MiMusic.net is a comprehensive <strong>browser-based web application</strong> designed to provide studio-grade digital signal processing (DSP) without the need to install any mobile apps or desktop software. Whether you are using an Android smartphone, an iPhone, or a desktop computer, our suite of 12 tools is accessible directly through your web browser.</p>
+        <p>Our platform focuses on utility and speed. Instead of relying on slow cloud servers, we bring the power of an audio editing studio directly into your active browser tab.</p>
+      </section>
+
+      <section class="article-section" id="how-it-works">
+        <h2>⚙️ How Our Web Tools Work</h2>
+        <p>Most traditional online audio converters ask you to "Upload" your file. This means your file is sent over the internet to a remote server, processed in a queue, and then sent back to you for downloading. This is slow and consumes your data plan.</p>
+        <p>Our website utilizes the <strong>HTML5 Web Audio API</strong>. When you select an audio or video file on our site:</p>
+        <ul>
+          <li>The file is loaded securely into your device's temporary memory (RAM).</li>
+          <li>Your local CPU performs the mathematical calculations (like volume boosting, pitch shifting, or spatial panning).</li>
+          <li>The resulting audio is synthesized directly on your device, allowing you to instantly export it.</li>
+        </ul>
+        <div class="info-box">
+          <strong>Note:</strong> Because processing relies on your device's hardware, newer smartphones and computers will render audio significantly faster than older models.
+        </div>
+      </section>
+
+      <section class="article-section" id="privacy">
+        <h2>🔒 Privacy & Data Security</h2>
+        <p>Data security is a fundamental design principle of the MiMusic web studio. Because our tools operate 100% client-side (inside your browser), <strong>your files are never uploaded, stored, or analyzed by our servers.</strong></p>
+        <p>If you are using our Vocal Clarity tool to edit a private business lecture, or our Voice Changer to record a personal voice memo, you can do so with the absolute guarantee that no third party will ever have access to your raw media. The moment you close the browser tab, the audio data is wiped from memory.</p>
+      </section>
+
+      <section class="article-section" id="troubleshooting">
+        <h2>🛠️ Web Troubleshooting</h2>
+        <p>If you encounter issues while using the platform, it is usually related to browser limitations. Here are the most common issues and how to fix them:</p>
+
+        <h3>1. "Browser Out of Memory / Page Crash"</h3>
+        <p>Since we process files locally, loading massive video files (e.g., a 2GB 4K video) into a mobile browser might exceed your phone's available RAM, causing the browser tab to crash.</p>
+        <div class="warning-box">
+          <strong>Solution:</strong> On mobile devices, try to stick to audio files or smaller video files (under 100MB). If you must process a very large file, please use a desktop computer (Chrome or Edge) which typically has much more RAM available.
+        </div>
+
+        <h3>2. "Audio format not supported"</h3>
+        <p>If you upload a file and the tool cannot decode it, the file might be corrupted or encoded in an unsupported proprietary format.</p>
+        <p><strong>Solution:</strong> Ensure your file is a standard web-compatible format like MP3, WAV, M4A, OGG, or a standard MP4 video container.</p>
+
+        <h3>3. "No Sound Output"</h3>
+        <p>If a tool like the Binaural Waves or Speaker Cleaner is running but you hear nothing, your browser might be blocking auto-playing audio.</p>
+        <p><strong>Solution:</strong> Check if your phone is on "Silent" or "Do Not Disturb" mode. Ensure your media volume is turned up. On Safari (iOS), you may need to explicitly tap the play button to authorize audio playback.</p>
+      </section>
+
+      <section class="article-section" id="supported-formats">
+        <h2>📁 Supported Formats</h2>
+        <p>Our platform supports decoding for almost all formats supported natively by your operating system's browser engine. For exports, to guarantee zero quality loss, the majority of our tools export the final processed file in <strong>Uncompressed WAV (.wav)</strong> format.</p>
+        <ul>
+          <li><strong>Input Audio:</strong> MP3, WAV, AAC, M4A, OGG, FLAC.</li>
+          <li><strong>Input Video (for Audio Extraction):</strong> MP4, WebM, MOV.</li>
+          <li><strong>Export Format:</strong> 16-bit or 32-bit float PCM WAV.</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 MiMusic.net Web Studio. Free, private, client-side digital signal processing.</p>
+  </footer>
+
+  <script>
+    // Smooth scrolling for sidebar links
+    document.querySelectorAll('.toc-link').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElem = document.getElementById(targetId);
+        if(targetElem) {
+          window.scrollTo({
+            top: targetElem.offsetTop - 100,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
