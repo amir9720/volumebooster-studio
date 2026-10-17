@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Music 8D Audio Converter | Xiaomi Spatial Sound</title>
-  <meta name="description" content="Convert any track into an immersive 8D rotating spatial experience online. Simulate Xiaomi spatial audio settings directly in your browser with zero uploads.">
+  <meta name="description" content="Convert any track into an immersive 8D rotating spatial experience online. Simulate spatial audio settings directly in your browser with zero uploads.">
   <style>
     :root {
       /* MiMusic Clean Light Theme Palette */
@@ -72,6 +72,10 @@
     .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
     .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    
+    /* Image placeholders for steps */
+    .step-image { width: 100%; height: 120px; background-color: var(--surface); border-radius: 8px; margin-bottom: 12px; object-fit: cover; border: 1px solid var(--border); }
+
     .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
     .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
@@ -80,21 +84,6 @@
     .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
     .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
-
-    /* Interactive Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
-    .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
-    .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
-    @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
-    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2); }
-    .review-inputs select { color: #d97706; font-weight: bold; }
-    .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; box-shadow: 0 2px 4px rgba(139, 92, 246, 0.2); }
-    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-    .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
-    .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 
     /* Accordion FAQ */
     .faq-container { margin-bottom: 45px; }
@@ -124,8 +113,8 @@
 
   <main class="container">
     <div class="tool-box">
-      <h1>Xiaomi 8D Spatial Audio Converter</h1>
-      <p class="lead">Simulate an immersive 360-degree rotating binaural soundstage in real time. Experience <strong>Mi music spatial</strong> sound perfectly in your headphones.</p>
+      <h1>8D Spatial Audio Converter</h1>
+      <p class="lead">Simulate an immersive 360-degree rotating binaural soundstage in real time. Experience spatial sound perfectly in your headphones.</p>
 
       <div class="orbit-stage">
         <div class="head-icon">🎧</div>
@@ -135,7 +124,7 @@
       <div class="dropzone" id="drop-box" onclick="document.getElementById('file-input').click()">
         <div class="dropzone-icon">🎵</div>
         <div class="dropzone-text" id="file-label">Select Audio Track (MP3, WAV, FLAC, M4A)</div>
-        <div class="dropzone-sub">Runs 100% locally in device memory — completely private</div>
+        <div class="dropzone-sub">Runs locally in device memory — completely private</div>
         <input type="file" id="file-input" accept="audio/*" style="display:none" onchange="handleAudio(event)">
       </div>
 
@@ -144,7 +133,7 @@
       <!-- Advanced Orbit Controls -->
       <div class="advanced-toggle">
         <button class="advanced-btn" type="button" onclick="toggleAdvanced()">
-          ⚙️ <span>Advanced Xiaomi Spatial Orbit Options</span>
+          ⚙️ <span>Advanced Spatial Orbit Options</span>
         </button>
         <div class="advanced-content" id="advanced-box">
           <div class="adv-row">
@@ -163,26 +152,29 @@
       </div>
 
       <div class="notice">
-        🎧 <strong>Headphones or Earbuds Required:</strong> 8D audio relies on binaural interaural timing. The spatial rotation illusion cannot be perceived on open phone or laptop speakers.
+        🎧 <strong>Headphones or Earbuds Required:</strong> 8D audio relies on binaural timing. The spatial rotation illusion cannot be perceived on open phone or laptop speakers.
       </div>
     </div>
 
-    <!-- 3-Step Tutorial -->
+    <!-- 3-Step Tutorial with Images -->
     <section class="tutorial-section">
       <h2 class="section-title">How to Experience 8D Audio in 3 Steps</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-badge">1</div>
+          <img src="https://via.placeholder.com/400x250/f5f3ff/8b5cf6?text=Wear+Headphones" alt="Step 1: Wear Headphones" class="step-image">
           <h3>Put on Headphones</h3>
           <p>Wear stereo headphones or earbuds, ensuring correct left and right ear placement.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">2</div>
+          <img src="https://via.placeholder.com/400x250/f5f3ff/8b5cf6?text=Load+Track" alt="Step 2: Load Track" class="step-image">
           <h3>Load Any Music Track</h3>
           <p>Drop your favorite MP3, WAV, or ambient track directly into the dropzone above.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">3</div>
+          <img src="https://via.placeholder.com/400x250/f5f3ff/8b5cf6?text=Engage+8D" alt="Step 3: Engage Spatialization" class="step-image">
           <h3>Engage Spatialization</h3>
           <p>Hit play and close your eyes as the sound smoothly rotates in three dimensions around your head.</p>
         </div>
@@ -191,19 +183,19 @@
 
     <!-- Why Choose Our Tool Section -->
     <section>
-      <h2 class="section-title">Why Choose Our Online 8D Sound Converter?</h2>
+      <h2 class="section-title">Features of the 8D Sound Converter</h2>
       <div class="features-grid">
         <div class="feature-box">
           <h4>🔒 Total File Confidentiality</h4>
-          <p>Your songs never leave your phone or computer. All DSP calculations execute locally in RAM.</p>
+          <p>Your songs never leave your phone or computer. All DSP calculations execute locally in your browser's RAM.</p>
         </div>
         <div class="feature-box">
           <h4>🌀 Smooth Sinusoidal Panning</h4>
-          <p>Continuous mathematical curve panning eliminates jerky channel jumping or phase tearing.</p>
+          <p>Continuous mathematical curve panning helps eliminate jerky channel jumping or phase tearing.</p>
         </div>
         <div class="feature-box">
-          <h4>🚀 Zero Rendering Delay</h4>
-          <p>Unlike YouTube 8D videos that require hours of rendering, our engine pans live in real time.</p>
+          <h4>🚀 Fast Live Rendering</h4>
+          <p>Unlike pre-rendered 8D videos that require hours of processing, our engine pans live in real time.</p>
         </div>
         <div class="feature-box">
           <h4>🎛️ Dynamic Orbit Tuning</h4>
@@ -212,43 +204,12 @@
       </div>
     </section>
 
-    <!-- Interactive Reviews System -->
-    <section class="reviews-box">
-      <div class="reviews-header">
-        <div>
-          <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">How did the 360-degree spatial effect sound in your headphones? Share below</p>
-        </div>
-        <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
-          <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
-        </div>
-      </div>
-
-      <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
-        <div class="review-inputs">
-          <input type="text" id="user-name" placeholder="Your Name or Nickname" required maxlength="30">
-          <select id="user-stars">
-            <option value="5">★★★★★ (5/5)</option>
-            <option value="4">★★★★☆ (4/5)</option>
-            <option value="3">★★★☆☆ (3/5)</option>
-            <option value="2">★★☆☆☆ (2/5)</option>
-            <option value="1">★☆☆☆☆ (1/5)</option>
-          </select>
-        </div>
-        <textarea id="user-comment" placeholder="What genre of music did you rotate and how did it feel? Share your feedback..." required rows="3" maxlength="400"></textarea>
-        <button type="submit" class="review-submit-btn">Post Feedback</button>
-      </form>
-
-      <div id="reviews-feed"></div>
-    </section>
-
     <!-- Accordion FAQ -->
     <section class="faq-container">
       <h2 class="section-title">Frequently Asked Questions</h2>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Is this similar to Xiaomi spatial audio settings?
+          Is this similar to device spatial audio settings?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
@@ -262,7 +223,7 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          In open room environments, sound emitted from a right speaker travels across the room and enters both your right and left ears nearly simultaneously. To create the spatial rotation illusion, the left ear must receive strictly isolated left-channel acoustic timing cues and vice-versa, which is only possible with closed headphones or earbuds.
+          In open room environments, sound emitted from a speaker travels across the room and enters both ears nearly simultaneously. To create the spatial rotation illusion, the left ear must receive strictly isolated left-channel acoustic cues and vice-versa, which requires headphones.
         </div>
       </div>
 
@@ -272,7 +233,7 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          No. Because our Web Audio StereoPanner node executes using floating-point DSP math without lossy MP3 re-encoding, the dynamic range, bit depth, and frequency response of your original file are preserved with 100% fidelity.
+          Because our Web Audio StereoPanner node executes using floating-point DSP math without lossy MP3 re-encoding, the dynamic range and frequency response of your original file are preserved at high fidelity without additional compression.
         </div>
       </div>
     </section>
@@ -280,24 +241,24 @@
     <!-- Comprehensive SEO Guide -->
     <article class="seo-article">
       <h2>The Psychoacoustic Science Behind 8D Audio and Spatial Perception</h2>
-      <p>Over the last few years, the phenomenon known as "8D Audio" has taken the internet by storm, racking up hundreds of millions of views on streaming channels. Listeners describe feeling as though music is no longer trapped between their ears, but rather floating through open space, orbiting around their temples, or echoing through a private amphitheater. If you are looking to replicate <strong>Xiaomi spatial audio settings</strong> online, the neurological and acoustic foundations powering this illusion are rooted in the study of <strong>psychoacoustics</strong>.</p>
+      <p>Over the last few years, the phenomenon known as "8D Audio" has taken the internet by storm. Listeners describe feeling as though music is no longer trapped between their ears, but rather floating through open space, orbiting around their temples. The neurological and acoustic foundations powering this illusion are rooted in the study of <strong>psychoacoustics</strong>.</p>
       <p>Human beings do not navigate acoustic environments in flat stereo. In the natural world, if a twig snaps behind your left shoulder, your auditory system relies on two critical acoustic measurements to locate that sound in three dimensions: <strong>Interaural Time Difference (ITD)</strong> and <strong>Interaural Level Difference (ILD)</strong>.</p>
 
       <h3>How the Human Brain Pinpoints Sounds in 3D Space</h3>
       <ul>
-        <li><strong>Interaural Time Difference (ITD):</strong> Sound travels through ambient air at approximately 343 meters per second. Because your ears are separated by the physical width of your skull, a sound arriving from the left reaches your left ear drum slightly before entering your right ear. Your brain processes this microscopic timing discrepancy to instantly register horizontal location.</li>
+        <li><strong>Interaural Time Difference (ITD):</strong> Sound travels through ambient air at a specific speed. Because your ears are separated by the physical width of your skull, a sound arriving from the left reaches your left ear slightly before your right ear. Your brain processes this microscopic timing discrepancy to instantly register horizontal location.</li>
         <li><strong>Interaural Level Difference (ILD):</strong> Your head acts as a dense physical barrier. High-frequency sound waves have short wavelengths that cannot bend around the curve of your skull. Consequently, a sound originating on your left arrives at your right ear noticeably quieter.</li>
       </ul>
 
-      <h3>How Our Browser Engine Synthesizes 360° Motion in Real Time</h3>
+      <h3>How Our Browser Engine Synthesizes 360° Motion</h3>
       <p>Producing an 8D audio track manually in traditional digital audio workstations (DAWs) requires tedious automation curves. Our web utility streamlines this process dynamically using the high-performance Web Audio API.</p>
-      <p>When you load a track, our DSP graph routes the audio buffer through a hardware-accelerated <code>StereoPannerNode</code>. An automated sinusoidal mathematical sweep continuously shifts the pan coordinate between -1.0 (hard left) and +1.0 (hard right). This makes it the easiest way to experience <strong>Xiaomi 8D audio</strong> natively in your browser.</p>
+      <p>When you load a track, our DSP graph routes the audio buffer through a <code>StereoPannerNode</code>. An automated mathematical sweep continuously shifts the pan coordinate between -1.0 (hard left) and +1.0 (hard right). This allows you to experience spatial audio natively in your browser.</p>
 
       <h3>Best Musical Genres for the 8D Experience</h3>
       <ul>
-        <li><strong>Ambient, Chillhop & Lo-Fi:</strong> Gentle Rhodes piano chords, vinyl crackle, and soft percussion feel relaxing and meditative when swept slowly through 3D space.</li>
-        <li><strong>Orchestral & Cinematic Scores:</strong> Sweeping string ensembles expand dramatically, simulating the feeling of sitting in the center of a concert hall.</li>
-        <li><strong>Progressive Electronic & Synthwave:</strong> Arpeggiated analog synthesizers create an intense, energetic sensation of kinetic motion during workout sessions.</li>
+        <li><strong>Ambient, Chillhop & Lo-Fi:</strong> Gentle chords, vinyl crackle, and soft percussion feel relaxing and meditative when swept slowly through 3D space.</li>
+        <li><strong>Orchestral Scores:</strong> Sweeping string ensembles expand dramatically, simulating the feeling of sitting in the center of a concert hall.</li>
+        <li><strong>Progressive Electronic:</strong> Arpeggiated synthesizers create an intense, energetic sensation of kinetic motion.</li>
       </ul>
     </article>
   </main>
@@ -373,60 +334,6 @@
       answer.style.display = isOpen ? 'none' : 'block';
       arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
     }
-
-    /* Real Interactive Reviews Engine (LocalStorage) */
-    const STORAGE_KEY = 'user_reviews_8daudio';
-
-    function loadReviews() {
-      const feed = document.getElementById('reviews-feed');
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      
-      if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Test your headphones and share your spatial experience!</p>';
-        return;
-      }
-
-      let totalStars = 0;
-      feed.innerHTML = stored.map(r => {
-        totalStars += r.rating;
-        return `
-          <div class="review-entry">
-            <div class="review-entry-header">
-              <strong style="color: var(--text-dark); font-size: 0.95rem; font-weight: 700;">${escapeHtml(r.name)}</strong>
-              <span style="color: #f59e0b; font-size: 0.9rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
-            </div>
-            <p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; line-height: 1.6;">${escapeHtml(r.comment)}</p>
-          </div>
-        `;
-      }).join('');
-
-      const avg = (totalStars / stored.length).toFixed(1);
-      document.getElementById('avg-val').innerText = avg;
-    }
-
-    function submitReview(e) {
-      e.preventDefault();
-      const name = document.getElementById('user-name').value.trim();
-      const rating = parseInt(document.getElementById('user-stars').value);
-      const comment = document.getElementById('user-comment').value.trim();
-
-      if (!name || !comment) return;
-
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      stored.unshift({ name, rating, comment, time: Date.now() });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-
-      document.getElementById('review-form').reset();
-      loadReviews();
-    }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.innerText = text;
-      return div.innerHTML;
-    }
-
-    window.addEventListener('DOMContentLoaded', loadReviews);
   </script>
 </body>
 </html>
