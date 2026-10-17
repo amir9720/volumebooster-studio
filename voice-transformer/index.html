@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Voice Changer & Funny FX | MiMusic Web Studio</title>
-  <meta name="description" content="Record and transform your voice instantly. Use the Mi music voice changer online to apply Helium, Robot, and Deep Monster FX with 100% privacy.">
+  <meta name="description" content="Record and transform your voice instantly. Use the Mi music voice changer online to apply Helium, Robot, and Deep Monster FX directly in your browser.">
   <style>
     :root {
       /* MiMusic Clean Light Theme Palette */
@@ -67,6 +67,10 @@
     .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
     .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    
+    /* Added Image placeholders for steps */
+    .step-image { width: 100%; height: 120px; background-color: var(--surface); border-radius: 8px; margin-bottom: 12px; object-fit: cover; border: 1px solid var(--border); }
+    
     .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
     .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
@@ -75,21 +79,6 @@
     .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
     .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
-
-    /* Interactive Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
-    .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
-    .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
-    @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
-    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); }
-    .review-inputs select { color: #d97706; font-weight: bold; }
-    .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2); }
-    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-    .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
-    .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 
     /* Accordion FAQ */
     .faq-container { margin-bottom: 45px; }
@@ -120,7 +109,7 @@
   <main class="container">
     <div class="tool-box">
       <h1>Xiaomi Voice Changer & FX Studio</h1>
-      <p class="lead">Record your speech online and apply fun Mi Music vocal formants instantly. Transform into a Helium Chipmunk, Robotic Android, or Deep Monster.</p>
+      <p class="lead">Record your speech directly in your browser and apply vocal formants instantly. Transform your voice into a Helium Chipmunk or Deep Monster.</p>
 
       <div class="mic-button-zone">
         <button class="record-btn" id="record-trigger" onclick="toggleRecording()">
@@ -141,14 +130,14 @@
 
         <div class="advanced-toggle">
           <button class="advanced-btn" type="button" onclick="toggleAdvanced()">
-            ⚙️ <span>Advanced MIUI Reverb FX</span>
+            ⚙️ <span>Advanced Reverb FX Settings</span>
           </button>
           <div class="advanced-content" id="advanced-box">
             <div class="adv-row">
               <label>Room Acoustic Space:</label>
               <select id="reverb-style">
                 <option value="dry" selected>Dry (Crisp & Intimate)</option>
-                <option value="hall">Cavern / Large Hall Ambience</option>
+                <option value="hall">Cavern / Large Ambience</option>
               </select>
             </div>
             <div class="adv-row">
@@ -160,24 +149,27 @@
       </div>
     </div>
 
-    <!-- 3-Step Tutorial -->
+    <!-- 3-Step Tutorial with Image Placeholders -->
     <section class="tutorial-section">
-      <h2 class="section-title">How to Use the Mi Music Voice Transformer</h2>
+      <h2 class="section-title">How to Use the Voice Transformer</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-badge">1</div>
+          <img src="https://via.placeholder.com/400x250/eef2ff/4f46e5?text=Record+Audio" alt="Step 1: Record your voice" class="step-image">
           <h3>Record a Short Clip</h3>
-          <p>Click the record button and speak a few clear sentences into your device microphone.</p>
+          <p>Click the record button and grant microphone access to speak a few sentences into your device.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">2</div>
-          <h3>Select MIUI Vocal FX</h3>
-          <p>Tap the Helium, Robot, or Monster presets to instantly morph your natural vocal tone.</p>
+          <img src="https://via.placeholder.com/400x250/eef2ff/4f46e5?text=Select+Preset" alt="Step 2: Choose vocal effect" class="step-image">
+          <h3>Select a Vocal FX</h3>
+          <p>Tap the Helium, Robot, or Monster preset buttons to instantly alter your recording's pitch and playback speed.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">3</div>
+          <img src="https://via.placeholder.com/400x250/eef2ff/4f46e5?text=Play+Preview" alt="Step 3: Listen to the result" class="step-image">
           <h3>Play and Preview</h3>
-          <p>Listen to your modified character recordings privately with zero cloud data logging.</p>
+          <p>Listen to your modified character recordings locally on your device.</p>
         </div>
       </div>
     </section>
@@ -187,53 +179,22 @@
       <h2 class="section-title">Why Use Our Online Voice Changer?</h2>
       <div class="features-grid">
         <div class="feature-box">
-          <h4>🔒 Guaranteed Voice Privacy</h4>
-          <p>Your biometric voice recordings stay in browser RAM. Zero third-party audio scraping.</p>
+          <h4>🔒 Processed Locally</h4>
+          <p>Because your voice is recorded using the HTML5 MediaRecorder API, the audio data stays in your browser's RAM and is not sent to external servers.</p>
         </div>
         <div class="feature-box">
-          <h4>⚡ Instant DSP Playback</h4>
-          <p>Experience real-time pitch manipulation without waiting for server rendering queues.</p>
+          <h4>⚡ Instant Playback</h4>
+          <p>Experience real-time pitch manipulation without waiting for server rendering queues or file conversion times.</p>
         </div>
         <div class="feature-box">
           <h4>🚫 No App Installs</h4>
-          <p>Avoid intrusive smartphone apps that demand excessive background microphone permissions.</p>
+          <p>Avoid smartphone apps that demand excessive background permissions. This tool runs entirely within the web page sandbox.</p>
         </div>
         <div class="feature-box">
           <h4>🎮 Great for Creators</h4>
-          <p>Craft unique voiceover personalities for gaming streams, memes, and comedic podcasts.</p>
+          <p>Craft fun voiceover personalities for streaming, podcasting, or comedic social media clips quickly and easily.</p>
         </div>
       </div>
-    </section>
-
-    <!-- Real Interactive Reviews System -->
-    <section class="reviews-box">
-      <div class="reviews-header">
-        <div>
-          <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">Which character effect did you like most? Share your thoughts below</p>
-        </div>
-        <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
-          <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
-        </div>
-      </div>
-
-      <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
-        <div class="review-inputs">
-          <input type="text" id="user-name" placeholder="Your Name or Nickname" required maxlength="30">
-          <select id="user-stars">
-            <option value="5">★★★★★ (5/5)</option>
-            <option value="4">★★★★☆ (4/5)</option>
-            <option value="3">★★★☆☆ (3/5)</option>
-            <option value="2">★★☆☆☆ (2/5)</option>
-            <option value="1">★☆☆☆☆ (1/5)</option>
-          </select>
-        </div>
-        <textarea id="user-comment" placeholder="Which voice preset was your favorite (Helium, Monster, Robot)? Share your feedback..." required rows="3" maxlength="400"></textarea>
-        <button type="submit" class="review-submit-btn">Post Feedback</button>
-      </form>
-
-      <div id="reviews-feed"></div>
     </section>
 
     <!-- Accordion FAQ -->
@@ -245,47 +206,46 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          No. This is an independent web-based utility for users looking to transform their voices online without navigating complex MIUI device settings. You can record directly from your browser and play it back instantly.
+          No. This is an independent web-based utility for users looking to transform their voices online without navigating complex device settings. You can record directly from your browser and play it back instantly.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Are my recorded audio clips uploaded or stored anywhere?
+          Are my recorded audio clips stored anywhere?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Never. All microphone capture and audio transformation logic execute exclusively inside your web browser sandbox. The moment you refresh or navigate away from the page, your recording is completely deleted from volatile memory.
+          No. All microphone capture and audio transformation logic execute exclusively inside your web browser sandbox. The moment you refresh or navigate away from the page, your recording is cleared from your device's active memory.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Can I use these voice recordings commercially in videos?
+          Can I save the changed voice file?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Yes! You retain 100% intellectual property rights over whatever you record and transform using this utility. You are free to use your transformed clips in YouTube videos, podcasts, and commercial multimedia projects.
+          Currently, this specific tool is designed for instant playback and previewing. If you need to permanently alter and export an audio file, consider using our Pitch & Speed Shifter tool.
         </div>
       </div>
     </section>
 
     <!-- Comprehensive Human-Written SEO Guide -->
     <article class="seo-article">
-      <h2>The Acoustic Science of Formant Shifting and Character Voice Design</h2>
-      <p>Whether for animation dubbing, anonymous podcast testimonials, comedic social media clips, or tabletop roleplaying game characters, altering vocal timbre has always been one of sound design's most entertaining disciplines. When we listen to a human voice, our brains instantly calculate two separate acoustic parameters: <strong>fundamental pitch</strong> (how fast the vocal cords flap) and <strong>formants</strong> (the acoustic resonances shaped by the physical size of the throat, mouth cavity, and nasal passages).</p>
-      <p>Traditional pitch shifters that simply speed up or slow down a tape recording alter both parameters simultaneously. While this works well for fast tempo adjustments, it often introduces harsh metallic artifacts if pushed too far. Our <strong>Mi music voice changer</strong> engine is designed to manipulate these frequencies for fun character effects.</p>
+      <h2>The Basics of Pitch Shifting and Voice Alteration</h2>
+      <p>Whether for animation dubbing, anonymous podcast testimonials, or comedic social media clips, altering vocal timbre has always been a fun aspect of audio design. When we listen to a human voice, our brains instantly calculate pitch (how high or low the voice is) and tempo (how fast the person speaks). Our <strong>Mi music voice changer</strong> utility manipulates these parameters through simple browser-based playback controls.</p>
 
-      <h3>Deconstructing the Classic Voice Transformation Profiles</h3>
+      <h3>How the Voice Effects Work</h3>
       <ul>
-        <li><strong>The Helium Chipmunk Phenomenon:</strong> When an actor speaks after inhaling helium, their fundamental vocal pitch doesn't actually change—only the speed of sound through their vocal tract increases, pushing resonant formants into high register. Our digital preset mimics this by accelerating playback speed, tightening transient attacks to recreate that recognizable animated tone.</li>
-        <li><strong>The Sub-Bass Monster Growl:</strong> Transforming a regular human voice into an imposing cinematic demon or robotic brute requires lowering the frequency spectrum by 30% to 40%. Dropping the rate widens formant spacing, creating an acoustic illusion that the speaker's chest cavity is twice its physical size.</li>
-        <li><strong>The Robotic Android:</strong> Classic sci-fi robot voices from early radio serials combined high-frequency ring modulation with narrow bandpass filtering. By stripping away lower fundamental resonance and sharpening midrange transients, speech takes on an electromechanical flavor.</li>
+        <li><strong>The Helium Effect:</strong> This preset mimics the famous "helium voice" by increasing the playback speed (playbackRate) of the audio object. Speeding up the recording automatically raises its fundamental pitch, making the voice sound higher and faster.</li>
+        <li><strong>The Deep Monster:</strong> To create an imposing or deep voice, the tool does the opposite. By lowering the playback speed below 1.0x, the audio stretches out, dropping the pitch significantly and making the speaker sound much larger.</li>
+        <li><strong>The Robotic Tone:</strong> While complex robotic voices in movies use vocoders, our tool creates a slightly mechanical feel by adjusting the playback rate to a very specific, slightly unnatural speed.</li>
       </ul>
 
-      <h3>Why In-Browser Web Audio Offers Unmatched Security</h3>
-      <p>Dozens of smartphone voice changer apps on mobile app stores require broad device permissions. In an era where biometric voice cloning is an emerging security concern, uploading your natural voice clips to unknown servers introduces real identity privacy risks.</p>
-      <p>Our tool operates strictly within the security confines of the client-side W3C Web Audio ecosystem. Your microphone stream is captured directly into local browser RAM via the HTML5 <code>MediaRecorder</code> API, eliminating privacy concerns completely.</p>
+      <h3>Privacy Benefits of Browser-Based Audio</h3>
+      <p>Many smartphone voice changer apps require broad device permissions to access your microphone and storage. In an era of privacy concerns, uploading your natural voice clips to unknown servers can be risky.</p>
+      <p>Our tool mitigates this by operating strictly within the client-side Web Audio API. Your microphone stream is captured directly into local browser RAM, allowing you to test out different vocal effects privately and securely.</p>
     </article>
   </main>
 
@@ -361,60 +321,6 @@
       answer.style.display = isOpen ? 'none' : 'block';
       arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
     }
-
-    /* Real Interactive Reviews Engine (LocalStorage) */
-    const STORAGE_KEY = 'user_reviews_voicetransformer';
-
-    function loadReviews() {
-      const feed = document.getElementById('reviews-feed');
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      
-      if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Record your voice and be the first to share your experience!</p>';
-        return;
-      }
-
-      let totalStars = 0;
-      feed.innerHTML = stored.map(r => {
-        totalStars += r.rating;
-        return `
-          <div class="review-entry">
-            <div class="review-entry-header">
-              <strong style="color: var(--text-dark); font-size: 0.95rem; font-weight: 700;">${escapeHtml(r.name)}</strong>
-              <span style="color: #f59e0b; font-size: 0.9rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
-            </div>
-            <p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; line-height: 1.6;">${escapeHtml(r.comment)}</p>
-          </div>
-        `;
-      }).join('');
-
-      const avg = (totalStars / stored.length).toFixed(1);
-      document.getElementById('avg-val').innerText = avg;
-    }
-
-    function submitReview(e) {
-      e.preventDefault();
-      const name = document.getElementById('user-name').value.trim();
-      const rating = parseInt(document.getElementById('user-stars').value);
-      const comment = document.getElementById('user-comment').value.trim();
-
-      if (!name || !comment) return;
-
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      stored.unshift({ name, rating, comment, time: Date.now() });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-
-      document.getElementById('review-form').reset();
-      loadReviews();
-    }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.innerText = text;
-      return div.innerHTML;
-    }
-
-    window.addEventListener('DOMContentLoaded', loadReviews);
   </script>
 </body>
 </html>
