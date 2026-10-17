@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Xiaomi Earbuds Latency Test | Mi Audio Sync Delay</title>
-  <meta name="description" content="Test audio delay and synchronization for Bluetooth headphones and TWS earbuds. The best Bluetooth headphone test online to fix Mi audio sync delay.">
+  <meta name="description" content="Test audio delay and synchronization for Bluetooth headphones and TWS earbuds. Evaluate your connection delay and adjust Mi audio sync settings online.">
   <style>
     :root {
       /* MiMusic Clean Light Theme Palette */
@@ -69,6 +69,10 @@
     .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
     .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    
+    /* Added Image placeholders for steps */
+    .step-image { width: 100%; height: 120px; background-color: var(--surface); border-radius: 8px; margin-bottom: 12px; object-fit: cover; border: 1px solid var(--border); }
+
     .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
     .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
@@ -77,21 +81,6 @@
     .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
     .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
-
-    /* Interactive Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
-    .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
-    .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
-    @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
-    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
-    .review-inputs select { color: #d97706; font-weight: bold; }
-    .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2); }
-    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-    .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
-    .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 
     /* Accordion FAQ */
     .faq-container { margin-bottom: 45px; }
@@ -122,7 +111,7 @@
   <main class="container">
     <div class="tool-box">
       <h1>Bluetooth Audio Latency Sync & Delay Test</h1>
-      <p class="lead">Assess sound lag and AV synchronization on Xiaomi wireless earbuds, headphones, and gaming headsets.</p>
+      <p class="lead">Evaluate sound lag and AV synchronization on your wireless earbuds, headphones, and gaming headsets.</p>
 
       <div class="flash-arena" id="flash-box" onclick="triggerSyncPulse()">
         <div class="flash-icon" id="flash-icon">⚡</div>
@@ -164,80 +153,52 @@
       </div>
     </div>
 
-    <!-- 3-Step Tutorial -->
+    <!-- 3-Step Tutorial with Images -->
     <section class="tutorial-section">
       <h2 class="section-title">How to Measure Bluetooth Audio Latency</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-badge">1</div>
+          <img src="https://via.placeholder.com/400x250/eff6ff/3b82f6?text=Connect+Headphones" alt="Step 1: Connect Headphones" class="step-image">
           <h3>Connect Headphones</h3>
-          <p>Pair your wireless earbuds or Bluetooth headset to your phone or PC and set comfortable volume.</p>
+          <p>Pair your wireless earbuds or Bluetooth headset to your device and set a comfortable volume.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">2</div>
+          <img src="https://via.placeholder.com/400x250/eff6ff/3b82f6?text=Watch+the+Flash" alt="Step 2: Watch Flash" class="step-image">
           <h3>Watch the Screen Flash</h3>
           <p>Look directly at the visual pulse box while listening intently for the acoustic click tone.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">3</div>
+          <img src="https://via.placeholder.com/400x250/eff6ff/3b82f6?text=Gauge+Delay" alt="Step 3: Gauge Delay" class="step-image">
           <h3>Gauge Synchronization</h3>
-          <p>If you see the flash before hearing the beep, packet transmission lag is present in your link.</p>
+          <p>If you see the flash before hearing the beep, it indicates that transmission lag is present in your link.</p>
         </div>
       </div>
     </section>
 
     <!-- Why Choose Our Tool Section -->
     <section>
-      <h2 class="section-title">Why Choose Our In-Browser AV Sync Test?</h2>
+      <h2 class="section-title">Features of the In-Browser AV Sync Test</h2>
       <div class="features-grid">
         <div class="feature-box">
-          <h4>⏱️ Hardware Clock Precision</h4>
-          <p>Scheduled using Web Audio API hardware timers accurate to sub-millisecond tolerances.</p>
+          <h4>⏱️ Web Audio Precision</h4>
+          <p>Uses Web Audio API timers to schedule sound pulses, providing a more consistent test than basic media playback.</p>
         </div>
         <div class="feature-box">
-          <h4>🚫 No Compressed Video Buffering</h4>
-          <p>Unlike YouTube sync videos, your browser won't artificially compensate or mask audio lag.</p>
+          <h4>🚫 Unbuffered Evaluation</h4>
+          <p>Unlike standard streaming videos, your browser generally won't attempt to automatically compensate or mask audio lag for these direct API calls.</p>
         </div>
         <div class="feature-box">
           <h4>🎮 Gamer & Editor Optimized</h4>
-          <p>Benchmark low-latency Gaming Modes on modern True Wireless Stereo (TWS) hardware.</p>
+          <p>Helps you evaluate Low-Latency or Gaming Modes on modern True Wireless Stereo (TWS) hardware.</p>
         </div>
         <div class="feature-box">
           <h4>📱 Platform Agnostic</h4>
-          <p>Operates identically on iOS Safari, Android Chrome, Windows Bluetooth stacks, and macOS.</p>
+          <p>Operates across modern web browsers on different operating systems.</p>
         </div>
       </div>
-    </section>
-
-    <!-- Interactive Reviews System -->
-    <section class="reviews-box">
-      <div class="reviews-header">
-        <div>
-          <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">What headphones did you test and what delay did you observe? Share below</p>
-        </div>
-        <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
-          <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
-        </div>
-      </div>
-
-      <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
-        <div class="review-inputs">
-          <input type="text" id="user-name" placeholder="Your Name or Nickname" required maxlength="30">
-          <select id="user-stars">
-            <option value="5">★★★★★ (5/5)</option>
-            <option value="4">★★★★☆ (4/5)</option>
-            <option value="3">★★★☆☆ (3/5)</option>
-            <option value="2">★★☆☆☆ (2/5)</option>
-            <option value="1">★☆☆☆☆ (1/5)</option>
-          </select>
-        </div>
-        <textarea id="user-comment" placeholder="Which Bluetooth earbuds/headphones did you test? Share your latency results..." required rows="3" maxlength="400"></textarea>
-        <button type="submit" class="review-submit-btn">Post Feedback</button>
-      </form>
-
-      <div id="reviews-feed"></div>
     </section>
 
     <!-- Accordion FAQ -->
@@ -249,7 +210,7 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Wired 3.5mm jacks transmit analog electrical signals at near light speed with sub-5ms delay. Bluetooth transmits audio as digitized binary packets over crowded 2.4GHz radio bands. Encoding the signal (via codecs like AAC or SBC), transmitting packets, and decoding them inside the earbuds introduces 50ms to 250ms of buffer delay.
+          Wired headphones transmit electrical signals almost instantly. Bluetooth transmits audio as data packets over radio bands. Encoding the audio, transmitting the data, and decoding it inside the earbuds introduces a buffer delay (often between 50ms to 250ms).
         </div>
       </div>
 
@@ -259,38 +220,38 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Video streaming apps (like Netflix and YouTube) use automatic delay compensation: they deliberately hold back the visual video stream by 150–200ms so it perfectly aligns with the delayed audio arriving in your ears. Interactive tasks like gaming or real-time typing cannot be pre-buffered, exposing the true hardware latency.
+          Many video streaming apps (like Netflix and YouTube) use automatic delay compensation. They deliberately hold back the visual video stream so it aligns with the delayed Bluetooth audio. Interactive tasks like gaming cannot be pre-buffered, which exposes the true hardware latency.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          How can I fix Mi audio sync delay?
+          How can I improve audio sync delay?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Enable 'Low Latency Gaming Mode' in your earbud companion app, switch from standard SBC to aptX Adaptive if supported by your smartphone, and connect to 5GHz Wi-Fi to eliminate radio interference with the 2.4GHz Bluetooth band.
+          Try enabling 'Low Latency' or 'Gaming Mode' in your earbud's companion app if available. Switching to codecs like aptX Adaptive or LDAC (if your hardware supports them) can also help reduce buffer delays.
         </div>
       </div>
     </section>
 
     <!-- Comprehensive SEO Guide -->
     <article class="seo-article">
-      <h2>The Mechanics of Bluetooth Codecs, Buffers, and Acoustic Desynchronization</h2>
-      <p>Few sensory experiences are as quietly irritating as audio-visual desynchronization. You watch an actor deliver an intense line on screen, and their mouth finishes moving a split second before the consonants hit your ears. Or you tap your screen in a competitive rhythm or shooter game, and the gunshot report arrives after your crosshair has already moved. In acoustic engineering, this disconnect is termed <em>lip-sync error</em> or <em>AV latency</em>.</p>
-      <p>While wired headsets provide effectively zero latency, cutting the cord introduces an elaborate chain of digital handshakes. Before a piece of audio can emanate from your wireless earbuds, your operating system must compress the raw PCM sound into a designated Bluetooth codec, slice the data into radio frequency packets, blast them across 2.4GHz radio waves, buffer them inside the receiver chip to prevent signal dropouts, and convert them back to analog voltage via a tiny onboard DAC. Doing a <strong>Xiaomi earbuds latency test</strong> allows you to measure this exact delay.</p>
+      <h2>Understanding Bluetooth Codecs and Acoustic Desynchronization</h2>
+      <p>Audio-visual desynchronization can be irritating. You watch a character speak on screen, but the sound hits your ears a split second later. Or you tap an action button in a game, and the sound effect is delayed. In acoustic engineering, this disconnect is termed <em>AV latency</em>.</p>
+      <p>While wired headsets provide effectively zero latency, cutting the cord introduces digital processing. Before audio plays from your wireless earbuds, your device must compress the sound into a Bluetooth codec, transmit it as radio frequency packets, buffer it in the receiver chip, and convert it back to analog audio. Using an online <strong>Xiaomi earbuds latency test</strong> allows you to evaluate this delay.</p>
 
-      <h3>Deciphering Bluetooth Codec Speeds</h3>
-      <p>The specific codec negotiated between your smartphone and your wireless audio receiver fundamentally dictates total transmission latency:</p>
+      <h3>Common Bluetooth Codecs and Latency</h3>
+      <p>The specific codec negotiated between your smartphone and your audio receiver influences the total transmission latency:</p>
       <ul>
-        <li><strong>SBC (Subband Codec):</strong> The universal mandatory baseline codec supported by all Bluetooth hardware. Typical latency ranges from <strong>150ms to 250ms</strong>. Perfectly fine for music, but clearly sluggish during video gaming.</li>
-        <li><strong>AAC (Advanced Audio Coding):</strong> Standard on many mobile devices. While AAC delivers pristine perceptual fidelity for music, its latency on Android devices can vary wildly between <strong>120ms and 200ms</strong>.</li>
-        <li><strong>aptX Low Latency & aptX Adaptive:</strong> Engineered by Qualcomm specifically for interactive media. These protocols drop buffer windows down to approximately <strong>40ms to 80ms</strong>.</li>
+        <li><strong>SBC (Subband Codec):</strong> The universal baseline codec. Typical latency ranges from <strong>150ms to 250ms</strong>. It is fine for music but can be sluggish for gaming.</li>
+        <li><strong>AAC (Advanced Audio Coding):</strong> Standard on many devices. While it delivers good audio quality, latency can vary between <strong>120ms and 200ms</strong> depending on the hardware.</li>
+        <li><strong>aptX Low Latency & aptX Adaptive:</strong> Engineered specifically for interactive media, these protocols aim to drop buffer windows closer to <strong>40ms to 80ms</strong>.</li>
       </ul>
 
-      <h3>Why YouTube Sync Videos Often Deceive You</h3>
-      <p>Many users attempt to test audio delay by searching for "audio sync test" videos on YouTube. Unfortunately, this approach is fundamentally flawed. Modern browser media players communicate with the operating system's audio stack. When you watch a pre-recorded YouTube video on modern versions of iOS, Android, or Windows, the operating system inquires about your Bluetooth buffer size and automatically delays the video frames to match the audio stream!</p>
-      <p>Because our tool generates dynamic, unbuffered tone pulses in real time via the hardware clock, no compensation can be applied. What you see and hear is your actual raw, unmasked hardware connection performance. This makes it the most reliable <strong>Bluetooth headphone test online</strong> available without installing any extra software.</p>
+      <h3>Evaluating True Latency</h3>
+      <p>Testing audio delay by searching for "audio sync test" videos on streaming platforms can be misleading. Modern operating systems often communicate with the media player to apply automatic delay compensation, intentionally delaying the video frames to match the Bluetooth audio stream.</p>
+      <p>Our tool generates dynamic tone pulses in real time via the Web Audio API, which generally bypasses media player delay compensation. What you see and hear provides a more accurate representation of your hardware's raw connection performance.</p>
     </article>
   </main>
 
@@ -371,60 +332,6 @@
       answer.style.display = isOpen ? 'none' : 'block';
       arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
     }
-
-    /* Real Interactive Reviews Engine (LocalStorage) */
-    const STORAGE_KEY = 'user_reviews_audiolatency';
-
-    function loadReviews() {
-      const feed = document.getElementById('reviews-feed');
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      
-      if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Test your wireless headphones and share your latency results!</p>';
-        return;
-      }
-
-      let totalStars = 0;
-      feed.innerHTML = stored.map(r => {
-        totalStars += r.rating;
-        return `
-          <div class="review-entry">
-            <div class="review-entry-header">
-              <strong style="color: var(--text-dark); font-size: 0.95rem; font-weight: 700;">${escapeHtml(r.name)}</strong>
-              <span style="color: #f59e0b; font-size: 0.9rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
-            </div>
-            <p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; line-height: 1.6;">${escapeHtml(r.comment)}</p>
-          </div>
-        `;
-      }).join('');
-
-      const avg = (totalStars / stored.length).toFixed(1);
-      document.getElementById('avg-val').innerText = avg;
-    }
-
-    function submitReview(e) {
-      e.preventDefault();
-      const name = document.getElementById('user-name').value.trim();
-      const rating = parseInt(document.getElementById('user-stars').value);
-      const comment = document.getElementById('user-comment').value.trim();
-
-      if (!name || !comment) return;
-
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      stored.unshift({ name, rating, comment, time: Date.now() });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-
-      document.getElementById('review-form').reset();
-      loadReviews();
-    }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.innerText = text;
-      return div.innerHTML;
-    }
-
-    window.addEventListener('DOMContentLoaded', loadReviews);
   </script>
 </body>
 </html>
