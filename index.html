@@ -96,11 +96,14 @@
     .card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
     .card-icon { width: 50px; height: 50px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .card-tag { font-size: 0.72rem; font-weight: 800; padding: 4px 8px; border-radius: 6px; text-transform: uppercase; }
+    
     .tag-blue { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
     .tag-green { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; }
     .tag-purple { background: #f5f3ff; color: #7c3aed; border: 1px solid #ddd6fe; }
     .tag-amber { background: #fffbeb; color: #d97706; border: 1px solid #fde68a; }
     .tag-pink { background: #fdf2f8; color: #db2777; border: 1px solid #fbcfe8; }
+    .tag-cyan { background: #ecfeff; color: #0891b2; border: 1px solid #a5f3fc; }
+
     .tool-card h3 { color: var(--text-dark); font-size: 1.15rem; margin-bottom: 8px; font-weight: 800; }
     .tool-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 20px; font-weight: 500; }
     .card-action { display: flex; align-items: center; gap: 6px; color: var(--accent); font-size: 0.88rem; font-weight: 700; }
@@ -211,6 +214,7 @@
       </div>
 
       <div class="tools-grid">
+        <!-- 1. Volume Booster -->
         <a href="/volume-booster/" class="tool-card">
           <div>
             <div class="card-top">
@@ -223,6 +227,7 @@
           <div class="card-action">Launch Tool &rarr;</div>
         </a>
 
+        <!-- 2. Speaker Cleaner -->
         <a href="/speaker-cleaner/" class="tool-card">
           <div>
             <div class="card-top">
@@ -230,11 +235,12 @@
               <span class="card-tag tag-amber">Utility</span>
             </div>
             <h3>Speaker Cleaner</h3>
-            <p>Expel trapped water droplets and dust from smartphone speaker grills using 165Hz sonic pulses.</p>
+            <p>Expel trapped water droplets and dust from smartphone speaker grills using sonic pulses.</p>
           </div>
           <div class="card-action">Launch Tool &rarr;</div>
         </a>
 
+        <!-- 3. 8D Audio -->
         <a href="/8d-audio/" class="tool-card">
           <div>
             <div class="card-top">
@@ -247,6 +253,7 @@
           <div class="card-action">Launch Tool &rarr;</div>
         </a>
 
+        <!-- 4. Vocal Clarity -->
         <a href="/vocal-clarity/" class="tool-card">
           <div>
             <div class="card-top">
@@ -259,6 +266,7 @@
           <div class="card-action">Launch Tool &rarr;</div>
         </a>
 
+        <!-- 5. Pitch & Speed -->
         <a href="/pitch-shifter/" class="tool-card">
           <div>
             <div class="card-top">
@@ -271,6 +279,7 @@
           <div class="card-action">Launch Tool &rarr;</div>
         </a>
 
+        <!-- 6. Decibel Meter -->
         <a href="/decibel-meter/" class="tool-card">
           <div>
             <div class="card-top">
@@ -278,14 +287,92 @@
               <span class="card-tag tag-pink">Measure</span>
             </div>
             <h3>Real-Time Decibel Meter</h3>
-            <p>Measure ambient room loudness (dB SPL) via your device microphone.</p>
+            <p>Measure ambient room loudness (dB SPL) directly via your device microphone.</p>
+          </div>
+          <div class="card-action">Launch Tool &rarr;</div>
+        </a>
+
+        <!-- 7. Video to Audio (Newly Added) -->
+        <a href="/video-to-audio/" class="tool-card">
+          <div>
+            <div class="card-top">
+              <div class="card-icon">🎬</div>
+              <span class="card-tag tag-amber">Extract</span>
+            </div>
+            <h3>Video to Audio</h3>
+            <p>Extract uncompressed audio tracks from MP4 and MOV videos locally.</p>
+          </div>
+          <div class="card-action">Launch Tool &rarr;</div>
+        </a>
+
+        <!-- 8. Audio Latency (Newly Added) -->
+        <a href="/audio-latency/" class="tool-card">
+          <div>
+            <div class="card-top">
+              <div class="card-icon">⚡</div>
+              <span class="card-tag tag-cyan">Test</span>
+            </div>
+            <h3>Audio Latency Test</h3>
+            <p>Measure Bluetooth audio delay and AV sync lag on your wireless earbuds.</p>
+          </div>
+          <div class="card-action">Launch Tool &rarr;</div>
+        </a>
+
+        <!-- 9. Voice Changer (Newly Added) -->
+        <a href="/voice-transformer/" class="tool-card">
+          <div>
+            <div class="card-top">
+              <div class="card-icon">🎙️</div>
+              <span class="card-tag tag-purple">Fun</span>
+            </div>
+            <h3>Voice Changer FX</h3>
+            <p>Apply fun vocal formants like Helium or Monster to your microphone recordings.</p>
+          </div>
+          <div class="card-action">Launch Tool &rarr;</div>
+        </a>
+
+        <!-- 10. Reverse Audio (Newly Added) -->
+        <a href="/reverse-audio/" class="tool-card">
+          <div>
+            <div class="card-top">
+              <div class="card-icon">🔄</div>
+              <span class="card-tag tag-blue">Edit</span>
+            </div>
+            <h3>Reverse Audio</h3>
+            <p>Play music backwards and export inverted waveforms with zero quality loss.</p>
+          </div>
+          <div class="card-action">Launch Tool &rarr;</div>
+        </a>
+
+        <!-- 11. Binaural Beats (Newly Added) -->
+        <a href="/binaural-waves/" class="tool-card">
+          <div>
+            <div class="card-top">
+              <div class="card-icon">🧠</div>
+              <span class="card-tag tag-green">Focus</span>
+            </div>
+            <h3>Binaural Audio Waves</h3>
+            <p>Generate relaxing ambient frequency offsets for study and deep focus.</p>
+          </div>
+          <div class="card-action">Launch Tool &rarr;</div>
+        </a>
+
+        <!-- 12. Hearing Test (Newly Added) -->
+        <a href="/hearing-test/" class="tool-card">
+          <div>
+            <div class="card-top">
+              <div class="card-icon">🦻</div>
+              <span class="card-tag tag-pink">Health</span>
+            </div>
+            <h3>High Frequency Test</h3>
+            <p>Check your upper auditory range and test your headphone treble limits.</p>
           </div>
           <div class="card-action">Launch Tool &rarr;</div>
         </a>
       </div>
     </section>
 
-    <!-- Architectural Deep-Dive (Now explaining the tools) -->
+    <!-- Architectural Deep-Dive -->
     <section class="feature-showcase">
       <div class="showcase-box">
         <h4>🔒 100% In-Browser Privacy</h4>
