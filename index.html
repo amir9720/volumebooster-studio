@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MiMusic - Professional In-Browser Audio Tools & DSP Engine</title>
-  <meta name="description" content="A comprehensive suite of 12 studio-grade audio utilities powered by the Web Audio API. Boost volume, shift pitch, extract tracks, clean speakers, and analyze sound with 100% device privacy.">
+  <title>MiMusic - Ultimate Guide, App Setup & Audio Fixes</title>
+  <meta name="description" content="Your complete guide to the Mi Music app. Learn how to install, fix playback issues, update your player, and access free online audio enhancement tools.">
   <style>
     :root {
-      /* Modern Clean Light Theme Palette */
+      /* MiMusic Clean Light Theme Palette */
       --bg: #f8fafc;
       --card-bg: #ffffff;
       --border: #e2e8f0;
@@ -56,7 +56,7 @@
     .hero { max-width: 1000px; margin: 0 auto; padding: 65px 20px 45px; text-align: center; }
     .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(79, 70, 229, 0.1); border: 1px solid rgba(79, 70, 229, 0.2); color: #4338ca; padding: 6px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; margin-bottom: 22px; }
     .hero h1 { font-size: 2.9rem; font-weight: 800; line-height: 1.2; color: var(--text-dark); margin-bottom: 20px; letter-spacing: -0.03em; }
-    .hero h1 span { background: linear-gradient(135deg, #4f46e5 0%, #a855f7 50%, #db2777 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero h1 span { color: var(--accent); }
     .hero-lead { font-size: 1.1rem; color: var(--muted); max-width: 720px; margin: 0 auto 30px; font-weight: 500; line-height: 1.6; }
     .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
     .cta-primary { background: var(--accent); color: #fff; text-decoration: none; padding: 14px 28px; border-radius: 12px; font-size: 1rem; font-weight: 700; transition: 0.2s; box-shadow: 0 4px 20px rgba(79, 70, 229, 0.35); }
@@ -71,13 +71,16 @@
       .cta-primary, .cta-secondary { width: 100%; max-width: 320px; text-align: center; }
     }
 
-    /* Trust & Key Metrics Bar */
-    .metrics-bar { max-width: 1000px; margin: 0 auto 60px; padding: 24px 20px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center; }
-    .metric-item h4 { font-size: 1.55rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
-    .metric-item p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
-
     /* Main Container */
     .main-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    /* Content Article Section */
+    .content-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; padding: 34px 28px; margin-bottom: 65px; text-align: left; color: var(--text); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+    .content-article h2 { color: var(--text-dark); font-size: 1.6rem; font-weight: 800; margin-bottom: 16px; border-bottom: 2px solid var(--surface); padding-bottom: 10px; }
+    .content-article h3 { color: var(--text-dark); font-size: 1.25rem; font-weight: 700; margin: 24px 0 10px; }
+    .content-article p { margin-bottom: 16px; font-size: 1rem; font-weight: 500; }
+    .content-article ul { padding-left: 20px; margin-bottom: 16px; font-size: 1rem; font-weight: 500; }
+    .content-article li { margin-bottom: 8px; }
 
     /* Suite Section Headers */
     .suite-section { margin-bottom: 65px; }
@@ -108,29 +111,6 @@
     .showcase-box h4 { font-size: 1.15rem; font-weight: 800; color: var(--text-dark); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
     .showcase-box p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; font-weight: 500; }
 
-    /* Brand SEO Article */
-    .brand-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; padding: 34px 28px; margin-bottom: 65px; text-align: left; color: var(--text); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
-    .brand-article h2 { color: var(--text-dark); font-size: 1.45rem; font-weight: 800; margin-bottom: 16px; }
-    .brand-article h3 { color: var(--text-dark); font-size: 1.15rem; font-weight: 700; margin: 24px 0 10px; }
-    .brand-article p { margin-bottom: 16px; font-size: 0.95rem; font-weight: 500; }
-    .brand-article ul { padding-left: 20px; margin-bottom: 16px; font-size: 0.95rem; font-weight: 500; }
-    .brand-article li { margin-bottom: 8px; }
-
-    /* Platform Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; padding: 28px; margin-bottom: 65px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
-    .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 24px; }
-    .review-form-box { background: var(--surface); padding: 20px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 24px; }
-    .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
-    @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
-    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); }
-    .review-inputs select { color: #d97706; font-weight: bold; }
-    .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 22px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2); }
-    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-    .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
-    .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-
     /* Accordion FAQ */
     .faq-container { margin-bottom: 65px; }
     .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
@@ -156,348 +136,204 @@
   <!-- Top Sticky Navigation Bar -->
   <header class="header-nav">
     <div class="nav-inner">
-      <!-- Changed Brand Name to MiMusic -->
       <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
       <nav class="nav-links">
-        <a href="#suite-enhance" class="nav-link">Enhancement</a>
-        <a href="#suite-creative" class="nav-link">Creative FX</a>
-        <a href="#suite-spatial" class="nav-link">Spatial</a>
-        <a href="#suite-diagnostics" class="nav-link">Diagnostics</a>
-        <a href="#brand-tech" class="nav-link">Architecture</a>
-        <a href="/volume-booster/" class="nav-btn">Launch Studio</a>
+        <a href="#about-app" class="nav-link">About Mi Music</a>
+        <a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+        <a href="#free-tools" class="nav-link">Online Tools</a>
+        <a href="/volume-booster/" class="nav-btn">Fix Audio Output</a>
       </nav>
     </div>
   </header>
 
   <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-badge">🚀 Powered by Hardware Web Audio API</div>
-    <h1>The Professional <span>Browser Audio Suite</span> for Creators</h1>
-    <p class="hero-lead">An uncompressed, studio-grade collection of 12 digital signal processing micro-utilities. Manipulate, boost, clean, analyze, and spatialize audio files entirely inside your device RAM with absolute privacy.</p>
+    <div class="hero-badge">📱 The Ultimate Audio Resource</div>
+    <h1>Everything You Need to Know About <span>Mi Music</span></h1>
+    <p class="hero-lead">Your definitive guide to the default music player for Xiaomi and MIUI devices. Discover features, learn how to fix common playback issues, and explore our free suite of online audio utilities designed to enhance your listening experience.</p>
     <div class="hero-actions">
-      <a href="#all-tools" class="cta-primary">Explore All 12 Audio Tools</a>
-      <a href="/volume-booster/" class="cta-secondary">Try Volume Booster &rarr;</a>
+      <a href="#about-app" class="cta-primary">Explore the Guide</a>
+      <a href="#free-tools" class="cta-secondary">Jump to Audio Tools &rarr;</a>
     </div>
   </section>
 
-  <!-- Key Metrics & Trust Strip -->
-  <section class="main-wrapper">
-    <div class="metrics-bar">
-      <div class="metric-item">
-        <h4>100% Private</h4>
-        <p>Zero cloud uploads; processed in device memory</p>
-      </div>
-      <div class="metric-item">
-        <h4>12 Micro-Tools</h4>
-        <p>Calibrated DSP engines for everyday workflows</p>
-      </div>
-      <div class="metric-item">
-        <h4>Sub-5ms Latency</h4>
-        <p>Hardware-accelerated floating-point PCM math</p>
-      </div>
-      <div class="metric-item">
-        <h4>Universal Mobile</h4>
-        <p>Zero software or app store installs required</p>
-      </div>
-    </div>
-  </section>
+  <!-- Main Content Area -->
+  <main class="main-wrapper">
 
-  <main class="main-wrapper" id="all-tools">
+    <!-- Article Section: About Mi Music -->
+    <article class="content-article" id="about-app">
+      <h2>Introduction to the Mi Music App</h2>
+      <p>The <strong>Mi Music</strong> app is the default, pre-installed audio player found on millions of Xiaomi, Redmi, and POCO smartphones running the MIUI or HyperOS operating systems. Designed to be a lightweight yet feature-rich media hub, it allows users to manage their local audio files, create playlists, and, in certain regions, stream music online.</p>
+      
+      <h3>Key Features of the Player</h3>
+      <ul>
+        <li><strong>Local File Management:</strong> Automatically scans your device for MP3, FLAC, WAV, and AAC files, organizing them by artist, album, and folder.</li>
+        <li><strong>Integrated Equalizer:</strong> Provides a customizable EQ and preset sound profiles tailored for different types of headphones and Xiaomi earbuds.</li>
+        <li><strong>Sleep Timer:</strong> A built-in function to automatically stop playback after a set duration, perfect for bedtime listening.</li>
+        <li><strong>Lyrics Support:</strong> Displays synchronized lyrics for supported tracks, enhancing the listening experience.</li>
+      </ul>
 
-    <!-- Suite 1: Sound Enhancement & Dialogue -->
-    <section class="suite-section" id="suite-enhance">
+      <h3>How to Update the App</h3>
+      <p>To ensure you have the latest features and bug fixes, you should regularly update the app. You can do this through the <strong>GetApps</strong> store (Xiaomi's official app marketplace) or via the Google Play Store, depending on your region. Simply search for "Mi Music" and tap "Update" if a new version is available.</p>
+    </article>
+
+    <!-- Article Section: Troubleshooting -->
+    <article class="content-article" id="troubleshooting">
+      <h2>Troubleshooting Common Mi Music Issues</h2>
+      <p>While the app is generally stable, users occasionally encounter playback or library issues. Here are solutions to the most common problems:</p>
+
+      <h3>1. Songs Not Showing in the Library</h3>
+      <p>If you've recently downloaded audio files but they aren't appearing in the app, the media scanner might not have detected them.</p>
+      <ul>
+        <li><strong>Solution:</strong> Go to the app settings, select "Advanced Settings," and tap "Filter audio files." Ensure that the file size and duration filters aren't accidentally hiding your new tracks. You can also manually trigger a rescan from the menu.</li>
+      </ul>
+
+      <h3>2. Muffled Sound or Low Volume</h3>
+      <p>If your tracks sound unusually quiet or muffled, the issue might be with the file itself or your device's audio settings.</p>
+      <ul>
+        <li><strong>Solution:</strong> Check the MIUI sound effects and equalizer settings. If the original audio file was recorded at a low volume, you can use our <a href="/volume-booster/" style="color:var(--accent);">Volume Booster tool</a> to amplify the file safely before playing it.</li>
+      </ul>
+
+      <h3>3. App Crashing or Freezing</h3>
+      <p>Sometimes cached data can cause the app to misbehave or crash unexpectedly.</p>
+      <ul>
+        <li><strong>Solution:</strong> Go to your phone's Settings > Apps > Manage Apps > Mi Music. Tap on "Clear Data" and select "Clear Cache." This will not delete your downloaded songs, but it resets the app's temporary files.</li>
+      </ul>
+    </article>
+
+    <!-- Suite Section: Free Online Tools -->
+    <section class="suite-section" id="free-tools">
       <div class="section-head">
-        <span class="section-badge">Mastering & Dialogue</span>
-        <h2 class="section-title">Sound Amplification & Enhancement Suite</h2>
-        <p class="section-desc">Hardware-safe volume expansion, speech frequency clarity, and physical acoustic cleaning.</p>
+        <span class="section-badge">Browser Utilities</span>
+        <h2 class="section-title">Free Audio Processing Tools</h2>
+        <p class="section-desc">While the Mi Music app is great for playback, sometimes your audio files need a little help. We've built a suite of free, browser-based tools to help you enhance, analyze, and fix your audio files without installing heavy desktop software. <strong>All tools process files locally in your browser to ensure complete privacy.</strong></p>
       </div>
+
       <div class="tools-grid">
         <a href="/volume-booster/" class="tool-card">
           <div>
             <div class="card-top">
               <div class="card-icon">🔊</div>
-              <span class="card-tag tag-blue">Gain Multiplier</span>
+              <span class="card-tag tag-blue">Enhance</span>
             </div>
-            <h3>Volume Booster & Gain Amplifier</h3>
-            <p>Amplify quiet audio and video recordings up to 400% with built-in dynamics limiting and anti-clipping protection.</p>
+            <h3>Volume Booster</h3>
+            <p>Amplify quiet audio and video recordings safely with built-in anti-clipping protection.</p>
           </div>
-          <div class="card-action">Launch Volume Booster &rarr;</div>
-        </a>
-
-        <a href="/vocal-clarity/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">🗣️</div>
-              <span class="card-tag tag-green">Speech Filter</span>
-            </div>
-            <h3>Speech & Vocal Clarity Enhancer</h3>
-            <p>Eliminate sub-bass mud, reduce hollow room boxiness, and push spoken voice notes into crisp linguistic focus.</p>
-          </div>
-          <div class="card-action">Launch Vocal Clarity &rarr;</div>
+          <div class="card-action">Launch Tool &rarr;</div>
         </a>
 
         <a href="/speaker-cleaner/" class="tool-card">
           <div>
             <div class="card-top">
               <div class="card-icon">💧</div>
-              <span class="card-tag tag-amber">165Hz Acoustic Pulse</span>
+              <span class="card-tag tag-amber">Utility</span>
             </div>
-            <h3>Speaker Cleaner & Water Ejector</h3>
-            <p>Expel trapped water droplets and fine lint from smartphone speaker grills using kinetic 165Hz sonic pulses.</p>
+            <h3>Speaker Cleaner</h3>
+            <p>Expel trapped water droplets and dust from smartphone speaker grills using 165Hz sonic pulses.</p>
           </div>
-          <div class="card-action">Launch Speaker Cleaner &rarr;</div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Suite 2: Creative Manipulation & Transformation -->
-    <section class="suite-section" id="suite-creative">
-      <div class="section-head">
-        <span class="section-badge">Creative Signal Processing</span>
-        <h2 class="section-title">Tempo, Pitch & Transformation Suite</h2>
-        <p class="section-desc">Granular time-stretching, voice alteration, and physical sample reversal.</p>
-      </div>
-      <div class="tools-grid">
-        <a href="/pitch-shifter/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">🎚️</div>
-              <span class="card-tag tag-blue">Time Stretch</span>
-            </div>
-            <h3>Audio Pitch & Speed Shifter</h3>
-            <p>Fine-tune playback speed from 0.5x to 2.0x while locking musical key and vocal formants without chipmunk distortion.</p>
-          </div>
-          <div class="card-action">Launch Pitch Shifter &rarr;</div>
+          <div class="card-action">Launch Tool &rarr;</div>
         </a>
 
-        <a href="/voice-transformer/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">🎙️</div>
-              <span class="card-tag tag-pink">Character FX</span>
-            </div>
-            <h3>Funny Voice Transformer & Vocal FX</h3>
-            <p>Record your voice memo and transform vocal formants into Helium, Robotic Android, or Deep Monster effects.</p>
-          </div>
-          <div class="card-action">Launch Voice Transformer &rarr;</div>
-        </a>
-
-        <a href="/reverse-audio/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">🔄</div>
-              <span class="card-tag tag-purple">Tape Reversal</span>
-            </div>
-            <h3>Reverse Audio Player & Rewinder</h3>
-            <p>Mathematically reverse audio waveform indices in memory to create swelling backwards risers and occult soundscapes.</p>
-          </div>
-          <div class="card-action">Launch Audio Reverser &rarr;</div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Suite 3: Spatial & Neuro-Acoustic Waves -->
-    <section class="suite-section" id="suite-spatial">
-      <div class="section-head">
-        <span class="section-badge">Immersive Audio</span>
-        <h2 class="section-title">Spatial Immersion & Neuro-Acoustic Waves</h2>
-        <p class="section-desc">Binaural psychoacoustics and rhythmic brainwave synchronization engines.</p>
-      </div>
-      <div class="tools-grid">
         <a href="/8d-audio/" class="tool-card">
           <div>
             <div class="card-top">
               <div class="card-icon">🎧</div>
-              <span class="card-tag tag-purple">360° Panning</span>
+              <span class="card-tag tag-purple">Spatial</span>
             </div>
-            <h3>8D Spatial Audio Converter</h3>
-            <p>Transform standard stereo tracks into an immersive 360-degree rotating binaural soundstage using headphones.</p>
+            <h3>8D Audio Converter</h3>
+            <p>Transform standard stereo tracks into an immersive 360-degree rotating binaural soundstage.</p>
           </div>
-          <div class="card-action">Launch 8D Converter &rarr;</div>
+          <div class="card-action">Launch Tool &rarr;</div>
         </a>
 
-        <a href="/binaural-waves/" class="tool-card">
+        <a href="/vocal-clarity/" class="tool-card">
           <div>
             <div class="card-top">
-              <div class="card-icon">🧠</div>
-              <span class="card-tag tag-blue">Brainwave Entrainment</span>
+              <div class="card-icon">🗣️</div>
+              <span class="card-tag tag-green">Filter</span>
             </div>
-            <h3>Binaural Study & Focus Waves</h3>
-            <p>Synthesize pure-tone Alpha (10Hz) and Theta (6Hz) waves to access deep concentration, coding flow, and calm meditation.</p>
+            <h3>Vocal Clarity Enhancer</h3>
+            <p>Reduce background mud and boost speech frequencies for clear podcast playback.</p>
           </div>
-          <div class="card-action">Launch Binaural Waves &rarr;</div>
+          <div class="card-action">Launch Tool &rarr;</div>
         </a>
 
-        <a href="/hearing-test/" class="tool-card">
+        <a href="/pitch-shifter/" class="tool-card">
           <div>
             <div class="card-top">
-              <div class="card-icon">👂</div>
-              <span class="card-tag tag-green">Frequency Sweep</span>
+              <div class="card-icon">🎚️</div>
+              <span class="card-tag tag-blue">Edit</span>
             </div>
-            <h3>Hearing Age Frequency Challenge</h3>
-            <p>Sweep high-frequency pure sine tones from 8,000Hz to 20,000Hz to benchmark your biological auditory threshold.</p>
+            <h3>Pitch & Speed Shifter</h3>
+            <p>Fine-tune playback speed from 0.5x to 2.0x while locking musical key.</p>
           </div>
-          <div class="card-action">Launch Hearing Test &rarr;</div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Suite 4: Media Extraction & Diagnostics -->
-    <section class="suite-section" id="suite-diagnostics">
-      <div class="section-head">
-        <span class="section-badge">Demuxing & Calibration</span>
-        <h2 class="section-title">Acoustic Diagnostics & Media Extraction</h2>
-        <p class="section-desc">Hardware sound pressure metering, AV delay benchmarking, and uncompressed extraction.</p>
-      </div>
-      <div class="tools-grid">
-        <a href="/video-to-audio/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">🎬</div>
-              <span class="card-tag tag-green">Local Demuxing</span>
-            </div>
-            <h3>Video to Audio Extractor</h3>
-            <p>Strip uncompressed high-fidelity WAV tracks out of MP4, WebM, and MOV videos locally without burning cellular data.</p>
-          </div>
-          <div class="card-action">Launch Video Extractor &rarr;</div>
+          <div class="card-action">Launch Tool &rarr;</div>
         </a>
 
         <a href="/decibel-meter/" class="tool-card">
           <div>
             <div class="card-top">
               <div class="card-icon">📊</div>
-              <span class="card-tag tag-pink">Acoustic SPL</span>
+              <span class="card-tag tag-pink">Measure</span>
             </div>
-            <h3>Real-Time Decibel & Sound Level Meter</h3>
-            <p>Measure ambient room loudness (dB SPL) via your device microphone with sensitivity offset calibration.</p>
+            <h3>Real-Time Decibel Meter</h3>
+            <p>Measure ambient room loudness (dB SPL) via your device microphone.</p>
           </div>
-          <div class="card-action">Launch Decibel Meter &rarr;</div>
-        </a>
-
-        <a href="/audio-latency/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">⚡</div>
-              <span class="card-tag tag-blue">AV Sync Clock</span>
-            </div>
-            <h3>Bluetooth Audio Latency Sync Test</h3>
-            <p>Benchmark sound delay on wireless earbuds, headsets, and gaming setups with sub-millisecond hardware timers.</p>
-          </div>
-          <div class="card-action">Launch Latency Test &rarr;</div>
+          <div class="card-action">Launch Tool &rarr;</div>
         </a>
       </div>
     </section>
 
-    <!-- Architectural Deep-Dive -->
-    <section class="feature-showcase" id="brand-tech">
+    <!-- Architectural Deep-Dive (Now explaining the tools) -->
+    <section class="feature-showcase">
       <div class="showcase-box">
-        <h4>🔒 100% In-Memory Privacy</h4>
-        <p>Traditional converter services upload your sensitive interviews, voice notes, and audio stems to foreign cloud servers. MiMusic executes entirely inside local browser volatile memory (RAM). Not a single audio frame is ever stored or transmitted across external networks.</p>
+        <h4>🔒 100% In-Browser Privacy</h4>
+        <p>Unlike traditional converters that upload your files to remote servers, our audio utilities execute entirely inside your local browser memory (RAM). Not a single audio frame is ever stored or transmitted across external networks.</p>
       </div>
       <div class="showcase-box">
         <h4>⚡ Zero Conversion Latency</h4>
-        <p>No waiting in cloud processing queues or uploading multi-gigabyte files over slow mobile data connections. Our Web Audio API pipeline taps directly into your device's multi-core CPU and hardware audio decoders for immediate response.</p>
+        <p>No waiting in cloud processing queues or uploading multi-gigabyte files. Our Web Audio API pipeline taps directly into your device's CPU and hardware decoders for immediate response.</p>
       </div>
       <div class="showcase-box">
-        <h4>🎧 32-Bit Float Studio Math</h4>
-        <p>Unlike ad-supported converters that compress audio multiple times—degrading treble frequencies into watery artifacts—our signal processing operates using 32-bit floating-point linear PCM representation for pristine studio fidelity.</p>
+        <h4>🎧 Uncompressed Fidelity</h4>
+        <p>Our tools avoid the double-compression degradation common on ad-supported sites. We process audio using floating-point math to maintain the highest possible audio quality during export.</p>
       </div>
-    </section>
-
-    <!-- Comprehensive Brand SEO Article -->
-    <article class="brand-article">
-      <h2>Transforming Digital Audio Processing Through Modern Browser Architecture</h2>
-      <p>For over two decades, working with digital audio required a compromise between two extremes. On one hand, professionals relied on heavy, resource-intensive Digital Audio Workstations (DAWs) like Pro Tools, Ableton Live, or Audacity—software suites that consume gigabytes of disk space and demand steep technical learning curves. On the other hand, everyday consumers turned to ad-cluttered online conversion websites that forced users to upload private files across remote servers, exposing confidential speech and unreleased music stems to unknown cloud providers.</p>
-      <p><strong>MiMusic.net</strong> was engineered to dissolve this compromise entirely. By leveraging the modern W3C Web Audio API and hardware-accelerated WebAssembly modules, our platform brings laboratory-grade digital signal processing directly into your browser tab.</p>
-
-      <h3>How In-Memory Client-Side DSP Operates</h3>
-      <p>When you load an audio file into any of our 12 specialized tools, the file never travels across an internet cable. Instead, the browser decodes the binary media container locally, unpacking compressed formats (such as MP3, AAC, or Opus) into raw Pulse-Code Modulation (PCM) sample arrays within your system RAM.</p>
-      <p>From dynamic gain amplification with lookahead peak limiting to surgical Butterworth biquad filtering, all calculations execute in real time. Because processing happens locally, our platform imposes zero file size restrictions, zero bandwidth consumption, and absolute confidentiality for legal, medical, and artistic recordings.</p>
-
-      <h3>Engineered for Diverse Real-World Use Cases</h3>
-      <ul>
-        <li><strong>Content Creators & Podcasters:</strong> Clean dialogue tracks with the Vocal Clarity Enhancer and strip high-fidelity audio from video clips in seconds.</li>
-        <li><strong>Students & Researchers:</strong> Amplify distant lecture hall recordings with the Volume Booster and utilize 10Hz Alpha Binaural Waves for sustained study focus.</li>
-        <li><strong>Musicians & Instrumentalists:</strong> Transcribe intricate solos note-by-note with our Pitch and Tempo Shifter without detuning instruments.</li>
-        <li><strong>Audiophiles & Gamers:</strong> Diagnose wireless Bluetooth earbud packet lag with the Latency Test and monitor room acoustics with the Decibel Meter.</li>
-      </ul>
-    </article>
-
-    <!-- Platform Community Reviews System -->
-    <section class="reviews-box">
-      <div class="reviews-header">
-        <div>
-          <h3 style="color: var(--text-dark); font-size: 1.3rem; font-weight: 800; margin-bottom: 4px;">Platform Feedback & User Ratings</h3>
-          <p style="color: var(--muted); font-size: 0.88rem; font-weight: 500;">Have a suggestion or request for a new audio micro-tool? Share your feedback with our development team</p>
-        </div>
-        <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.7rem; font-weight: 800; color: var(--text-dark);">5.0</span>
-          <span style="color: #f59e0b; font-size: 1.2rem;">★★★★★</span>
-        </div>
-      </div>
-
-      <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
-        <div class="review-inputs">
-          <input type="text" id="user-name" placeholder="Your Name or Handle" required maxlength="30">
-          <select id="user-stars">
-            <option value="5">★★★★★ (5/5)</option>
-            <option value="4">★★★★☆ (4/5)</option>
-            <option value="3">★★★☆☆ (3/5)</option>
-            <option value="2">★★☆☆☆ (2/5)</option>
-            <option value="1">★☆☆☆☆ (1/5)</option>
-          </select>
-        </div>
-        <textarea id="user-comment" placeholder="Which audio tools do you use most frequently, and what features would you like to see next?" required rows="3" maxlength="400"></textarea>
-        <button type="submit" class="review-submit-btn">Submit Platform Feedback</button>
-      </form>
-
-      <div id="reviews-feed"></div>
     </section>
 
     <!-- Accordion FAQ -->
     <section class="faq-container">
       <div class="section-head">
-        <span class="section-badge">Support & Knowledge Base</span>
+        <span class="section-badge">Support</span>
         <h2 class="section-title">Frequently Asked Questions</h2>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Are my audio and video files uploaded to remote servers?
+          Is this website affiliated with Xiaomi?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          No. MiMusic operates strictly via client-side Web Audio API and HTML5 Canvas architecture. All file demuxing, frequency filtering, and amplification calculations execute locally within your device's memory (RAM). Not a single byte of your media leaves your computer or phone.
+          No. MiMusic.net is an independent, community-driven resource and web utility platform. We provide guides and browser-based audio tools, but we are not affiliated with, endorsed by, or connected to Xiaomi Inc.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Is there any file size limit or daily conversion quota?
+          Why use these online tools instead of an app?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Because our platform does not rely on costly server processing farms, there are no artificial file size caps, daily usage quotas, or paywalls. You can process recordings of any length as long as your device has available memory.
+          Our browser-based tools require no installation, do not ask for intrusive permissions (like access to your contacts or location), and process files locally. They offer a safe, fast, and private way to edit audio on any device.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Do these tools work on mobile browsers like iPhone and Android?
+          Can I use these tools on my iPhone or PC?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Yes! All 12 utilities are responsive and touch-optimized, operating smoothly across iOS Safari, Android Google Chrome, iPadOS, macOS, and Windows without requiring app installations.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          Can I use audio processed by MiMusic commercially?
-          <span class="faq-arrow">▼</span>
-        </button>
-        <div class="faq-answer">
-          Yes. You maintain 100% intellectual property ownership over all media processed through our platform. You are free to use your exported audio files in commercial podcasts, YouTube videos, and music productions.
+          Yes! While our guides focus on Android/MIUI users, the web utilities themselves are platform-agnostic. They work perfectly on iOS Safari, macOS, Windows, and any modern web browser.
         </div>
       </div>
     </section>
@@ -508,45 +344,44 @@
   <footer>
     <div class="footer-grid">
       <div class="footer-col">
-        <!-- Changed Brand Name -->
         <h5>🎵 MiMusic.net</h5>
-        <p style="margin-bottom: 14px; font-size: 0.88rem; font-weight: 500; line-height: 1.6;">A modern suite of 12 studio-grade audio micro-tools running 100% client-side in your browser. Engineered for privacy, speed, and acoustic accuracy.</p>
+        <p style="margin-bottom: 14px; font-size: 0.88rem; font-weight: 500; line-height: 1.6;">Your independent guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
         <p style="font-size: 0.85rem; color: #64748b; font-weight: 600;">Contact: Sobl5910@gmail.com</p>
       </div>
 
       <div class="footer-col">
-        <h5>Mastering & Voice</h5>
+        <h5>Popular Tools</h5>
         <ul>
           <li><a href="/volume-booster/">Volume Booster</a></li>
-          <li><a href="/vocal-clarity/">Vocal Clarity Enhancer</a></li>
           <li><a href="/speaker-cleaner/">Speaker Cleaner</a></li>
+          <li><a href="/8d-audio/">8D Spatial Audio</a></li>
+          <li><a href="/pitch-shifter/">Pitch & Tempo</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Analysis & Fixes</h5>
+        <ul>
+          <li><a href="/vocal-clarity/">Vocal Clarity</a></li>
           <li><a href="/video-to-audio/">Video to Audio</a></li>
+          <li><a href="/decibel-meter/">Decibel Meter</a></li>
+          <li><a href="/audio-latency/">Latency Test</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h5>Creative & Spatial</h5>
+        <h5>Fun & Focus</h5>
         <ul>
-          <li><a href="/pitch-shifter/">Pitch & Tempo Shifter</a></li>
-          <li><a href="/voice-transformer/">Voice Transformer</a></li>
-          <li><a href="/8d-audio/">8D Audio Converter</a></li>
-          <li><a href="/reverse-audio/">Reverse Audio Player</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h5>Acoustics & Waves</h5>
-        <ul>
-          <li><a href="/binaural-waves/">Binaural Study Beats</a></li>
-          <li><a href="/hearing-test/">Hearing Age Challenge</a></li>
-          <li><a href="/decibel-meter/">Real-Time Decibel Meter</a></li>
-          <li><a href="/audio-latency/">Bluetooth Latency Sync</a></li>
+          <li><a href="/voice-transformer/">Voice Changer</a></li>
+          <li><a href="/reverse-audio/">Reverse Audio</a></li>
+          <li><a href="/binaural-waves/">Binaural Beats</a></li>
+          <li><a href="/hearing-test/">Hearing Test</a></li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; 2026 MiMusic.net Studio. Free, open, and private in-browser digital signal processing.</p>
+      <p>&copy; 2026 MiMusic.net. Independent audio guides and web tools.</p>
     </div>
   </footer>
 
@@ -558,60 +393,6 @@
       answer.style.display = isOpen ? 'none' : 'block';
       arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
     }
-
-    /* Platform Level Interactive Feedback System (LocalStorage) */
-    const STORAGE_KEY = 'platform_reviews_mimusic';
-
-    function loadReviews() {
-      const feed = document.getElementById('reviews-feed');
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      
-      if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No platform reviews yet. Be the first to share your experience with the studio suite!</p>';
-        return;
-      }
-
-      let totalStars = 0;
-      feed.innerHTML = stored.map(r => {
-        totalStars += r.rating;
-        return `
-          <div class="review-entry">
-            <div class="review-entry-header">
-              <strong style="color: var(--text-dark); font-size: 0.95rem; font-weight: 700;">${escapeHtml(r.name)}</strong>
-              <span style="color: #f59e0b; font-size: 0.9rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
-            </div>
-            <p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; line-height: 1.6;">${escapeHtml(r.comment)}</p>
-          </div>
-        `;
-      }).join('');
-
-      const avg = (totalStars / stored.length).toFixed(1);
-      document.getElementById('avg-val').innerText = avg;
-    }
-
-    function submitReview(e) {
-      e.preventDefault();
-      const name = document.getElementById('user-name').value.trim();
-      const rating = parseInt(document.getElementById('user-stars').value);
-      const comment = document.getElementById('user-comment').value.trim();
-
-      if (!name || !comment) return;
-
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      stored.unshift({ name, rating, comment, time: Date.now() });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-
-      document.getElementById('review-form').reset();
-      loadReviews();
-    }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.innerText = text;
-      return div.innerHTML;
-    }
-
-    window.addEventListener('DOMContentLoaded', loadReviews);
   </script>
 </body>
 </html>
