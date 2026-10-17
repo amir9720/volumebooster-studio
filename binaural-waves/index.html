@@ -3,122 +3,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Binaural Beats Generator - Alpha & Theta Waves for Deep Study & Focus</title>
-  <meta name="description" content="Synthesize pure binaural study beats online for deep flow-state concentration and meditation. Features customizable carrier pitches and zero server uploads.">
+  <title>Mi Music Player Online | Binaural Beats for Deep Focus</title>
+  <meta name="description" content="Synthesize pure binaural study beats online for deep concentration. Adjust Mi music equalizer settings for Alpha and Theta waves with zero server uploads.">
   <style>
     :root {
-      --bg: #090d16;
-      --card-bg: #111827;
-      --border: #1f2937;
+      /* MiMusic Clean Light Theme Palette */
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
       --accent: #6366f1;
       --accent-hover: #4f46e5;
       --danger: #ef4444;
-      --text: #f9fafb;
-      --muted: #9ca3af;
-      --surface: #0c121e;
+      --text: #334155;
+      --text-dark: #0f172a;
+      --muted: #64748b;
+      --surface: #eef2ff;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 16px 60px; line-height: 1.6; }
-
-    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
-    .brand { color: #fff; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-    .brand span { color: var(--accent); }
-    .back-home { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
-    .back-home:hover { color: #fff; }
-
-    .container { width: 100%; max-width: 820px; }
-    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); text-align: center; }
-    h1 { font-size: 2rem; margin-bottom: 8px; color: #fff; }
-    .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; }
-
-    /* Visual Pulse Avatar */
-    .pulse-avatar { width: 130px; height: 130px; border-radius: 50%; background: var(--surface); border: 3px solid var(--border); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 3rem; transition: all 0.3s ease; }
-    .pulse-active { border-color: var(--accent); box-shadow: 0 0 35px rgba(99, 102, 241, 0.45); animation: breathe 3s infinite alternate ease-in-out; }
-    @keyframes breathe {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.08); }
+    body { 
+      background: var(--bg); 
+      background-image: linear-gradient(180deg, #eef2ff 0%, #f8fafc 400px);
+      color: var(--text); 
+      min-height: 100vh; 
+      display: flex; flex-direction: column; align-items: center; 
+      padding: 0 16px 60px; line-height: 1.6; 
     }
 
-    .status-text { font-size: 1.05rem; color: #fff; font-weight: 600; margin-bottom: 24px; }
-    .status-sub { color: var(--muted); font-size: 0.85rem; margin-top: 4px; font-weight: 400; }
+    /* Top Brand Navigation */
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); margin-bottom: 30px; }
+    .brand { color: var(--text-dark); font-size: 1.25rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand span { color: var(--accent); }
+    .back-home { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .back-home:hover { color: var(--accent); }
+
+    .container { width: 100%; max-width: 820px; }
+    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); text-align: center; }
+    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
+    .lead { color: var(--muted); font-size: 0.95rem; font-weight: 500; margin-bottom: 24px; }
+
+    /* Visual Pulse Avatar */
+    .pulse-avatar { width: 130px; height: 130px; border-radius: 50%; background: #fff; border: 4px solid var(--border); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1); }
+    .pulse-active { border-color: var(--accent); box-shadow: 0 0 40px rgba(99, 102, 241, 0.4); animation: breathe 3s infinite alternate ease-in-out; }
+    @keyframes breathe {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+
+    .status-text { font-size: 1.05rem; color: var(--text-dark); font-weight: 800; margin-bottom: 24px; }
+    .status-sub { color: var(--muted); font-size: 0.85rem; margin-top: 4px; font-weight: 500; }
 
     .btn-group { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
-    .preset-btn { background: #1e293b; color: #fff; border: 1px solid var(--border); padding: 14px 18px; border-radius: 12px; font-size: 0.92rem; font-weight: 600; cursor: pointer; transition: 0.2s; flex: 1; min-width: 150px; }
-    .preset-btn:hover { background: #334155; }
-    .preset-btn.active { background: var(--accent); border-color: var(--accent); box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3); }
+    .preset-btn { background: var(--surface); color: var(--text-dark); border: 1px solid #c7d2fe; padding: 14px 18px; border-radius: 12px; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: 0.2s; flex: 1; min-width: 150px; }
+    .preset-btn:hover { background: #e0e7ff; border-color: var(--accent); color: var(--accent); }
+    .preset-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3); }
 
-    .stop-btn { background: #334155; color: var(--muted); border: 1px solid var(--border); padding: 12px 26px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
-    .stop-btn:hover { background: var(--danger); color: #fff; }
+    .stop-btn { background: #f1f5f9; color: var(--text-dark); border: 1px solid var(--border); padding: 12px 26px; border-radius: 10px; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .stop-btn:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
 
     /* Advanced Audio Tool Panel */
     .advanced-toggle { margin-top: 24px; border-top: 1px dashed var(--border); padding-top: 16px; text-align: left; }
-    .advanced-btn { background: none; border: none; color: var(--accent); font-size: 0.9rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-    .advanced-content { display: none; margin-top: 14px; padding: 14px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid var(--border); }
-    .adv-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.88rem; color: var(--muted); }
+    .advanced-btn { background: none; border: none; color: var(--accent); font-size: 0.95rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .advanced-content { display: none; margin-top: 14px; padding: 18px; background: #fff; border-radius: 12px; border: 1px solid #c7d2fe; }
+    .adv-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
     .adv-row:last-child { margin-bottom: 0; }
-    select { background: #1e293b; color: #fff; border: 1px solid var(--border); padding: 5px 10px; border-radius: 6px; outline: none; }
+    select { background: #fff; color: var(--text-dark); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; outline: none; font-weight: 500; }
 
-    .notice { margin-top: 20px; font-size: 0.85rem; color: #a5b4fc; background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.25); padding: 12px; border-radius: 10px; text-align: left; }
+    .notice { margin-top: 20px; font-size: 0.85rem; color: #4338ca; background: #e0e7ff; border: 1px solid #c7d2fe; padding: 14px; border-radius: 10px; text-align: left; font-weight: 500; }
 
     /* Step-by-Step Tutorial Box */
     .tutorial-section { margin-top: 45px; }
-    .section-title { font-size: 1.4rem; color: #fff; margin-bottom: 18px; font-weight: 700; text-align: left; }
+    .section-title { font-size: 1.4rem; color: var(--text-dark); margin-bottom: 18px; font-weight: 800; text-align: left; }
     .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; }
+    .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
-    .step-card h3 { font-size: 1rem; color: #fff; margin-bottom: 6px; }
-    .step-card p { font-size: 0.85rem; color: var(--muted); }
+    .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
+    .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
     /* Why Choose Us */
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .feature-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
-    .feature-box h4 { color: #fff; font-size: 0.95rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-    .feature-box p { font-size: 0.83rem; color: var(--muted); }
+    .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
-    /* Real Interactive Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; }
+    /* Interactive Reviews System */
+    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
     .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
     .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
     .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
     @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #1e293b; color: #fff; border: 1px solid var(--border); padding: 10px; border-radius: 8px; outline: none; font-size: 0.88rem; }
-    .review-inputs select { color: #f59e0b; font-weight: bold; }
+    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
+    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2); }
+    .review-inputs select { color: #d97706; font-weight: bold; }
     .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.88rem; transition: 0.2s; }
-    .review-submit-btn:hover { background: var(--accent-hover); }
+    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2); }
+    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
     .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
     .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 
     /* Accordion FAQ */
     .faq-container { margin-bottom: 45px; }
-    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
-    .faq-question { width: 100%; padding: 16px 20px; text-align: left; background: none; border: none; color: #fff; font-size: 0.95rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-question:hover { color: var(--accent); }
+    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+    .faq-question { width: 100%; padding: 16px 20px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-question:hover { color: var(--accent); background: var(--surface); }
     .faq-arrow { font-size: 0.8rem; transition: transform 0.2s; }
-    .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.88rem; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 12px; }
+    .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.95rem; font-weight: 500; line-height: 1.6; border-top: 1px solid var(--surface); padding-top: 12px; }
 
     /* Comprehensive SEO Article */
-    .seo-article { background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: #cbd5e1; font-size: 0.93rem; line-height: 1.7; text-align: left; }
-    .seo-article h2 { color: #fff; font-size: 1.35rem; margin-bottom: 14px; }
-    .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 24px 0 10px; }
-    .seo-article p { margin-bottom: 16px; }
-    .seo-article ul { padding-left: 20px; margin-bottom: 16px; }
+    .seo-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: var(--text); font-size: 0.95rem; line-height: 1.7; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .seo-article h2 { color: var(--text-dark); font-size: 1.45rem; font-weight: 800; margin-bottom: 14px; }
+    .seo-article h3 { color: var(--text-dark); font-size: 1.15rem; font-weight: 700; margin: 24px 0 10px; }
+    .seo-article p { margin-bottom: 16px; font-weight: 500; }
+    .seo-article ul { padding-left: 20px; margin-bottom: 16px; font-weight: 500; }
     .seo-article li { margin-bottom: 6px; }
 
-    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; font-weight: 500; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
   </style>
 </head>
 <body>
 
   <header class="nav">
-    <a href="/" class="brand">⚡ GOODEV<span>Audio</span></a>
-    <a href="/" class="back-home">&larr; Back to All Tools</a>
+    <a href="/" class="brand">🎵 MiMusic<span>.net</span></a>
+    <a href="/" class="back-home">&larr; Studio Home</a>
   </header>
 
   <main class="container">
     <div class="tool-box">
-      <h1>Binaural Study & Focus Waves</h1>
-      <p class="lead">Synthesize continuous pure-tone binaural beats directly in your browser to enter flow states, boost deep work, and meditate.</p>
+      <h1>Mi Music Binaural Beats & Study Waves</h1>
+      <p class="lead">Synthesize continuous pure-tone binaural beats directly in your browser. Tune your Mi music equalizer settings to enter deep flow states.</p>
 
       <div class="pulse-avatar" id="avatar-icon">🧠</div>
 
@@ -130,23 +141,23 @@
       <div class="btn-group">
         <button class="preset-btn" id="btn-alpha" onclick="startBinaural('alpha', 10)">
           ⚡ Alpha (10Hz)<br>
-          <small style="color:var(--muted); font-weight:400;">Flow State & Study</small>
+          <small style="font-weight:500;">Flow State & Study</small>
         </button>
         <button class="preset-btn" id="btn-theta" onclick="startBinaural('theta', 6)">
           🌿 Theta (6Hz)<br>
-          <small style="color:var(--muted); font-weight:400;">Deep Calm & Relax</small>
+          <small style="font-weight:500;">Deep Calm & Relax</small>
         </button>
         <button class="preset-btn" id="btn-beta" onclick="startBinaural('beta', 18)">
           🎯 Beta (18Hz)<br>
-          <small style="color:var(--muted); font-weight:400;">High Alertness</small>
+          <small style="font-weight:500;">High Alertness</small>
         </button>
         <button class="preset-btn" id="btn-delta" onclick="startBinaural('delta', 2.5)">
           🌙 Delta (2.5Hz)<br>
-          <small style="color:var(--muted); font-weight:400;">Deep Sleep Rest</small>
+          <small style="font-weight:500;">Deep Sleep Rest</small>
         </button>
       </div>
 
-      <div>
+      <div style="margin-top: 20px;">
         <button class="stop-btn" onclick="stopBinaural()">⏹️ Stop Audio Waves</button>
       </div>
 
@@ -182,7 +193,7 @@
 
     <!-- 3-Step Tutorial -->
     <section class="tutorial-section">
-      <h2 class="section-title">How to Use Binaural Beats for Focus in 3 Steps</h2>
+      <h2 class="section-title">How to Use Binaural Beats for Focus</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-badge">1</div>
@@ -204,7 +215,7 @@
 
     <!-- Why Choose Our Tool Section -->
     <section>
-      <h2 class="section-title">Why Choose Our In-Browser Beat Generator?</h2>
+      <h2 class="section-title">Why Use Our In-Browser Beat Generator?</h2>
       <div class="features-grid">
         <div class="feature-box">
           <h4>🔬 Zero Phase Distortion</h4>
@@ -225,20 +236,19 @@
       </div>
     </section>
 
-    <!-- Real Interactive Reviews System (No Fake Data) -->
+    <!-- Interactive Reviews System -->
     <section class="reviews-box">
       <div class="reviews-header">
         <div>
-          <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem;">Which frequency helped your focus or meditation? Share your thoughts below</p>
+          <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
+          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">Which frequency helped your focus or meditation? Share your thoughts below</p>
         </div>
         <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: #fff;">5.0</span>
+          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
           <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
         </div>
       </div>
 
-      <!-- Live Submission Form -->
       <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
         <div class="review-inputs">
           <input type="text" id="user-name" placeholder="Your Name or Nickname" required maxlength="30">
@@ -254,7 +264,6 @@
         <button type="submit" class="review-submit-btn">Post Feedback</button>
       </form>
 
-      <!-- Live Dynamic Feed -->
       <div id="reviews-feed"></div>
     </section>
 
@@ -263,11 +272,11 @@
       <h2 class="section-title">Frequently Asked Questions</h2>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          How does the brain create a "phantom" third beat?
+          Is this tool a Mi music player online alternative?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          When your left ear receives a 200Hz tone and your right ear receives a 210Hz tone, your ears hear two continuous steady pitches. However, inside your brainstem's superior olivary complex, electrical impulses from both auditory nerves converge. Because the two waves periodically fall in and out of phase ten times per second, your brain synthesizes an illusory rhythmic pulsing sensation at exactly 10Hz.
+          Yes! If you want to listen to continuous binaural beats without relying on pre-recorded MP3 tracks, this tool synthesizes the frequencies perfectly inside your browser. No extra <strong>Xiaomi audio tools</strong> needed.
         </div>
       </div>
 
@@ -287,44 +296,37 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Only if played too loud. Binaural beats are intended to serve as a low-level acoustic anchor (between 25% and 35% system volume). If the volume is set too high, prolonged pure sine wave pressure can cause ear canal fatigue. Keep it soft and unobtrusive.
+          Only if played too loud. Binaural beats are intended to serve as a low-level acoustic anchor. If the volume is set too high, prolonged pure sine wave pressure can cause ear canal fatigue. Keep it soft and unobtrusive.
         </div>
       </div>
     </section>
 
-    <!-- Comprehensive Human-Written SEO Guide -->
+    <!-- Comprehensive SEO Guide -->
     <article class="seo-article">
       <h2>The Neurobiology of Brainwave Entrainment and Binaural Resonance</h2>
-      <p>In our hyper-connected modern workspace, staying focused is a constant uphill battle. Constant push notifications, open-office background chatter, and the cognitive fatigue of endless task-switching make entering a genuine "flow state" difficult. While many professionals listen to music or lo-fi beats, complex melodies and vocal lyrics actively compete for processing power in the brain's language centers. This is where <strong>auditory brainwave entrainment</strong> offers a scientifically distinct advantage.</p>
+      <p>In our hyper-connected modern workspace, staying focused is a constant uphill battle. Constant push notifications, open-office background chatter, and the cognitive fatigue of endless task-switching make entering a genuine "flow state" difficult. While many professionals listen to lo-fi beats, complex melodies and vocal lyrics actively compete for processing power. This is where <strong>auditory brainwave entrainment</strong> offers a scientifically distinct advantage for <strong>Mi music player online</strong> users.</p>
       <p>Discovered in 1839 by German physicist Heinrich Wilhelm Dove, binaural beats do not rely on acoustic sound mixing in the air. Instead, they exploit a unique biological mechanism within the mammalian auditory pathway: the <strong>Frequency Following Response (FFR)</strong>.</p>
 
-      <h3>How the Superior Olivary Complex Decodes Stereo Differences</h3>
-      <p>When you put on headphones and route a pure 200Hz tone into your left ear and a 210Hz tone into your right ear, the two sound waves never physically interact until their electrical signals meet inside your brainstem. There, an almond-sized cluster of neurons called the <em>superior olivary complex</em> processes acoustic timing data to locate objects in space.</p>
-      <p>Attempting to reconcile the slight frequency discrepancy between the left and right ears, the brain begins firing neural oscillations at the mathematical difference between the two tones (210Hz – 200Hz = <strong>10Hz</strong>). Over a five-to-ten-minute period, electroencephalogram (EEG) studies demonstrate that cortical neural rhythms synchronize with this stimulus, nudging the brain toward specific cognitive states.</p>
-
+      <h3>How the Brain Decodes Stereo Differences</h3>
+      <p>When you put on headphones and route a pure 200Hz tone into your left ear and a 210Hz tone into your right ear, the two sound waves never physically interact until their electrical signals meet inside your brainstem. Attempting to reconcile the slight frequency discrepancy, the brain begins firing neural oscillations at the mathematical difference between the two tones (210Hz – 200Hz = <strong>10Hz</strong>).</p>
+      
       <h3>Target Brainwave Frequency Classifications</h3>
       <ul>
-        <li><strong>Alpha Waves (8Hz – 12Hz):</strong> The gold standard for deep study and creative flow. Alpha rhythms correspond to relaxed alertness—the ideal neurological state where anxiety drops, internal mental chatter quietens, and problem-solving feels effortless.</li>
-        <li><strong>Theta Waves (4Hz – 7Hz):</strong> Linked with deep meditation, hypnagogic dream states, memory consolidation, and deep somatic relaxation. Excellent for unwinding after high-stress work or preparing for sleep.</li>
-        <li><strong>Beta Waves (13Hz – 30Hz):</strong> Associated with active analytical thinking, rapid decision-making, and high alertness. Best used during urgent, detail-heavy diagnostic tasks.</li>
-        <li><strong>Delta Waves (0.5Hz – 3Hz):</strong> The slowest neural rhythms, dominating restorative slow-wave stage 3 deep sleep. Listening helps reset nervous system arousal before bedtime.</li>
+        <li><strong>Alpha Waves (8Hz – 12Hz):</strong> The gold standard for deep study and creative flow. Alpha rhythms correspond to relaxed alertness.</li>
+        <li><strong>Theta Waves (4Hz – 7Hz):</strong> Linked with deep meditation, hypnagogic dream states, and somatic relaxation.</li>
+        <li><strong>Beta Waves (13Hz – 30Hz):</strong> Associated with active analytical thinking, rapid decision-making, and high alertness.</li>
+        <li><strong>Delta Waves (0.5Hz – 3Hz):</strong> The slowest neural rhythms, dominating restorative slow-wave deep sleep.</li>
       </ul>
 
-      <h3>Why Real-Time Pure Synthesis Beats Pre-Recorded Video Streams</h3>
-      <p>Most people discover binaural beats through video or music streaming services. Unfortunately, lossy compression algorithms (like 128kbps MP3 or AAC) are designed specifically to discard subtle inter-channel phase differences to reduce file sizes. By smearing the micro-second timing differences between left and right channels, compressed audio substantially weakens the neurological entrainment illusion.</p>
-      <p>Our tool resolves this by generating raw, continuous mathematical sine oscillations in real time via the browser's hardware-accelerated Web Audio API. With zero compression, zero bandwidth buffering, and infinite non-looping playback, your auditory cortex receives mathematically perfect acoustic stimuli.</p>
-
-      <h3>Guidelines for an Effective Focus Routine</h3>
-      <ul>
-        <li><strong>Set Low Volume:</strong> The tone should sit quietly beneath your conscious awareness (around 30% volume). You should easily be able to talk over it.</li>
-        <li><strong>Allow a 6-Minute Ramp:</strong> Neural entrainment requires several minutes of continuous auditory exposure before brainwave patterns shift. Avoid toggling back and forth between frequencies.</li>
-        <li><strong>Combine with Deep Work:</strong> Use our 10Hz Alpha preset alongside the Pomodoro technique—25 or 50 minutes of focused work with your phone out of reach.</li>
-      </ul>
+      <h3>Checking Mi Music Equalizer Settings for Binaural Audio</h3>
+      <p>Most people discover binaural beats through video or music streaming services. Unfortunately, lossy compression algorithms (like MP3 or AAC) are designed specifically to discard subtle inter-channel phase differences. By smearing the micro-second timing differences between left and right channels, compressed audio substantially weakens the neurological entrainment illusion.</p>
+      <p>Our tool resolves this by generating raw, continuous mathematical sine oscillations in real time via the browser's hardware-accelerated Web Audio API. It completely bypasses your default <strong>Mi music equalizer settings</strong> to deliver pristine, unaltered waveforms.</p>
     </article>
   </main>
 
   <footer>
-    <p>&copy; 2026 GOODEV Audio Studio. Free browser-based audio tools.</p>
+    <p style="margin-bottom: 8px;">&copy; 2026 MiMusic.net Studio. Free browser-based DSP tools.</p>
+    <p style="font-size: 0.75rem; color: #94a3b8;">Disclaimer: MiMusic.net is an independent web utility and is not affiliated with or endorsed by Xiaomi Inc. or the official Mi Music app.</p>
   </footer>
 
   <script>
@@ -437,7 +439,7 @@
       const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
       
       if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.88rem; font-style: italic; padding: 10px 0;">No reviews posted yet. Test these binaural beats and share your focus results!</p>';
+        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Test these binaural beats and share your focus results!</p>';
         return;
       }
 
@@ -447,10 +449,10 @@
         return `
           <div class="review-entry">
             <div class="review-entry-header">
-              <strong style="color: #cbd5e1; font-size: 0.92rem;">${escapeHtml(r.name)}</strong>
-              <span style="color: #f59e0b; font-size: 0.85rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+              <strong style="color: var(--text-dark); font-size: 0.95rem; font-weight: 700;">${escapeHtml(r.name)}</strong>
+              <span style="color: #f59e0b; font-size: 0.9rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
             </div>
-            <p style="color: var(--muted); font-size: 0.86rem; line-height: 1.5;">${escapeHtml(r.comment)}</p>
+            <p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; line-height: 1.6;">${escapeHtml(r.comment)}</p>
           </div>
         `;
       }).join('');
