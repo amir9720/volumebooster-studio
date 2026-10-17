@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Music Hearing Test - High Frequency Audio Check Online</title>
-  <meta name="description" content="Test your upper biological hearing frequency up to 20kHz online. Calibrated pure-tone sine oscillator to check Xiaomi audio settings and speaker fidelity.">
+  <title>Mi Music High Frequency Audio Check | Hearing Test Utility</title>
+  <meta name="description" content="Explore your upper auditory frequency range online. A fun, non-medical pure-tone sine oscillator to check Xiaomi audio settings and speaker fidelity.">
   <style>
     :root {
       /* MiMusic Clean Light Theme Palette */
@@ -64,6 +64,10 @@
     .adv-row:last-child { margin-bottom: 0; }
     select { background: #fff; color: var(--text-dark); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; outline: none; font-weight: 500; }
 
+    /* Medical Disclaimer Box */
+    .disclaimer-box { margin-top: 24px; padding: 16px; background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; text-align: left; font-size: 0.85rem; color: #991b1b; }
+    .disclaimer-box strong { color: #7f1d1d; }
+
     /* Step-by-Step Tutorial Box */
     .tutorial-section { margin-top: 45px; }
     .section-title { font-size: 1.4rem; color: var(--text-dark); margin-bottom: 18px; font-weight: 800; text-align: left; }
@@ -122,8 +126,8 @@
 
   <main class="container">
     <div class="tool-box">
-      <h1>Hearing Age Frequency Challenge</h1>
-      <p class="lead">Determine your upper auditory threshold and check your Xiaomi audio equipment fidelity using precision high-frequency sine oscillators.</p>
+      <h1>High Frequency Audio & Speaker Test</h1>
+      <p class="lead">Explore your upper auditory perception range and check your Xiaomi audio equipment fidelity using high-frequency sine oscillators. (Not a medical test)</p>
 
       <div class="freq-box">
         <div class="freq-val" id="freq-num">12,000</div>
@@ -139,13 +143,13 @@
         <input type="range" id="freq-slider" min="8000" max="20000" step="500" value="12000" oninput="handleFreq(this.value)">
       </div>
 
-      <div class="estimate-pill" id="age-estimate">Biological Hearing Estimate: Under 50 Years Old</div>
+      <div class="estimate-pill" id="age-estimate">General Age Correlation: Often under 50</div>
 
       <div>
         <button class="btn" id="tone-btn" onclick="toggleTone()">Play Test Tone</button>
       </div>
 
-      <!-- Advanced Hearing Diagnostic Controls -->
+      <!-- Advanced Hearing Controls -->
       <div class="advanced-toggle">
         <button class="advanced-btn" type="button" onclick="toggleAdvanced()">
           ⚙️ <span>Advanced Ear Routing & Safety Calibration</span>
@@ -164,16 +168,20 @@
             <select id="gain-level" onchange="updateGainLevel()">
               <option value="0.25" selected>Moderate Safety (Recommended)</option>
               <option value="0.15">Soft (Sensitive Earphones)</option>
-              <option value="0.4">Boosted (Hard of Hearing)</option>
+              <option value="0.4">Boosted Output</option>
             </select>
           </div>
         </div>
+      </div>
+
+      <div class="disclaimer-box">
+        <strong>Medical Disclaimer:</strong> This tool is provided strictly for educational, entertainment, and audio equipment testing purposes. It is <em>not</em> a clinical medical device, cannot provide a medical diagnosis, and should not replace a professional audiogram. If you suspect you are experiencing hearing loss or tinnitus, please consult a licensed audiologist or healthcare professional.
       </div>
     </div>
 
     <!-- 3-Step Tutorial -->
     <section class="tutorial-section">
-      <h2 class="section-title">How to Test Your Hearing Frequency</h2>
+      <h2 class="section-title">How to Use the Audio Frequency Test</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-badge">1</div>
@@ -187,31 +195,31 @@
         </div>
         <div class="step-card">
           <div class="step-badge">3</div>
-          <h3>Identify Biological Age</h3>
-          <p>Read your estimated biological ear age based on international audiology standards.</p>
+          <h3>Check Correlations</h3>
+          <p>View the general age correlation associated with standard high-frequency hearing drop-offs.</p>
         </div>
       </div>
     </section>
 
     <!-- Why Choose Our Tool Section -->
     <section>
-      <h2 class="section-title">Why Choose Our Online Hearing Test?</h2>
+      <h2 class="section-title">Why Use This Frequency Generator?</h2>
       <div class="features-grid">
         <div class="feature-box">
-          <h4>🔬 Pure Uncompressed Sine Waves</h4>
+          <h4>🔬 Pure Uncompressed Tones</h4>
           <p>Direct hardware oscillator math avoids the compression artifacts of lossy YouTube test clips.</p>
         </div>
         <div class="feature-box">
-          <h4>🎧 Ear-by-Ear Diagnostics</h4>
-          <p>Isolate your left and right ears individually to reveal hidden one-sided hearing fatigue.</p>
+          <h4>🎧 Individual Channel Check</h4>
+          <p>Isolate your left and right audio channels individually to test headphone balance.</p>
         </div>
         <div class="feature-box">
           <h4>🛡️ Built-In Volume Limiter</h4>
-          <p>Engineered safe amplitude staging protects delicate inner-ear stereocilia from accidental blasts.</p>
+          <p>Engineered safe amplitude staging to help prevent accidentally playing loud, high-pitched tones.</p>
         </div>
         <div class="feature-box">
           <h4>🔒 Zero Personal Tracking</h4>
-          <p>Test results are strictly temporary and never compiled or sold to medical advertisers.</p>
+          <p>Test results are strictly temporary and never compiled, stored, or transmitted.</p>
         </div>
       </div>
     </section>
@@ -221,11 +229,11 @@
       <div class="reviews-header">
         <div>
           <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">What was your highest audible frequency? Share your ear age result below</p>
+          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">What was your highest audible frequency? Share your experience below</p>
         </div>
         <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
-          <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
+          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">0.0</span>
+          <span style="color: #cbd5e1; font-size: 1.15rem;">★★★★★</span>
         </div>
       </div>
 
@@ -256,7 +264,7 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Consumer smartphone speakers and cheap laptop drivers have physical diaphragms that struggle to oscillate 15,000 times per second. In many cases, it is the micro-speaker hardware rolling off rather than your ears. For an accurate biological benchmark, always wear quality over-ear or in-ear headphones.
+          Consumer smartphone speakers and cheap laptop drivers have physical diaphragms that often struggle to reproduce frequencies above 15,000 Hz accurately. In many cases, it is the speaker hardware failing to produce the sound, not your ears failing to hear it. Always use quality headphones for testing.
         </div>
       </div>
 
@@ -266,32 +274,36 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          No. This is a wellness benchmark for high-frequency perception limits. A clinical audiologist tests hearing across specific decibel steps (dB HL) inside sound-isolated booths using calibrated bone and air transducers. If you experience persistent ringing (tinnitus) or speech muffling, consult a licensed audiologist.
+          <strong>Absolutely not.</strong> This is a casual tool for exploring high-frequency perception limits and testing audio equipment. A clinical audiologist tests hearing across specific decibel steps inside sound-isolated booths using calibrated bone and air transducers. Always consult a doctor for medical concerns.
         </div>
       </div>
     </section>
 
     <!-- Comprehensive SEO Guide -->
     <article class="seo-article">
-      <h2>The Biology of Human Hearing Loss and the Presbycusis Curve</h2>
-      <p>Have you ever watched a group of teenagers react in mild annoyance to a high-pitched ringtone that their parents or teachers completely failed to hear? You might recall the famous "Mosquito ringtone" craze of the mid-2000s, where students used 17,400Hz tones to receive text notifications during school hours without adults noticing. What seemed like a clever schoolyard trick was actually an everyday demonstration of fundamental auditory biology: <strong>Presbycusis</strong>, the gradual age-related loss of high-frequency hearing.</p>
-      <p>A healthy human child is born with the capacity to detect acoustic frequencies spanning from 20Hz (deep sub-bass rumble) all the way up to 20,000Hz (the uppermost limit of air vibration). However, unlike skin cells or hair on your scalp, the delicate auditory receptors responsible for translating mechanical vibrations into electrical nerve impulses cannot regenerate once damaged.</p>
+      <h2>The Biology of Hearing and High-Frequency Drop-off</h2>
+      <p>It's a well-known biological phenomenon that as human beings age, their ability to perceive very high acoustic frequencies gradually diminishes. This natural process is known as <strong>Presbycusis</strong>. You might recall the "Mosquito ringtone" trend, where students used 17,400Hz tones to receive notifications that older adults couldn't hear. While fun to experiment with, this highlights how our sensory biology changes over time.</p>
 
-      <h3>Inside the Cochlea: Why the Base Wears Out First</h3>
-      <p>To understand why upper treble frequencies vanish first, one must look inside the inner ear's spiral organ: the <strong>cochlea</strong>. The cochlea is lined with thousands of microscopic sensory hair cells, known as stereocilia, mapped along the basilar membrane in a precise frequency layout called <em>tonotopic organization</em>:</p>
+      <h3>Why High Frequencies Fade First</h3>
+      <p>To understand why upper treble frequencies become harder to hear, we look inside the inner ear's spiral organ: the cochlea. The cochlea is lined with microscopic sensory hair cells. The cells at the base (entrance) of the cochlea are responsible for detecting high frequencies. Because all sound waves must pass these cells first, they endure the most mechanical wear and tear over a lifetime, leading them to fatigue earlier than the cells responsible for low bass tones.</p>
+
+      <h3>General Statistical Correlations</h3>
+      <p>While genetics and environmental noise exposure create vast individual differences, general audiological statistics show certain correlations between age and high-frequency perception:</p>
       <ul>
-        <li><strong>The Basal Turn (Entrance):</strong> The base of the cochlea is tuned to detect high-frequency acoustic waves (12,000Hz to 20,000Hz). Because all sound waves—whether a jet engine, a bass drum, or a whisper—must travel through this gateway to enter the spiral, these basal hair cells absorb the brunt of mechanical stress.</li>
-        <li><strong>The Apical Turn (Deep Tip):</strong> The deep apex registers low-frequency energy (20Hz to 500Hz). Because it sits protected at the innermost end of the cochlea, bass sensitivity typically survives well into advanced old age.</li>
+        <li><strong>18,000 Hz to 20,000 Hz:</strong> Most commonly audible to teenagers and young adults under 24.</li>
+        <li><strong>15,000 Hz to 17,000 Hz:</strong> Often the upper limit for adults in their late 20s to 30s.</li>
+        <li><strong>12,000 Hz to 14,000 Hz:</strong> A typical threshold for adults over 40.</li>
+        <li><strong>Below 10,000 Hz:</strong> More common in older adults or individuals with significant cumulative noise exposure.</li>
       </ul>
 
       <h3>Checking Xiaomi Audio Settings Fidelity</h3>
-      <p>Aside from biological hearing loss, many users wonder why their music sounds muffled. Often, this tool doubles as a <strong>Xiaomi audio test</strong>. If your headphones are capable but you cannot hear high frequencies, it may be due to improper <strong>MIUI audio settings</strong>. Checking your system equalizer and ensuring that high-frequency bands aren't muted is crucial for a crisp listening experience.</p>
+      <p>Aside from checking your own perception, this tool is excellent for a <strong>Xiaomi audio test</strong>. By generating a pure, uncompressed tone, you can test if your Bluetooth earbuds or wired headphones are capable of faithfully reproducing the entire frequency spectrum. If your headphones are capable but you cannot hear high frequencies, checking your <strong>MIUI audio settings</strong> or equalizer to ensure treble bands aren't muted can improve your listening experience.</p>
     </article>
   </main>
 
   <footer>
     <p style="margin-bottom: 8px;">&copy; 2026 MiMusic.net Studio. Free browser-based DSP tools.</p>
-    <p style="font-size: 0.75rem; color: #94a3b8;">Disclaimer: MiMusic.net is an independent web utility and is not affiliated with or endorsed by Xiaomi Inc. or the official Mi Music app.</p>
+    <p style="font-size: 0.75rem; color: #94a3b8;">Disclaimer: MiMusic.net is an independent web utility and is not affiliated with or endorsed by Xiaomi Inc. or the official Mi Music app. This site does not provide medical advice.</p>
   </footer>
 
   <script>
@@ -310,13 +322,13 @@
       }
 
       if (freq >= 17500) {
-        ageEstimate.innerText = 'Biological Hearing Estimate: Teens & Under 24';
+        ageEstimate.innerText = 'General Age Correlation: Teens & Under 24';
       } else if (freq >= 15000) {
-        ageEstimate.innerText = 'Biological Hearing Estimate: Under 30 Years Old';
+        ageEstimate.innerText = 'General Age Correlation: Under 30 Years Old';
       } else if (freq >= 12000) {
-        ageEstimate.innerText = 'Biological Hearing Estimate: Under 50 Years Old';
+        ageEstimate.innerText = 'General Age Correlation: Often under 50';
       } else {
-        ageEstimate.innerText = 'Biological Hearing Estimate: 50+ Years Old';
+        ageEstimate.innerText = 'General Age Correlation: 50+ Years Old';
       }
     }
 
@@ -394,7 +406,7 @@
       const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
       
       if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Test your upper frequency and share your ear age result!</p>';
+        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.88rem; font-style: italic; padding: 10px 0;">No reviews posted yet. Test your upper frequency and share your experience!</p>';
         return;
       }
 
@@ -412,7 +424,7 @@
         `;
       }).join('');
 
-      const avg = (totalStars / stored.length).toFixed(1);
+      const avg = stored.length > 0 ? (totalStars / stored.length).toFixed(1) : "0.0";
       document.getElementById('avg-val').innerText = avg;
     }
 
