@@ -3,33 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xiaomi Volume Booster & Mi Music Amplifier Online</title>
-  <meta name="description" content="Increase volume for MIUI audio and fix quiet music files. The ultimate Mi music volume booster online with built-in distortion protection and 400% gain.">
+  <title>Mi Music Volume Booster | Amplify Audio Online Safely</title>
+  <meta name="description" content="Boost audio volume safely in your browser. A free online Mi Music utility to amplify quiet MP3s and video files without uploading to a server.">
   <style>
     :root {
-      /* MiMusic Clean Light Theme Palette (Matches Homepage) */
+      /* MiMusic Clean Light Theme Palette */
       --bg: #f8fafc;
       --card-bg: #ffffff;
       --border: #e2e8f0;
       --accent: #4f46e5;
       --accent-hover: #4338ca;
+      --danger: #ef4444;
       --text: #334155;
       --text-dark: #0f172a;
       --muted: #64748b;
-      --surface: #f1f5f9;
+      --surface: #eef2ff;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { 
       background: var(--bg); 
-      background-image: linear-gradient(180deg, #f0f4ff 0%, #f8fafc 400px); 
+      background-image: linear-gradient(180deg, #eef2ff 0%, #f8fafc 400px);
       color: var(--text); 
       min-height: 100vh; 
       display: flex; flex-direction: column; align-items: center; 
       padding: 0 16px 60px; line-height: 1.6; 
     }
-    
+
     /* Top Brand Navigation */
-    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--surface); margin-bottom: 30px; }
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); margin-bottom: 30px; }
     .brand { color: var(--text-dark); font-size: 1.25rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
     .brand span { color: var(--accent); }
     .back-home { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
@@ -39,25 +40,21 @@
     .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); text-align: center; }
     h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
     .lead { color: var(--muted); font-size: 0.95rem; font-weight: 500; margin-bottom: 24px; }
-    
+
     .dropzone { border: 2px dashed #cbd5e1; border-radius: 14px; padding: 40px 20px; cursor: pointer; transition: 0.2s; background: var(--surface); margin-bottom: 20px; }
     .dropzone:hover { border-color: var(--accent); background: #e0e7ff; }
     .dropzone-icon { font-size: 2.5rem; margin-bottom: 8px; }
     .dropzone-text { font-size: 1.05rem; color: var(--text-dark); font-weight: 700; }
     .dropzone-sub { font-size: 0.85rem; color: var(--muted); margin-top: 4px; font-weight: 500; }
 
-    /* Advanced Audio Tool Panel */
-    .control-panel { display: none; margin-top: 24px; text-align: left; background: var(--surface); padding: 24px; border-radius: 14px; border: 1px solid var(--border); }
-    .control-label { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: 700; font-size: 0.95rem; color: var(--text-dark); }
-    .control-label span { color: var(--accent); font-size: 1.2rem; font-weight: 800; }
-    input[type=range] { width: 100%; accent-color: var(--accent); height: 8px; border-radius: 4px; outline: none; background: #cbd5e1; cursor: pointer; }
+    .control-panel { display: none; margin-top: 24px; text-align: left; background: #fff; padding: 24px; border-radius: 14px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .control-label { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 700; font-size: 0.95rem; color: var(--text-dark); }
+    .control-label span { color: var(--accent); font-size: 1.15rem; font-weight: 800; }
     
-    .advanced-toggle { margin-top: 18px; border-top: 1px dashed var(--border); padding-top: 16px; }
-    .advanced-btn { background: none; border: none; color: var(--accent); font-size: 0.9rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-    .advanced-content { display: none; margin-top: 14px; padding: 16px; background: #fff; border-radius: 8px; border: 1px solid var(--border); }
-    .adv-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.9rem; color: var(--text); font-weight: 500; }
-    .adv-row:last-child { margin-bottom: 0; }
-    audio { width: 100%; margin-top: 18px; border-radius: 8px; }
+    input[type=range] { width: 100%; accent-color: var(--accent); height: 8px; border-radius: 4px; outline: none; background: #cbd5e1; cursor: pointer; margin-bottom: 24px; }
+
+    .btn { background: var(--accent); color: #fff; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.2s; width: 100%; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25); }
+    .btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
 
     /* Step-by-Step Tutorial Box */
     .tutorial-section { margin-top: 45px; }
@@ -65,29 +62,18 @@
     .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
     .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    
+    /* Added Image placeholders for steps */
+    .step-image { width: 100%; height: 120px; background-color: var(--surface); border-radius: 8px; margin-bottom: 12px; object-fit: cover; border: 1px solid var(--border); }
+    
     .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
-    .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
+    .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; line-height: 1.5; }
 
-    /* Why Choose Us */
+    /* Feature Breakdown Block */
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 40px; }
     .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; font-weight: 800; }
-    .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
-
-    /* Real Interactive Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
-    .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
-    .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
-    @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
-    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); }
-    .review-inputs select { color: #d97706; font-weight: bold; }
-    .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2); }
-    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-    .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
-    .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+    .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; line-height: 1.5; }
 
     /* Accordion FAQ */
     .faq-container { margin-bottom: 45px; }
@@ -97,7 +83,7 @@
     .faq-arrow { font-size: 0.8rem; transition: transform 0.2s; }
     .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.95rem; font-weight: 500; line-height: 1.6; border-top: 1px solid var(--surface); padding-top: 12px; }
 
-    /* SEO Article Section */
+    /* Comprehensive SEO Article */
     .seo-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: var(--text); font-size: 0.95rem; line-height: 1.7; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
     .seo-article h2 { color: var(--text-dark); font-size: 1.45rem; font-weight: 800; margin-bottom: 14px; }
     .seo-article h3 { color: var(--text-dark); font-size: 1.15rem; font-weight: 700; margin: 24px 0 10px; }
@@ -117,117 +103,76 @@
 
   <main class="container">
     <div class="tool-box">
-      <h1>Xiaomi Volume Booster & Amplifier</h1>
-      <p class="lead">Fix quiet MIUI audio files. Amplify music and video recordings up to 400% with built-in distortion protection.</p>
+      <h1>Mi Music Volume Booster</h1>
+      <p class="lead">Amplify quiet audio and video files locally in your browser. An independent utility to help boost your media volume without server uploads.</p>
 
-      <div class="dropzone" onclick="document.getElementById('file-input').click()">
+      <div class="dropzone" id="drop-box" onclick="document.getElementById('file-input').click()">
         <div class="dropzone-icon">🔊</div>
-        <div class="dropzone-text" id="file-label">Click or Drag & Drop audio/video file here</div>
-        <div class="dropzone-sub">Supports MP3, WAV, AAC, MP4, WebM, MOV (Max 500MB)</div>
-        <input type="file" id="file-input" accept="audio/*,video/*" style="display:none" onchange="loadFile(event)">
+        <div class="dropzone-text" id="file-label">Select Audio or Video File</div>
+        <div class="dropzone-sub">Processes directly in your device's memory</div>
+        <input type="file" id="file-input" accept="audio/*,video/*" style="display:none" onchange="handleFile(event)">
       </div>
 
       <div class="control-panel" id="controls">
         <div class="control-label">
-          <label>Amplification Level:</label>
-          <span id="boost-indicator">100%</span>
+          <label>Volume Gain Multiplier:</label>
+          <span id="gain-indicator">2.0x (200%)</span>
         </div>
-        <input type="range" id="boost-range" min="1" max="4" step="0.05" value="1" oninput="changeGain(this.value)">
+        <input type="range" id="gain-range" min="0.1" max="4.0" step="0.1" value="2.0" oninput="changeGain(this.value)">
         
-        <div class="advanced-toggle">
-          <button class="advanced-btn" type="button" onclick="toggleAdvanced()">
-            ⚙️ <span>Advanced Audio Controls</span>
-          </button>
-          <div class="advanced-content" id="advanced-box">
-            <div class="adv-row">
-              <label>Anti-Clipping Limiter:</label>
-              <input type="checkbox" id="limiter-toggle" checked onchange="toggleLimiter(this.checked)">
-            </div>
-            <div class="adv-row">
-              <label>Bass Roll-Off (Reduce low-end rumble):</label>
-              <input type="checkbox" id="bass-cut" onchange="toggleBassCut(this.checked)">
-            </div>
-          </div>
-        </div>
-
-        <audio id="player" controls></audio>
+        <audio id="player" controls style="width: 100%; margin-bottom: 20px; border-radius: 8px; outline: none;"></audio>
+        
+        <button class="btn" id="download-btn" onclick="exportAudio()">Export Amplified Audio</button>
       </div>
     </div>
 
-    <!-- 3-Step Tutorial -->
+    <!-- 3-Step Tutorial with Image Placeholders -->
     <section class="tutorial-section">
-      <h2 class="section-title">How to Increase Volume for Mi Music Files</h2>
+      <h2 class="section-title">How to Boost Audio Volume</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-badge">1</div>
-          <h3>Upload Media</h3>
-          <p>Select any quiet music track, podcast, or video file directly from your device storage.</p>
+          <!-- Placeholder for future screenshots -->
+          <img src="https://via.placeholder.com/400x250/eef2ff/4f46e5?text=Upload+Screen" alt="Step 1: Upload File" class="step-image">
+          <h3>Load Your File</h3>
+          <p>Tap the upload box to select a local audio or video file. The file remains on your device and is not uploaded to any server.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">2</div>
-          <h3>Adjust Gain Multiplier</h3>
-          <p>Drag the volume slider to multiply sound up to 400%. The built-in limiter ensures safety.</p>
+          <img src="https://via.placeholder.com/400x250/eef2ff/4f46e5?text=Slider+Adjustment" alt="Step 2: Adjust Gain" class="step-image">
+          <h3>Adjust the Gain</h3>
+          <p>Use the slider to increase the volume multiplier. The built-in dynamic limiter helps prevent severe audio clipping.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">3</div>
-          <h3>Listen Loud & Clear</h3>
-          <p>Press play to preview the amplified sound with zero harsh distortion or clipping.</p>
+          <img src="https://via.placeholder.com/400x250/eef2ff/4f46e5?text=Export+Button" alt="Step 3: Export Audio" class="step-image">
+          <h3>Export File</h3>
+          <p>Click export to save the amplified WAV file directly to your smartphone's local storage.</p>
         </div>
       </div>
     </section>
 
-    <!-- Why Choose Our Tool Section -->
+    <!-- Refined Claims & Features -->
     <section>
-      <h2 class="section-title">Why Use Our Online Volume Booster?</h2>
+      <h2 class="section-title">Why Use This Audio Amplifier?</h2>
       <div class="features-grid">
         <div class="feature-box">
-          <h4>🔒 100% Private & Local</h4>
-          <p>Files are decoded in your browser memory (RAM) and never uploaded to remote servers.</p>
+          <h4>🔒 Processed Locally</h4>
+          <p>Because processing occurs in your web browser, your files are never uploaded to our servers, keeping your voice notes and recordings private.</p>
         </div>
         <div class="feature-box">
-          <h4>⚡ Zero Upload Wait Time</h4>
-          <p>Extract and boost audio from heavy MP4 video files instantly without internet delays.</p>
+          <h4>🎛️ Safe Audio Limiter</h4>
+          <p>A dynamic compression node softens sudden peaks, attempting to boost volume without destroying the original sound quality.</p>
         </div>
         <div class="feature-box">
-          <h4>🛡️ Built-in Limiter</h4>
-          <p>Our Web Audio dynamics compressor catches aggressive peaks, preventing speaker damage.</p>
+          <h4>⚡ Immediate Processing</h4>
+          <p>By using your device's own CPU and RAM (via the Web Audio API), you avoid waiting in long server queues for conversions.</p>
         </div>
         <div class="feature-box">
-          <h4>📱 No App Installation</h4>
-          <p>Get studio-grade DSP functionality right in Safari or Chrome without downloading APKs.</p>
+          <h4>📱 Device Limits Apply</h4>
+          <p>There are no artificial file size limits on our end, but the maximum file size you can process depends entirely on your phone's available RAM.</p>
         </div>
       </div>
-    </section>
-
-    <!-- Real Interactive Reviews System -->
-    <section class="reviews-box">
-      <div class="reviews-header">
-        <div>
-          <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">Did this tool help fix your quiet audio files? Share your experience below</p>
-        </div>
-        <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
-          <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
-        </div>
-      </div>
-
-      <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
-        <div class="review-inputs">
-          <input type="text" id="user-name" placeholder="Your Name or Nickname" required maxlength="30">
-          <select id="user-stars">
-            <option value="5">★★★★★ (5/5)</option>
-            <option value="4">★★★★☆ (4/5)</option>
-            <option value="3">★★★☆☆ (3/5)</option>
-            <option value="2">★★☆☆☆ (2/5)</option>
-            <option value="1">★☆☆☆☆ (1/5)</option>
-          </select>
-        </div>
-        <textarea id="user-comment" placeholder="How did this tool work for your audio file? Share your real experience..." required rows="3" maxlength="400"></textarea>
-        <button type="submit" class="review-submit-btn">Post Feedback</button>
-      </form>
-
-      <div id="reviews-feed"></div>
     </section>
 
     <!-- Accordion FAQ -->
@@ -235,47 +180,49 @@
       <h2 class="section-title">Frequently Asked Questions</h2>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          How does this volume booster differ from turning up my Xiaomi phone volume?
+          Is this the official Mi Music app?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Your device's volume buttons only scale the output voltage of your hardware DAC. If the original digital file was recorded too quietly, maximizing phone volume won't be enough. Our tool mathematically multiplies the digital amplitude values within the file itself, giving you a louder baseline track suitable for any media player.
+          No. This is an independent web utility designed to complement your audio experience. It is not affiliated with Xiaomi Inc.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Will boosting the volume cause distortion or clipping?
+          Why did my browser crash when uploading a large video?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Normally, pushing digital audio beyond 0dBFS causes harsh "clipping" distortion. To prevent this, our advanced engine routes your audio through a DynamicsCompressorNode. This acts as a protective brickwall limiter, smoothly rounding off aggressive peaks while elevating the quieter sections of the track.
+          Because this tool relies on your device's memory (RAM) to decode audio, extremely large video files might exceed what your mobile browser can handle. For best results on mobile, try to use files under 100MB.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Can I boost the audio track of video files like MP4?
+          Will this permanently damage my speakers?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Yes! You can load MP4, WebM, and MOV video clips. The booster amplifies the internal audio channel while preserving the playback stream.
+          We use a dynamics compressor to reduce harsh distortion, but continually playing heavily amplified audio at maximum device volume can degrade speaker hardware over time. Please use it responsibly.
         </div>
       </div>
     </section>
 
-    <!-- Comprehensive Human-Written Guide -->
+    <!-- Comprehensive SEO Guide -->
     <article class="seo-article">
-      <h2>Understanding Digital Gain Staging and Safe Audio Amplification</h2>
-      <p>Have you ever plugged in your headphones to listen to an important voice note, downloaded lecture, or webinar recording, only to find that even at maximum device volume, the voices sound faint and muffled? You turn your smartphone or laptop sound output all the way to 100%, yet you still struggle to comprehend words over everyday room noise.</p>
-      <p>This frustrating issue stems from the fundamental difference between <em>output level</em> and <em>signal gain</em>. Standard media players like the default <strong>MIUI music app</strong> can only amplify audio up to the ceiling originally encoded in the digital file container (known as 0 dB Full Scale). If the person who recorded the media stood too far from the microphone, had low input sensitivity, or forgot to normalize the track before exporting, the recorded waveform remains trapped at a whisper.</p>
+      <h2>Understanding Audio Amplification and the Web Audio API</h2>
+      <p>Sometimes a voice note, a lecture recording, or a downloaded video is simply too quiet to hear clearly, even when your phone volume is at 100%. While the <strong>Mi Music</strong> app offers an equalizer, it cannot natively modify the core gain of the file itself. This is where an online volume booster becomes a useful companion tool.</p>
 
-      <h3>How Web-Based Digital Signal Processing Works</h3>
-      <p>Rather than requiring users to download massive audio workstations, modern browsers provide access to the high-performance Web Audio API. When you select an audio track or video clip, our booster routes the sound through an internal <code>GainNode</code> multiplier before dispatching the acoustic waves to your sound card.</p>
-      <p>This architecture allows you to scale amplitudes up to 4x (400%) in real time. Because the math executes through hardware-accelerated calculations, playback remains instantaneous with zero buffer latency.</p>
+      <h3>How In-Browser Amplification Works</h3>
+      <p>Traditional audio converter websites require you to upload your file to their servers. This uses your mobile data, takes time, and poses privacy risks. Our tool takes a different approach by utilizing HTML5 and the Web Audio API.</p>
+      <p>When you select a file, your browser decodes the media locally into raw audio data within its own memory allocation. A `GainNode` then multiplies the amplitude of the audio signal. To prevent the audio from exceeding digital limits (which causes harsh, crackling distortion known as clipping), a `DynamicsCompressorNode` acts as a safety net, gently lowering the volume of extremely loud peaks.</p>
 
-      <h3>Preventing Audio Clipping and Distortion</h3>
-      <p>When multiplying sound past its original volume ceiling, the greatest technical hazard is digital clipping—the harsh, crackling buzz that occurs when audio peaks flatten against the maximum dynamic limit. To solve this, our tool includes an optional <strong>Anti-Clipping Dynamics Limiter</strong>. The limiter automatically rounds off extreme acoustic peaks, maintaining clear, intelligible dialogue even at high amplification levels.</p>
+      <h3>Tips for Best Audio Quality</h3>
+      <ul>
+        <li><strong>Don't over-amplify:</strong> Pushing the gain slider to 4.0x on an already loud track will result in distortion. Try to find the lowest comfortable boost.</li>
+        <li><strong>Use Headphones:</strong> If a recording has a lot of background noise, boosting the volume will also boost that noise. Headphones can help isolate speech better than phone speakers.</li>
+      </ul>
     </article>
   </main>
 
@@ -285,52 +232,153 @@
   </footer>
 
   <script>
-    let actx, gainNode, sourceNode, compressor, bassFilter;
-    const player = document.getElementById('player');
-    const indicator = document.getElementById('boost-indicator');
+    let audioCtx;
+    let sourceNode;
+    let gainNode;
+    let compressorNode;
+    let audioBuffer;
 
-    function loadFile(e) {
+    const player = document.getElementById('player');
+    const gainIndicator = document.getElementById('gain-indicator');
+
+    function handleFile(e) {
       const file = e.target.files[0];
       if (!file) return;
-      document.getElementById('file-label').innerText = file.name;
-      player.src = URL.createObjectURL(file);
+      
+      document.getElementById('file-label').innerText = "Processing: " + file.name;
       document.getElementById('controls').style.display = 'block';
 
-      if (!actx) {
-        actx = new (window.AudioContext || window.webkitAudioContext)();
-        gainNode = actx.createGain();
-        compressor = actx.createDynamicsCompressor();
-        bassFilter = actx.createBiquadFilter();
+      const fileURL = URL.createObjectURL(file);
+      player.src = fileURL;
 
-        bassFilter.type = 'highpass';
-        bassFilter.frequency.value = 20;
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        if(!audioCtx) {
+           audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        audioCtx.decodeAudioData(ev.target.result, function(buffer) {
+          audioBuffer = buffer;
+          document.getElementById('file-label').innerText = file.name + " (Ready)";
+          setupLivePreview(fileURL);
+        });
+      };
+      reader.readAsArrayBuffer(file);
+    }
 
-        sourceNode = actx.createMediaElementSource(player);
-        sourceNode.connect(bassFilter);
-        bassFilter.connect(gainNode);
-        gainNode.connect(compressor);
-        compressor.connect(actx.destination);
-      }
+    function setupLivePreview(fileURL) {
+      if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      
+      if(sourceNode) sourceNode.disconnect();
+      if(gainNode) gainNode.disconnect();
+      if(compressorNode) compressorNode.disconnect();
+
+      sourceNode = audioCtx.createMediaElementSource(player);
+      gainNode = audioCtx.createGain();
+      compressorNode = audioCtx.createDynamicsCompressor();
+
+      compressorNode.threshold.setValueAtTime(-3, audioCtx.currentTime);
+      compressorNode.knee.setValueAtTime(10, audioCtx.currentTime);
+      compressorNode.ratio.setValueAtTime(10, audioCtx.currentTime);
+      compressorNode.attack.setValueAtTime(0.005, audioCtx.currentTime);
+      compressorNode.release.setValueAtTime(0.1, audioCtx.currentTime);
+
+      const currentGain = document.getElementById('gain-range').value;
+      gainNode.gain.value = currentGain;
+
+      sourceNode.connect(gainNode);
+      gainNode.connect(compressorNode);
+      compressorNode.connect(audioCtx.destination);
     }
 
     function changeGain(val) {
-      indicator.innerText = Math.round(val * 100) + '%';
-      if (gainNode) gainNode.gain.value = parseFloat(val);
+      gainIndicator.innerText = `${val}x (${Math.round(val * 100)}%)`;
+      if (gainNode) {
+        gainNode.gain.value = val;
+      }
     }
 
-    function toggleAdvanced() {
-      const box = document.getElementById('advanced-box');
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    async function exportAudio() {
+      if (!audioBuffer) return alert("Please wait for the file to finish decoding.");
+      
+      const btn = document.getElementById('download-btn');
+      btn.innerText = 'Rendering Audio...';
+      btn.style.opacity = '0.7';
+
+      const offlineCtx = new OfflineAudioContext(
+        audioBuffer.numberOfChannels,
+        audioBuffer.length,
+        audioBuffer.sampleRate
+      );
+
+      const source = offlineCtx.createBufferSource();
+      source.buffer = audioBuffer;
+
+      const exportGain = offlineCtx.createGain();
+      exportGain.gain.value = document.getElementById('gain-range').value;
+
+      const exportComp = offlineCtx.createDynamicsCompressor();
+      exportComp.threshold.setValueAtTime(-3, offlineCtx.currentTime);
+      exportComp.knee.setValueAtTime(10, offlineCtx.currentTime);
+      exportComp.ratio.setValueAtTime(10, offlineCtx.currentTime);
+      exportComp.attack.setValueAtTime(0.005, offlineCtx.currentTime);
+      exportComp.release.setValueAtTime(0.1, offlineCtx.currentTime);
+
+      source.connect(exportGain);
+      exportGain.connect(exportComp);
+      exportComp.connect(offlineCtx.destination);
+      source.start();
+
+      const renderedBuffer = await offlineCtx.startRendering();
+      const wavData = audioBufferToWav(renderedBuffer);
+      const blob = new Blob([new DataView(wavData)], { type: 'audio/wav' });
+      const url = window.URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'MiMusic-Boosted.wav';
+      a.click();
+      window.URL.revokeObjectURL(url);
+      
+      btn.innerText = 'Export Amplified Audio';
+      btn.style.opacity = '1';
     }
 
-    function toggleLimiter(enabled) {
-      if (!compressor) return;
-      compressor.threshold.value = enabled ? -6 : 0;
-    }
+    function audioBufferToWav(buffer) {
+      let numOfChan = buffer.numberOfChannels,
+          length = buffer.length * numOfChan * 2 + 44,
+          bufferData = new ArrayBuffer(length),
+          view = new DataView(bufferData),
+          channels = [], i, sample, offset = 0, pos = 0;
 
-    function toggleBassCut(enabled) {
-      if (!bassFilter) return;
-      bassFilter.frequency.value = enabled ? 120 : 20;
+      setUint32(0x46464952);
+      setUint32(length - 8);
+      setUint32(0x45564157);
+      setUint32(0x20746d66);
+      setUint32(16);
+      setUint16(1);
+      setUint16(numOfChan);
+      setUint32(buffer.sampleRate);
+      setUint32(buffer.sampleRate * 2 * numOfChan);
+      setUint16(numOfChan * 2);
+      setUint16(16);
+      setUint32(0x61746164);
+      setUint32(length - pos - 4);
+
+      for(i = 0; i < buffer.numberOfChannels; i++) channels.push(buffer.getChannelData(i));
+
+      while(pos < length) {
+        for(i = 0; i < numOfChan; i++) {
+          sample = Math.max(-1, Math.min(1, channels[i][offset]));
+          sample = (0.5 + sample < 0 ? sample * 32768 : sample * 32767) | 0;
+          view.setInt16(pos, sample, true);
+          pos += 2;
+        }
+        offset++;
+      }
+      return bufferData;
+
+      function setUint16(data) { view.setUint16(pos, data, true); pos += 2; }
+      function setUint32(data) { view.setUint32(pos, data, true); pos += 4; }
     }
 
     function toggleFaq(btn) {
@@ -340,60 +388,6 @@
       answer.style.display = isOpen ? 'none' : 'block';
       arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
     }
-
-    /* Real Interactive Reviews Engine (LocalStorage) */
-    const STORAGE_KEY = 'user_reviews_volumebooster';
-
-    function loadReviews() {
-      const feed = document.getElementById('reviews-feed');
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      
-      if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Test this tool and be the first to share your experience!</p>';
-        return;
-      }
-
-      let totalStars = 0;
-      feed.innerHTML = stored.map(r => {
-        totalStars += r.rating;
-        return `
-          <div class="review-entry">
-            <div class="review-entry-header">
-              <strong style="color: var(--text-dark); font-size: 0.95rem; font-weight: 700;">${escapeHtml(r.name)}</strong>
-              <span style="color: #f59e0b; font-size: 0.9rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
-            </div>
-            <p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; line-height: 1.6;">${escapeHtml(r.comment)}</p>
-          </div>
-        `;
-      }).join('');
-
-      const avg = (totalStars / stored.length).toFixed(1);
-      document.getElementById('avg-val').innerText = avg;
-    }
-
-    function submitReview(e) {
-      e.preventDefault();
-      const name = document.getElementById('user-name').value.trim();
-      const rating = parseInt(document.getElementById('user-stars').value);
-      const comment = document.getElementById('user-comment').value.trim();
-
-      if (!name || !comment) return;
-
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      stored.unshift({ name, rating, comment, time: Date.now() });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-
-      document.getElementById('review-form').reset();
-      loadReviews();
-    }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.innerText = text;
-      return div.innerHTML;
-    }
-
-    window.addEventListener('DOMContentLoaded', loadReviews);
   </script>
 </body>
 </html>
