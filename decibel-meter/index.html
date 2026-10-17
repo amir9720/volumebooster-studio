@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Xiaomi Sound Meter | Live Decibel Tester Online</title>
-  <meta name="description" content="Accurate browser-based sound level meter (dB SPL). Test Xiaomi speaker loudness and ambient noise. The safest Mi music volume test with 100% microphone privacy.">
+  <meta name="description" content="Browser-based sound level meter (dB SPL). Test ambient noise or speaker loudness online. A helpful volume test operating locally on your device.">
   <style>
     :root {
       /* MiMusic Clean Light Theme Palette */
@@ -70,6 +70,10 @@
     .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
     .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    
+    /* Added Image placeholders for steps */
+    .step-image { width: 100%; height: 120px; background-color: var(--surface); border-radius: 8px; margin-bottom: 12px; object-fit: cover; border: 1px solid var(--border); }
+
     .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
     .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
@@ -78,21 +82,6 @@
     .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
     .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
-
-    /* Interactive Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
-    .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
-    .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
-    @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
-    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.2); }
-    .review-inputs select { color: #d97706; font-weight: bold; }
-    .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; box-shadow: 0 2px 4px rgba(236, 72, 153, 0.2); }
-    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-    .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
-    .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 
     /* Accordion FAQ */
     .faq-container { margin-bottom: 45px; }
@@ -123,7 +112,7 @@
   <main class="container">
     <div class="tool-box">
       <h1>Online Decibel & Sound Meter</h1>
-      <p class="lead">Measure ambient noise and test Xiaomi speaker loudness instantly using your device microphone with zero software installation.</p>
+      <p class="lead">Measure ambient noise and estimate speaker loudness using your device's microphone without installing dedicated software.</p>
 
       <div class="meter-circle" id="meter-circle">
         <div class="db-value" id="db-reading">0</div>
@@ -161,80 +150,52 @@
       </div>
     </div>
 
-    <!-- 3-Step Tutorial -->
+    <!-- 3-Step Tutorial with Images -->
     <section class="tutorial-section">
       <h2 class="section-title">How to Measure Audio Levels</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-badge">1</div>
+          <img src="https://via.placeholder.com/400x250/fdf2f8/ec4899?text=Allow+Mic+Access" alt="Step 1: Allow Mic" class="step-image">
           <h3>Allow Mic Access</h3>
-          <p>Click start and permit your browser to listen to raw ambient sound levels safely.</p>
+          <p>Click start and permit your browser to use the microphone for sampling ambient sound levels.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">2</div>
+          <img src="https://via.placeholder.com/400x250/fdf2f8/ec4899?text=Position+Device" alt="Step 2: Position Device" class="step-image">
           <h3>Position Device</h3>
-          <p>Keep your phone or laptop stationary, away from airflow vents or direct breathing.</p>
+          <p>Keep your phone or laptop stationary, away from airflow vents or direct breathing for a cleaner reading.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">3</div>
+          <img src="https://via.placeholder.com/400x250/fdf2f8/ec4899?text=Observe+Reading" alt="Step 3: Observe Reading" class="step-image">
           <h3>Observe Live Reading</h3>
-          <p>Monitor real-time acoustic loudness and benchmark your speakers against health standards.</p>
+          <p>Monitor real-time acoustic estimates to benchmark your environment's noise level.</p>
         </div>
       </div>
     </section>
 
     <!-- Why Choose Our Tool Section -->
     <section>
-      <h2 class="section-title">Why Use Our In-Browser Xiaomi Sound Meter?</h2>
+      <h2 class="section-title">Features of the In-Browser Sound Meter</h2>
       <div class="features-grid">
         <div class="feature-box">
-          <h4>🔒 Total Privacy Guarantee</h4>
-          <p>Raw acoustic signals are evaluated in device memory. Zero voice clips are saved or streamed.</p>
+          <h4>🔒 Privacy Focused</h4>
+          <p>Raw acoustic signals are evaluated locally in your device's memory. No voice clips are saved or transmitted.</p>
         </div>
         <div class="feature-box">
-          <h4>⚙️ Hardware Offset Calibration</h4>
-          <p>Fine-tune gain offsets to align with certified reference sound level meters.</p>
+          <h4>⚙️ Offset Calibration</h4>
+          <p>Fine-tune gain offsets manually if you need to align the tool with a certified reference sound level meter.</p>
         </div>
         <div class="feature-box">
-          <h4>📊 Root-Mean-Square (RMS) Engine</h4>
-          <p>High-resolution FFT algorithms calculate authentic physical sound pressure energy.</p>
+          <h4>📊 Root-Mean-Square (RMS)</h4>
+          <p>Uses Fast Fourier Transform (FFT) logic to approximate physical sound pressure energy.</p>
         </div>
         <div class="feature-box">
-          <h4>⚡ Instant No-App Access</h4>
-          <p>Works immediately across iOS Safari and Android Chrome without permissions bloating.</p>
+          <h4>⚡ Instant Access</h4>
+          <p>Works across modern browsers without requiring dedicated app installations or extra permissions.</p>
         </div>
       </div>
-    </section>
-
-    <!-- Interactive Reviews System -->
-    <section class="reviews-box">
-      <div class="reviews-header">
-        <div>
-          <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">How accurate was this sound meter for your room? Leave your feedback below</p>
-        </div>
-        <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
-          <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
-        </div>
-      </div>
-
-      <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
-        <div class="review-inputs">
-          <input type="text" id="user-name" placeholder="Your Name or Nickname" required maxlength="30">
-          <select id="user-stars">
-            <option value="5">★★★★★ (5/5)</option>
-            <option value="4">★★★★☆ (4/5)</option>
-            <option value="3">★★★☆☆ (3/5)</option>
-            <option value="2">★★☆☆☆ (2/5)</option>
-            <option value="1">★☆☆☆☆ (1/5)</option>
-          </select>
-        </div>
-        <textarea id="user-comment" placeholder="What environment did you measure (studio, office, street)? Share your experience..." required rows="3" maxlength="400"></textarea>
-        <button type="submit" class="review-submit-btn">Post Feedback</button>
-      </form>
-
-      <div id="reviews-feed"></div>
     </section>
 
     <!-- Accordion FAQ -->
@@ -242,21 +203,21 @@
       <h2 class="section-title">Frequently Asked Questions</h2>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Is this tool a reliable Mi music volume test?
+          Is this tool useful for a volume test?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Yes. If you want to benchmark the output power of your speakers, you can play a track and use this meter on a secondary device to monitor the peak decibels (dB SPL). Note that smartphone microphones are most accurate for mid-range vocal frequencies.
+          Yes. If you want to estimate the output power of your speakers, you can play a track and use this meter on a secondary device to monitor the peak decibels. Keep in mind that smartphone microphones are most accurate for mid-range frequencies.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Is any of my ambient speech recorded or stored on remote servers?
+          Is my ambient speech recorded or stored?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Absolutely not. The Web Audio API processes sound waves strictly within your device's volatile memory (RAM). The browser calculates mathematical amplitude levels and instantly discards the raw audio data. No speech is ever saved, analyzed for content, or transmitted.
+          No. The Web Audio API processes sound waves strictly within your device's memory (RAM). The browser calculates amplitude levels and discards the raw audio data instantly. No audio is saved or transmitted.
         </div>
       </div>
 
@@ -266,35 +227,34 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Dedicated Type 1 sound meters use factory-calibrated microphones costing hundreds of dollars. Smartphone microphones are optimized primarily for vocal frequency bands. However, for everyday comparative noise checks, modern phones offer reliable approximations typically within 3 to 5 dB of dedicated hardware.
+          Dedicated sound meters use factory-calibrated microphones. Smartphone microphones are optimized primarily for vocal frequency bands. However, for general comparative noise checks, modern phones offer reliable approximations, often within a few decibels of dedicated hardware.
         </div>
       </div>
     </section>
 
     <!-- Comprehensive SEO Guide -->
     <article class="seo-article">
-      <h2>The Science of Sound Pressure and Measuring Environmental Loudness</h2>
-      <p>Noise is invisible, omnipresent, and easy to underestimate. Whether you are testing <strong>Xiaomi speaker loudness</strong>, checking if your home office is quiet enough for recording, or confirming whether a nursery is peaceful, guessing how loud a room is by ear is unreliable. The human brain naturally adapts to ongoing background hums—a biological survival mechanism known as auditory sensory adaptation.</p>
-      <p>Acoustic sound pressure level (SPL) is quantified in <strong>decibels (dB)</strong>, a logarithmic unit of measurement. Every increase of 10 dB represents a tenfold increase in physical acoustic wave power and roughly a doubling in perceived loudness.</p>
+      <h2>Understanding Sound Pressure and Environmental Loudness</h2>
+      <p>Noise is omnipresent and easy to underestimate. Whether you are estimating speaker loudness, checking if your home office is quiet enough for recording, or confirming whether a room is peaceful, guessing how loud a space is by ear can be unreliable due to our brain's natural auditory adaptation.</p>
+      <p>Acoustic sound pressure level (SPL) is quantified in <strong>decibels (dB)</strong>, a logarithmic unit of measurement. An increase of 10 dB represents a tenfold increase in acoustic power and roughly a doubling in perceived loudness.</p>
 
-      <h3>Everyday Decibel Benchmarks for Acoustic Reference</h3>
+      <h3>Everyday Decibel Benchmarks</h3>
       <ul>
-        <li><strong>20–30 dB SPL:</strong> Serene bedroom at night, gentle leaf rustle, or an empty library. Ideal for deep REM sleep.</li>
-        <li><strong>40–50 dB SPL:</strong> Moderate residential ambience or soft background rainfall. Excellent baseline for work.</li>
-        <li><strong>60–70 dB SPL:</strong> Standard indoor human conversation or a modern dishwasher cycle.</li>
-        <li><strong>80–85 dB SPL:</strong> Busy metropolitan street intersection or heavy traffic. Prolonged exposure begins to trigger occupational hearing risk.</li>
-        <li><strong>100+ dB SPL:</strong> Live sporting arenas, subway train braking, and power tools. Hearing protection is strongly recommended.</li>
+        <li><strong>20–30 dB SPL:</strong> Serene bedroom at night or an empty library. Ideal for sleep.</li>
+        <li><strong>40–50 dB SPL:</strong> Moderate residential ambience or soft background rainfall.</li>
+        <li><strong>60–70 dB SPL:</strong> Standard indoor human conversation.</li>
+        <li><strong>80–85 dB SPL:</strong> Busy street traffic. Prolonged exposure begins to present risks.</li>
+        <li><strong>100+ dB SPL:</strong> Live sporting events and power tools. Hearing protection is recommended.</li>
       </ul>
 
-      <h3>How the Xiaomi Sound Meter Captures Decibel Data</h3>
-      <p>Conventional smartphone sound meter apps often ask for excessive phone permissions, run persistent background tracking, and consume device resources with intrusive video advertisements. This utility takes a radically different engineering approach.</p>
-      <p>When you click start, the browser opens an isolated local audio channel. The signal passes into an <code>AnalyserNode</code>, which conducts real-time Fast Fourier Transform (FFT) analysis. By taking the Root Mean Square (RMS) of the incoming electrical voltage samples, the software calculates instant acoustic decibels directly on your device processor. Not a single sound byte is ever transmitted across an external internet cable.</p>
+      <h3>How Browser-Based Sound Meters Work</h3>
+      <p>When you grant microphone access, the browser opens an isolated local audio channel. The signal passes into an <code>AnalyserNode</code>, which conducts Fast Fourier Transform (FFT) analysis. By taking the Root Mean Square (RMS) of the incoming samples, the software calculates acoustic decibel estimates directly on your device processor, keeping your audio data private.</p>
     </article>
   </main>
 
   <footer>
     <p style="margin-bottom: 8px;">&copy; 2026 MiMusic.net Studio. Free browser-based DSP tools.</p>
-    <p style="font-size: 0.75rem; color: #94a3b8;">Disclaimer: MiMusic.net is an independent web utility and is not affiliated with or endorsed by Xiaomi Inc. or the official Mi Music app.</p>
+    <p style="font-size: 0.75rem; color: #94a3b8;">Disclaimer: MiMusic.net is an independent web utility and is not affiliated with or endorsed by Xiaomi Inc. or the official Mi Music app. This tool provides estimates and should not replace certified professional acoustic measurement equipment.</p>
   </footer>
 
   <script>
@@ -371,13 +331,13 @@
       }
 
       if (db < 40) {
-        ratingDesc.innerHTML = 'Environment: <strong style="color:#10b981">Whisper Quiet (Serene & Relaxing)</strong>';
+        ratingDesc.innerHTML = 'Environment: <strong style="color:#10b981">Whisper Quiet (Serene)</strong>';
       } else if (db < 65) {
-        ratingDesc.innerHTML = 'Environment: <strong style="color:#3b82f6">Moderate (Standard Indoor Conversation)</strong>';
+        ratingDesc.innerHTML = 'Environment: <strong style="color:#3b82f6">Moderate (Standard Conversation)</strong>';
       } else if (db < 80) {
-        ratingDesc.innerHTML = 'Environment: <strong style="color:#f59e0b">Loud (Appliances / Busy Street Traffic)</strong>';
+        ratingDesc.innerHTML = 'Environment: <strong style="color:#f59e0b">Loud (Busy Traffic)</strong>';
       } else {
-        ratingDesc.innerHTML = 'Environment: <strong style="color:#ef4444">Very Loud (Risk of Hearing Fatigue)</strong>';
+        ratingDesc.innerHTML = 'Environment: <strong style="color:#ef4444">Very Loud (Use Caution)</strong>';
       }
 
       if (isMeasuring) animFrame = requestAnimationFrame(renderLoop);
@@ -395,60 +355,6 @@
       answer.style.display = isOpen ? 'none' : 'block';
       arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
     }
-
-    /* Real Interactive Reviews Engine (LocalStorage) */
-    const STORAGE_KEY = 'user_reviews_decibelmeter';
-
-    function loadReviews() {
-      const feed = document.getElementById('reviews-feed');
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      
-      if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Test your room noise and share your results!</p>';
-        return;
-      }
-
-      let totalStars = 0;
-      feed.innerHTML = stored.map(r => {
-        totalStars += r.rating;
-        return `
-          <div class="review-entry">
-            <div class="review-entry-header">
-              <strong style="color: var(--text-dark); font-size: 0.95rem; font-weight: 700;">${escapeHtml(r.name)}</strong>
-              <span style="color: #f59e0b; font-size: 0.9rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
-            </div>
-            <p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; line-height: 1.6;">${escapeHtml(r.comment)}</p>
-          </div>
-        `;
-      }).join('');
-
-      const avg = (totalStars / stored.length).toFixed(1);
-      document.getElementById('avg-val').innerText = avg;
-    }
-
-    function submitReview(e) {
-      e.preventDefault();
-      const name = document.getElementById('user-name').value.trim();
-      const rating = parseInt(document.getElementById('user-stars').value);
-      const comment = document.getElementById('user-comment').value.trim();
-
-      if (!name || !comment) return;
-
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      stored.unshift({ name, rating, comment, time: Date.now() });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-
-      document.getElementById('review-form').reset();
-      loadReviews();
-    }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.innerText = text;
-      return div.innerHTML;
-    }
-
-    window.addEventListener('DOMContentLoaded', loadReviews);
   </script>
 </body>
 </html>
