@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Music Audio Extractor | Convert Video to Audio Free</title>
-  <meta name="description" content="Extract uncompressed audio tracks from MP4 and MOV videos. The fastest Xiaomi audio extractor tool for Mi music files, with zero server uploads required.">
+  <meta name="description" content="Extract uncompressed audio tracks from MP4 and MOV videos. A fast local audio extractor tool for Mi music files, processing entirely in your browser.">
   <style>
     :root {
       /* MiMusic Clean Light Theme Palette */
@@ -67,6 +67,10 @@
     .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
     .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    
+    /* Added Image placeholders for steps */
+    .step-image { width: 100%; height: 120px; background-color: var(--surface); border-radius: 8px; margin-bottom: 12px; object-fit: cover; border: 1px solid var(--border); }
+
     .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
     .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
@@ -75,21 +79,6 @@
     .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
     .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
-
-    /* Interactive Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
-    .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
-    .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
-    @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
-    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); }
-    .review-inputs select { color: #d97706; font-weight: bold; }
-    .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2); }
-    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-    .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
-    .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 
     /* Accordion FAQ */
     .faq-container { margin-bottom: 45px; }
@@ -119,13 +108,13 @@
 
   <main class="container">
     <div class="tool-box">
-      <h1>Mi Music Audio Extractor (Video to WAV)</h1>
-      <p class="lead">Extract uncompressed high-fidelity audio streams directly from Xiaomi videos and MP4 files without uploading to external servers.</p>
+      <h1>Audio Extractor (Video to WAV)</h1>
+      <p class="lead">Extract audio streams directly from videos and MP4 files locally. Process files in your browser without uploading to external servers.</p>
 
       <div class="dropzone" onclick="document.getElementById('file-input').click()">
         <div class="dropzone-icon">🎬</div>
         <div class="dropzone-text" id="file-label">Select or drop video file here (MP4, WebM, MOV)</div>
-        <div class="dropzone-sub">Runs completely inside browser memory — no bandwidth consumption</div>
+        <div class="dropzone-sub">Runs securely inside device memory</div>
         <input type="file" id="file-input" accept="video/*" style="display:none" onchange="handleVideo(event)">
       </div>
 
@@ -144,8 +133,8 @@
           <div class="adv-row">
             <label>Output Sample Rate:</label>
             <select id="sample-rate-select">
-              <option value="44100" selected>44.1 kHz (CD / Music Standard)</option>
-              <option value="48000">48.0 kHz (Broadcast Video Standard)</option>
+              <option value="44100" selected>44.1 kHz (CD Standard)</option>
+              <option value="48000">48.0 kHz (Video Standard)</option>
             </select>
           </div>
         </div>
@@ -155,80 +144,52 @@
       <div class="status-box" id="status-log"></div>
     </div>
 
-    <!-- 3-Step Tutorial -->
+    <!-- 3-Step Tutorial with Images -->
     <section class="tutorial-section">
       <h2 class="section-title">How to Extract Audio from Video Files</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-badge">1</div>
+          <img src="https://via.placeholder.com/400x250/eef2ff/4f46e5?text=Select+Video" alt="Step 1: Select Video" class="step-image">
           <h3>Select Video File</h3>
-          <p>Drag and drop your MP4, MOV, or WebM recording straight into the upload container.</p>
+          <p>Tap the upload box to select an MP4, MOV, or WebM recording from your device storage.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">2</div>
+          <img src="https://via.placeholder.com/400x250/eef2ff/4f46e5?text=Configure" alt="Step 2: Configure Settings" class="step-image">
           <h3>Configure Settings</h3>
-          <p>Leave default settings for full studio fidelity or tune channel modes in advanced options.</p>
+          <p>Leave default settings for full stereo fidelity or adjust channel modes in advanced options.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">3</div>
+          <img src="https://via.placeholder.com/400x250/eef2ff/4f46e5?text=Save+Audio" alt="Step 3: Save Audio" class="step-image">
           <h3>Save Audio Track</h3>
-          <p>Click extract to render and download your pristine uncompressed WAV file instantly.</p>
+          <p>Click extract to render the track locally and download your uncompressed WAV file.</p>
         </div>
       </div>
     </section>
 
     <!-- Why Choose Our Tool Section -->
     <section>
-      <h2 class="section-title">Why Use the Mi Music Audio Extractor?</h2>
+      <h2 class="section-title">Features of the Local Audio Extractor</h2>
       <div class="features-grid">
         <div class="feature-box">
-          <h4>🛡️ Zero Cloud Uploads</h4>
-          <p>Your video never travels over the web. Demuxing happens entirely in device memory.</p>
+          <h4>🛡️ Local Processing</h4>
+          <p>Your video never travels over the web. Demuxing happens entirely in your device's browser memory.</p>
         </div>
         <div class="feature-box">
-          <h4>🚀 Blazing Rendering Speed</h4>
-          <p>No waiting in server queues or uploading massive multi-gigabyte video files.</p>
+          <h4>🚀 Fast Local Rendering</h4>
+          <p>Avoid waiting in server upload queues. Extraction speed relies directly on your device's CPU.</p>
         </div>
         <div class="feature-box">
-          <h4>🎧 Uncompressed Quality</h4>
-          <p>Direct PCM waveform extraction preserves full dynamic range without double-compression loss.</p>
+          <h4>🎧 Uncompressed Export</h4>
+          <p>Direct PCM waveform extraction creates a WAV file, preventing the double-compression loss common with online MP3 converters.</p>
         </div>
         <div class="feature-box">
           <h4>📶 No Data Usage</h4>
-          <p>Extracts hours of footage without consuming your precious cellular data plan.</p>
+          <p>Extract audio from your local videos without consuming your cellular data plan.</p>
         </div>
       </div>
-    </section>
-
-    <!-- Real Interactive Reviews System -->
-    <section class="reviews-box">
-      <div class="reviews-header">
-        <div>
-          <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">Leave your real feedback or report extraction issues below</p>
-        </div>
-        <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
-          <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
-        </div>
-      </div>
-
-      <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
-        <div class="review-inputs">
-          <input type="text" id="user-name" placeholder="Your Name or Nickname" required maxlength="30">
-          <select id="user-stars">
-            <option value="5">★★★★★ (5/5)</option>
-            <option value="4">★★★★☆ (4/5)</option>
-            <option value="3">★★★☆☆ (3/5)</option>
-            <option value="2">★★☆☆☆ (2/5)</option>
-            <option value="1">★☆☆☆☆ (1/5)</option>
-          </select>
-        </div>
-        <textarea id="user-comment" placeholder="How did the video-to-audio extraction work for your clip? Share your feedback..." required rows="3" maxlength="400"></textarea>
-        <button type="submit" class="review-submit-btn">Post Feedback</button>
-      </form>
-
-      <div id="reviews-feed"></div>
     </section>
 
     <!-- Accordion FAQ -->
@@ -236,52 +197,44 @@
       <h2 class="section-title">Frequently Asked Questions</h2>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Is this tool a Xiaomi audio extractor alternative?
+          Is this tool a Mi Music audio extractor alternative?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Yes. If you don't want to rely on the default Mi Music converter or third-party apps, our browser-based audio extractor provides a secure, locally-processed alternative without requiring you to install unknown software.
+          Yes. If you prefer not to use third-party apps to extract audio, our browser-based utility provides a secure, locally-processed alternative without requiring software installation.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Why is browser-based conversion faster than cloud converters?
+          Why did the browser freeze on a large video?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Cloud converter platforms require you to upload the entire video container—including heavy 1080p or 4K pixel frames—across the internet before they can strip the audio. Our browser tool reads the video locally using native hardware decoders, ignoring unnecessary video frames and extracting the audio track straight from local storage.
+          Because files are processed in local memory, your device's available RAM limits the maximum file size you can handle. Very large 4K video files may cause mobile browsers to run out of memory. Try processing smaller clips for optimal performance.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Is there any limit on video file size?
+          Why is the output file a WAV instead of MP3?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Because files are never uploaded to remote hosting servers, there is no arbitrary file size limit. As long as your device has sufficient RAM to open the video container, you can process files of any length.
+          WAV files are uncompressed. By exporting to WAV via the Web Audio API, we ensure no further audio degradation occurs during the extraction process, preserving the original sound quality of the video file.
         </div>
       </div>
     </section>
 
-    <!-- Expert Human-Written SEO Guide -->
+    <!-- Comprehensive SEO Guide -->
     <article class="seo-article">
       <h2>The Engineering Behind Video Demuxing and Audio Extraction</h2>
-      <p>Almost everyone working in digital media eventually encounters the need to strip an audio track out of a video recording. You might have recorded a four-hour company town hall, an academic thesis presentation, or an impromptu smartphone interview, and you only need the vocal dialogue to share with colleagues or feed into your <strong>Mi Music</strong> playlists. Yet, storing, sending, or backing up multi-gigabyte video files just to access sound is clumsy and wasteful.</p>
-      <p>In standard video containers like MP4, MOV, or MKV, video and audio streams are interleaved together in binary packets along with timing metadata. To extract the sound cleanly, software must perform <em>demuxing</em>: dissecting the container package, discarding visual data, and decoding the compressed audio stream (typically AAC or Opus) into raw, editable audio waveforms.</p>
+      <p>Almost everyone working in digital media eventually encounters the need to strip an audio track out of a video recording. You might have recorded a company town hall, a thesis presentation, or a smartphone interview, and you only need the dialogue to share or feed into your <strong>Mi Music</strong> playlists. Storing or sending multi-gigabyte video files just to access sound is clumsy and wasteful.</p>
+      <p>In standard video containers like MP4, MOV, or WebM, video and audio streams are interleaved together in binary packets. To extract the sound cleanly, software must perform <em>demuxing</em>: dissecting the container package, discarding visual data, and decoding the audio stream into raw, editable audio waveforms.</p>
 
-      <h3>The Pitfalls of Legacy Online Converters vs. Our Mi Music Audio Extractor</h3>
-      <p>For over a decade, the standard way people converted video to audio was by using ad-cluttered converter websites. Unfortunately, traditional cloud converters carry major drawbacks:</p>
-      <ul>
-        <li><strong>Enormous Bandwidth Waste:</strong> If you have a 2GB 4K video clip, you have to upload all 2,000 megabytes of visual frames across your network just to retrieve a 30MB audio track.</li>
-        <li><strong>Privacy Risks:</strong> Sending proprietary webinars or private family recordings across third-party cloud servers exposes your personal media to third-party databases.</li>
-        <li><strong>Generation Loss:</strong> Many cloud tools re-encode already compressed audio into poor-quality 128kbps MP3s, adding audible artifacts.</li>
-      </ul>
-
-      <h3>How Client-Side Extraction Resolves These Problems</h3>
-      <p>Our browser-based extractor uses the modern Web Audio API and hardware-accelerated media decoders built directly into modern browser rendering engines. When you select a video file, it reads the binary blob directly from device storage into temporary RAM buffers.</p>
-      <p>The audio channel is decoded through an offline computational context, resampled to your requested sample rate (44.1kHz or 48kHz), and formatted into a clean, uncompressed 16-bit Linear PCM WAV container. Not a single byte of your video ever touches an external network cable, delivering maximum speed and absolute privacy.</p>
+      <h3>Client-Side Extraction vs Cloud Converters</h3>
+      <p>For over a decade, the standard way to convert video to audio involved ad-supported cloud websites. However, uploading a 2GB 4K video clip across your network just to retrieve a 30MB audio track wastes massive amounts of bandwidth. Furthermore, uploading personal videos to third-party servers introduces privacy concerns.</p>
+      <p>Our browser-based extractor resolves this by utilizing the Web Audio API. When you select a video file, it reads the binary data directly from local storage into temporary RAM. The audio channel is decoded locally, resampled to your requested rate (44.1kHz or 48kHz), and formatted into a clean WAV container. Not a single byte of your video ever touches an external network, ensuring your media remains private.</p>
     </article>
   </main>
 
@@ -342,7 +295,7 @@
         statusBox.innerText = 'Extraction complete! Your uncompressed audio file has been downloaded.';
         convertBtn.disabled = false;
       } catch (err) {
-        statusBox.innerText = 'Error decoding video track. Make sure the file contains an active audio stream.';
+        statusBox.innerText = 'Error decoding video track. The file may be too large for browser memory, or the audio format is unsupported.';
         convertBtn.disabled = false;
       }
     }
@@ -378,60 +331,6 @@
       answer.style.display = isOpen ? 'none' : 'block';
       arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
     }
-
-    /* Real Interactive Reviews Engine (LocalStorage) */
-    const STORAGE_KEY = 'user_reviews_videotoaudio';
-
-    function loadReviews() {
-      const feed = document.getElementById('reviews-feed');
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      
-      if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Test this tool and be the first to share your experience!</p>';
-        return;
-      }
-
-      let totalStars = 0;
-      feed.innerHTML = stored.map(r => {
-        totalStars += r.rating;
-        return `
-          <div class="review-entry">
-            <div class="review-entry-header">
-              <strong style="color: var(--text-dark); font-size: 0.95rem; font-weight: 700;">${escapeHtml(r.name)}</strong>
-              <span style="color: #f59e0b; font-size: 0.9rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
-            </div>
-            <p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; line-height: 1.6;">${escapeHtml(r.comment)}</p>
-          </div>
-        `;
-      }).join('');
-
-      const avg = (totalStars / stored.length).toFixed(1);
-      document.getElementById('avg-val').innerText = avg;
-    }
-
-    function submitReview(e) {
-      e.preventDefault();
-      const name = document.getElementById('user-name').value.trim();
-      const rating = parseInt(document.getElementById('user-stars').value);
-      const comment = document.getElementById('user-comment').value.trim();
-
-      if (!name || !comment) return;
-
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      stored.unshift({ name, rating, comment, time: Date.now() });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-
-      document.getElementById('review-form').reset();
-      loadReviews();
-    }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.innerText = text;
-      return div.innerHTML;
-    }
-
-    window.addEventListener('DOMContentLoaded', loadReviews);
   </script>
 </body>
 </html>
