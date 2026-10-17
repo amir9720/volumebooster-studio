@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Change Audio Pitch & Speed | MiMusic Player Online</title>
-  <meta name="description" content="Adjust playback tempo and pitch in real-time. The best online Mi music player speed tool to slow down or speed up audio files with zero server uploads.">
+  <meta name="description" content="Adjust playback tempo and pitch online. A fast local Mi music player tool to slow down or speed up audio files directly in your browser.">
   <style>
     :root {
       /* MiMusic Clean Light Theme Palette */
@@ -69,6 +69,10 @@
     .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
     .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    
+    /* Added Image placeholders for steps */
+    .step-image { width: 100%; height: 120px; background-color: var(--surface); border-radius: 8px; margin-bottom: 12px; object-fit: cover; border: 1px solid var(--border); }
+
     .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
     .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
@@ -77,21 +81,6 @@
     .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
     .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
-
-    /* Interactive Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
-    .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
-    .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
-    @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
-    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
-    .review-inputs select { color: #d97706; font-weight: bold; }
-    .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2); }
-    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-    .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
-    .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 
     /* Accordion FAQ */
     .faq-container { margin-bottom: 45px; }
@@ -122,12 +111,12 @@
   <main class="container">
     <div class="tool-box">
       <h1>Audio Pitch & Speed Shifter</h1>
-      <p class="lead">Fine-tune tempo and musical pitch in real-time. Slow down or speed up your Mi Music files instantly without robotic digital distortion.</p>
+      <p class="lead">Adjust tempo and musical pitch dynamically. Slow down or speed up your audio files locally to help with transcription or quick listening.</p>
 
       <div class="dropzone" onclick="document.getElementById('file-input').click()">
         <div class="dropzone-icon">🎚️</div>
         <div class="dropzone-text" id="file-label">Click or Drag & Drop audio file here</div>
-        <div class="dropzone-sub">Supports MP3, WAV, AAC, FLAC, OGG (Processed locally)</div>
+        <div class="dropzone-sub">Supports MP3, WAV, AAC, OGG (Processed locally)</div>
         <input type="file" id="file-input" accept="audio/*" style="display:none" onchange="loadFile(event)">
       </div>
 
@@ -147,16 +136,12 @@
 
         <div class="advanced-toggle">
           <button class="advanced-btn" type="button" onclick="toggleAdvanced()">
-            ⚙️ <span>Advanced Tuning & Audio Key Options</span>
+            ⚙️ <span>Advanced Tuning Options</span>
           </button>
           <div class="advanced-content" id="advanced-box">
             <div class="adv-row">
-              <label>Preserve Natural Pitch when Speeding Up:</label>
+              <label>Preserve Pitch when Adjusting Speed:</label>
               <input type="checkbox" id="preserve-pitch" checked onchange="togglePitchLock(this.checked)">
-            </div>
-            <div class="adv-row">
-              <label>Speech Formant Optimization:</label>
-              <input type="checkbox" id="formant-opt" checked>
             </div>
           </div>
         </div>
@@ -165,80 +150,52 @@
       </div>
     </div>
 
-    <!-- 3-Step Tutorial -->
+    <!-- 3-Step Tutorial with Images -->
     <section class="tutorial-section">
       <h2 class="section-title">How to Change Audio Pitch and Speed</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-badge">1</div>
+          <img src="https://via.placeholder.com/400x250/eff6ff/3b82f6?text=Load+Track" alt="Step 1: Load Track" class="step-image">
           <h3>Load Your Track</h3>
           <p>Drop any audio recording, song stems, or vocal file into the work area above.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">2</div>
+          <img src="https://via.placeholder.com/400x250/eff6ff/3b82f6?text=Select+Speed" alt="Step 2: Select Target Speed" class="step-image">
           <h3>Select Target Speed</h3>
           <p>Slide between 0.5x and 2.0x or use dedicated quick-select presets for transcriptions.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">3</div>
+          <img src="https://via.placeholder.com/400x250/eff6ff/3b82f6?text=Play+Audio" alt="Step 3: Audit Playback" class="step-image">
           <h3>Audit Live Playback</h3>
-          <p>Hit play to review the altered timing immediately with pristine vocal naturalness.</p>
+          <p>Hit play to review the altered timing immediately, with pitch preservation handling the tonal balance.</p>
         </div>
       </div>
     </section>
 
     <!-- Why Choose Our Tool Section -->
     <section>
-      <h2 class="section-title">Why Use Our Mi Music Pitch Shifter?</h2>
+      <h2 class="section-title">Features of the Pitch Shifter</h2>
       <div class="features-grid">
         <div class="feature-box">
-          <h4>🔒 Absolute Privacy</h4>
-          <p>Your audio files remain on your device. Zero remote caching or server storage.</p>
+          <h4>🔒 Local Processing</h4>
+          <p>Your audio files remain on your device's memory. Zero remote caching or server storage.</p>
         </div>
         <div class="feature-box">
-          <h4>🎯 Formant Stability</h4>
-          <p>Advanced pitch-lock algorithms prevent voices from turning into chipmunks at high speeds.</p>
+          <h4>🎯 Pitch Stability</h4>
+          <p>The browser's native algorithms attempt to preserve the natural pitch of voices even at high speeds.</p>
         </div>
         <div class="feature-box">
-          <h4>⏱️ Real-Time Processing</h4>
-          <p>Changes apply instantaneously without waiting for lengthy re-encoding queues.</p>
+          <h4>⏱️ Fast Adjustments</h4>
+          <p>Changes to tempo apply without waiting for lengthy re-encoding queues.</p>
         </div>
         <div class="feature-box">
           <h4>🎧 Musician-Friendly</h4>
-          <p>Ideal for transcribing fast instrument solos note-by-note without pitch drift.</p>
+          <p>Helpful for transcribing fast instrument solos note-by-note by slowing down the playback.</p>
         </div>
       </div>
-    </section>
-
-    <!-- Interactive Reviews System -->
-    <section class="reviews-box">
-      <div class="reviews-header">
-        <div>
-          <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">Leave your real feedback or report playback questions below</p>
-        </div>
-        <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
-          <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
-        </div>
-      </div>
-
-      <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
-        <div class="review-inputs">
-          <input type="text" id="user-name" placeholder="Your Name or Nickname" required maxlength="30">
-          <select id="user-stars">
-            <option value="5">★★★★★ (5/5)</option>
-            <option value="4">★★★★☆ (4/5)</option>
-            <option value="3">★★★☆☆ (3/5)</option>
-            <option value="2">★★☆☆☆ (2/5)</option>
-            <option value="1">★☆☆☆☆ (1/5)</option>
-          </select>
-        </div>
-        <textarea id="user-comment" placeholder="How did this speed/pitch shifter perform on your track? Share your experience..." required rows="3" maxlength="400"></textarea>
-        <button type="submit" class="review-submit-btn">Post Feedback</button>
-      </form>
-
-      <div id="reviews-feed"></div>
     </section>
 
     <!-- Accordion FAQ -->
@@ -246,44 +203,34 @@
       <h2 class="section-title">Frequently Asked Questions</h2>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          How can I change audio pitch on Xiaomi devices?
+          Does changing the speed alter the musical pitch?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          If your default MIUI audio player doesn't support pitch shifting, you can use our web-based tool. Simply upload your file, and adjust the tempo slider. You can choose whether to lock the natural pitch or let it shift organically with the speed.
+          By default, modern web browsers use time-stretching algorithms that try to preserve the natural pitch. If a track is in C major, it typically stays in C major even if accelerated. You can turn this off in Advanced Options to get classic tape-speed effects.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Does changing the speed alter the musical pitch of the song?
+          Why is there a slight delay when sliding the tempo?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          By default, modern time-stretching algorithms preserve the natural pitch and key. That means if a track is in the key of C major, it stays in C major even if you accelerate it to 1.5x speed. You can turn this behavior off in Advanced Options if you prefer classic tape-speed effects.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          Are there any daily file limits?
-          <span class="faq-arrow">▼</span>
-        </button>
-        <div class="faq-answer">
-          No. Because our processing runs directly via your browser's local computational engine, you can edit as many audio files as your device memory allows.
+          Because the audio is processed locally on your device, sudden large changes in playback speed require your device's CPU to recalculate the audio buffers. A slight delay is normal.
         </div>
       </div>
     </section>
 
     <!-- Comprehensive SEO Guide -->
     <article class="seo-article">
-      <h2>The Mechanics of Audio Time-Stretching and Pitch Correction</h2>
-      <p>Anyone who has ever tried transcribing a rapid-fire legal deposition, dissecting an elaborate flamenco guitar solo, or reviewing a dense academic lecture understands the frustration of rigid playback speeds. In the days of analog tape recorders, altering playback speed was purely mechanical: spinning the tape reel faster raised both tempo and pitch together, transforming mature voices into squeaky cartoon characters.</p>
-      <p>In modern digital signal processing (DSP), separating speed from pitch requires sophisticated mathematical manipulation known as time-stretching. Instead of simply playing recorded samples faster, the <strong>Mi Music player speed</strong> engine slices waveforms into microscopic granular frames, analyzes their phase alignment, and reconstructs the sonic timeline so that vocal formants and musical tonality remain completely natural.</p>
+      <h2>Understanding Audio Time-Stretching</h2>
+      <p>Anyone who has tried transcribing a rapid-fire lecture or dissecting a complex guitar solo understands the frustration of rigid playback speeds. In the days of analog tape recorders, altering playback speed was purely mechanical: spinning the tape reel faster raised both tempo and pitch together, making voices sound unnatural.</p>
+      <p>Modern digital signal processing (DSP) enables us to separate speed from pitch through a process called time-stretching. Instead of simply playing samples faster, algorithms analyze the waveform and reconstruct it so that the musical tonality and vocal formants remain relatively stable.</p>
 
-      <h3>Why Pure In-Browser Processing Is the Smarter Choice</h3>
-      <p>Most commercial audio tools push you to download bulky desktop programs or upload confidential client voice memos to remote cloud servers. Cloud conversions take valuable minutes to queue, consume high mobile bandwidth, and present clear security vulnerabilities when handling unreleased music or private interviews.</p>
-      <p>Our utility eliminates cloud transit entirely. By tapping into the browser's native HTML5 audio stream and Web Audio API architecture, your source files are loaded directly into device RAM. All DSP adjustments execute locally using your hardware's CPU, ensuring instant playback response and complete data secrecy.</p>
+      <h3>In-Browser Processing Efficiency</h3>
+      <p>Many commercial audio tools require downloading bulky desktop software or uploading confidential voice memos to remote cloud servers. Cloud conversions take time, use data bandwidth, and present privacy concerns.</p>
+      <p>Our utility avoids cloud transit entirely. By utilizing the browser's native HTML5 audio capabilities, your source files are loaded directly into your device's RAM. Playback adjustments execute locally using your hardware, offering an efficient and private way to manage audio pacing.</p>
     </article>
   </main>
 
@@ -337,60 +284,6 @@
       answer.style.display = isOpen ? 'none' : 'block';
       arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
     }
-
-    /* Real Interactive Reviews Engine (LocalStorage) */
-    const STORAGE_KEY = 'user_reviews_pitchshifter';
-
-    function loadReviews() {
-      const feed = document.getElementById('reviews-feed');
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      
-      if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Test this tool and be the first to share your experience!</p>';
-        return;
-      }
-
-      let totalStars = 0;
-      feed.innerHTML = stored.map(r => {
-        totalStars += r.rating;
-        return `
-          <div class="review-entry">
-            <div class="review-entry-header">
-              <strong style="color: var(--text-dark); font-size: 0.95rem; font-weight: 700;">${escapeHtml(r.name)}</strong>
-              <span style="color: #f59e0b; font-size: 0.9rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
-            </div>
-            <p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; line-height: 1.6;">${escapeHtml(r.comment)}</p>
-          </div>
-        `;
-      }).join('');
-
-      const avg = (totalStars / stored.length).toFixed(1);
-      document.getElementById('avg-val').innerText = avg;
-    }
-
-    function submitReview(e) {
-      e.preventDefault();
-      const name = document.getElementById('user-name').value.trim();
-      const rating = parseInt(document.getElementById('user-stars').value);
-      const comment = document.getElementById('user-comment').value.trim();
-
-      if (!name || !comment) return;
-
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      stored.unshift({ name, rating, comment, time: Date.now() });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-
-      document.getElementById('review-form').reset();
-      loadReviews();
-    }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.innerText = text;
-      return div.innerHTML;
-    }
-
-    window.addEventListener('DOMContentLoaded', loadReviews);
   </script>
 </body>
 </html>
