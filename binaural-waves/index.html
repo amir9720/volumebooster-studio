@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Music Player Online | Binaural Beats for Deep Focus</title>
-  <meta name="description" content="Synthesize pure binaural study beats online for deep concentration. Adjust Mi music equalizer settings for Alpha and Theta waves with zero server uploads.">
+  <title>Mi Music Player Online | Binaural Ambient Audio</title>
+  <meta name="description" content="Generate continuous pure-tone binaural audio online. Adjust Mi music equalizer settings to create a relaxing background ambiance for study and work sessions.">
   <style>
     :root {
       /* MiMusic Clean Light Theme Palette */
@@ -68,7 +68,10 @@
     .adv-row:last-child { margin-bottom: 0; }
     select { background: #fff; color: var(--text-dark); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; outline: none; font-weight: 500; }
 
+    /* Disclaimer & Notices */
     .notice { margin-top: 20px; font-size: 0.85rem; color: #4338ca; background: #e0e7ff; border: 1px solid #c7d2fe; padding: 14px; border-radius: 10px; text-align: left; font-weight: 500; }
+    .disclaimer-box { margin-top: 16px; padding: 16px; background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 10px; text-align: left; font-size: 0.85rem; color: #991b1b; line-height: 1.5; }
+    .disclaimer-box strong { color: #7f1d1d; }
 
     /* Step-by-Step Tutorial Box */
     .tutorial-section { margin-top: 45px; }
@@ -128,32 +131,32 @@
 
   <main class="container">
     <div class="tool-box">
-      <h1>Mi Music Binaural Beats & Study Waves</h1>
-      <p class="lead">Synthesize continuous pure-tone binaural beats directly in your browser. Tune your Mi music equalizer settings to enter deep flow states.</p>
+      <h1>Mi Music Binaural Audio Generator</h1>
+      <p class="lead">Synthesize continuous pure-tone binaural audio directly in your browser. A tool to help create a relaxing ambient soundscape for study or rest.</p>
 
-      <div class="pulse-avatar" id="avatar-icon">🧠</div>
+      <div class="pulse-avatar" id="avatar-icon">🎧</div>
 
       <div class="status-text" id="wave-status">
         Ready to generate
-        <div class="status-sub">Select a brainwave frequency profile below</div>
+        <div class="status-sub">Select an ambient profile below</div>
       </div>
 
       <div class="btn-group">
         <button class="preset-btn" id="btn-alpha" onclick="startBinaural('alpha', 10)">
-          ⚡ Alpha (10Hz)<br>
-          <small style="font-weight:500;">Flow State & Study</small>
+          ⚡ 10Hz Offset<br>
+          <small style="font-weight:500;">Study Ambiance</small>
         </button>
         <button class="preset-btn" id="btn-theta" onclick="startBinaural('theta', 6)">
-          🌿 Theta (6Hz)<br>
-          <small style="font-weight:500;">Deep Calm & Relax</small>
+          🌿 6Hz Offset<br>
+          <small style="font-weight:500;">Relaxation Support</small>
         </button>
         <button class="preset-btn" id="btn-beta" onclick="startBinaural('beta', 18)">
-          🎯 Beta (18Hz)<br>
-          <small style="font-weight:500;">High Alertness</small>
+          🎯 18Hz Offset<br>
+          <small style="font-weight:500;">Active Listening</small>
         </button>
         <button class="preset-btn" id="btn-delta" onclick="startBinaural('delta', 2.5)">
-          🌙 Delta (2.5Hz)<br>
-          <small style="font-weight:500;">Deep Sleep Rest</small>
+          🌙 2.5Hz Offset<br>
+          <small style="font-weight:500;">Restful Backdrop</small>
         </button>
       </div>
 
@@ -161,7 +164,7 @@
         <button class="stop-btn" onclick="stopBinaural()">⏹️ Stop Audio Waves</button>
       </div>
 
-      <!-- Advanced Neuro-Acoustic Controls -->
+      <!-- Advanced Tone Controls -->
       <div class="advanced-toggle">
         <button class="advanced-btn" type="button" onclick="toggleAdvanced()">
           ⚙️ <span>Advanced Carrier Frequency & Volume</span>
@@ -172,7 +175,7 @@
             <select id="carrier-pitch" onchange="restartCurrent()">
               <option value="200" selected>200 Hz (Neutral & Balanced)</option>
               <option value="150">150 Hz (Warm & Soothing Bass)</option>
-              <option value="250">250 Hz (Crisp & Focused Tone)</option>
+              <option value="250">250 Hz (Crisp Tone)</option>
             </select>
           </div>
           <div class="adv-row">
@@ -180,20 +183,24 @@
             <select id="synth-volume" onchange="updateVolume()">
               <option value="0.2" selected>Moderate Background (Recommended)</option>
               <option value="0.1">Soft Whisper (Low Distraction)</option>
-              <option value="0.35">Prominent Resonance</option>
+              <option value="0.35">Prominent Tone</option>
             </select>
           </div>
         </div>
       </div>
 
       <div class="notice">
-        🎧 <strong>Stereo Headphones Required:</strong> Binaural beats require two distinct acoustic frequencies presented independently to each ear to elicit neurological brainwave entrainment.
+        🎧 <strong>Stereo Headphones Required:</strong> The binaural audio effect requires two distinct acoustic frequencies presented independently to each ear.
+      </div>
+      
+      <div class="disclaimer-box">
+        <strong>Medical Disclaimer:</strong> This audio tool is provided for entertainment and ambient listening purposes only. It makes no claims to treat, diagnose, or cure any medical or psychological conditions, including ADHD, insomnia, or anxiety. If you have medical concerns, please consult a qualified healthcare professional.
       </div>
     </div>
 
     <!-- 3-Step Tutorial -->
     <section class="tutorial-section">
-      <h2 class="section-title">How to Use Binaural Beats for Focus</h2>
+      <h2 class="section-title">How to Use Ambient Audio Tones</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-badge">1</div>
@@ -202,31 +209,31 @@
         </div>
         <div class="step-card">
           <div class="step-badge">2</div>
-          <h3>Select Your Mental State</h3>
-          <p>Choose Alpha (10Hz) for coding or exam revision, or Theta (6Hz) for meditation and relaxation.</p>
+          <h3>Select Your Ambiance</h3>
+          <p>Choose the 10Hz offset for a study background, or the 6Hz offset for general relaxation.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">3</div>
-          <h3>Let Your Mind Adapt</h3>
-          <p>Keep the volume at a gentle background level; your brain entrains to the phantom pulse in 5 minutes.</p>
+          <h3>Adjust Volume</h3>
+          <p>Keep the volume at a gentle background level so it does not distract you from your tasks.</p>
         </div>
       </div>
     </section>
 
     <!-- Why Choose Our Tool Section -->
     <section>
-      <h2 class="section-title">Why Use Our In-Browser Beat Generator?</h2>
+      <h2 class="section-title">Why Use Our In-Browser Tone Generator?</h2>
       <div class="features-grid">
         <div class="feature-box">
-          <h4>🔬 Zero Phase Distortion</h4>
-          <p>Hardware sine oscillators maintain micro-second phase accuracy that MP3 compression ruins.</p>
+          <h4>🔬 Clear Audio Synthesis</h4>
+          <p>Hardware sine oscillators generate continuous tones without the compression artifacts found in MP3 files.</p>
         </div>
         <div class="feature-box">
-          <h4>♾️ Infinite Non-Looping Tone</h4>
+          <h4>♾️ Infinite Non-Looping</h4>
           <p>Synthesized in real time. Never suffers from jarring loop clicks or sudden audio dropouts.</p>
         </div>
         <div class="feature-box">
-          <h4>🔋 Zero Battery & Data Drain</h4>
+          <h4>🔋 Device Friendly</h4>
           <p>Generates math locally using your CPU. No streaming megabytes or cellular bandwidth usage.</p>
         </div>
         <div class="feature-box">
@@ -241,11 +248,11 @@
       <div class="reviews-header">
         <div>
           <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">Which frequency helped your focus or meditation? Share your thoughts below</p>
+          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">Did you enjoy listening to these background tones? Share your thoughts below</p>
         </div>
         <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
-          <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
+          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">0.0</span>
+          <span style="color: #cbd5e1; font-size: 1.15rem;">★★★★★</span>
         </div>
       </div>
 
@@ -260,7 +267,7 @@
             <option value="1">★☆☆☆☆ (1/5)</option>
           </select>
         </div>
-        <textarea id="user-comment" placeholder="Did Alpha or Theta waves help your deep study, coding, or sleep session? Share your feedback..." required rows="3" maxlength="400"></textarea>
+        <textarea id="user-comment" placeholder="Which ambient tone do you prefer for studying or relaxing? Share your feedback..." required rows="3" maxlength="400"></textarea>
         <button type="submit" class="review-submit-btn">Post Feedback</button>
       </form>
 
@@ -276,51 +283,49 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Yes! If you want to listen to continuous binaural beats without relying on pre-recorded MP3 tracks, this tool synthesizes the frequencies perfectly inside your browser. No extra <strong>Xiaomi audio tools</strong> needed.
+          Yes! If you want to listen to continuous ambient tones without relying on pre-recorded MP3 tracks, this tool synthesizes the frequencies directly inside your browser. No extra <strong>Xiaomi audio tools</strong> needed.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Why do binaural beats fail to work over room speakers?
+          Why do binaural tones fail to work over room speakers?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          If you play binaural beats on external stereo speakers, the sound waves physically mix in the open air of your room before reaching your head, creating acoustic interference outside your body. For neurological entrainment to occur, each ear must be isolated with separate stereo drivers so the mixing occurs neurologically inside your brain.
+          If you play these audio offsets on external stereo speakers, the sound waves physically mix in the open air of your room before reaching your head. To perceive the acoustic illusion, each ear must receive an isolated sound frequency, which requires stereo headphones.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Can listening to binaural beats cause headaches or fatigue?
+          Can listening to continuous tones cause fatigue?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Only if played too loud. Binaural beats are intended to serve as a low-level acoustic anchor. If the volume is set too high, prolonged pure sine wave pressure can cause ear canal fatigue. Keep it soft and unobtrusive.
+          It can if played too loud. These tones are intended to serve as a low-level acoustic background. If the volume is set high, prolonged pure sine wave playback might feel tiring. Keep it soft and unobtrusive.
         </div>
       </div>
     </section>
 
     <!-- Comprehensive SEO Guide -->
     <article class="seo-article">
-      <h2>The Neurobiology of Brainwave Entrainment and Binaural Resonance</h2>
-      <p>In our hyper-connected modern workspace, staying focused is a constant uphill battle. Constant push notifications, open-office background chatter, and the cognitive fatigue of endless task-switching make entering a genuine "flow state" difficult. While many professionals listen to lo-fi beats, complex melodies and vocal lyrics actively compete for processing power. This is where <strong>auditory brainwave entrainment</strong> offers a scientifically distinct advantage for <strong>Mi music player online</strong> users.</p>
-      <p>Discovered in 1839 by German physicist Heinrich Wilhelm Dove, binaural beats do not rely on acoustic sound mixing in the air. Instead, they exploit a unique biological mechanism within the mammalian auditory pathway: the <strong>Frequency Following Response (FFR)</strong>.</p>
+      <h2>Understanding Binaural Audio and Background Focus Tones</h2>
+      <p>Many people struggle to find the right audio environment for studying, reading, or relaxing. While some prefer lo-fi beats or classical music, others find that melodies and lyrics distract them. This is where continuous ambient tones can be a useful alternative for <strong>Mi music player online</strong> users looking for a steady acoustic backdrop.</p>
 
-      <h3>How the Brain Decodes Stereo Differences</h3>
-      <p>When you put on headphones and route a pure 200Hz tone into your left ear and a 210Hz tone into your right ear, the two sound waves never physically interact until their electrical signals meet inside your brainstem. Attempting to reconcile the slight frequency discrepancy, the brain begins firing neural oscillations at the mathematical difference between the two tones (210Hz – 200Hz = <strong>10Hz</strong>).</p>
+      <h3>The Concept of Audio Offsets</h3>
+      <p>The term "binaural beats" refers to an auditory illusion. When you put on headphones and route a pure 200Hz tone into your left ear and a 210Hz tone into your right ear, the two sound waves do not mix in the air. Instead, as your auditory system processes these slightly different frequencies, listeners often perceive a rhythmic pulsing sensation at the exact difference between the two (in this case, 10Hz).</p>
       
-      <h3>Target Brainwave Frequency Classifications</h3>
+      <h3>Common Ambient Frequency Categories</h3>
+      <p>Many users enjoy different audio offsets depending on their current activity:</p>
       <ul>
-        <li><strong>Alpha Waves (8Hz – 12Hz):</strong> The gold standard for deep study and creative flow. Alpha rhythms correspond to relaxed alertness.</li>
-        <li><strong>Theta Waves (4Hz – 7Hz):</strong> Linked with deep meditation, hypnagogic dream states, and somatic relaxation.</li>
-        <li><strong>Beta Waves (13Hz – 30Hz):</strong> Associated with active analytical thinking, rapid decision-making, and high alertness.</li>
-        <li><strong>Delta Waves (0.5Hz – 3Hz):</strong> The slowest neural rhythms, dominating restorative slow-wave deep sleep.</li>
+        <li><strong>Around 10Hz (Alpha range):</strong> Often used as a background for reading, studying, or light creative work to help block out distracting noises.</li>
+        <li><strong>Around 6Hz (Theta range):</strong> A slower pulse that some users find pleasant for unwinding, meditating, or simply resting their eyes.</li>
+        <li><strong>Around 18Hz (Beta range):</strong> A faster rhythm that can feel more energetic, sometimes used during active tasks.</li>
       </ul>
 
-      <h3>Checking Mi Music Equalizer Settings for Binaural Audio</h3>
-      <p>Most people discover binaural beats through video or music streaming services. Unfortunately, lossy compression algorithms (like MP3 or AAC) are designed specifically to discard subtle inter-channel phase differences. By smearing the micro-second timing differences between left and right channels, compressed audio substantially weakens the neurological entrainment illusion.</p>
-      <p>Our tool resolves this by generating raw, continuous mathematical sine oscillations in real time via the browser's hardware-accelerated Web Audio API. It completely bypasses your default <strong>Mi music equalizer settings</strong> to deliver pristine, unaltered waveforms.</p>
+      <h3>Checking Mi Music Equalizer Settings for Clean Audio</h3>
+      <p>Most people listen to ambient tracks through video or music streaming services. However, compression algorithms (like MP3 or AAC) can sometimes introduce artifacts into pure tones. Our tool bypasses pre-recorded files by generating continuous mathematical sine oscillations in real time. It operates independently of your default <strong>Mi music equalizer settings</strong> to deliver a clean, uncompressed audio experience.</p>
     </article>
   </main>
 
@@ -375,16 +380,16 @@
 
       if (type === 'alpha') {
         btnAlpha.classList.add('active');
-        statusText.innerHTML = 'Playing Alpha Waves (10Hz)<div class="status-sub">' + baseFreq + 'Hz Left / ' + (baseFreq + beatDiff) + 'Hz Right — Flow State & Study</div>';
+        statusText.innerHTML = 'Playing 10Hz Offset<div class="status-sub">' + baseFreq + 'Hz L / ' + (baseFreq + beatDiff) + 'Hz R — Study Background</div>';
       } else if (type === 'theta') {
         btnTheta.classList.add('active');
-        statusText.innerHTML = 'Playing Theta Waves (6Hz)<div class="status-sub">' + baseFreq + 'Hz Left / ' + (baseFreq + beatDiff) + 'Hz Right — Deep Calm & Meditation</div>';
+        statusText.innerHTML = 'Playing 6Hz Offset<div class="status-sub">' + baseFreq + 'Hz L / ' + (baseFreq + beatDiff) + 'Hz R — Relaxation Tone</div>';
       } else if (type === 'beta') {
         btnBeta.classList.add('active');
-        statusText.innerHTML = 'Playing Beta Waves (18Hz)<div class="status-sub">' + baseFreq + 'Hz Left / ' + (baseFreq + beatDiff) + 'Hz Right — High Alertness & Analysis</div>';
+        statusText.innerHTML = 'Playing 18Hz Offset<div class="status-sub">' + baseFreq + 'Hz L / ' + (baseFreq + beatDiff) + 'Hz R — Active Ambiance</div>';
       } else if (type === 'delta') {
         btnDelta.classList.add('active');
-        statusText.innerHTML = 'Playing Delta Waves (2.5Hz)<div class="status-sub">' + baseFreq + 'Hz Left / ' + (baseFreq + beatDiff) + 'Hz Right — Deep Rest & Sleep Reset</div>';
+        statusText.innerHTML = 'Playing 2.5Hz Offset<div class="status-sub">' + baseFreq + 'Hz L / ' + (baseFreq + beatDiff) + 'Hz R — Restful Backdrop</div>';
       }
     }
 
@@ -396,7 +401,7 @@
       isPlaying = false;
       avatar.classList.remove('pulse-active');
       clearActiveButtons();
-      statusText.innerHTML = 'Ready to generate<div class="status-sub">Select a brainwave frequency profile below</div>';
+      statusText.innerHTML = 'Ready to generate<div class="status-sub">Select an ambient profile below</div>';
     }
 
     function clearActiveButtons() {
@@ -439,7 +444,7 @@
       const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
       
       if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Test these binaural beats and share your focus results!</p>';
+        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Test these ambient tones and share your experience!</p>';
         return;
       }
 
@@ -457,7 +462,7 @@
         `;
       }).join('');
 
-      const avg = (totalStars / stored.length).toFixed(1);
+      const avg = stored.length > 0 ? (totalStars / stored.length).toFixed(1) : "0.0";
       document.getElementById('avg-val').innerText = avg;
     }
 
