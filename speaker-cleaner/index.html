@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xiaomi Speaker Cleaner & Water Ejector | MiMusic Online</title>
-  <meta name="description" content="Fix muffled sound on your phone. Clear speaker water and dust using the official MiMusic 165Hz acoustic wave generator. Safe for all Xiaomi & MIUI devices.">
+  <title>Xiaomi Speaker Cleaner Assistant | MiMusic Online</title>
+  <meta name="description" content="Attempt to clear speaker water and dust using our 165Hz acoustic wave generator. A helpful utility for muffled sound on Xiaomi & MIUI devices.">
   <style>
     :root {
       /* MiMusic Clean Light Theme Palette */
@@ -59,6 +59,10 @@
     .adv-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
     .adv-row:last-child { margin-bottom: 0; }
     select { background: #fff; color: var(--text-dark); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; outline: none; font-weight: 500; }
+
+    /* Notice Box for Disclaimer */
+    .disclaimer-box { margin-top: 24px; padding: 16px; background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; text-align: left; font-size: 0.85rem; color: #991b1b; }
+    .disclaimer-box strong { color: #7f1d1d; }
 
     /* Step-by-Step Tutorial Box */
     .tutorial-section { margin-top: 45px; }
@@ -118,12 +122,12 @@
 
   <main class="container">
     <div class="tool-box">
-      <h1>Xiaomi Speaker Cleaner & Water Fix</h1>
-      <p class="lead">Dislodge trapped water droplets and fine dust from your phone speakers using our calibrated 165Hz acoustic wave generator.</p>
+      <h1>Xiaomi Speaker Cleaner Assistant</h1>
+      <p class="lead">Try our 165Hz acoustic wave generator, which may help dislodge trapped water droplets and fine dust from your phone speakers.</p>
 
       <div class="wave-visualizer" id="vis-circle">💧</div>
 
-      <button class="btn" id="cleaner-trigger" onclick="toggleCleaningTone()">Start Ejection Frequency</button>
+      <button class="btn" id="cleaner-trigger" onclick="toggleCleaningTone()">Start Audio Pulse</button>
 
       <!-- Advanced Tone Settings -->
       <div class="advanced-toggle">
@@ -134,8 +138,8 @@
           <div class="adv-row">
             <label>Waveform Type:</label>
             <select id="wave-type">
-              <option value="sawtooth" selected>Sawtooth (Maximum Physical Cone Push)</option>
-              <option value="square">Square Wave (High Impulse Shock)</option>
+              <option value="sawtooth" selected>Sawtooth (Stronger Physical Cone Push)</option>
+              <option value="square">Square Wave (High Impulse)</option>
               <option value="sine">Pure Sine Wave (Gentle Air Displacement)</option>
             </select>
           </div>
@@ -145,49 +149,53 @@
           </div>
         </div>
       </div>
+
+      <div class="disclaimer-box">
+        <strong>Important Disclaimer:</strong> This tool generates audio frequencies designed to vibrate speaker components. It is provided "as is" and does not guarantee the successful removal of water or dust, nor does it guarantee protection from hardware damage. If your device has suffered significant liquid exposure, please turn it off immediately and consult a professional repair service. Use this tool at your own discretion.
+      </div>
     </div>
 
     <!-- 3-Step Tutorial -->
     <section class="tutorial-section">
-      <h2 class="section-title">How to Clear Speaker Water in 3 Steps</h2>
+      <h2 class="section-title">How to Use the Speaker Cleaning Assistant</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-badge">1</div>
-          <h3>Maximize Phone Volume</h3>
-          <p>Turn your Xiaomi or Android smartphone volume up to 100% to maximize kinetic cone displacement.</p>
+          <h3>Increase Phone Volume</h3>
+          <p>Turn your smartphone volume up to a comfortable high level to increase speaker cone vibration.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">2</div>
           <h3>Angle Speakers Downward</h3>
-          <p>Tilt your phone with speaker grills pointing down toward an absorbent cloth or tissue.</p>
+          <p>Tilt your phone with speaker grills pointing down, ideally over an absorbent cloth or tissue.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">3</div>
-          <h3>Run Sonic Pulse</h3>
-          <p>Trigger the 165Hz tone for 45 to 60 seconds until tiny mist droplets scatter and clear sound returns.</p>
+          <h3>Run Audio Pulse</h3>
+          <p>Trigger the 165Hz tone for 45 to 60 seconds to see if it helps clear the muffled sound.</p>
         </div>
       </div>
     </section>
 
     <!-- Why Choose Our Tool Section -->
     <section>
-      <h2 class="section-title">Why Choose Our Mi Acoustic Cleaner?</h2>
+      <h2 class="section-title">Features of Our Acoustic Utility</h2>
       <div class="features-grid">
         <div class="feature-box">
-          <h4>🛡️ Zero Hardware Contact</h4>
-          <p>Cleans speakers without poking pins or needles that tear the delicate IP68 water mesh.</p>
+          <h4>🛡️ Non-Invasive Approach</h4>
+          <p>Offers an alternative to poking pins or needles into speaker grills, which can damage delicate internal meshes.</p>
         </div>
         <div class="feature-box">
-          <h4>🔬 Calibrated 165Hz Physics</h4>
-          <p>Engineered frequency specifically tuned to shatter water surface tension across micro-holes.</p>
+          <h4>🔬 165Hz Physics</h4>
+          <p>Uses a specific frequency often associated with disrupting water surface tension in small speaker enclosures.</p>
         </div>
         <div class="feature-box">
-          <h4>📱 No App Store Downloads</h4>
-          <p>Runs directly in your mobile browser. A safe alternative to shady third-party cleaner apps.</p>
+          <h4>📱 Browser-Based</h4>
+          <p>Runs directly in your mobile browser. No need to download third-party apps.</p>
         </div>
         <div class="feature-box">
-          <h4>💨 Dual Action (Water & Dust)</h4>
-          <p>Air pressure vibrations expel both dried dirt particles and fresh water ingress.</p>
+          <h4>💨 Dual Utility</h4>
+          <p>May assist in loosening dried dirt particles as well as fresh moisture.</p>
         </div>
       </div>
     </section>
@@ -197,11 +205,11 @@
       <div class="reviews-header">
         <div>
           <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">Did this tone eject water or clear dust from your speaker? Share below</p>
+          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">Did this tool help improve your speaker sound? Share below</p>
         </div>
         <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
-          <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
+          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">0.0</span>
+          <span style="color: #cbd5e1; font-size: 1.15rem;">★★★★★</span>
         </div>
       </div>
 
@@ -216,7 +224,7 @@
             <option value="1">★☆☆☆☆ (1/5)</option>
           </select>
         </div>
-        <textarea id="user-comment" placeholder="What phone model did you clean and did it restore your audio clarity? Share your experience..." required rows="3" maxlength="400"></textarea>
+        <textarea id="user-comment" placeholder="What phone model did you try this on? Share your experience..." required rows="3" maxlength="400"></textarea>
         <button type="submit" class="review-submit-btn">Post Feedback</button>
       </form>
 
@@ -232,57 +240,58 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Our tool is an advanced web-based alternative. While some Xiaomi phones have a basic "Clear Speaker" option built-in, our online generator gives you direct control over the waveform (Sawtooth vs Sine) and enables a dynamic frequency sweep (140Hz to 180Hz) to dislodge stubborn water and dust more effectively.
+          Our tool is an advanced web-based alternative. While some Xiaomi phones have a basic "Clear Speaker" option built-in, our online generator gives you direct control over the waveform (Sawtooth vs Sine) and enables a dynamic frequency sweep (140Hz to 180Hz) to provide varying vibrations.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Can this acoustic tone rupture my smartphone speaker?
+          Can this acoustic tone damage my smartphone speaker?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          No. The tone is engineered to operate strictly within the native decibel and frequency specifications of mobile dynamic micro-transducers. It creates strong low-frequency cone travel without exceeding hardware power thresholds.
+          The tone is designed to operate within typical frequency ranges for mobile speakers. However, as with any audio playback at maximum volume, prolonged use could potentially cause wear. Use it in short bursts and avoid leaving it running continuously.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Does the rice method actually work to fix muffled sound?
+          Will this fix my water-damaged phone?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          No, the rice myth is widely debunked by repair technicians. Raw rice does not absorb internal moisture effectively, and the fine starch dust enters your ports, mixing with trapped moisture to create a gummy paste that permanently clogs speaker grills. Acoustic ejection is the only safe method.
+          <strong>No.</strong> This tool is only designed to vibrate the speaker membrane to potentially dislodge superficial water droplets in the speaker grill. It cannot fix internal liquid damage to motherboards or circuits. If your phone is seriously waterlogged, seek professional repair immediately.
         </div>
       </div>
     </section>
 
     <!-- Comprehensive SEO Guide -->
     <article class="seo-article">
-      <h2>Understanding Acoustic Displacement and How to Fix a Muffled Speaker</h2>
-      <p>Modern flagship smartphones come equipped with impressive IP67 or IP68 water resistance ratings. These ratings give users peace of mind when their phone accidentally falls into a pool, takes a shower splash, or endures heavy rainfall. However, there is a crucial distinction between <em>internal liquid protection</em> and <em>acoustic clarity</em>.</p>
-      <p>Water may not breach the motherboard, but it easily gets sucked into the exterior speaker port. Because speaker grills feature microscopic holes engineered to let acoustic waves pass while blocking dirt, water droplets undergo strong capillary action. Surface tension causes water to latch onto the perimeter of the grill holes, creating an impermeable liquid barrier. When you try to listen to <strong>Mi Music</strong> tracks, the speaker diaphragm vibrates against trapped liquid, resulting in distant, muffled, or severely distorted sound.</p>
+      <h2>Understanding Speaker Muffling and Acoustic Assistance</h2>
+      <p>Modern smartphones often feature water resistance ratings (like IP67 or IP68), designed to protect internal components from accidental splashes or brief submersion. However, even on resistant devices, water can become trapped in the exterior speaker port. Because speaker grills feature tiny holes, water droplets can adhere to the mesh due to surface tension, creating a temporary liquid barrier. This often results in distant, muffled, or distorted sound when playing <strong>Mi Music</strong> tracks or watching videos.</p>
 
-      <h3>The Physics of the 165Hz Xiaomi Speaker Cleaner</h3>
-      <p>To break capillary adhesion, physical force must be applied from <em>behind</em> the grill. This relies on precise acoustic resonance:</p>
+      <h3>The Theory Behind 165Hz Speaker Cleaning</h3>
+      <p>The idea behind acoustic speaker cleaning utilities is to use physical vibration to disrupt this surface tension:</p>
       <ul>
-        <li><strong>Why 165Hz?</strong> Higher frequencies (like 1,000Hz or speech) cause tiny, rapid cone shivers that barely displace air. Conversely, 165Hz sits at the mechanical resonance sweet spot of miniature mobile drivers, creating wide physical cone excursions (the speaker diaphragm moves forward and backward as far as physically possible).</li>
-        <li><strong>Why Sawtooth Waves?</strong> Smooth sine waves build and release pressure symmetrically. A sawtooth waveform rises gradually and drops off vertically. This asymmetric air pressure acts like a piston hammer, snapping the air column outward to overcome water surface tension.</li>
+        <li><strong>Frequency Selection:</strong> Frequencies around 165Hz are often chosen because they tend to cause relatively wide physical excursions (movements) of miniature mobile speaker diaphragms compared to higher frequencies.</li>
+        <li><strong>Waveform Impact:</strong> While pure sine waves create smooth pressure changes, waveforms like sawtooth or square waves create more abrupt changes in air pressure, which some believe is more effective at shaking loose debris or moisture.</li>
       </ul>
 
-      <h3>Proper Post-Water Rescue Protocol</h3>
-      <p>If your phone just took an accidental swim, follow this step-by-step restoration procedure to protect your audio hardware:</p>
+      <h3>What to Do After Minor Water Exposure</h3>
+      <p>If your phone's speaker sounds muffled after getting wet, here are some common steps to try:</p>
       <ul>
-        <li><strong>Dry the chassis immediately:</strong> Wipe down the screen and frame with a dry microfiber cloth. Do not shake the phone violently.</li>
-        <li><strong>Position the speaker downward:</strong> Gravity is your ally. Keep the bottom edge of your device tilted downward toward a dry paper towel.</li>
-        <li><strong>Activate the tone at max volume:</strong> Run our <strong>Xiaomi speaker cleaner</strong> tone. Within 20 to 30 seconds, you should observe fine moisture mist landing on the paper towel.</li>
+        <li><strong>Dry the exterior:</strong> Gently wipe down the device with a dry, clean cloth. Avoid vigorous shaking.</li>
+        <li><strong>Use Gravity:</strong> Keep the speaker pointing downwards to encourage drainage.</li>
+        <li><strong>Try Acoustic Vibration:</strong> Run an audio pulse tool like our <strong>Xiaomi speaker cleaner</strong> assistant for a short duration to see if the vibration helps clear the grill.</li>
+        <li><strong>Allow Evaporation:</strong> Let the device air dry in a well-ventilated space. Avoid using heat sources like hair dryers, which can damage seals.</li>
       </ul>
+      <p><em>Always remember that software cannot repair hardware. If problems persist, consult the manufacturer or a certified repair technician.</em></p>
     </article>
   </main>
 
   <footer>
     <p style="margin-bottom: 8px;">&copy; 2026 MiMusic.net Studio. Free browser-based DSP tools.</p>
-    <p style="font-size: 0.75rem; color: #94a3b8;">Disclaimer: MiMusic.net is an independent web utility and is not affiliated with or endorsed by Xiaomi Inc. or the official Mi Music app.</p>
+    <p style="font-size: 0.75rem; color: #94a3b8;">Disclaimer: MiMusic.net is an independent web utility and is not affiliated with or endorsed by Xiaomi Inc. or the official Mi Music app. This tool is provided for utility purposes only and does not guarantee hardware protection or repair.</p>
   </footer>
 
   <script>
@@ -309,7 +318,7 @@
 
         osc.start();
         isRunning = true;
-        btn.innerText = 'Stop Ejection Wave';
+        btn.innerText = 'Stop Audio Pulse';
         btn.classList.add('active');
         circle.classList.add('vibrating');
         circle.innerText = '🔊';
@@ -336,7 +345,7 @@
         }
         if (sweepInterval) clearInterval(sweepInterval);
         isRunning = false;
-        btn.innerText = 'Start Ejection Frequency';
+        btn.innerText = 'Start Audio Pulse';
         btn.classList.remove('active');
         circle.classList.remove('vibrating');
         circle.innerText = '💧';
@@ -364,7 +373,7 @@
       const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
       
       if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Test this tool on your phone and share your results!</p>';
+        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Try this tool and share your experience!</p>';
         return;
       }
 
@@ -382,7 +391,7 @@
         `;
       }).join('');
 
-      const avg = (totalStars / stored.length).toFixed(1);
+      const avg = stored.length > 0 ? (totalStars / stored.length).toFixed(1) : "0.0";
       document.getElementById('avg-val').innerText = avg;
     }
 
