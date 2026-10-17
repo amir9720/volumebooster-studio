@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reverse Mi Music Online | Play Audio Backwards Free</title>
-  <meta name="description" content="Reverse audio files and play songs backwards online. The fastest Mi Music audio editor for reversing tracks with zero loss, no server uploads, and instant WAV export.">
+  <meta name="description" content="Reverse audio files and play songs backwards online. A fast Mi Music audio editor for reversing tracks with no server uploads and instant WAV export.">
   <style>
     :root {
       /* MiMusic Clean Light Theme Palette */
@@ -69,6 +69,10 @@
     .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
     .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    
+    /* Added Image placeholders for steps */
+    .step-image { width: 100%; height: 120px; background-color: var(--surface); border-radius: 8px; margin-bottom: 12px; object-fit: cover; border: 1px solid var(--border); }
+
     .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
     .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
@@ -77,21 +81,6 @@
     .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
     .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
-
-    /* Interactive Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
-    .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
-    .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
-    @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
-    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.2); }
-    .review-inputs select { color: #d97706; font-weight: bold; }
-    .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; box-shadow: 0 2px 4px rgba(236, 72, 153, 0.2); }
-    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-    .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
-    .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 
     /* Accordion FAQ */
     .faq-container { margin-bottom: 45px; }
@@ -122,12 +111,12 @@
   <main class="container">
     <div class="tool-box">
       <h1>Reverse Audio Player</h1>
-      <p class="lead">Play Mi Music files backwards online. Reverses the waveform in device memory and exports uncompressed WAV tracks with zero quality loss.</p>
+      <p class="lead">Play your audio files backwards online. Invert the waveform locally in your browser memory and export uncompressed WAV tracks.</p>
 
       <div class="dropzone" onclick="document.getElementById('file-input').click()">
         <div class="dropzone-icon">🔄</div>
-        <div class="dropzone-text" id="file-label">Select Audio File (MP3, WAV, OGG, M4A)</div>
-        <div class="dropzone-sub">Processes 100% in local memory — no server transmission</div>
+        <div class="dropzone-text" id="file-label">Select Audio File (MP3, WAV, M4A)</div>
+        <div class="dropzone-sub">Processes securely in local memory — no server transmission</div>
         <input type="file" id="file-input" accept="audio/*" style="display:none" onchange="handleFile(event)">
       </div>
 
@@ -144,7 +133,7 @@
       <!-- Advanced Inversion Options -->
       <div class="advanced-toggle">
         <button class="advanced-btn" type="button" onclick="toggleAdvanced()">
-          ⚙️ <span>Advanced Reversal & Transient Settings</span>
+          ⚙️ <span>Advanced Reversal Settings</span>
         </button>
         <div class="advanced-content" id="advanced-box">
           <div class="adv-row">
@@ -162,80 +151,52 @@
       </div>
     </div>
 
-    <!-- 3-Step Tutorial -->
+    <!-- 3-Step Tutorial with Images -->
     <section class="tutorial-section">
       <h2 class="section-title">How to Play Audio Backwards</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-badge">1</div>
+          <img src="https://via.placeholder.com/400x250/fdf2f8/ec4899?text=Upload+Audio" alt="Step 1: Upload Audio" class="step-image">
           <h3>Upload Audio File</h3>
-          <p>Drop your Xiaomi music track, instrumental sample, or voice clip into the container above.</p>
+          <p>Drop your music track, instrumental sample, or voice clip into the container above.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">2</div>
+          <img src="https://via.placeholder.com/400x250/fdf2f8/ec4899?text=Invert+Waveform" alt="Step 2: Invert Audio" class="step-image">
           <h3>Invert Sample Arrays</h3>
-          <p>Click the reverse button to mathematically reverse audio waveform indices in device memory.</p>
+          <p>Click the reverse button to invert the audio waveform sequentially in device memory.</p>
         </div>
         <div class="step-card">
           <div class="step-badge">3</div>
+          <img src="https://via.placeholder.com/400x250/fdf2f8/ec4899?text=Play+and+Download" alt="Step 3: Download" class="step-image">
           <h3>Audition & Download</h3>
-          <p>Listen to your reversed audio track immediately and export a crystal-clear studio WAV file.</p>
+          <p>Listen to your reversed audio track immediately and export a clean WAV file to your device.</p>
         </div>
       </div>
     </section>
 
     <!-- Why Choose Our Tool Section -->
     <section>
-      <h2 class="section-title">Why Choose Our Online Audio Reverser?</h2>
+      <h2 class="section-title">Features of Our Online Reverser</h2>
       <div class="features-grid">
         <div class="feature-box">
           <h4>🔒 Absolute Confidentiality</h4>
-          <p>Confidential voice recordings and music stems never leave your device. Zero remote storage.</p>
+          <p>Voice recordings and music stems never leave your device. All processing happens locally in your browser.</p>
         </div>
         <div class="feature-box">
           <h4>🎧 Studio PCM Export</h4>
-          <p>Exports pristine uncompressed WAV files ready for immediate timeline importing.</p>
+          <p>Exports uncompressed WAV files ready for immediate use in audio editing timelines without generation loss.</p>
         </div>
         <div class="feature-box">
-          <h4>⚡ Instant RAM Computation</h4>
-          <p>No waiting in server processing queues. Reversal takes less than 3 seconds on modern devices.</p>
+          <h4>⚡ Efficient RAM Computation</h4>
+          <p>No waiting in server processing queues. The reversal speed relies on your device's CPU and is highly efficient.</p>
         </div>
         <div class="feature-box">
           <h4>🛡️ Anti-Click Protection</h4>
-          <p>Automatic micro-fade envelopes prevent harsh digital pops at the start and finish of reversed tracks.</p>
+          <p>Optional micro-fade envelopes can help prevent harsh digital pops at the start and finish of reversed tracks.</p>
         </div>
       </div>
-    </section>
-
-    <!-- Interactive Reviews System -->
-    <section class="reviews-box">
-      <div class="reviews-header">
-        <div>
-          <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">Did the reversed playback work smoothly? Share your experience below</p>
-        </div>
-        <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
-          <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
-        </div>
-      </div>
-
-      <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
-        <div class="review-inputs">
-          <input type="text" id="user-name" placeholder="Your Name or Nickname" required maxlength="30">
-          <select id="user-stars">
-            <option value="5">★★★★★ (5/5)</option>
-            <option value="4">★★★★☆ (4/5)</option>
-            <option value="3">★★★☆☆ (3/5)</option>
-            <option value="2">★★☆☆☆ (2/5)</option>
-            <option value="1">★☆☆☆☆ (1/5)</option>
-          </select>
-        </div>
-        <textarea id="user-comment" placeholder="What audio did you reverse (song, voice memo)? Share your feedback..." required rows="3" maxlength="400"></textarea>
-        <button type="submit" class="review-submit-btn">Post Feedback</button>
-      </form>
-
-      <div id="reviews-feed"></div>
     </section>
 
     <!-- Accordion FAQ -->
@@ -243,11 +204,11 @@
       <h2 class="section-title">Frequently Asked Questions</h2>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Is this tool a Xiaomi audio editor alternative?
+          Is this tool an audio editor alternative?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Yes! If your default Mi Music app lacks advanced editing features like audio reversal, this web tool provides a secure, locally-processed alternative without requiring third-party APK installations.
+          Yes! If your default media player lacks advanced editing features like audio reversal, this web tool provides a secure, locally-processed alternative without requiring you to install additional software.
         </div>
       </div>
 
@@ -257,37 +218,37 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Not at all. Digital reversal simply reorders the sequence of numerical sample values in memory. The bit depth, dynamic range, and frequency spectrum remain 100% mathematically intact.
+          Not at all. Digital reversal simply reorders the sequence of numerical sample values in memory. The bit depth, dynamic range, and frequency spectrum remain mathematically intact.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Is there any limit to the audio file duration?
+          Is there a limit to the audio file length?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Because processing occurs within your browser's local RAM rather than an external web server, there are no artificial time or size caps. You can invert short percussion soundbites or multi-hour ambient recordings as long as your device has available memory.
+          Because processing occurs within your browser's local RAM rather than an external web server, the maximum file length depends entirely on your specific device's available memory limits.
         </div>
       </div>
     </section>
 
     <!-- Comprehensive SEO Guide -->
     <article class="seo-article">
-      <h2>The Art of Audio Reversal and Inverted Envelope Acoustics</h2>
-      <p>Have you ever listened to a cinematic movie trailer where a cymbal seems to swell backwards out of silence, or wondered what your favorite vocal melody sounds like when played in reverse? The art of playing sound backwards—often referred to as <strong>backmasking</strong> or tape reversal—has an illustrious history in experimental music and sound design.</p>
-      <p>In analog recording studios, achieving this effect required manually unspooling physical magnetic tape reels from playback heads and threading them upside down. Today, modern digital signal processing allows us to manipulate audio time coordinates instantly, right from your browser.</p>
+      <h2>The Art of Audio Reversal and Inverted Acoustics</h2>
+      <p>Have you ever listened to a cinematic trailer where a sound seems to swell backwards out of silence, or wondered what a melody sounds like when played in reverse? The art of playing sound backwards—often referred to as <strong>backmasking</strong> or tape reversal—has an illustrious history in experimental music and sound design.</p>
+      <p>In traditional analog studios, achieving this effect required manually unspooling magnetic tape reels from playback heads and threading them upside down. Today, modern digital signal processing allows us to manipulate audio time coordinates instantly, right from a web browser.</p>
 
-      <h3>The Physics of Inverted ADSR Acoustic Envelopes</h3>
+      <h3>The Physics of Inverted Acoustic Envelopes</h3>
       <p>Why does playing an everyday sound backwards create such an eerie sensation? The answer lies in acoustic envelope physics: <strong>Attack, Decay, Sustain, and Release (ADSR)</strong>.</p>
       <ul>
-        <li><strong>Natural Forward Audio:</strong> When a drum is struck or a door slams shut, physical acoustic energy bursts outward almost instantaneously (sub-5 millisecond Attack). As vibrational energy dissipates into ambient air, the sound undergoes a long, natural decay tail. Our brains are hardwired to anticipate this.</li>
-        <li><strong>Inverted Reverse Audio:</strong> When you flip the waveform using a <strong>Mi Music audio editor</strong>, the long natural decay becomes a gradual, swelling crescendo. The brain strains to anticipate the source because acoustic energy is accumulating rather than dissipating.</li>
+        <li><strong>Natural Forward Audio:</strong> When a drum is struck or a door slams shut, physical acoustic energy bursts outward almost instantaneously (rapid Attack). As the vibrational energy dissipates, the sound undergoes a long, natural decay tail. Our brains are hardwired to anticipate this normal pattern.</li>
+        <li><strong>Inverted Reverse Audio:</strong> When you flip the waveform using an audio editor, that long natural decay becomes a gradual, swelling crescendo. The brain struggles to identify the sound source because acoustic energy is accumulating rather than dissipating naturally.</li>
       </ul>
 
-      <h3>How Web Audio Array Reversal Operates Client-Side</h3>
-      <p>Unlike slow online converters that force you to upload personal songs across cloud servers, our utility operates via client-side Web Audio API buffers. When you drop an audio file into the tool, the browser decodes the compressed format into raw floating-point Pulse-Code Modulation (PCM) samples inside volatile memory (RAM).</p>
-      <p>Our algorithm traverses each independent audio channel array (left and right) and reverses the sample indices mathematically. The entire process takes seconds, consumes zero network data, and guarantees absolute confidentiality for your media.</p>
+      <h3>How Web Audio Reversal Works Client-Side</h3>
+      <p>Unlike some online converters that require you to upload songs to a cloud server, our utility operates via client-side Web Audio API buffers. When you select an audio file, your browser decodes the format into floating-point Pulse-Code Modulation (PCM) samples inside its own memory (RAM).</p>
+      <p>Our algorithm traverses each independent audio channel array (left and right) and reverses the sample indices mathematically. The process consumes zero network data after the initial page load, providing security and privacy for your media files.</p>
     </article>
   </main>
 
@@ -348,7 +309,7 @@
         revBtn.disabled = false;
         revBtn.innerText = 'Reverse Again';
       } catch (err) {
-        alert('Could not decode audio file. Ensure the format is valid.');
+        alert('Could not decode audio file. Ensure the format is valid and the file is not too large.');
         revBtn.disabled = false;
         revBtn.innerText = 'Reverse Audio Track';
       }
@@ -390,60 +351,6 @@
       answer.style.display = isOpen ? 'none' : 'block';
       arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
     }
-
-    /* Real Interactive Reviews Engine (LocalStorage) */
-    const STORAGE_KEY = 'user_reviews_reverseaudio';
-
-    function loadReviews() {
-      const feed = document.getElementById('reviews-feed');
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      
-      if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Invert your audio file and share your experience!</p>';
-        return;
-      }
-
-      let totalStars = 0;
-      feed.innerHTML = stored.map(r => {
-        totalStars += r.rating;
-        return `
-          <div class="review-entry">
-            <div class="review-entry-header">
-              <strong style="color: var(--text-dark); font-size: 0.95rem; font-weight: 700;">${escapeHtml(r.name)}</strong>
-              <span style="color: #f59e0b; font-size: 0.9rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
-            </div>
-            <p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; line-height: 1.6;">${escapeHtml(r.comment)}</p>
-          </div>
-        `;
-      }).join('');
-
-      const avg = (totalStars / stored.length).toFixed(1);
-      document.getElementById('avg-val').innerText = avg;
-    }
-
-    function submitReview(e) {
-      e.preventDefault();
-      const name = document.getElementById('user-name').value.trim();
-      const rating = parseInt(document.getElementById('user-stars').value);
-      const comment = document.getElementById('user-comment').value.trim();
-
-      if (!name || !comment) return;
-
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      stored.unshift({ name, rating, comment, time: Date.now() });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-
-      document.getElementById('review-form').reset();
-      loadReviews();
-    }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.innerText = text;
-      return div.innerHTML;
-    }
-
-    window.addEventListener('DOMContentLoaded', loadReviews);
   </script>
 </body>
 </html>
