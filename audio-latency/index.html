@@ -3,114 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bluetooth Audio Latency Test - Measure Sound Delay & AV Sync</title>
-  <meta name="description" content="Test audio delay and synchronization for Bluetooth headphones, TWS earbuds, and soundbars online. Calibrated millisecond AV clock with zero installations.">
+  <title>Xiaomi Earbuds Latency Test | Mi Audio Sync Delay</title>
+  <meta name="description" content="Test audio delay and synchronization for Bluetooth headphones and TWS earbuds. The best Bluetooth headphone test online to fix Mi audio sync delay.">
   <style>
     :root {
-      --bg: #090d16;
-      --card-bg: #111827;
-      --border: #1f2937;
+      /* MiMusic Clean Light Theme Palette */
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
       --accent: #3b82f6;
       --accent-hover: #2563eb;
-      --flash: #ffffff;
+      --flash: #f8fafc;
       --danger: #ef4444;
-      --text: #f9fafb;
-      --muted: #9ca3af;
-      --surface: #0c121e;
+      --text: #334155;
+      --text-dark: #0f172a;
+      --muted: #64748b;
+      --surface: #eff6ff;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 16px 60px; line-height: 1.6; }
+    body { 
+      background: var(--bg); 
+      background-image: linear-gradient(180deg, #eff6ff 0%, #f8fafc 400px);
+      color: var(--text); 
+      min-height: 100vh; 
+      display: flex; flex-direction: column; align-items: center; 
+      padding: 0 16px 60px; line-height: 1.6; 
+    }
 
-    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
-    .brand { color: #fff; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    /* Top Brand Navigation */
+    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); margin-bottom: 30px; }
+    .brand { color: var(--text-dark); font-size: 1.25rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
     .brand span { color: var(--accent); }
-    .back-home { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
-    .back-home:hover { color: #fff; }
+    .back-home { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .back-home:hover { color: var(--accent); }
 
     .container { width: 100%; max-width: 820px; }
-    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); text-align: center; }
-    h1 { font-size: 2rem; margin-bottom: 8px; color: #fff; }
-    .lead { color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; }
+    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); text-align: center; }
+    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
+    .lead { color: var(--muted); font-size: 0.95rem; font-weight: 500; margin-bottom: 24px; }
 
     /* Flash Target Box */
-    .flash-arena { width: 100%; height: 160px; border-radius: 14px; background: var(--surface); border: 2px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 24px; transition: background-color 0.04s ease; cursor: pointer; user-select: none; }
-    .flash-arena.active-pulse { background: var(--flash); color: #000; border-color: #fff; }
+    .flash-arena { width: 100%; height: 160px; border-radius: 14px; background: var(--card-bg); border: 3px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 24px; transition: background-color 0.04s ease; cursor: pointer; user-select: none; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1); }
+    .flash-arena.active-pulse { background: var(--text-dark); color: #fff; border-color: var(--text-dark); box-shadow: 0 4px 20px rgba(15, 23, 42, 0.4); }
     .flash-icon { font-size: 2.5rem; margin-bottom: 6px; }
-    .flash-text { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.04em; }
+    .flash-text { font-size: 1.1rem; font-weight: 800; letter-spacing: 0.04em; color: var(--text-dark); }
+    .active-pulse .flash-text { color: #fff; }
 
     .control-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
-    .btn { background: var(--accent); color: #fff; border: none; padding: 14px 26px; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.2s; }
-    .btn:hover { background: var(--accent-hover); }
-    .btn-secondary { background: #1e293b; color: var(--muted); border: 1px solid var(--border); }
-    .btn-secondary:hover { background: #334155; color: #fff; }
+    .btn { background: var(--accent); color: #fff; border: none; padding: 14px 26px; border-radius: 12px; font-size: 1rem; font-weight: 800; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25); }
+    .btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .btn-secondary { background: #f1f5f9; color: var(--text-dark); border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .btn-secondary:hover { background: #e2e8f0; color: var(--text-dark); transform: translateY(-2px); }
 
     /* Advanced Latency Controls */
     .advanced-toggle { margin-top: 24px; border-top: 1px dashed var(--border); padding-top: 16px; text-align: left; }
-    .advanced-btn { background: none; border: none; color: var(--accent); font-size: 0.9rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-    .advanced-content { display: none; margin-top: 14px; padding: 14px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid var(--border); }
-    .adv-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.88rem; color: var(--muted); }
+    .advanced-btn { background: none; border: none; color: var(--accent); font-size: 0.95rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .advanced-content { display: none; margin-top: 14px; padding: 18px; background: var(--surface); border-radius: 12px; border: 1px solid #bfdbfe; }
+    .adv-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
     .adv-row:last-child { margin-bottom: 0; }
-    select, input[type=number] { background: #1e293b; color: #fff; border: 1px solid var(--border); padding: 5px 10px; border-radius: 6px; outline: none; }
+    select, input[type=number] { background: #fff; color: var(--text-dark); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; outline: none; font-weight: 500; }
 
     /* Step-by-Step Tutorial Box */
     .tutorial-section { margin-top: 45px; }
-    .section-title { font-size: 1.4rem; color: #fff; margin-bottom: 18px; font-weight: 700; text-align: left; }
+    .section-title { font-size: 1.4rem; color: var(--text-dark); margin-bottom: 18px; font-weight: 800; text-align: left; }
     .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; }
+    .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
-    .step-card h3 { font-size: 1rem; color: #fff; margin-bottom: 6px; }
-    .step-card p { font-size: 0.85rem; color: var(--muted); }
+    .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
+    .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
     /* Why Choose Us */
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .feature-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
-    .feature-box h4 { color: #fff; font-size: 0.95rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-    .feature-box p { font-size: 0.83rem; color: var(--muted); }
+    .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
-    /* Real Interactive Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; }
+    /* Interactive Reviews System */
+    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
     .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
     .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
     .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
     @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #1e293b; color: #fff; border: 1px solid var(--border); padding: 10px; border-radius: 8px; outline: none; font-size: 0.88rem; }
-    .review-inputs select { color: #f59e0b; font-weight: bold; }
+    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
+    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
+    .review-inputs select { color: #d97706; font-weight: bold; }
     .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.88rem; transition: 0.2s; }
-    .review-submit-btn:hover { background: var(--accent-hover); }
+    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2); }
+    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
     .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
     .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 
     /* Accordion FAQ */
     .faq-container { margin-bottom: 45px; }
-    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
-    .faq-question { width: 100%; padding: 16px 20px; text-align: left; background: none; border: none; color: #fff; font-size: 0.95rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-question:hover { color: var(--accent); }
+    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+    .faq-question { width: 100%; padding: 16px 20px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-question:hover { color: var(--accent); background: var(--surface); }
     .faq-arrow { font-size: 0.8rem; transition: transform 0.2s; }
-    .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.88rem; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 12px; }
+    .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.95rem; font-weight: 500; line-height: 1.6; border-top: 1px solid var(--surface); padding-top: 12px; }
 
     /* Comprehensive SEO Article */
-    .seo-article { background: rgba(17, 24, 39, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: #cbd5e1; font-size: 0.93rem; line-height: 1.7; text-align: left; }
-    .seo-article h2 { color: #fff; font-size: 1.35rem; margin-bottom: 14px; }
-    .seo-article h3 { color: #e2e8f0; font-size: 1.1rem; margin: 24px 0 10px; }
-    .seo-article p { margin-bottom: 16px; }
-    .seo-article ul { padding-left: 20px; margin-bottom: 16px; }
+    .seo-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: var(--text); font-size: 0.95rem; line-height: 1.7; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .seo-article h2 { color: var(--text-dark); font-size: 1.45rem; font-weight: 800; margin-bottom: 14px; }
+    .seo-article h3 { color: var(--text-dark); font-size: 1.15rem; font-weight: 700; margin: 24px 0 10px; }
+    .seo-article p { margin-bottom: 16px; font-weight: 500; }
+    .seo-article ul { padding-left: 20px; margin-bottom: 16px; font-weight: 500; }
     .seo-article li { margin-bottom: 6px; }
 
-    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; font-weight: 500; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
   </style>
 </head>
 <body>
 
   <header class="nav">
-    <a href="/" class="brand">⚡ GOODEV<span>Audio</span></a>
-    <a href="/" class="back-home">&larr; Back to All Tools</a>
+    <a href="/" class="brand">🎵 MiMusic<span>.net</span></a>
+    <a href="/" class="back-home">&larr; Studio Home</a>
   </header>
 
   <main class="container">
     <div class="tool-box">
       <h1>Bluetooth Audio Latency Sync & Delay Test</h1>
-      <p class="lead">Assess sound lag and AV synchronization on wireless headphones, earbuds, and gaming headsets.</p>
+      <p class="lead">Assess sound lag and AV synchronization on Xiaomi wireless earbuds, headphones, and gaming headsets.</p>
 
       <div class="flash-arena" id="flash-box" onclick="triggerSyncPulse()">
         <div class="flash-icon" id="flash-icon">⚡</div>
@@ -154,7 +166,7 @@
 
     <!-- 3-Step Tutorial -->
     <section class="tutorial-section">
-      <h2 class="section-title">How to Measure Bluetooth Audio Latency in 3 Steps</h2>
+      <h2 class="section-title">How to Measure Bluetooth Audio Latency</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-badge">1</div>
@@ -192,25 +204,24 @@
         </div>
         <div class="feature-box">
           <h4>📱 Platform Agnostic</h4>
-          <p>Operates identically on iOS Safari, Android, Windows Bluetooth stacks, and macOS.</p>
+          <p>Operates identically on iOS Safari, Android Chrome, Windows Bluetooth stacks, and macOS.</p>
         </div>
       </div>
     </section>
 
-    <!-- Real Interactive Reviews System (No Fake Data) -->
+    <!-- Interactive Reviews System -->
     <section class="reviews-box">
       <div class="reviews-header">
         <div>
-          <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem;">What headphones did you test and what delay did you observe? Share below</p>
+          <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
+          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">What headphones did you test and what delay did you observe? Share below</p>
         </div>
         <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: #fff;">5.0</span>
+          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
           <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
         </div>
       </div>
 
-      <!-- Live Submission Form -->
       <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
         <div class="review-inputs">
           <input type="text" id="user-name" placeholder="Your Name or Nickname" required maxlength="30">
@@ -226,7 +237,6 @@
         <button type="submit" class="review-submit-btn">Post Feedback</button>
       </form>
 
-      <!-- Live Dynamic Feed -->
       <div id="reviews-feed"></div>
     </section>
 
@@ -239,7 +249,7 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Wired 3.5mm jacks and USB-C audio transmit analog electrical signals at near light speed with sub-5ms delay. Bluetooth transmits audio as digitized binary packets over crowded 2.4GHz radio bands. Encoding the signal (via codecs like AAC or SBC), transmitting packets, and decoding them inside the earbuds introduces 50ms to 250ms of buffer delay.
+          Wired 3.5mm jacks transmit analog electrical signals at near light speed with sub-5ms delay. Bluetooth transmits audio as digitized binary packets over crowded 2.4GHz radio bands. Encoding the signal (via codecs like AAC or SBC), transmitting packets, and decoding them inside the earbuds introduces 50ms to 250ms of buffer delay.
         </div>
       </div>
 
@@ -255,7 +265,7 @@
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          How can I reduce audio latency on my device?
+          How can I fix Mi audio sync delay?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
@@ -264,36 +274,29 @@
       </div>
     </section>
 
-    <!-- Expert Human-Written SEO Guide -->
+    <!-- Comprehensive SEO Guide -->
     <article class="seo-article">
       <h2>The Mechanics of Bluetooth Codecs, Buffers, and Acoustic Desynchronization</h2>
       <p>Few sensory experiences are as quietly irritating as audio-visual desynchronization. You watch an actor deliver an intense line on screen, and their mouth finishes moving a split second before the consonants hit your ears. Or you tap your screen in a competitive rhythm or shooter game, and the gunshot report arrives after your crosshair has already moved. In acoustic engineering, this disconnect is termed <em>lip-sync error</em> or <em>AV latency</em>.</p>
-      <p>While wired headsets provide effectively zero latency (under 5 milliseconds), cutting the cord introduces an elaborate chain of digital handshakes. Before a piece of audio can emanate from your wireless earbuds, your operating system must compress the raw PCM sound into a designated Bluetooth codec, slice the data into radio frequency packets, blast them across 2.4GHz radio waves, buffer them inside the receiver chip to prevent signal dropouts, and convert them back to analog voltage via a tiny onboard DAC.</p>
+      <p>While wired headsets provide effectively zero latency, cutting the cord introduces an elaborate chain of digital handshakes. Before a piece of audio can emanate from your wireless earbuds, your operating system must compress the raw PCM sound into a designated Bluetooth codec, slice the data into radio frequency packets, blast them across 2.4GHz radio waves, buffer them inside the receiver chip to prevent signal dropouts, and convert them back to analog voltage via a tiny onboard DAC. Doing a <strong>Xiaomi earbuds latency test</strong> allows you to measure this exact delay.</p>
 
       <h3>Deciphering Bluetooth Codec Speeds</h3>
-      <p>The specific codec negotiated between your smartphone or computer and your wireless audio receiver fundamentally dictates total transmission latency:</p>
+      <p>The specific codec negotiated between your smartphone and your wireless audio receiver fundamentally dictates total transmission latency:</p>
       <ul>
         <li><strong>SBC (Subband Codec):</strong> The universal mandatory baseline codec supported by all Bluetooth hardware. Typical latency ranges from <strong>150ms to 250ms</strong>. Perfectly fine for music, but clearly sluggish during video gaming.</li>
-        <li><strong>AAC (Advanced Audio Coding):</strong> Standard on Apple iPhone, iPad, and Mac. While AAC delivers pristine perceptual fidelity for music, its latency on Android devices can vary wildly between <strong>120ms and 200ms</strong> due to divergent hardware encoder implementations.</li>
-        <li><strong>aptX Low Latency & aptX Adaptive:</strong> Engineered by Qualcomm specifically for interactive media. These protocols drop buffer windows down to approximately <strong>40ms to 80ms</strong>, approaching imperceptible wired speeds.</li>
-        <li><strong>LDAC:</strong> Sony's high-resolution audio codec focuses heavily on massive bitrates (up to 990kbps). Because it prioritizes bandwidth over raw speed, latency can climb past <strong>200ms</strong>, making it fantastic for hi-res album listening but sub-optimal for fast gaming.</li>
+        <li><strong>AAC (Advanced Audio Coding):</strong> Standard on many mobile devices. While AAC delivers pristine perceptual fidelity for music, its latency on Android devices can vary wildly between <strong>120ms and 200ms</strong>.</li>
+        <li><strong>aptX Low Latency & aptX Adaptive:</strong> Engineered by Qualcomm specifically for interactive media. These protocols drop buffer windows down to approximately <strong>40ms to 80ms</strong>.</li>
       </ul>
 
       <h3>Why YouTube Sync Videos Often Deceive You</h3>
       <p>Many users attempt to test audio delay by searching for "audio sync test" videos on YouTube. Unfortunately, this approach is fundamentally flawed. Modern browser media players communicate with the operating system's audio stack. When you watch a pre-recorded YouTube video on modern versions of iOS, Android, or Windows, the operating system inquires about your Bluetooth buffer size and automatically delays the video frames to match the audio stream!</p>
-      <p>Because our tool generates dynamic, unbuffered tone pulses in real time via the hardware clock (<code>AudioContext.currentTime</code>), no compensation can be applied. What you see and hear is your actual raw, unmasked hardware connection performance.</p>
-
-      <h3>Actionable Steps to Minimize Audio Lag</h3>
-      <ul>
-        <li><strong>Toggle Low-Latency / Gaming Mode:</strong> Most modern TWS earbuds offer a low-latency mode via capacitive tap gestures or companion smartphone apps. This shrinks buffer margins to ~60ms.</li>
-        <li><strong>Mitigate 2.4GHz Radio Congestion:</strong> Bluetooth and legacy 2.4GHz Wi-Fi share the same frequency spectrum. Connecting your phone or laptop to a 5GHz or 6GHz Wi-Fi band substantially cuts packet retransmissions.</li>
-        <li><strong>Keep Distance Minimal:</strong> Keeping your smartphone in your front pocket or close on your desk prevents packet drops that force Bluetooth controllers into conservative, high-latency buffering modes.</li>
-      </ul>
+      <p>Because our tool generates dynamic, unbuffered tone pulses in real time via the hardware clock, no compensation can be applied. What you see and hear is your actual raw, unmasked hardware connection performance. This makes it the most reliable <strong>Bluetooth headphone test online</strong> available without installing any extra software.</p>
     </article>
   </main>
 
   <footer>
-    <p>&copy; 2026 GOODEV Audio Studio. Free browser-based audio tools.</p>
+    <p style="margin-bottom: 8px;">&copy; 2026 MiMusic.net Studio. Free browser-based DSP tools.</p>
+    <p style="font-size: 0.75rem; color: #94a3b8;">Disclaimer: MiMusic.net is an independent web utility and is not affiliated with or endorsed by Xiaomi Inc. or the official Mi Music app.</p>
   </footer>
 
   <script>
@@ -351,8 +354,8 @@
         clearInterval(loopInterval);
         loopInterval = null;
         autoBtn.innerText = 'Start Rhythm Loop (1.2s)';
-        autoBtn.style.background = '#1e293b';
-        autoBtn.style.color = 'var(--muted)';
+        autoBtn.style.background = '#f1f5f9';
+        autoBtn.style.color = 'var(--text-dark)';
       }
     }
 
@@ -377,7 +380,7 @@
       const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
       
       if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.88rem; font-style: italic; padding: 10px 0;">No reviews posted yet. Test your wireless headphones and share your latency results!</p>';
+        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Test your wireless headphones and share your latency results!</p>';
         return;
       }
 
@@ -387,10 +390,10 @@
         return `
           <div class="review-entry">
             <div class="review-entry-header">
-              <strong style="color: #cbd5e1; font-size: 0.92rem;">${escapeHtml(r.name)}</strong>
-              <span style="color: #f59e0b; font-size: 0.85rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+              <strong style="color: var(--text-dark); font-size: 0.95rem; font-weight: 700;">${escapeHtml(r.name)}</strong>
+              <span style="color: #f59e0b; font-size: 0.9rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
             </div>
-            <p style="color: var(--muted); font-size: 0.86rem; line-height: 1.5;">${escapeHtml(r.comment)}</p>
+            <p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; line-height: 1.6;">${escapeHtml(r.comment)}</p>
           </div>
         `;
       }).join('');
