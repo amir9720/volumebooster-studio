@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Sound Enhancer & Vocal Clarity | MiMusic Web Tools</title>
-  <meta name="description" content="Improve Xiaomi sound quality and vocal clarity online. Use our advanced Mi sound enhancer to fix muddy audio, optimize MIUI audio settings, and isolate speech.">
+  <meta name="description" content="Improve sound quality and vocal clarity online. Use our browser-based sound enhancer to fix muddy audio and isolate speech without uploading files.">
   <style>
     :root {
       /* MiMusic Clean Light Theme (Matches Homepage) */
@@ -60,26 +60,24 @@
     .player-zone { display: none; margin-top: 24px; text-align: left; padding: 20px; background: var(--surface); border-radius: 14px; border: 1px solid var(--border); }
     audio { width: 100%; border-radius: 8px; margin-bottom: 12px; outline: none; }
 
+    /* Step-by-Step Tutorial Box */
+    .tutorial-section { margin-top: 45px; }
+    .section-title { font-size: 1.4rem; color: var(--text-dark); margin-bottom: 18px; font-weight: 800; text-align: left; }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
+    .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    
+    /* Added Image placeholders for steps */
+    .step-image { width: 100%; height: 120px; background-color: var(--surface); border-radius: 8px; margin-bottom: 12px; object-fit: cover; border: 1px solid var(--border); }
+    
+    .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
+    .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
+
     /* Features Grid */
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 40px 0; }
     .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
     .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
-
-    /* Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
-    .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
-    .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
-    @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
-    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); }
-    .review-inputs select { color: #d97706; font-weight: bold; }
-    .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2); }
-    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-    .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
-    .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 
     /* SEO Article & FAQ */
     .seo-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: var(--text); font-size: 0.95rem; line-height: 1.7; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 40px; }
@@ -107,8 +105,8 @@
 
   <main class="container">
     <div class="tool-box">
-      <h1>Mi Sound Enhancer & Vocal Clarity</h1>
-      <p class="lead">Optimize your MIUI audio settings online. Cut through muddy bass frequencies and isolate human speech for crystal clear podcast and lecture playback.</p>
+      <h1>Voice Clarity Enhancer</h1>
+      <p class="lead">Optimize your audio files online. Cut through muddy bass frequencies and isolate human speech for clearer podcast and lecture playback.</p>
 
       <div class="dropzone" onclick="document.getElementById('file-input').click()">
         <div class="dropzone-icon">🗣️</div>
@@ -118,7 +116,7 @@
 
       <div class="controls-grid">
         <div class="control-group">
-          <label>Mud Cut (High-Pass) <span class="val-display" id="hp-val">120 Hz</span></label>
+          <label>Mud Cut (High-Pass Filter) <span class="val-display" id="hp-val">120 Hz</span></label>
           <input type="range" id="hp-slider" min="20" max="400" value="120" oninput="document.getElementById('hp-val').innerText = this.value + ' Hz'">
         </div>
         <div class="control-group">
@@ -138,15 +136,40 @@
       </div>
     </div>
 
+    <!-- 3-Step Tutorial with Image Placeholders -->
+    <section class="tutorial-section">
+      <h2 class="section-title">How to Improve Vocal Clarity</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-badge">1</div>
+          <img src="https://via.placeholder.com/400x250/eef2ff/4f46e5?text=Select+Audio+File" alt="Step 1: Upload File" class="step-image">
+          <h3>Load Your Recording</h3>
+          <p>Tap the box above to select an audio file from your device. The file is processed locally without uploading.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-badge">2</div>
+          <img src="https://via.placeholder.com/400x250/eef2ff/4f46e5?text=Adjust+Filters" alt="Step 2: Adjust Settings" class="step-image">
+          <h3>Adjust the Filters</h3>
+          <p>Use the Mud Cut slider to remove background rumble, and the Presence Boost to bring the voice forward.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-badge">3</div>
+          <img src="https://via.placeholder.com/400x250/eef2ff/4f46e5?text=Export+WAV" alt="Step 3: Download" class="step-image">
+          <h3>Enhance & Export</h3>
+          <p>Click the enhance button. Once processing finishes, you can preview the audio and save it to your phone.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Why Choose Us -->
     <section class="features-grid">
       <div class="feature-box">
         <h4>🎙️ Speech Isolation</h4>
-        <p>Boosts the 2kHz-5kHz frequency range where human consonants reside, making muffled voices intelligible.</p>
+        <p>Boosts the 2.5kHz-5kHz frequency range where human consonants reside, making muffled voices intelligible.</p>
       </div>
       <div class="feature-box">
-        <h4>🎛️ MIUI Audio Equalizer Alt</h4>
-        <p>Works directly in your browser memory without needing complex system equalizer settings or root access.</p>
+        <h4>🔒 Processed Locally</h4>
+        <p>Your audio files stay inside your browser's memory and are never uploaded to remote servers.</p>
       </div>
       <div class="feature-box">
         <h4>🔇 Remove Rumble</h4>
@@ -154,70 +177,41 @@
       </div>
     </section>
 
-    <!-- Reviews System -->
-    <section class="reviews-box">
-      <div class="reviews-header">
-        <div>
-          <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">Did this sound enhancer improve your audio quality? Share below!</p>
-        </div>
-        <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">5.0</span>
-          <span style="color: #f59e0b; font-size: 1.15rem;">★★★★★</span>
-        </div>
-      </div>
-
-      <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
-        <div class="review-inputs">
-          <input type="text" id="user-name" placeholder="Your Name" required maxlength="30">
-          <select id="user-stars">
-            <option value="5">★★★★★ (5/5)</option>
-            <option value="4">★★★★☆ (4/5)</option>
-            <option value="3">★★★☆☆ (3/5)</option>
-          </select>
-        </div>
-        <textarea id="user-comment" placeholder="How did this tool help clear up your audio files?" required rows="3" maxlength="300"></textarea>
-        <button type="submit" class="review-submit-btn">Post Feedback</button>
-      </form>
-
-      <div id="reviews-feed"></div>
-    </section>
-
     <!-- Accordion FAQ -->
     <div style="margin-bottom: 30px;">
       <h2 style="color: var(--text-dark); font-size: 1.3rem; font-weight: 800; margin-bottom: 16px;">Frequently Asked Questions</h2>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          How can I improve Xiaomi sound quality for podcasts?
+          How can I improve audio quality for podcasts?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Standard music equalizers boost bass, which makes speech sound "muddy" and hard to understand. To improve Xiaomi sound quality for speech, you need to cut frequencies below 150Hz (using a High-Pass filter) and boost the "presence" frequencies between 3kHz and 5kHz. Our Mi Sound Enhancer tool applies these exact DSP filters automatically.
+          Standard music equalizers often boost bass, which makes speech sound "muddy" and hard to understand. To improve sound quality for speech, you need to cut frequencies below 150Hz and boost the frequencies between 3kHz and 5kHz. Our tool applies these exact DSP filters automatically.
         </div>
       </div>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Does this tool change my system MIUI audio settings?
+          Does this tool change my system audio settings?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          No. This is a browser-based utility that processes the specific audio file you upload. It permanently applies the clarity filters and exports a new WAV file. It does not alter your device's global MIUI audio settings or hardware equalizer.
+          No. This is a browser-based utility that processes the specific audio file you upload. It applies the clarity filters and exports a new audio file. It does not alter your device's global audio settings or hardware equalizer.
         </div>
       </div>
     </div>
 
     <!-- SEO Article -->
     <article class="seo-article">
-      <h2>Optimizing Audio Clarity and Mi Sound Enhancer Settings</h2>
-      <p>Listening to poorly recorded lectures, interviews, or voice memos can be a frustrating experience. Often, background room rumble and excessive low-end frequencies mask the consonants of human speech, making the audio sound muffled or "muddy." While many users search for the perfect <strong>MIUI audio settings</strong> or system-level <strong>Mi sound enhancer</strong> profiles to fix this, applying a global equalizer to your device isn't always the best solution, as it will also negatively affect how your music sounds.</p>
+      <h2>Optimizing Audio Clarity and Understanding Sound Equalization</h2>
+      <p>Listening to poorly recorded lectures, interviews, or voice memos can be a frustrating experience. Often, background room rumble and excessive low-end frequencies mask the consonants of human speech, making the audio sound muffled or "muddy." While many users search for the perfect equalizer profiles to fix this, applying a global equalizer to your device isn't always the best solution, as it will also affect how your music sounds.</p>
       
       <h3>The Science of Speech Intelligibility</h3>
-      <p>Human speech intelligibility primarily relies on a specific band of frequencies. When we struggle to understand spoken words, the solution is rarely to simply turn up the volume. Instead, we must reshape the audio spectrum:</p>
+      <p>Human speech intelligibility primarily relies on specific bands of frequencies. When we struggle to understand spoken words, the solution is rarely to simply turn up the volume. Instead, we must reshape the audio spectrum:</p>
       <ul>
-        <li><strong>High-Pass Filtering (Mud Cut):</strong> Frequencies below 100Hz-120Hz contain almost no useful speech information. They mostly consist of microphone handling noise, wind, air conditioning hum, and traffic rumble. By completely cutting these frequencies, we instantly remove the "mud" masking the voice.</li>
+        <li><strong>High-Pass Filtering (Mud Cut):</strong> Frequencies below 100Hz-120Hz contain almost no useful speech information. They mostly consist of microphone handling noise, wind, air conditioning hum, and traffic rumble. By cutting these frequencies, we remove the "mud" masking the voice.</li>
         <li><strong>Presence Boost:</strong> The crispness of consonants (like T, K, P, and S) lives in the 2.5kHz to 5kHz range. A gentle EQ boost in this specific zone brings the voice forward in the mix, drastically improving clarity.</li>
       </ul>
-      <p>Our web-based audio tool applies these precise studio-grade EQ curves directly to your file inside your browser's memory, providing a permanent fix without requiring you to tweak your phone's internal equalizer settings every time you switch between podcasts and music.</p>
+      <p>Our web-based audio tool utilizes the Web Audio API to apply these precise studio-grade EQ curves directly to your file inside your browser's memory, providing a permanent fix for individual files.</p>
     </article>
 
   </main>
@@ -296,7 +290,7 @@
         processBtn.disabled = false;
         processBtn.innerText = 'Enhance Again';
       } catch (err) {
-        alert('Could not decode audio file.');
+        alert('Could not decode audio file. Make sure it is a valid format.');
         processBtn.disabled = false;
         processBtn.innerText = 'Enhance Audio Quality';
       }
@@ -325,40 +319,6 @@
       answer.style.display = isOpen ? 'none' : 'block';
       arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
     }
-
-    /* Reviews Engine */
-    const STORAGE_KEY = 'tool_reviews_vocalclarity';
-    function loadReviews() {
-      const feed = document.getElementById('reviews-feed');
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-style: italic;">No reviews yet. Share your experience!</p>';
-        return;
-      }
-      let totalStars = 0;
-      feed.innerHTML = stored.map(r => {
-        totalStars += r.rating;
-        return `<div class="review-entry">
-            <div class="review-entry-header"><strong style="color: var(--text-dark);">${escapeHtml(r.name)}</strong><span style="color: #f59e0b;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span></div>
-            <p style="color: var(--muted); font-size: 0.9rem; margin-top: 4px;">${escapeHtml(r.comment)}</p>
-          </div>`;
-      }).join('');
-      document.getElementById('avg-val').innerText = (totalStars / stored.length).toFixed(1);
-    }
-    function submitReview(e) {
-      e.preventDefault();
-      const name = document.getElementById('user-name').value.trim();
-      const rating = parseInt(document.getElementById('user-stars').value);
-      const comment = document.getElementById('user-comment').value.trim();
-      if (!name || !comment) return;
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      stored.unshift({ name, rating, comment, time: Date.now() });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-      document.getElementById('review-form').reset();
-      loadReviews();
-    }
-    function escapeHtml(text) { const div = document.createElement('div'); div.innerText = text; return div.innerHTML; }
-    window.addEventListener('DOMContentLoaded', loadReviews);
   </script>
 </body>
 </html>
