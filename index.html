@@ -74,14 +74,6 @@
     /* Main Container */
     .main-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-    /* Content Article Section */
-    .content-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; padding: 34px 28px; margin-bottom: 65px; text-align: left; color: var(--text); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
-    .content-article h2 { color: var(--text-dark); font-size: 1.6rem; font-weight: 800; margin-bottom: 16px; border-bottom: 2px solid var(--surface); padding-bottom: 10px; }
-    .content-article h3 { color: var(--text-dark); font-size: 1.25rem; font-weight: 700; margin: 24px 0 10px; }
-    .content-article p { margin-bottom: 16px; font-size: 1rem; font-weight: 500; }
-    .content-article ul { padding-left: 20px; margin-bottom: 16px; font-size: 1rem; font-weight: 500; }
-    .content-article li { margin-bottom: 8px; }
-
     /* Suite Section Headers */
     .suite-section { margin-bottom: 65px; }
     .section-head { text-align: left; margin-bottom: 26px; border-bottom: 2px solid var(--surface); padding-bottom: 14px; }
@@ -141,11 +133,12 @@
     <div class="nav-inner">
       <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
       <nav class="nav-links">
-        <a href="#about-app" class="nav-link">About Mi Music</a>
-        <a href="#troubleshooting" class="nav-link">Troubleshooting</a>
-        <a href="#free-tools" class="nav-link">Online Tools</a>
+        <!-- لینک‌ها به صفحات مجزا که ساخته‌ایم هدایت می‌شوند -->
+        <a href="about.html" class="nav-link">About Mi Music</a>
+        <a href="install.html" class="nav-link">Install & Update</a>
+        <a href="troubleshooting.html" class="nav-link">Troubleshooting</a>
         <a href="guide.html" class="nav-link" style="color: var(--accent); font-weight: 700;">📖 User Guide</a>
-        <a href="/volume-booster/" class="nav-btn">Fix Audio Output</a>
+        <a href="#free-tools" class="nav-btn">Online Tools</a>
       </nav>
     </div>
   </header>
@@ -156,54 +149,14 @@
     <h1>Everything You Need to Know About <span>Mi Music</span></h1>
     <p class="hero-lead">Your definitive guide to the default music player for Xiaomi and MIUI devices. Discover features, learn how to fix common playback issues, and explore our free suite of online audio utilities designed to enhance your listening experience.</p>
     <div class="hero-actions">
-      <a href="#about-app" class="cta-primary">Explore the Guide</a>
+      <!-- هدایت به صفحه مقالات -->
+      <a href="about.html" class="cta-primary">Explore the Guide</a>
       <a href="#free-tools" class="cta-secondary">Jump to Audio Tools &rarr;</a>
     </div>
   </section>
 
   <!-- Main Content Area -->
   <main class="main-wrapper">
-
-    <!-- Article Section: About Mi Music -->
-    <article class="content-article" id="about-app">
-      <h2>Introduction to the Mi Music App</h2>
-      <p>The <strong>Mi Music</strong> app is the default, pre-installed audio player found on millions of Xiaomi, Redmi, and POCO smartphones running the MIUI or HyperOS operating systems. Designed to be a lightweight yet feature-rich media hub, it allows users to manage their local audio files, create playlists, and, in certain regions, stream music online.</p>
-      
-      <h3>Key Features of the Player</h3>
-      <ul>
-        <li><strong>Local File Management:</strong> Automatically scans your device for MP3, FLAC, WAV, and AAC files, organizing them by artist, album, and folder.</li>
-        <li><strong>Integrated Equalizer:</strong> Provides a customizable EQ and preset sound profiles tailored for different types of headphones and Xiaomi earbuds.</li>
-        <li><strong>Sleep Timer:</strong> A built-in function to automatically stop playback after a set duration, perfect for bedtime listening.</li>
-        <li><strong>Lyrics Support:</strong> Displays synchronized lyrics for supported tracks, enhancing the listening experience.</li>
-      </ul>
-
-      <h3>How to Update the App</h3>
-      <p>To ensure you have the latest features and bug fixes, you should regularly update the app. You can do this through the <strong>GetApps</strong> store (Xiaomi's official app marketplace) or via the Google Play Store, depending on your region. Simply search for "Mi Music" and tap "Update" if a new version is available.</p>
-    </article>
-
-    <!-- Article Section: Troubleshooting -->
-    <article class="content-article" id="troubleshooting">
-      <h2>Troubleshooting Common Mi Music Issues</h2>
-      <p>While the app is generally stable, users occasionally encounter playback or library issues. Here are solutions to the most common problems:</p>
-
-      <h3>1. Songs Not Showing in the Library</h3>
-      <p>If you've recently downloaded audio files but they aren't appearing in the app, the media scanner might not have detected them.</p>
-      <ul>
-        <li><strong>Solution:</strong> Go to the app settings, select "Advanced Settings," and tap "Filter audio files." Ensure that the file size and duration filters aren't accidentally hiding your new tracks. You can also manually trigger a rescan from the menu.</li>
-      </ul>
-
-      <h3>2. Muffled Sound or Low Volume</h3>
-      <p>If your tracks sound unusually quiet or muffled, the issue might be with the file itself or your device's audio settings.</p>
-      <ul>
-        <li><strong>Solution:</strong> Check the MIUI sound effects and equalizer settings. If the original audio file was recorded at a low volume, you can use our <a href="/volume-booster/" style="color:var(--accent);">Volume Booster tool</a> to amplify the file safely before playing it.</li>
-      </ul>
-
-      <h3>3. App Crashing or Freezing</h3>
-      <p>Sometimes cached data can cause the app to misbehave or crash unexpectedly.</p>
-      <ul>
-        <li><strong>Solution:</strong> Go to your phone's Settings > Apps > Manage Apps > Mi Music. Tap on "Clear Data" and select "Clear Cache." This will not delete your downloaded songs, but it resets the app's temporary files.</li>
-      </ul>
-    </article>
 
     <!-- Suite Section: Free Online Tools -->
     <section class="suite-section" id="free-tools">
@@ -292,7 +245,7 @@
           <div class="card-action">Launch Tool &rarr;</div>
         </a>
 
-        <!-- 7. Video to Audio (Newly Added) -->
+        <!-- 7. Video to Audio -->
         <a href="/video-to-audio/" class="tool-card">
           <div>
             <div class="card-top">
@@ -305,7 +258,7 @@
           <div class="card-action">Launch Tool &rarr;</div>
         </a>
 
-        <!-- 8. Audio Latency (Newly Added) -->
+        <!-- 8. Audio Latency -->
         <a href="/audio-latency/" class="tool-card">
           <div>
             <div class="card-top">
@@ -318,7 +271,7 @@
           <div class="card-action">Launch Tool &rarr;</div>
         </a>
 
-        <!-- 9. Voice Changer (Newly Added) -->
+        <!-- 9. Voice Changer -->
         <a href="/voice-transformer/" class="tool-card">
           <div>
             <div class="card-top">
@@ -331,7 +284,7 @@
           <div class="card-action">Launch Tool &rarr;</div>
         </a>
 
-        <!-- 10. Reverse Audio (Newly Added) -->
+        <!-- 10. Reverse Audio -->
         <a href="/reverse-audio/" class="tool-card">
           <div>
             <div class="card-top">
@@ -344,7 +297,7 @@
           <div class="card-action">Launch Tool &rarr;</div>
         </a>
 
-        <!-- 11. Binaural Beats (Newly Added) -->
+        <!-- 11. Binaural Beats -->
         <a href="/binaural-waves/" class="tool-card">
           <div>
             <div class="card-top">
@@ -357,7 +310,7 @@
           <div class="card-action">Launch Tool &rarr;</div>
         </a>
 
-        <!-- 12. Hearing Test (Newly Added) -->
+        <!-- 12. Hearing Test -->
         <a href="/hearing-test/" class="tool-card">
           <div>
             <div class="card-top">
