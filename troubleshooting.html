@@ -3,95 +3,245 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Music Troubleshooting | Fix Playback Errors</title>
-  <meta name="description" content="Common solutions to fix Mi Music app crashes, missing songs in the library, and audio output glitches on Xiaomi devices.">
+  <title>Troubleshooting Mi Music App | Fix Playback & Bugs</title>
+  <meta name="description" content="Comprehensive guide to fixing common Mi Music app problems. Resolve issues with local music not showing, background playback stopping, and app crashes.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
-    :root { --bg: #f8fafc; --card-bg: #ffffff; --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca; --text: #334155; --text-dark: #0f172a; --muted: #64748b; --surface: #f1f5f9; }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
-    body { background: var(--bg); color: var(--text); line-height: 1.6; }
-    
-    .header-nav { width: 100%; border-bottom: 1px solid var(--border); background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
-    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
-    .brand-logo { color: var(--text-dark); font-size: 1.25rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    /* Global Variables & Base */
+    :root {
+      --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
+      --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca; 
+      --accent-light: #e0e7ff; --text-dark: #0f172a; --text: #334155; 
+      --muted: #64748b; --success: #10b981; --warning: #f59e0b;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05); --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); line-height: 1.7; }
+
+    /* Navigation */
+    .header-nav { width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .brand-logo { color: var(--text-dark); font-size: 1.3rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
     .brand-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 20px; align-items: center; }
-    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.2s; }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
     .nav-link:hover { color: var(--accent); }
-    .nav-btn { background: var(--accent); color: #fff; text-decoration: none; padding: 8px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; transition: 0.2s; }
-    .nav-btn:hover { background: var(--accent-hover); box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
 
-    .hero-banner { background: var(--surface); padding: 50px 20px; text-align: center; border-bottom: 1px solid var(--border); }
-    .hero-banner h1 { font-size: 2.5rem; color: var(--text-dark); font-weight: 800; margin-bottom: 12px; }
-    .hero-banner p { font-size: 1.1rem; color: var(--muted); max-width: 600px; margin: 0 auto; }
-    
-    .container { max-width: 800px; margin: 40px auto 60px; padding: 0 20px; }
-    .content-article { background: var(--card-bg); padding: 40px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    .featured-image { width: 100%; height: 250px; border-radius: 12px; background: #e0e7ff; margin-bottom: 30px; object-fit: cover; border: 1px solid var(--border); }
-    
-    .content-article h3 { color: var(--text-dark); font-size: 1.3rem; font-weight: 800; margin: 28px 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--surface); }
-    .content-article p { margin-bottom: 16px; font-size: 1.05rem; }
-    
-    .fix-box { background: #eff6ff; border-left: 4px solid var(--accent); padding: 18px 24px; border-radius: 0 8px 8px 0; margin-bottom: 24px; font-size: 1rem; color: var(--text-dark); font-weight: 500; }
+    /* Article Header */
+    .article-header { background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); padding: 60px 24px 40px; text-align: center; border-bottom: 1px solid var(--border); }
+    .article-header h1 { font-size: 2.5rem; font-weight: 900; color: var(--text-dark); margin-bottom: 16px; letter-spacing: -0.02em; }
+    .article-header p { font-size: 1.1rem; color: var(--muted); max-width: 700px; margin: 0 auto; }
 
-    footer { border-top: 1px solid var(--border); background: var(--card-bg); padding: 40px 20px; text-align: center; color: var(--muted); font-size: 0.9rem; }
-    .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 20px; flex-wrap: wrap; }
-    .footer-links a { color: var(--text-dark); text-decoration: none; font-weight: 600; transition: 0.2s; }
-    .footer-links a:hover { color: var(--accent); }
+    /* Content Area */
+    .content-container { max-width: 800px; margin: 40px auto 80px; padding: 0 24px; }
+    
+    /* Issue Cards */
+    .issue-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 30px; margin-bottom: 30px; box-shadow: var(--shadow-sm); }
+    .issue-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid var(--surface-alt); padding-bottom: 16px; }
+    .issue-icon { width: 40px; height: 40px; background: #fee2e2; color: #dc2626; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    .issue-header h2 { font-size: 1.4rem; font-weight: 800; color: var(--text-dark); }
+    
+    .solution-box { background: #f0fdf4; border-left: 4px solid #10b981; padding: 20px; border-radius: 0 12px 12px 0; margin-top: 20px; }
+    .solution-box h3 { color: #047857; font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .solution-box ol { margin-left: 20px; color: #065f46; }
+    .solution-box li { margin-bottom: 8px; }
+
+    /* Info/Warning Boxes */
+    .info-box { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 20px; border-radius: 0 12px 12px 0; margin-bottom: 40px; color: #1e3a8a; }
+
+    /* FAQ Section */
+    .faq-title { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); margin: 50px 0 20px; text-align: center; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; }
+    .faq-question { width: 100%; padding: 20px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1.05rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-answer { display: none; padding: 0 20px 20px; color: var(--muted); font-size: 0.95rem; line-height: 1.6; border-top: 1px solid var(--surface-alt); padding-top: 16px; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
+    .footer-col h5 { color: var(--text-dark); font-size: 1rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; padding: 0; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a { color: var(--muted); text-decoration: none; transition: 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 
+  <!-- Navigation -->
   <header class="header-nav">
     <div class="nav-inner">
       <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
       <nav class="nav-links">
-        <a href="about.html" class="nav-link">About App</a>
-        <a href="install.html" class="nav-link">Installation</a>
-        <a href="troubleshooting.html" class="nav-link" style="color: var(--accent); font-weight: 700;">Troubleshooting</a>
-        <a href="tools.html" class="nav-btn">Online Tools</a>
+        <a href="/about.html" class="nav-link">App Features</a>
+        <a href="/install.html" class="nav-link">Installation</a>
+        <a href="/troubleshooting.html" class="nav-link" style="color: var(--accent); font-weight: 700;">Troubleshooting</a>
+        <a href="/tools.html" class="nav-link">Free Audio Tools</a>
       </nav>
     </div>
   </header>
 
-  <div class="hero-banner">
-    <h1>Troubleshooting & Fixes</h1>
-    <p>Official guide to resolving app crashes, library sync issues, and audio output glitches.</p>
+  <!-- Article Header -->
+  <div class="article-header">
+    <h1>App Troubleshooting Guide</h1>
+    <p>Having trouble with your music player? We have compiled the most common issues users face with the app and provided quick, proven solutions.</p>
   </div>
 
-  <main class="container">
-    <div class="content-article">
-      <img src="https://via.placeholder.com/800x300/e0e7ff/4f46e5?text=Fixing+Playback+Issues" alt="Troubleshooting Audio Errors" class="featured-image">
+  <!-- Main Content -->
+  <main class="content-container">
+    
+    <div class="info-box">
+      <strong>Before you begin:</strong> Many app glitches can be solved simply by restarting your smartphone. Please try a quick reboot before attempting the more advanced fixes below.
+    </div>
+
+    <!-- Issue 1 -->
+    <div class="issue-card">
+      <div class="issue-header">
+        <div class="issue-icon">🎵</div>
+        <h2>Local Music Files Not Showing</h2>
+      </div>
+      <p>You have downloaded MP3 files to your phone's internal storage, but the app's library remains empty or is missing specific tracks.</p>
       
-      <h3>Issue 1: Downloaded Songs Are Missing</h3>
-      <p>If you downloaded an MP3 or received an audio file via WhatsApp, but it isn't showing up in your library, the media scanner likely filtered it out.</p>
-      <div class="fix-box">
-        <strong>The Fix:</strong> Go to the app Settings > Advanced Settings > "Filter audio files". Ensure the "By size" (e.g. hiding files under 500KB) and "By length" filters aren't hiding your track. Then, manually tap "Scan local music".
-      </div>
-
-      <h3>Issue 2: The App Crashes Randomly</h3>
-      <p>Frequent crashes or frozen screens are usually caused by corrupted cache files after a recent MIUI system update.</p>
-      <div class="fix-box">
-        <strong>The Fix:</strong> Navigate to your phone's Settings > Apps > Manage Apps > Music. Tap "Clear Data" and select "Clear Cache". (Do not worry, this will not delete your actual MP3 files or playlists).
-      </div>
-
-      <h3>Issue 3: Audio Plays but is Too Quiet</h3>
-      <p>If your device volume is maxed out but the song is still quiet, the original file was likely exported with low gain or compression.</p>
-      <div class="fix-box">
-        <strong>The Fix:</strong> The app cannot fix the file's inherent volume. Use our free online <a href="/volume-booster/" style="color:var(--accent); font-weight:bold; text-decoration:none;">Volume Booster</a> tool to safely amplify the file's waveform, download the louder version, and play it in Mi Music.
+      <div class="solution-box">
+        <h3>✅ How to Fix It:</h3>
+        <ol>
+          <li>Open the app and go to <strong>Settings</strong> (usually a gear icon).</li>
+          <li>Navigate to <strong>Advanced Settings</strong>.</li>
+          <li>Look for <strong>Filter audio files</strong>.</li>
+          <li>Ensure that the settings for "By size" and "By length" are turned off or set very low. Sometimes the app hides short or small audio files thinking they are ringtones or voice notes.</li>
+          <li>Go back to the main screen, pull down to refresh, and let the media scanner run.</li>
+        </ol>
       </div>
     </div>
+
+    <!-- Issue 2 -->
+    <div class="issue-card">
+      <div class="issue-header">
+        <div class="issue-icon">🛑</div>
+        <h2>App Keeps Crashing or Freezing</h2>
+      </div>
+      <p>The application closes unexpectedly while playing a song, or the interface completely freezes and becomes unresponsive to touch.</p>
+      
+      <div class="solution-box">
+        <h3>✅ How to Fix It:</h3>
+        <ol>
+          <li>Go to your phone's main <strong>Settings > Apps > Manage Apps</strong>.</li>
+          <li>Search for "Music" or "Mi Music" and tap on it.</li>
+          <li>Tap on <strong>Clear Data</strong> at the bottom.</li>
+          <li>Select <strong>Clear Cache</strong> (Do not select Clear All Data, as it might reset your custom playlists).</li>
+          <li>Force stop the app and reopen it.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Issue 3 -->
+    <div class="issue-card">
+      <div class="issue-header">
+        <div class="issue-icon">🔋</div>
+        <h2>Music Stops Playing in Background</h2>
+      </div>
+      <p>When you lock your screen or switch to another application, the music abruptly stops playing after a few minutes.</p>
+      
+      <div class="solution-box">
+        <h3>✅ How to Fix It:</h3>
+        <ol>
+          <li>Go to your phone's main <strong>Settings > Battery</strong>.</li>
+          <li>Find the battery optimization or background activity settings for individual apps.</li>
+          <li>Locate the Music app in the list.</li>
+          <li>Change its background setting to <strong>No Restrictions</strong>. MIUI's aggressive battery saver often kills background audio to save power.</li>
+        </ol>
+      </div>
+    </div>
+
+    <h2 class="faq-title">General Support FAQ</h2>
+    
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Why are lyrics not displaying for my songs?
+        <span>▼</span>
+      </button>
+      <div class="faq-answer">
+        The player requires embedded lyrics within the ID3 tags of the audio file, or a separate .lrc file located in the exact same folder with the exact same name as the audio file. If neither is present, no lyrics will be displayed.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        How do I remove ads from the app?
+        <span>▼</span>
+      </button>
+      <div class="faq-answer">
+        On Xiaomi devices, you can often disable ads by opening the app Settings, going to Advanced Settings, and toggling off "Show ads" or "Receive recommendations."
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Is my audio file corrupted?
+        <span>▼</span>
+      </button>
+      <div class="faq-answer">
+        If a specific track refuses to play but others work fine, the file might be corrupted. Try uploading that specific file to our free <a href="/tools.html" style="color: var(--accent); text-decoration: none;">Audio Tools</a> (like the Volume Booster) to see if the browser engine can decode it. If it fails there too, the file is broken.
+      </div>
+    </div>
+
   </main>
 
+  <!-- Global Footer -->
   <footer>
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">App Features</a>
-      <a href="install.html">Install Guide</a>
-      <a href="tools.html">Free Audio Tools</a>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="brand-logo" style="margin-bottom: 16px;">🎵 MiMusic<span>.net</span></a>
+        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
+        <p style="font-weight: 600; color: var(--text-dark);">Contact: Sobl5910@gmail.com</p>
+      </div>
+      <div class="footer-col">
+        <h5>Popular Tools</h5>
+        <ul>
+          <li><a href="/volume-booster/">Volume Booster</a></li>
+          <li><a href="/speaker-cleaner/">Speaker Cleaner</a></li>
+          <li><a href="/8d-audio/">8D Spatial Audio</a></li>
+          <li><a href="/pitch-shifter/">Pitch & Tempo</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Analysis & Fixes</h5>
+        <ul>
+          <li><a href="/vocal-clarity/">Vocal Clarity</a></li>
+          <li><a href="/video-to-audio/">Video to Audio</a></li>
+          <li><a href="/decibel-meter/">Decibel Meter</a></li>
+          <li><a href="/audio-latency/">Latency Test</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="/about.html">About Mi Music</a></li>
+          <li><a href="/install.html">Installation Guide</a></li>
+          <li><a href="/troubleshooting.html" style="color: var(--accent);">Troubleshooting</a></li>
+          <li><a href="/tools.html">All Audio Tools</a></li>
+        </ul>
+      </div>
     </div>
-    <p>&copy; 2026 MiMusic.net. Independent audio guides and web tools.</p>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MiMusic.net. Independent audio guides and web tools.</p>
+    </div>
   </footer>
 
+  <script>
+    // FAQ Toggle Script
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const arrow = btn.querySelector('span');
+      const isOpen = answer.style.display === 'block';
+      answer.style.display = isOpen ? 'none' : 'block';
+      arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
+  </script>
 </body>
 </html>
