@@ -3,421 +3,278 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xiaomi Speaker Cleaner Assistant | MiMusic Online</title>
-  <meta name="description" content="Attempt to clear speaker water and dust using our 165Hz acoustic wave generator. A helpful utility for muffled sound on Xiaomi & MIUI devices.">
+  <title>Xiaomi Speaker Cleaner Assistant - Eject Water & Dust | Mi Music Tools</title>
+  <meta name="description" content="Use our free 165Hz acoustic wave generator to safely eject trapped water and fine dust from your smartphone's speaker grills. Works directly in your browser.">
+  <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
+    /* Global Variables & Base */
     :root {
-      /* MiMusic Clean Light Theme Palette */
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --border: #e2e8f0;
-      --accent: #f59e0b;
-      --accent-hover: #d97706;
-      --danger: #ef4444;
-      --text: #334155;
-      --text-dark: #0f172a;
-      --muted: #64748b;
-      --surface: #f1f5f9;
+      --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
+      --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca; 
+      --accent-light: #e0e7ff; --text-dark: #0f172a; --text: #334155; 
+      --muted: #64748b; --success: #10b981; --warning: #f59e0b;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05); --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { 
-      background: var(--bg); 
-      background-image: linear-gradient(180deg, #fffbeb 0%, #f8fafc 400px);
-      color: var(--text); 
-      min-height: 100vh; 
-      display: flex; flex-direction: column; align-items: center; 
-      padding: 0 16px 60px; line-height: 1.6; 
+    body { background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* Navigation (Matching Homepage) */
+    .header-nav { width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .brand-logo { color: var(--text-dark); font-size: 1.3rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .nav-link:hover { color: var(--accent); }
+
+    /* Tool Workspace Area */
+    .workspace { padding: 60px 24px 40px; background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); text-align: center; }
+    .tool-container { max-width: 700px; margin: 0 auto; background: var(--surface); border-radius: 24px; padding: 40px; box-shadow: var(--shadow-md); border: 1px solid var(--border); }
+    .tool-title { font-size: 2.2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 16px; letter-spacing: -0.03em; }
+    .tool-desc { font-size: 1.05rem; color: var(--muted); margin-bottom: 30px; }
+    
+    .status-ring { width: 120px; height: 120px; border-radius: 50%; background: var(--surface-alt); margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; font-size: 3rem; border: 4px solid var(--border); transition: 0.3s; }
+    .status-ring.active { border-color: var(--accent); animation: pulse 1.5s infinite; color: var(--accent); }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(79, 70, 229, 0); } 100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); } }
+
+    .btn-main { background: var(--accent); color: #fff; border: none; padding: 16px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); width: 100%; max-width: 300px; }
+    .btn-main:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .btn-main.stop { background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); }
+    .btn-main.stop:hover { background: #dc2626; }
+
+    /* Disclaimer Box */
+    .disclaimer { margin-top: 30px; padding: 16px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; font-size: 0.85rem; color: #92400e; text-align: left; }
+    .disclaimer strong { color: #b45309; }
+
+    /* Guide / How to use */
+    .content-section { max-width: 1000px; margin: 40px auto 60px; padding: 0 24px; }
+    .section-title { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); margin-bottom: 30px; text-align: center; }
+    
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 60px; }
+    .step-card { background: var(--surface); padding: 24px; border-radius: 16px; border: 1px solid var(--border); position: relative; }
+    .step-number { position: absolute; top: -15px; left: 24px; width: 34px; height: 34px; background: var(--text-dark); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; }
+    .step-card h4 { font-size: 1.1rem; color: var(--text-dark); margin: 10px 0; }
+    .step-card p { font-size: 0.9rem; color: var(--muted); }
+
+    /* FAQ Section */
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; }
+    .faq-question { width: 100%; padding: 20px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1.05rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-answer { display: none; padding: 0 20px 20px; color: var(--muted); font-size: 0.95rem; line-height: 1.6; border-top: 1px solid var(--surface-alt); padding-top: 16px; }
+
+    /* Footer (Matching Homepage) */
+    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
+    .footer-col h5 { color: var(--text-dark); font-size: 1rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; padding: 0; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a { color: var(--muted); text-decoration: none; transition: 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .tool-container { padding: 30px 20px; }
     }
-
-    /* Top Brand Navigation */
-    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--surface); margin-bottom: 30px; }
-    .brand { color: var(--text-dark); font-size: 1.25rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-    .brand span { color: var(--accent); }
-    .back-home { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
-    .back-home:hover { color: var(--accent); }
-
-    .container { width: 100%; max-width: 820px; }
-    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); text-align: center; }
-    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
-    .lead { color: var(--muted); font-size: 0.95rem; font-weight: 500; margin-bottom: 24px; }
-
-    .wave-visualizer { width: 130px; height: 130px; border-radius: 50%; background: #fffbeb; border: 3px solid var(--accent); margin: 0 auto 28px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; transition: transform 0.3s ease; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15); }
-    .vibrating { animation: pulse 0.15s infinite alternate; }
-    @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
-      100% { transform: scale(1.1); box-shadow: 0 0 40px rgba(245, 158, 11, 0.6); }
-    }
-
-    .btn { background: var(--accent); color: #fff; border: none; padding: 16px 28px; border-radius: 12px; font-size: 1.05rem; font-weight: 800; cursor: pointer; transition: 0.2s; width: 100%; max-width: 380px; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25); }
-    .btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
-    .btn.active { background: var(--danger); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3); }
-
-    /* Advanced Frequency Controls */
-    .advanced-toggle { margin-top: 28px; border-top: 1px dashed var(--border); padding-top: 16px; text-align: left; }
-    .advanced-btn { background: none; border: none; color: var(--accent); font-size: 0.95rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-    .advanced-content { display: none; margin-top: 14px; padding: 18px; background: #fff; border-radius: 12px; border: 1px solid var(--border); }
-    .adv-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
-    .adv-row:last-child { margin-bottom: 0; }
-    select { background: #fff; color: var(--text-dark); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; outline: none; font-weight: 500; }
-
-    /* Notice Box for Disclaimer */
-    .disclaimer-box { margin-top: 24px; padding: 16px; background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; text-align: left; font-size: 0.85rem; color: #991b1b; }
-    .disclaimer-box strong { color: #7f1d1d; }
-
-    /* Step-by-Step Tutorial Box */
-    .tutorial-section { margin-top: 45px; }
-    .section-title { font-size: 1.4rem; color: var(--text-dark); margin-bottom: 18px; font-weight: 800; text-align: left; }
-    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
-    .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
-    .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
-
-    /* Why Choose Us */
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-    .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
-
-    /* Interactive Reviews System */
-    .reviews-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 40px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
-    .review-form-box { background: var(--surface); padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
-    .review-inputs { display: grid; grid-template-columns: 1fr 150px; gap: 12px; margin-bottom: 12px; }
-    @media (max-width: 500px) { .review-inputs { grid-template-columns: 1fr; } }
-    .review-inputs input, .review-inputs select, .review-form-box textarea { background: #fff; color: var(--text-dark); border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; font-weight: 500; }
-    .review-inputs input:focus, .review-form-box textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2); }
-    .review-inputs select { color: #d97706; font-weight: bold; }
-    .review-form-box textarea { width: 100%; margin-bottom: 12px; resize: vertical; }
-    .review-submit-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; box-shadow: 0 2px 4px rgba(245, 158, 11, 0.2); }
-    .review-submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-    .review-entry { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
-    .review-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-
-    /* Accordion FAQ */
-    .faq-container { margin-bottom: 45px; }
-    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-    .faq-question { width: 100%; padding: 16px 20px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-question:hover { color: var(--accent); background: var(--surface); }
-    .faq-arrow { font-size: 0.8rem; transition: transform 0.2s; }
-    .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.95rem; font-weight: 500; line-height: 1.6; border-top: 1px solid var(--surface); padding-top: 12px; }
-
-    /* Comprehensive SEO Article */
-    .seo-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: var(--text); font-size: 0.95rem; line-height: 1.7; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    .seo-article h2 { color: var(--text-dark); font-size: 1.45rem; font-weight: 800; margin-bottom: 14px; }
-    .seo-article h3 { color: var(--text-dark); font-size: 1.15rem; font-weight: 700; margin: 24px 0 10px; }
-    .seo-article p { margin-bottom: 16px; font-weight: 500; }
-    .seo-article ul { padding-left: 20px; margin-bottom: 16px; font-weight: 500; }
-    .seo-article li { margin-bottom: 6px; }
-
-    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; font-weight: 500; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
   </style>
 </head>
 <body>
 
-  <header class="nav">
-    <a href="/" class="brand">🎵 MiMusic<span>.net</span></a>
-    <a href="/" class="back-home">&larr; Studio Home</a>
+  <!-- Global Header -->
+  <header class="header-nav">
+    <div class="nav-inner">
+      <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
+      <nav class="nav-links">
+        <a href="/about.html" class="nav-link">App Features</a>
+        <a href="/install.html" class="nav-link">Installation</a>
+        <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 700;">Free Audio Tools</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="container">
-    <div class="tool-box">
-      <h1>Xiaomi Speaker Cleaner Assistant</h1>
-      <p class="lead">Try our 165Hz acoustic wave generator, which may help dislodge trapped water droplets and fine dust from your phone speakers.</p>
+  <!-- Interactive Tool Workspace -->
+  <main class="workspace">
+    <div class="tool-container">
+      <h1 class="tool-title">Speaker Cleaner Assistant</h1>
+      <p class="tool-desc">Try our 165Hz acoustic wave generator, designed to dislodge trapped water droplets and fine dust from your phone's speaker grills.</p>
+      
+      <div class="status-ring" id="statusIcon">💧</div>
+      
+      <button class="btn-main" id="playBtn" onclick="toggleTone()">Start Audio Pulse</button>
 
-      <div class="wave-visualizer" id="vis-circle">💧</div>
-
-      <button class="btn" id="cleaner-trigger" onclick="toggleCleaningTone()">Start Audio Pulse</button>
-
-      <!-- Advanced Tone Settings -->
-      <div class="advanced-toggle">
-        <button class="advanced-btn" type="button" onclick="toggleAdvanced()">
-          ⚙️ <span>Advanced Acoustic Wave Controls</span>
-        </button>
-        <div class="advanced-content" id="advanced-box">
-          <div class="adv-row">
-            <label>Waveform Type:</label>
-            <select id="wave-type">
-              <option value="sawtooth" selected>Sawtooth (Stronger Physical Cone Push)</option>
-              <option value="square">Square Wave (High Impulse)</option>
-              <option value="sine">Pure Sine Wave (Gentle Air Displacement)</option>
-            </select>
-          </div>
-          <div class="adv-row">
-            <label>Dynamic Sweep Mode (140Hz - 180Hz):</label>
-            <input type="checkbox" id="sweep-toggle" checked>
-          </div>
-        </div>
+      <div class="disclaimer">
+        <strong>Important Disclaimer:</strong> This tool generates audio frequencies to vibrate speaker components. It is provided "as is" and does not guarantee the successful removal of water or dust. If your device has suffered significant liquid exposure, turn it off immediately.
       </div>
+    </div>
+  </main>
 
-      <div class="disclaimer-box">
-        <strong>Important Disclaimer:</strong> This tool generates audio frequencies designed to vibrate speaker components. It is provided "as is" and does not guarantee the successful removal of water or dust, nor does it guarantee protection from hardware damage. If your device has suffered significant liquid exposure, please turn it off immediately and consult a professional repair service. Use this tool at your own discretion.
+  <!-- Feature Image (Adding Visual Value for SEO) -->
+  <div style="max-width: 800px; margin: 0 auto 40px; padding: 0 24px; text-align: center;">
+    <img src="speaker-water.jpg" alt="Smartphone ejecting water using sound waves" style="width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);">
+  </div>
+
+  <!-- Value-Added Content for SEO (Anti-Thin Content) -->
+  <section class="content-section">
+    <h2 class="section-title">How to Use the Speaker Cleaner</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h4>Maximize Volume</h4>
+        <p>Ensure your smartphone volume is set to 100%. Turn off silent or do-not-disturb modes.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h4>Face Speakers Down</h4>
+        <p>Hold your phone with the speaker grills facing downward to allow gravity to pull moisture out.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h4>Run Audio Pulse</h4>
+        <p>Click "Start Audio Pulse" and let the 165Hz tone play for about 60 to 90 seconds.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <h4>Wipe & Repeat</h4>
+        <p>Gently wipe the grill with a dry cloth. If the sound is still muffled, repeat the process.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO FAQ -->
+  <section class="content-section" style="max-width: 800px; margin-top: 0;">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        How does the 165Hz frequency clean my speaker?
+        <span>▼</span>
+      </button>
+      <div class="faq-answer">
+        The idea behind acoustic speaker cleaning utilities is to use physical vibration. Frequencies around 165Hz cause relatively wide physical excursions (movements) of miniature mobile speaker diaphragms. This aggressive vibration helps break the surface tension of trapped water droplets, forcing them out of the tiny speaker grill holes.
       </div>
     </div>
 
-    <!-- 3-Step Tutorial -->
-    <section class="tutorial-section">
-      <h2 class="section-title">How to Use the Speaker Cleaning Assistant</h2>
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-badge">1</div>
-          <h3>Increase Phone Volume</h3>
-          <p>Turn your smartphone volume up to a comfortable high level to increase speaker cone vibration.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-badge">2</div>
-          <h3>Angle Speakers Downward</h3>
-          <p>Tilt your phone with speaker grills pointing down, ideally over an absorbent cloth or tissue.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-badge">3</div>
-          <h3>Run Audio Pulse</h3>
-          <p>Trigger the 165Hz tone for 45 to 60 seconds to see if it helps clear the muffled sound.</p>
-        </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Can this tool fix a severely water-damaged phone?
+        <span>▼</span>
+      </button>
+      <div class="faq-answer">
+        No. This tool is designed only to clear out residual water from the speaker cavity after minor splashes or brief submersion (if your phone has water-resistance ratings). It cannot repair internal hardware corrosion or fix a short-circuited motherboard.
       </div>
-    </section>
+    </div>
 
-    <!-- Why Choose Our Tool Section -->
-    <section>
-      <h2 class="section-title">Features of Our Acoustic Utility</h2>
-      <div class="features-grid">
-        <div class="feature-box">
-          <h4>🛡️ Non-Invasive Approach</h4>
-          <p>Offers an alternative to poking pins or needles into speaker grills, which can damage delicate internal meshes.</p>
-        </div>
-        <div class="feature-box">
-          <h4>🔬 165Hz Physics</h4>
-          <p>Uses a specific frequency often associated with disrupting water surface tension in small speaker enclosures.</p>
-        </div>
-        <div class="feature-box">
-          <h4>📱 Browser-Based</h4>
-          <p>Runs directly in your mobile browser. No need to download third-party apps.</p>
-        </div>
-        <div class="feature-box">
-          <h4>💨 Dual Utility</h4>
-          <p>May assist in loosening dried dirt particles as well as fresh moisture.</p>
-        </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Do I need to download an app to use this?
+        <span>▼</span>
+      </button>
+      <div class="faq-answer">
+        Not at all. Our Speaker Cleaner runs entirely within your device's web browser using standard Web Audio APIs. There is no need to download third-party APKs or grant invasive permissions.
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Interactive Reviews System -->
-    <section class="reviews-box">
-      <div class="reviews-header">
-        <div>
-          <h3 style="color: var(--text-dark); font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">User Community Feedback</h3>
-          <p style="color: var(--muted); font-size: 0.85rem; font-weight: 500;">Did this tool help improve your speaker sound? Share below</p>
-        </div>
-        <div id="rating-summary" style="display: flex; align-items: center; gap: 8px;">
-          <span id="avg-val" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">0.0</span>
-          <span style="color: #cbd5e1; font-size: 1.15rem;">★★★★★</span>
-        </div>
-      </div>
-
-      <form class="review-form-box" id="review-form" onsubmit="submitReview(event)">
-        <div class="review-inputs">
-          <input type="text" id="user-name" placeholder="Your Name or Nickname" required maxlength="30">
-          <select id="user-stars">
-            <option value="5">★★★★★ (5/5)</option>
-            <option value="4">★★★★☆ (4/5)</option>
-            <option value="3">★★★☆☆ (3/5)</option>
-            <option value="2">★★☆☆☆ (2/5)</option>
-            <option value="1">★☆☆☆☆ (1/5)</option>
-          </select>
-        </div>
-        <textarea id="user-comment" placeholder="What phone model did you try this on? Share your experience..." required rows="3" maxlength="400"></textarea>
-        <button type="submit" class="review-submit-btn">Post Feedback</button>
-      </form>
-
-      <div id="reviews-feed"></div>
-    </section>
-
-    <!-- Accordion FAQ -->
-    <section class="faq-container">
-      <h2 class="section-title">Frequently Asked Questions</h2>
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          Is this the same as the "Clear Speaker" feature in MIUI settings?
-          <span class="faq-arrow">▼</span>
-        </button>
-        <div class="faq-answer">
-          Our tool is an advanced web-based alternative. While some Xiaomi phones have a basic "Clear Speaker" option built-in, our online generator gives you direct control over the waveform (Sawtooth vs Sine) and enables a dynamic frequency sweep (140Hz to 180Hz) to provide varying vibrations.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          Can this acoustic tone damage my smartphone speaker?
-          <span class="faq-arrow">▼</span>
-        </button>
-        <div class="faq-answer">
-          The tone is designed to operate within typical frequency ranges for mobile speakers. However, as with any audio playback at maximum volume, prolonged use could potentially cause wear. Use it in short bursts and avoid leaving it running continuously.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          Will this fix my water-damaged phone?
-          <span class="faq-arrow">▼</span>
-        </button>
-        <div class="faq-answer">
-          <strong>No.</strong> This tool is only designed to vibrate the speaker membrane to potentially dislodge superficial water droplets in the speaker grill. It cannot fix internal liquid damage to motherboards or circuits. If your phone is seriously waterlogged, seek professional repair immediately.
-        </div>
-      </div>
-    </section>
-
-    <!-- Comprehensive SEO Guide -->
-    <article class="seo-article">
-      <h2>Understanding Speaker Muffling and Acoustic Assistance</h2>
-      <p>Modern smartphones often feature water resistance ratings (like IP67 or IP68), designed to protect internal components from accidental splashes or brief submersion. However, even on resistant devices, water can become trapped in the exterior speaker port. Because speaker grills feature tiny holes, water droplets can adhere to the mesh due to surface tension, creating a temporary liquid barrier. This often results in distant, muffled, or distorted sound when playing <strong>Mi Music</strong> tracks or watching videos.</p>
-
-      <h3>The Theory Behind 165Hz Speaker Cleaning</h3>
-      <p>The idea behind acoustic speaker cleaning utilities is to use physical vibration to disrupt this surface tension:</p>
-      <ul>
-        <li><strong>Frequency Selection:</strong> Frequencies around 165Hz are often chosen because they tend to cause relatively wide physical excursions (movements) of miniature mobile speaker diaphragms compared to higher frequencies.</li>
-        <li><strong>Waveform Impact:</strong> While pure sine waves create smooth pressure changes, waveforms like sawtooth or square waves create more abrupt changes in air pressure, which some believe is more effective at shaking loose debris or moisture.</li>
-      </ul>
-
-      <h3>What to Do After Minor Water Exposure</h3>
-      <p>If your phone's speaker sounds muffled after getting wet, here are some common steps to try:</p>
-      <ul>
-        <li><strong>Dry the exterior:</strong> Gently wipe down the device with a dry, clean cloth. Avoid vigorous shaking.</li>
-        <li><strong>Use Gravity:</strong> Keep the speaker pointing downwards to encourage drainage.</li>
-        <li><strong>Try Acoustic Vibration:</strong> Run an audio pulse tool like our <strong>Xiaomi speaker cleaner</strong> assistant for a short duration to see if the vibration helps clear the grill.</li>
-        <li><strong>Allow Evaporation:</strong> Let the device air dry in a well-ventilated space. Avoid using heat sources like hair dryers, which can damage seals.</li>
-      </ul>
-      <p><em>Always remember that software cannot repair hardware. If problems persist, consult the manufacturer or a certified repair technician.</em></p>
-    </article>
-  </main>
-
+  <!-- Global Footer -->
   <footer>
-    <p style="margin-bottom: 8px;">&copy; 2026 MiMusic.net Studio. Free browser-based DSP tools.</p>
-    <p style="font-size: 0.75rem; color: #94a3b8;">Disclaimer: MiMusic.net is an independent web utility and is not affiliated with or endorsed by Xiaomi Inc. or the official Mi Music app. This tool is provided for utility purposes only and does not guarantee hardware protection or repair.</p>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="brand-logo" style="margin-bottom: 16px;">🎵 MiMusic<span>.net</span></a>
+        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
+        <p style="font-weight: 600; color: var(--text-dark);">Contact: Sobl5910@gmail.com</p>
+      </div>
+      <div class="footer-col">
+        <h5>Popular Tools</h5>
+        <ul>
+          <li><a href="/volume-booster/">Volume Booster</a></li>
+          <li><a href="/speaker-cleaner/" style="color: var(--accent);">Speaker Cleaner</a></li>
+          <li><a href="/8d-audio/">8D Spatial Audio</a></li>
+          <li><a href="/pitch-shifter/">Pitch & Tempo</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Analysis & Fixes</h5>
+        <ul>
+          <li><a href="/vocal-clarity/">Vocal Clarity</a></li>
+          <li><a href="/video-to-audio/">Video to Audio</a></li>
+          <li><a href="/decibel-meter/">Decibel Meter</a></li>
+          <li><a href="/audio-latency/">Latency Test</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="/about.html">About Mi Music</a></li>
+          <li><a href="/install.html">Installation Guide</a></li>
+          <li><a href="/troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="/tools.html">All Audio Tools</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MiMusic.net. Independent audio guides and web tools.</p>
+    </div>
   </footer>
 
+  <!-- Scripts for Tool Functionality & UI -->
   <script>
-    let actx, osc, isRunning = false, sweepInterval = null;
-    const btn = document.getElementById('cleaner-trigger');
-    const circle = document.getElementById('vis-circle');
-
-    function toggleCleaningTone() {
-      if (!isRunning) {
-        actx = new (window.AudioContext || window.webkitAudioContext)();
-        osc = actx.createOscillator();
-        const gain = actx.createGain();
-
-        const waveType = document.getElementById('wave-type').value;
-        const enableSweep = document.getElementById('sweep-toggle').checked;
-
-        osc.type = waveType;
-        osc.frequency.setValueAtTime(165, actx.currentTime);
-
-        gain.gain.setValueAtTime(0.9, actx.currentTime);
-
-        osc.connect(gain);
-        gain.connect(actx.destination);
-
-        osc.start();
-        isRunning = true;
-        btn.innerText = 'Stop Audio Pulse';
-        btn.classList.add('active');
-        circle.classList.add('vibrating');
-        circle.innerText = '🔊';
-
-        if (enableSweep) {
-          let currFreq = 140;
-          let goingUp = true;
-          sweepInterval = setInterval(() => {
-            if (!isRunning) return;
-            if (goingUp) {
-              currFreq += 2;
-              if (currFreq >= 180) goingUp = false;
-            } else {
-              currFreq -= 2;
-              if (currFreq <= 140) goingUp = true;
-            }
-            osc.frequency.setValueAtTime(currFreq, actx.currentTime);
-          }, 50);
-        }
-      } else {
-        if (osc) {
-          osc.stop();
-          osc.disconnect();
-        }
-        if (sweepInterval) clearInterval(sweepInterval);
-        isRunning = false;
-        btn.innerText = 'Start Audio Pulse';
-        btn.classList.remove('active');
-        circle.classList.remove('vibrating');
-        circle.innerText = '💧';
-      }
-    }
-
-    function toggleAdvanced() {
-      const box = document.getElementById('advanced-box');
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
-    }
-
+    // FAQ Toggle
     function toggleFaq(btn) {
       const answer = btn.nextElementSibling;
-      const arrow = btn.querySelector('.faq-arrow');
+      const arrow = btn.querySelector('span');
       const isOpen = answer.style.display === 'block';
       answer.style.display = isOpen ? 'none' : 'block';
       arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
     }
 
-    /* Real Interactive Reviews Engine (LocalStorage) */
-    const STORAGE_KEY = 'user_reviews_speakercleaner';
+    // 165Hz Audio Generator Logic
+    let audioCtx = null;
+    let oscillator = null;
+    let isPlaying = false;
 
-    function loadReviews() {
-      const feed = document.getElementById('reviews-feed');
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      
-      if (stored.length === 0) {
-        feed.innerHTML = '<p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; font-style: italic; padding: 10px 0;">No reviews posted yet. Try this tool and share your experience!</p>';
-        return;
+    function toggleTone() {
+      const btn = document.getElementById('playBtn');
+      const icon = document.getElementById('statusIcon');
+
+      if (!isPlaying) {
+        // Start Audio
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        oscillator = audioCtx.createOscillator();
+        oscillator.type = 'sine'; // Sine wave is best for safe hardware pushing
+        oscillator.frequency.setValueAtTime(165, audioCtx.currentTime); // 165Hz
+        
+        const gainNode = audioCtx.createGain();
+        gainNode.gain.value = 1; // Max volume for the pulse
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        
+        oscillator.start();
+        isPlaying = true;
+        
+        // Update UI
+        btn.textContent = "Stop Pulse";
+        btn.classList.add('stop');
+        icon.classList.add('active');
+        icon.textContent = "🔊";
+      } else {
+        // Stop Audio
+        if (oscillator) {
+          oscillator.stop();
+          oscillator.disconnect();
+        }
+        isPlaying = false;
+        
+        // Update UI
+        btn.textContent = "Start Audio Pulse";
+        btn.classList.remove('stop');
+        icon.classList.remove('active');
+        icon.textContent = "💧";
       }
-
-      let totalStars = 0;
-      feed.innerHTML = stored.map(r => {
-        totalStars += r.rating;
-        return `
-          <div class="review-entry">
-            <div class="review-entry-header">
-              <strong style="color: var(--text-dark); font-size: 0.95rem; font-weight: 700;">${escapeHtml(r.name)}</strong>
-              <span style="color: #f59e0b; font-size: 0.9rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
-            </div>
-            <p style="color: var(--muted); font-size: 0.9rem; font-weight: 500; line-height: 1.6;">${escapeHtml(r.comment)}</p>
-          </div>
-        `;
-      }).join('');
-
-      const avg = stored.length > 0 ? (totalStars / stored.length).toFixed(1) : "0.0";
-      document.getElementById('avg-val').innerText = avg;
     }
-
-    function submitReview(e) {
-      e.preventDefault();
-      const name = document.getElementById('user-name').value.trim();
-      const rating = parseInt(document.getElementById('user-stars').value);
-      const comment = document.getElementById('user-comment').value.trim();
-
-      if (!name || !comment) return;
-
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      stored.unshift({ name, rating, comment, time: Date.now() });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-
-      document.getElementById('review-form').reset();
-      loadReviews();
-    }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.innerText = text;
-      return div.innerHTML;
-    }
-
-    window.addEventListener('DOMContentLoaded', loadReviews);
   </script>
 </body>
 </html>
