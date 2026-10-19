@@ -4,46 +4,94 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Music Troubleshooting | Fix Playback Errors</title>
-  <meta name="description" content="Common solutions to fix Mi Music app crashes, missing songs in the library, and audio output glitches.">
+  <meta name="description" content="Common solutions to fix Mi Music app crashes, missing songs in the library, and audio output glitches on Xiaomi devices.">
+  <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
-    :root { --bg: #f8fafc; --card-bg: #ffffff; --border: #e2e8f0; --accent: #4f46e5; --text: #334155; --text-dark: #0f172a; --muted: #64748b; }
+    :root { --bg: #f8fafc; --card-bg: #ffffff; --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca; --text: #334155; --text-dark: #0f172a; --muted: #64748b; --surface: #f1f5f9; }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
     body { background: var(--bg); color: var(--text); line-height: 1.6; }
-    .nav { padding: 20px; border-bottom: 1px solid var(--border); background: #fff; text-align: center; }
-    .nav a { text-decoration: none; color: var(--accent); font-weight: 700; font-size: 1.2rem; }
-    .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
-    .content { background: var(--card-bg); padding: 40px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    h1 { color: var(--text-dark); margin-bottom: 20px; font-size: 2rem; }
-    h3 { color: var(--text-dark); margin: 24px 0 8px; font-size: 1.2rem; }
-    p { margin-bottom: 16px; font-size: 1.05rem; }
-    .fix-box { background: #eff6ff; border-left: 4px solid var(--accent); padding: 16px; margin-bottom: 24px; border-radius: 0 8px 8px 0; }
+    
+    .header-nav { width: 100%; border-bottom: 1px solid var(--border); background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .brand-logo { color: var(--text-dark); font-size: 1.25rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 20px; align-items: center; }
+    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.2s; }
+    .nav-link:hover { color: var(--accent); }
+    .nav-btn { background: var(--accent); color: #fff; text-decoration: none; padding: 8px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; transition: 0.2s; }
+    .nav-btn:hover { background: var(--accent-hover); box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
+
+    .hero-banner { background: var(--surface); padding: 50px 20px; text-align: center; border-bottom: 1px solid var(--border); }
+    .hero-banner h1 { font-size: 2.5rem; color: var(--text-dark); font-weight: 800; margin-bottom: 12px; }
+    .hero-banner p { font-size: 1.1rem; color: var(--muted); max-width: 600px; margin: 0 auto; }
+    
+    .container { max-width: 800px; margin: 40px auto 60px; padding: 0 20px; }
+    .content-article { background: var(--card-bg); padding: 40px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .featured-image { width: 100%; height: 250px; border-radius: 12px; background: #e0e7ff; margin-bottom: 30px; object-fit: cover; border: 1px solid var(--border); }
+    
+    .content-article h3 { color: var(--text-dark); font-size: 1.3rem; font-weight: 800; margin: 28px 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--surface); }
+    .content-article p { margin-bottom: 16px; font-size: 1.05rem; }
+    
+    .fix-box { background: #eff6ff; border-left: 4px solid var(--accent); padding: 18px 24px; border-radius: 0 8px 8px 0; margin-bottom: 24px; font-size: 1rem; color: var(--text-dark); font-weight: 500; }
+
+    footer { border-top: 1px solid var(--border); background: var(--card-bg); padding: 40px 20px; text-align: center; color: var(--muted); font-size: 0.9rem; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 20px; flex-wrap: wrap; }
+    .footer-links a { color: var(--text-dark); text-decoration: none; font-weight: 600; transition: 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
   </style>
 </head>
 <body>
-  <div class="nav"><a href="/">🎵 MiMusic.net Home</a></div>
+
+  <header class="header-nav">
+    <div class="nav-inner">
+      <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
+      <nav class="nav-links">
+        <a href="about.html" class="nav-link">About App</a>
+        <a href="install.html" class="nav-link">Installation</a>
+        <a href="troubleshooting.html" class="nav-link" style="color: var(--accent); font-weight: 700;">Troubleshooting</a>
+        <a href="tools.html" class="nav-btn">Online Tools</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero-banner">
+    <h1>Troubleshooting & Fixes</h1>
+    <p>Official guide to resolving app crashes, library sync issues, and audio output glitches.</p>
+  </div>
+
   <main class="container">
-    <div class="content">
-      <h1>Troubleshooting Mi Music</h1>
-      <p>Encountering glitches while listening to music can be frustrating. Here is our official guide to solving the most common Mi Music app errors.</p>
+    <div class="content-article">
+      <img src="https://via.placeholder.com/800x300/e0e7ff/4f46e5?text=Fixing+Playback+Issues" alt="Troubleshooting Audio Errors" class="featured-image">
       
       <h3>Issue 1: Downloaded Songs Are Missing</h3>
-      <p>If you downloaded an MP3 but it isn't showing up in your library, the media scanner likely missed it.</p>
+      <p>If you downloaded an MP3 or received an audio file via WhatsApp, but it isn't showing up in your library, the media scanner likely filtered it out.</p>
       <div class="fix-box">
-        <strong>The Fix:</strong> Go to the app Settings > Advanced Settings > "Filter audio files". Ensure the "By size" and "By length" filters aren't hiding your track. Then, manually tap "Scan local music".
+        <strong>The Fix:</strong> Go to the app Settings > Advanced Settings > "Filter audio files". Ensure the "By size" (e.g. hiding files under 500KB) and "By length" filters aren't hiding your track. Then, manually tap "Scan local music".
       </div>
 
       <h3>Issue 2: The App Crashes Randomly</h3>
-      <p>Frequent crashes are usually caused by corrupted cache files after a MIUI system update.</p>
+      <p>Frequent crashes or frozen screens are usually caused by corrupted cache files after a recent MIUI system update.</p>
       <div class="fix-box">
-        <strong>The Fix:</strong> Navigate to your phone's Settings > Apps > Manage Apps > Music. Tap "Clear Data" and select "Clear Cache". (Do not worry, this will not delete your actual MP3 files).
+        <strong>The Fix:</strong> Navigate to your phone's Settings > Apps > Manage Apps > Music. Tap "Clear Data" and select "Clear Cache". (Do not worry, this will not delete your actual MP3 files or playlists).
       </div>
 
       <h3>Issue 3: Audio Plays but is Too Quiet</h3>
-      <p>If the volume is maxed out but the song is still quiet, the original file was likely exported with low gain.</p>
+      <p>If your device volume is maxed out but the song is still quiet, the original file was likely exported with low gain or compression.</p>
       <div class="fix-box">
-        <strong>The Fix:</strong> The app cannot fix the file itself. Use our free online <a href="/volume-booster/" style="color:var(--accent); font-weight:bold;">Volume Booster</a> tool to safely amplify the file's waveform, then re-open the boosted file in Mi Music.
+        <strong>The Fix:</strong> The app cannot fix the file's inherent volume. Use our free online <a href="/volume-booster/" style="color:var(--accent); font-weight:bold; text-decoration:none;">Volume Booster</a> tool to safely amplify the file's waveform, download the louder version, and play it in Mi Music.
       </div>
     </div>
   </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">App Features</a>
+      <a href="install.html">Install Guide</a>
+      <a href="tools.html">Free Audio Tools</a>
+    </div>
+    <p>&copy; 2026 MiMusic.net. Independent audio guides and web tools.</p>
+  </footer>
+
 </body>
 </html>
