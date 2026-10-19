@@ -3,337 +3,331 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Music 8D Audio Converter | Xiaomi Spatial Sound</title>
-  <meta name="description" content="Convert any track into an immersive 8D rotating spatial experience online. Simulate spatial audio settings directly in your browser with zero uploads.">
+  <title>8D Audio Converter - Make Spatial Audio Online | Mi Music Tools</title>
+  <meta name="description" content="Convert any standard audio file into an immersive 8D spatial audio experience. Listen to music orbiting around your head directly in your browser.">
+  <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
+    /* Global Variables & Base */
     :root {
-      /* MiMusic Clean Light Theme Palette */
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --border: #e2e8f0;
-      --accent: #8b5cf6;
-      --accent-hover: #7c3aed;
-      --danger: #ef4444;
-      --text: #334155;
-      --text-dark: #0f172a;
-      --muted: #64748b;
-      --surface: #f5f3ff;
+      --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
+      --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca; 
+      --accent-light: #e0e7ff; --text-dark: #0f172a; --text: #334155; 
+      --muted: #64748b; --success: #10b981; --warning: #f59e0b;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05); --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { 
-      background: var(--bg); 
-      background-image: linear-gradient(180deg, #f5f3ff 0%, #f8fafc 400px);
-      color: var(--text); 
-      min-height: 100vh; 
-      display: flex; flex-direction: column; align-items: center; 
-      padding: 0 16px 60px; line-height: 1.6; 
-    }
+    body { background: var(--bg); color: var(--text); line-height: 1.6; }
 
-    /* Top Brand Navigation */
-    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); margin-bottom: 30px; }
-    .brand { color: var(--text-dark); font-size: 1.25rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-    .brand span { color: var(--accent); }
-    .back-home { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
-    .back-home:hover { color: var(--accent); }
+    /* Navigation */
+    .header-nav { width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .brand-logo { color: var(--text-dark); font-size: 1.3rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .nav-link:hover { color: var(--accent); }
 
-    .container { width: 100%; max-width: 820px; }
-    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); text-align: center; }
-    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
-    .lead { color: var(--muted); font-size: 0.95rem; font-weight: 500; margin-bottom: 24px; }
-
-    /* Orbit Visualizer */
-    .orbit-stage { width: 150px; height: 150px; border-radius: 50%; border: 3px dashed var(--accent); margin: 0 auto 24px; position: relative; display: flex; align-items: center; justify-content: center; background: #fff; box-shadow: 0 4px 16px rgba(139, 92, 246, 0.1); }
-    .head-icon { font-size: 2.5rem; }
-    .audio-satellite { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); position: absolute; box-shadow: 0 0 16px rgba(139, 92, 246, 0.6); transition: transform 0.05s linear; }
-
-    .dropzone { border: 2px dashed #cbd5e1; border-radius: 14px; padding: 40px 20px; cursor: pointer; transition: 0.2s; background: var(--surface); margin-bottom: 20px; }
-    .dropzone:hover { border-color: var(--accent); background: #ede9fe; }
-    .dropzone-icon { font-size: 2.5rem; margin-bottom: 8px; }
-    .dropzone-text { font-size: 1.05rem; color: var(--text-dark); font-weight: 700; }
-    .dropzone-sub { font-size: 0.85rem; color: var(--muted); margin-top: 4px; font-weight: 500; }
-
-    .btn { background: var(--accent); color: #fff; border: none; padding: 15px 30px; border-radius: 12px; font-size: 1rem; font-weight: 800; cursor: pointer; transition: 0.2s; width: 100%; max-width: 380px; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25); }
-    .btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
-    .btn.active-8d { background: var(--danger); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3); }
-
-    /* Advanced Spatial Controls */
-    .advanced-toggle { margin-top: 28px; border-top: 1px dashed var(--border); padding-top: 16px; text-align: left; }
-    .advanced-btn { background: none; border: none; color: var(--accent); font-size: 0.95rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-    .advanced-content { display: none; margin-top: 14px; padding: 18px; background: #fff; border-radius: 12px; border: 1px solid #ddd6fe; }
-    .adv-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
-    .adv-row:last-child { margin-bottom: 0; }
-    select { background: #fff; color: var(--text-dark); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; outline: none; font-weight: 500; }
-
-    .notice { margin-top: 24px; font-size: 0.9rem; color: #5b21b6; background: #ede9fe; border: 1px solid #ddd6fe; padding: 14px; border-radius: 10px; text-align: left; font-weight: 500; }
-
-    /* Step-by-Step Tutorial Box */
-    .tutorial-section { margin-top: 45px; }
-    .section-title { font-size: 1.4rem; color: var(--text-dark); margin-bottom: 18px; font-weight: 800; text-align: left; }
-    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    /* Tool Workspace Area */
+    .workspace { padding: 60px 24px 40px; background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); text-align: center; }
+    .tool-container { max-width: 700px; margin: 0 auto; background: var(--surface); border-radius: 24px; padding: 40px; box-shadow: var(--shadow-md); border: 1px solid var(--border); }
+    .tool-title { font-size: 2.2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 16px; letter-spacing: -0.03em; }
+    .tool-desc { font-size: 1.05rem; color: var(--muted); margin-bottom: 30px; }
     
-    /* Image placeholders for steps */
-    .step-image { width: 100%; height: 120px; background-color: var(--surface); border-radius: 8px; margin-bottom: 12px; object-fit: cover; border: 1px solid var(--border); }
+    .status-ring { width: 120px; height: 120px; border-radius: 50%; background: var(--surface-alt); margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; font-size: 3rem; border: 4px solid var(--border); transition: 0.3s; position: relative; overflow: hidden; }
+    .status-ring::after { content: ''; position: absolute; width: 100%; height: 100%; border-radius: 50%; box-shadow: inset 0 0 20px rgba(79,70,229,0); transition: 0.3s; }
+    .status-ring.active { border-color: var(--accent); color: var(--accent); animation: float 3s ease-in-out infinite; }
+    .status-ring.active::after { box-shadow: inset 0 0 20px rgba(79,70,229,0.5); animation: orbit 4s linear infinite; }
+    @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+    @keyframes orbit { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-    .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
-    .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
+    /* Tool Controls */
+    .file-upload-wrapper { margin-bottom: 24px; }
+    .file-upload-label { display: inline-block; background: var(--surface-alt); border: 2px dashed var(--border-hover); padding: 20px 40px; border-radius: 12px; cursor: pointer; font-weight: 600; color: var(--text-dark); transition: 0.3s; width: 100%; max-width: 400px; }
+    .file-upload-label:hover { border-color: var(--accent); background: var(--accent-light); }
+    input[type="file"] { display: none; }
+    
+    .headphone-warning { display: inline-flex; align-items: center; gap: 8px; background: #fee2e2; color: #991b1b; padding: 10px 20px; border-radius: 50px; font-size: 0.9rem; font-weight: 700; margin-bottom: 30px; }
 
-    /* Why Choose Us */
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-    .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
+    .btn-main { background: var(--accent); color: #fff; border: none; padding: 16px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); width: 100%; max-width: 300px; }
+    .btn-main:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .btn-main:disabled { background: var(--muted); cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-main.stop { background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); }
 
-    /* Accordion FAQ */
-    .faq-container { margin-bottom: 45px; }
-    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-    .faq-question { width: 100%; padding: 16px 20px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-question:hover { color: var(--accent); background: var(--surface); }
-    .faq-arrow { font-size: 0.8rem; transition: transform 0.2s; }
-    .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.95rem; font-weight: 500; line-height: 1.6; border-top: 1px solid var(--surface); padding-top: 12px; }
+    /* Guide / How to use */
+    .content-section { max-width: 1000px; margin: 40px auto 60px; padding: 0 24px; }
+    .section-title { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); margin-bottom: 30px; text-align: center; }
+    
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 60px; }
+    .step-card { background: var(--surface); padding: 24px; border-radius: 16px; border: 1px solid var(--border); position: relative; }
+    .step-number { position: absolute; top: -15px; left: 24px; width: 34px; height: 34px; background: var(--text-dark); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; }
+    .step-card h4 { font-size: 1.1rem; color: var(--text-dark); margin: 10px 0; }
+    .step-card p { font-size: 0.9rem; color: var(--muted); }
 
-    /* Comprehensive SEO Article */
-    .seo-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: var(--text); font-size: 0.95rem; line-height: 1.7; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    .seo-article h2 { color: var(--text-dark); font-size: 1.45rem; font-weight: 800; margin-bottom: 14px; }
-    .seo-article h3 { color: var(--text-dark); font-size: 1.15rem; font-weight: 700; margin: 24px 0 10px; }
-    .seo-article p { margin-bottom: 16px; font-weight: 500; }
-    .seo-article ul { padding-left: 20px; margin-bottom: 16px; font-weight: 500; }
-    .seo-article li { margin-bottom: 6px; }
+    /* FAQ Section */
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; }
+    .faq-question { width: 100%; padding: 20px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1.05rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-answer { display: none; padding: 0 20px 20px; color: var(--muted); font-size: 0.95rem; line-height: 1.6; border-top: 1px solid var(--surface-alt); padding-top: 16px; }
 
-    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; font-weight: 500; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+    /* Footer */
+    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
+    .footer-col h5 { color: var(--text-dark); font-size: 1rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; padding: 0; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a { color: var(--muted); text-decoration: none; transition: 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .tool-container { padding: 30px 20px; }
+    }
   </style>
 </head>
 <body>
 
-  <header class="nav">
-    <a href="/" class="brand">🎵 MiMusic<span>.net</span></a>
-    <a href="/" class="back-home">&larr; Studio Home</a>
+  <!-- Global Header -->
+  <header class="header-nav">
+    <div class="nav-inner">
+      <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
+      <nav class="nav-links">
+        <a href="/about.html" class="nav-link">App Features</a>
+        <a href="/install.html" class="nav-link">Installation</a>
+        <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 700;">Free Audio Tools</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="container">
-    <div class="tool-box">
-      <h1>8D Spatial Audio Converter</h1>
-      <p class="lead">Simulate an immersive 360-degree rotating binaural soundstage in real time. Experience spatial sound perfectly in your headphones.</p>
-
-      <div class="orbit-stage">
-        <div class="head-icon">🎧</div>
-        <div class="audio-satellite" id="satellite" style="left: calc(50% - 11px); top: -11px;"></div>
+  <!-- Interactive Tool Workspace -->
+  <main class="workspace">
+    <div class="tool-container">
+      <h1 class="tool-title">8D Audio Converter</h1>
+      <p class="tool-desc">Transform standard stereo tracks into an immersive 360-degree spatial audio experience. Processed entirely in your browser.</p>
+      
+      <div class="status-ring" id="statusIcon">🎧</div>
+      
+      <div class="file-upload-wrapper">
+        <label class="file-upload-label" for="audioFile">
+          <span id="fileNameDisplay">📁 Upload Stereo Track (MP3, WAV)</span>
+        </label>
+        <input type="file" id="audioFile" accept="audio/*" onchange="handleFileSelect(event)">
       </div>
 
-      <div class="dropzone" id="drop-box" onclick="document.getElementById('file-input').click()">
-        <div class="dropzone-icon">🎵</div>
-        <div class="dropzone-text" id="file-label">Select Audio Track (MP3, WAV, FLAC, M4A)</div>
-        <div class="dropzone-sub">Runs locally in device memory — completely private</div>
-        <input type="file" id="file-input" accept="audio/*" style="display:none" onchange="handleAudio(event)">
+      <div class="headphone-warning">
+        ⚠️ Headphones Required for 8D Effect
       </div>
+      <br>
+      
+      <button class="btn-main" id="playBtn" onclick="togglePlayback()" disabled>Play in 8D Audio</button>
+    </div>
+  </main>
 
-      <button class="btn" id="play-btn" style="display:none;" onclick="toggle8D()">Activate 8D Spatial Audio</button>
+  <!-- Feature Image -->
+  <div style="max-width: 800px; margin: 0 auto 40px; padding: 0 24px; text-align: center;">
+    <img src="8d-audio.jpg" alt="Headphones surrounded by spatial audio sound waves" style="width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);">
+  </div>
 
-      <!-- Advanced Orbit Controls -->
-      <div class="advanced-toggle">
-        <button class="advanced-btn" type="button" onclick="toggleAdvanced()">
-          ⚙️ <span>Advanced Spatial Orbit Options</span>
-        </button>
-        <div class="advanced-content" id="advanced-box">
-          <div class="adv-row">
-            <label>Orbit Rotation Speed:</label>
-            <select id="orbit-speed">
-              <option value="0.025">Slow & Hypnotic (Deep Immersion)</option>
-              <option value="0.038" selected>Standard Rhythm (Natural 360° Flow)</option>
-              <option value="0.065">Fast Whirl (Intense Dynamic Rush)</option>
-            </select>
-          </div>
-          <div class="adv-row">
-            <label>Subtle Room Ambience (Acoustic Depth):</label>
-            <input type="checkbox" id="depth-toggle" checked>
-          </div>
-        </div>
+  <!-- Value-Added Content for SEO -->
+  <section class="content-section">
+    <h2 class="section-title">How to Experience 8D Music</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h4>Upload Your Track</h4>
+        <p>Select any standard stereo MP3 or WAV file from your local storage. High-quality files yield the best spatial results.</p>
       </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h4>Wear Headphones</h4>
+        <p>This is crucial! The 8D illusion relies on isolating your left and right ears. Phone speakers will not produce the effect.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h4>Start the Converter</h4>
+        <p>Click play. Our algorithm will instantly start panning and filtering the audio to simulate a moving sound source.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <h4>Close Your Eyes</h4>
+        <p>Relax and listen as the music orbits around your head. The audio is processed privately on your device.</p>
+      </div>
+    </div>
+  </section>
 
-      <div class="notice">
-        🎧 <strong>Headphones or Earbuds Required:</strong> 8D audio relies on binaural timing. The spatial rotation illusion cannot be perceived on open phone or laptop speakers.
+  <!-- SEO FAQ -->
+  <section class="content-section" style="max-width: 800px; margin-top: 0;">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        What exactly is 8D Audio?
+        <span>▼</span>
+      </button>
+      <div class="faq-answer">
+        8D Audio is an auditory illusion created by manipulating stereo panning and equalization. By continuously shifting the sound from left to right and adjusting the frequencies, it tricks your brain into thinking the sound source is physically moving around your head in a 360-degree space.
       </div>
     </div>
 
-    <!-- 3-Step Tutorial with Images -->
-    <section class="tutorial-section">
-      <h2 class="section-title">How to Experience 8D Audio in 3 Steps</h2>
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-badge">1</div>
-          <img src="https://via.placeholder.com/400x250/f5f3ff/8b5cf6?text=Wear+Headphones" alt="Step 1: Wear Headphones" class="step-image">
-          <h3>Put on Headphones</h3>
-          <p>Wear stereo headphones or earbuds, ensuring correct left and right ear placement.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-badge">2</div>
-          <img src="https://via.placeholder.com/400x250/f5f3ff/8b5cf6?text=Load+Track" alt="Step 2: Load Track" class="step-image">
-          <h3>Load Any Music Track</h3>
-          <p>Drop your favorite MP3, WAV, or ambient track directly into the dropzone above.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-badge">3</div>
-          <img src="https://via.placeholder.com/400x250/f5f3ff/8b5cf6?text=Engage+8D" alt="Step 3: Engage Spatialization" class="step-image">
-          <h3>Engage Spatialization</h3>
-          <p>Hit play and close your eyes as the sound smoothly rotates in three dimensions around your head.</p>
-        </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Why isn't it working on my phone's speakers?
+        <span>▼</span>
+      </button>
+      <div class="faq-answer">
+        The spatial illusion relies entirely on binaural isolation—meaning your left ear must only hear the left channel, and your right ear must only hear the right. If you play it on standard speakers, both ears hear both channels, destroying the 3D effect. You must wear headphones or earbuds.
       </div>
-    </section>
+    </div>
 
-    <!-- Why Choose Our Tool Section -->
-    <section>
-      <h2 class="section-title">Features of the 8D Sound Converter</h2>
-      <div class="features-grid">
-        <div class="feature-box">
-          <h4>🔒 Total File Confidentiality</h4>
-          <p>Your songs never leave your phone or computer. All DSP calculations execute locally in your browser's RAM.</p>
-        </div>
-        <div class="feature-box">
-          <h4>🌀 Smooth Sinusoidal Panning</h4>
-          <p>Continuous mathematical curve panning helps eliminate jerky channel jumping or phase tearing.</p>
-        </div>
-        <div class="feature-box">
-          <h4>🚀 Fast Live Rendering</h4>
-          <p>Unlike pre-rendered 8D videos that require hours of processing, our engine pans live in real time.</p>
-        </div>
-        <div class="feature-box">
-          <h4>🎛️ Dynamic Orbit Tuning</h4>
-          <p>Fine-tune how quickly the sound moves around you to match ambient, lo-fi, or energetic tempos.</p>
-        </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Is my music uploaded to your servers?
+        <span>▼</span>
+      </button>
+      <div class="faq-answer">
+        No. Like all Mi Music web tools, the 8D Converter uses the HTML5 Web Audio API to process the sound locally in your browser's memory. Your personal audio files are never uploaded, ensuring 100% data privacy.
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Accordion FAQ -->
-    <section class="faq-container">
-      <h2 class="section-title">Frequently Asked Questions</h2>
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          Is this similar to device spatial audio settings?
-          <span class="faq-arrow">▼</span>
-        </button>
-        <div class="faq-answer">
-          Yes! If your device doesn't natively support hardware-level spatial audio, our web tool simulates a very similar 360-degree panning effect using standard stereo headphones.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          Why doesn't the 8D effect work on phone or TV speakers?
-          <span class="faq-arrow">▼</span>
-        </button>
-        <div class="faq-answer">
-          In open room environments, sound emitted from a speaker travels across the room and enters both ears nearly simultaneously. To create the spatial rotation illusion, the left ear must receive strictly isolated left-channel acoustic cues and vice-versa, which requires headphones.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          Does spatializing degrade music audio quality?
-          <span class="faq-arrow">▼</span>
-        </button>
-        <div class="faq-answer">
-          Because our Web Audio StereoPanner node executes using floating-point DSP math without lossy MP3 re-encoding, the dynamic range and frequency response of your original file are preserved at high fidelity without additional compression.
-        </div>
-      </div>
-    </section>
-
-    <!-- Comprehensive SEO Guide -->
-    <article class="seo-article">
-      <h2>The Psychoacoustic Science Behind 8D Audio and Spatial Perception</h2>
-      <p>Over the last few years, the phenomenon known as "8D Audio" has taken the internet by storm. Listeners describe feeling as though music is no longer trapped between their ears, but rather floating through open space, orbiting around their temples. The neurological and acoustic foundations powering this illusion are rooted in the study of <strong>psychoacoustics</strong>.</p>
-      <p>Human beings do not navigate acoustic environments in flat stereo. In the natural world, if a twig snaps behind your left shoulder, your auditory system relies on two critical acoustic measurements to locate that sound in three dimensions: <strong>Interaural Time Difference (ITD)</strong> and <strong>Interaural Level Difference (ILD)</strong>.</p>
-
-      <h3>How the Human Brain Pinpoints Sounds in 3D Space</h3>
-      <ul>
-        <li><strong>Interaural Time Difference (ITD):</strong> Sound travels through ambient air at a specific speed. Because your ears are separated by the physical width of your skull, a sound arriving from the left reaches your left ear slightly before your right ear. Your brain processes this microscopic timing discrepancy to instantly register horizontal location.</li>
-        <li><strong>Interaural Level Difference (ILD):</strong> Your head acts as a dense physical barrier. High-frequency sound waves have short wavelengths that cannot bend around the curve of your skull. Consequently, a sound originating on your left arrives at your right ear noticeably quieter.</li>
-      </ul>
-
-      <h3>How Our Browser Engine Synthesizes 360° Motion</h3>
-      <p>Producing an 8D audio track manually in traditional digital audio workstations (DAWs) requires tedious automation curves. Our web utility streamlines this process dynamically using the high-performance Web Audio API.</p>
-      <p>When you load a track, our DSP graph routes the audio buffer through a <code>StereoPannerNode</code>. An automated mathematical sweep continuously shifts the pan coordinate between -1.0 (hard left) and +1.0 (hard right). This allows you to experience spatial audio natively in your browser.</p>
-
-      <h3>Best Musical Genres for the 8D Experience</h3>
-      <ul>
-        <li><strong>Ambient, Chillhop & Lo-Fi:</strong> Gentle chords, vinyl crackle, and soft percussion feel relaxing and meditative when swept slowly through 3D space.</li>
-        <li><strong>Orchestral Scores:</strong> Sweeping string ensembles expand dramatically, simulating the feeling of sitting in the center of a concert hall.</li>
-        <li><strong>Progressive Electronic:</strong> Arpeggiated synthesizers create an intense, energetic sensation of kinetic motion.</li>
-      </ul>
-    </article>
-  </main>
-
+  <!-- Global Footer -->
   <footer>
-    <p style="margin-bottom: 8px;">&copy; 2026 MiMusic.net Studio. Free browser-based DSP tools.</p>
-    <p style="font-size: 0.75rem; color: #94a3b8;">Disclaimer: MiMusic.net is an independent web utility and is not affiliated with or endorsed by Xiaomi Inc. or the official Mi Music app.</p>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="brand-logo" style="margin-bottom: 16px;">🎵 MiMusic<span>.net</span></a>
+        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
+        <p style="font-weight: 600; color: var(--text-dark);">Contact: Sobl5910@gmail.com</p>
+      </div>
+      <div class="footer-col">
+        <h5>Popular Tools</h5>
+        <ul>
+          <li><a href="/volume-booster/">Volume Booster</a></li>
+          <li><a href="/speaker-cleaner/">Speaker Cleaner</a></li>
+          <li><a href="/8d-audio/" style="color: var(--accent);">8D Spatial Audio</a></li>
+          <li><a href="/pitch-shifter/">Pitch & Tempo</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Analysis & Fixes</h5>
+        <ul>
+          <li><a href="/vocal-clarity/">Vocal Clarity</a></li>
+          <li><a href="/video-to-audio/">Video to Audio</a></li>
+          <li><a href="/decibel-meter/">Decibel Meter</a></li>
+          <li><a href="/audio-latency/">Latency Test</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="/about.html">About Mi Music</a></li>
+          <li><a href="/install.html">Installation Guide</a></li>
+          <li><a href="/troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="/tools.html">All Audio Tools</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MiMusic.net. Independent audio guides and web tools.</p>
+    </div>
   </footer>
 
+  <!-- Scripts for Tool Functionality & UI -->
   <script>
-    let actx, panner, source, audioElem, animTimer, angle = 0, isPlaying = false;
-    const satellite = document.getElementById('satellite');
-    const playBtn = document.getElementById('play-btn');
-
-    function handleAudio(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      document.getElementById('file-label').innerText = file.name;
-
-      if (audioElem) audioElem.pause();
-      audioElem = new Audio(URL.createObjectURL(file));
-      audioElem.loop = true;
-
-      actx = new (window.AudioContext || window.webkitAudioContext)();
-      panner = actx.createStereoPanner();
-      source = actx.createMediaElementSource(audioElem);
-      source.connect(panner);
-      panner.connect(actx.destination);
-
-      playBtn.style.display = 'inline-block';
-    }
-
-    function toggle8D() {
-      if (!isPlaying) {
-        actx.resume();
-        audioElem.play();
-        isPlaying = true;
-        playBtn.innerText = 'Stop 8D Spatial Audio';
-        playBtn.classList.add('active-8d');
-
-        animTimer = setInterval(() => {
-          const speedFactor = parseFloat(document.getElementById('orbit-speed').value) || 0.038;
-          angle += speedFactor;
-          const panVal = Math.sin(angle);
-          panner.pan.setValueAtTime(panVal, actx.currentTime);
-
-          const radius = 75;
-          const centerX = 75 - 11;
-          const centerY = 75 - 11;
-          const x = centerX + radius * Math.sin(angle);
-          const y = centerY - radius * Math.cos(angle);
-          satellite.style.left = x + 'px';
-          satellite.style.top = y + 'px';
-        }, 30);
-      } else {
-        audioElem.pause();
-        clearInterval(animTimer);
-        isPlaying = false;
-        playBtn.innerText = 'Activate 8D Spatial Audio';
-        playBtn.classList.remove('active-8d');
-      }
-    }
-
-    function toggleAdvanced() {
-      const box = document.getElementById('advanced-box');
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
-    }
-
+    // FAQ Toggle
     function toggleFaq(btn) {
       const answer = btn.nextElementSibling;
-      const arrow = btn.querySelector('.faq-arrow');
+      const arrow = btn.querySelector('span');
       const isOpen = answer.style.display === 'block';
       answer.style.display = isOpen ? 'none' : 'block';
       arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
     }
+
+    // Web Audio API for 8D Spatial Audio
+    let audioCtx = null;
+    let audioSource = null;
+    let panner = null;
+    let audioElement = new Audio();
+    let isPlaying = false;
+    let animationId = null;
+    let startTime = 0;
+
+    function handleFileSelect(event) {
+      const file = event.target.files[0];
+      if (file) {
+        document.getElementById('fileNameDisplay').textContent = "🎵 " + file.name;
+        document.getElementById('playBtn').disabled = false;
+        
+        // Create object URL for the audio element
+        const fileURL = URL.createObjectURL(file);
+        audioElement.src = fileURL;
+      }
+    }
+
+    // Orbit function: sweeps panning from left to right smoothly
+    function animate8D() {
+      if(!isPlaying) return;
+      
+      const timeElapsed = (Date.now() - startTime) / 1000;
+      // Math.sin creates a smooth wave between -1 and 1. 
+      // Multiplying time by 0.5 makes one full orbit take about ~12.5 seconds.
+      const panValue = Math.sin(timeElapsed * 0.5); 
+      
+      if(panner) {
+        panner.pan.value = panValue;
+      }
+      
+      animationId = requestAnimationFrame(animate8D);
+    }
+
+    function togglePlayback() {
+      const btn = document.getElementById('playBtn');
+      const icon = document.getElementById('statusIcon');
+
+      if (!isPlaying) {
+        // Init Audio Context on first play
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          audioSource = audioCtx.createMediaElementSource(audioElement);
+          
+          // Create Stereo Panner for the left-right sweep
+          panner = audioCtx.createStereoPanner();
+          
+          audioSource.connect(panner);
+          panner.connect(audioCtx.destination);
+        }
+        
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
+        audioElement.play();
+        isPlaying = true;
+        startTime = Date.now();
+        animate8D(); // Start the 8D orbit animation
+        
+        btn.textContent = "Pause 8D Audio";
+        btn.classList.add('stop');
+        icon.classList.add('active');
+      } else {
+        audioElement.pause();
+        isPlaying = false;
+        cancelAnimationFrame(animationId);
+        
+        btn.textContent = "Play in 8D Audio";
+        btn.classList.remove('stop');
+        icon.classList.remove('active');
+      }
+    }
+
+    // Reset UI when audio finishes
+    audioElement.addEventListener('ended', function() {
+      isPlaying = false;
+      cancelAnimationFrame(animationId);
+      document.getElementById('playBtn').textContent = "Play in 8D Audio";
+      document.getElementById('playBtn').classList.remove('stop');
+      document.getElementById('statusIcon').classList.remove('active');
+    });
   </script>
 </body>
 </html>
