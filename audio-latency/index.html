@@ -3,334 +3,289 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xiaomi Earbuds Latency Test | Mi Audio Sync Delay</title>
-  <meta name="description" content="Test audio delay and synchronization for Bluetooth headphones and TWS earbuds. Evaluate your connection delay and adjust Mi audio sync settings online.">
+  <title>Audio Latency & Sync Test Online | Mi Music Tools</title>
+  <meta name="description" content="Test your Bluetooth headphones and wireless earbuds for audio lag. Our precise visual metronome helps you detect audio/video sync issues instantly.">
+  <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
+    /* Global Variables & Base */
     :root {
-      /* MiMusic Clean Light Theme Palette */
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --border: #e2e8f0;
-      --accent: #3b82f6;
-      --accent-hover: #2563eb;
-      --flash: #f8fafc;
-      --danger: #ef4444;
-      --text: #334155;
-      --text-dark: #0f172a;
-      --muted: #64748b;
-      --surface: #eff6ff;
+      --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
+      --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca; 
+      --accent-light: #e0e7ff; --text-dark: #0f172a; --text: #334155; 
+      --muted: #64748b; --shadow-sm: 0 1px 2px rgba(0,0,0,0.05); 
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { 
-      background: var(--bg); 
-      background-image: linear-gradient(180deg, #eff6ff 0%, #f8fafc 400px);
-      color: var(--text); 
-      min-height: 100vh; 
-      display: flex; flex-direction: column; align-items: center; 
-      padding: 0 16px 60px; line-height: 1.6; 
-    }
+    body { background: var(--bg); color: var(--text); line-height: 1.6; }
 
-    /* Top Brand Navigation */
-    .nav { width: 100%; max-width: 900px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); margin-bottom: 30px; }
-    .brand { color: var(--text-dark); font-size: 1.25rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-    .brand span { color: var(--accent); }
-    .back-home { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
-    .back-home:hover { color: var(--accent); }
+    /* Navigation */
+    .header-nav { width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .brand-logo { color: var(--text-dark); font-size: 1.3rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .nav-link:hover { color: var(--accent); }
 
-    .container { width: 100%; max-width: 820px; }
-    .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); text-align: center; }
-    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
-    .lead { color: var(--muted); font-size: 0.95rem; font-weight: 500; margin-bottom: 24px; }
-
-    /* Flash Target Box */
-    .flash-arena { width: 100%; height: 160px; border-radius: 14px; background: var(--card-bg); border: 3px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 24px; transition: background-color 0.04s ease; cursor: pointer; user-select: none; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1); }
-    .flash-arena.active-pulse { background: var(--text-dark); color: #fff; border-color: var(--text-dark); box-shadow: 0 4px 20px rgba(15, 23, 42, 0.4); }
-    .flash-icon { font-size: 2.5rem; margin-bottom: 6px; }
-    .flash-text { font-size: 1.1rem; font-weight: 800; letter-spacing: 0.04em; color: var(--text-dark); }
-    .active-pulse .flash-text { color: #fff; }
-
-    .control-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
-    .btn { background: var(--accent); color: #fff; border: none; padding: 14px 26px; border-radius: 12px; font-size: 1rem; font-weight: 800; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25); }
-    .btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
-    .btn-secondary { background: #f1f5f9; color: var(--text-dark); border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .btn-secondary:hover { background: #e2e8f0; color: var(--text-dark); transform: translateY(-2px); }
-
-    /* Advanced Latency Controls */
-    .advanced-toggle { margin-top: 24px; border-top: 1px dashed var(--border); padding-top: 16px; text-align: left; }
-    .advanced-btn { background: none; border: none; color: var(--accent); font-size: 0.95rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-    .advanced-content { display: none; margin-top: 14px; padding: 18px; background: var(--surface); border-radius: 12px; border: 1px solid #bfdbfe; }
-    .adv-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
-    .adv-row:last-child { margin-bottom: 0; }
-    select, input[type=number] { background: #fff; color: var(--text-dark); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; outline: none; font-weight: 500; }
-
-    /* Step-by-Step Tutorial Box */
-    .tutorial-section { margin-top: 45px; }
-    .section-title { font-size: 1.4rem; color: var(--text-dark); margin-bottom: 18px; font-weight: 800; text-align: left; }
-    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .step-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .step-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    /* Tool Workspace Area */
+    .workspace { padding: 60px 24px 40px; background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); text-align: center; }
+    .tool-container { max-width: 700px; margin: 0 auto; background: var(--surface); border-radius: 24px; padding: 40px; box-shadow: var(--shadow-md); border: 1px solid var(--border); }
+    .tool-title { font-size: 2.2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 16px; letter-spacing: -0.03em; }
+    .tool-desc { font-size: 1.05rem; color: var(--muted); margin-bottom: 30px; }
     
-    /* Added Image placeholders for steps */
-    .step-image { width: 100%; height: 120px; background-color: var(--surface); border-radius: 8px; margin-bottom: 12px; object-fit: cover; border: 1px solid var(--border); }
+    /* Metronome UI */
+    .metronome-container { background: #1e293b; width: 180px; height: 180px; margin: 0 auto 30px; border-radius: 24px; display: flex; align-items: center; justify-content: center; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+    .metronome-dot { width: 60px; height: 60px; background: #334155; border-radius: 50%; transition: background 0.05s ease-out; }
+    .metronome-dot.flash { background: #10b981; box-shadow: 0 0 30px #10b981; }
+    
+    .status-text { font-weight: 700; color: var(--text-dark); margin-bottom: 24px; font-size: 1.1rem; }
 
-    .step-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 700; }
-    .step-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
+    .btn-main { background: var(--accent); color: #fff; border: none; padding: 16px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); width: 100%; max-width: 300px; }
+    .btn-main:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .btn-main.stop { background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); }
 
-    /* Why Choose Us */
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .feature-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .feature-box h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-    .feature-box p { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
+    /* Guide / How to use */
+    .content-section { max-width: 1000px; margin: 40px auto 60px; padding: 0 24px; }
+    .section-title { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); margin-bottom: 30px; text-align: center; }
+    
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 60px; }
+    .step-card { background: var(--surface); padding: 24px; border-radius: 16px; border: 1px solid var(--border); position: relative; }
+    .step-number { position: absolute; top: -15px; left: 24px; width: 34px; height: 34px; background: var(--text-dark); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; }
+    .step-card h4 { font-size: 1.1rem; color: var(--text-dark); margin: 10px 0; }
+    .step-card p { font-size: 0.9rem; color: var(--muted); }
 
-    /* Accordion FAQ */
-    .faq-container { margin-bottom: 45px; }
-    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-    .faq-question { width: 100%; padding: 16px 20px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-question:hover { color: var(--accent); background: var(--surface); }
-    .faq-arrow { font-size: 0.8rem; transition: transform 0.2s; }
-    .faq-answer { display: none; padding: 0 20px 18px; color: var(--muted); font-size: 0.95rem; font-weight: 500; line-height: 1.6; border-top: 1px solid var(--surface); padding-top: 12px; }
+    /* FAQ Section */
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; }
+    .faq-question { width: 100%; padding: 20px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1.05rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-answer { display: none; padding: 0 20px 20px; color: var(--muted); font-size: 0.95rem; line-height: 1.6; border-top: 1px solid var(--surface-alt); padding-top: 16px; }
 
-    /* Comprehensive SEO Article */
-    .seo-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 32px; color: var(--text); font-size: 0.95rem; line-height: 1.7; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    .seo-article h2 { color: var(--text-dark); font-size: 1.45rem; font-weight: 800; margin-bottom: 14px; }
-    .seo-article h3 { color: var(--text-dark); font-size: 1.15rem; font-weight: 700; margin: 24px 0 10px; }
-    .seo-article p { margin-bottom: 16px; font-weight: 500; }
-    .seo-article ul { padding-left: 20px; margin-bottom: 16px; font-weight: 500; }
-    .seo-article li { margin-bottom: 6px; }
+    /* Footer */
+    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
+    .footer-col h5 { color: var(--text-dark); font-size: 1rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; padding: 0; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a { color: var(--muted); text-decoration: none; transition: 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; }
 
-    footer { margin-top: 50px; text-align: center; color: var(--muted); font-size: 0.85rem; font-weight: 500; border-top: 1px solid var(--border); padding-top: 24px; width: 100%; max-width: 900px; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .tool-container { padding: 30px 20px; }
+    }
   </style>
 </head>
 <body>
 
-  <header class="nav">
-    <a href="/" class="brand">🎵 MiMusic<span>.net</span></a>
-    <a href="/" class="back-home">&larr; Studio Home</a>
+  <!-- Global Header -->
+  <header class="header-nav">
+    <div class="nav-inner">
+      <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
+      <nav class="nav-links">
+        <a href="/about.html" class="nav-link">App Features</a>
+        <a href="/install.html" class="nav-link">Installation</a>
+        <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 700;">Free Audio Tools</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="container">
-    <div class="tool-box">
-      <h1>Bluetooth Audio Latency Sync & Delay Test</h1>
-      <p class="lead">Evaluate sound lag and AV synchronization on your wireless earbuds, headphones, and gaming headsets.</p>
-
-      <div class="flash-arena" id="flash-box" onclick="triggerSyncPulse()">
-        <div class="flash-icon" id="flash-icon">⚡</div>
-        <div class="flash-text" id="flash-label">Click Box or Press Trigger</div>
+  <!-- Interactive Tool Workspace -->
+  <main class="workspace">
+    <div class="tool-container">
+      <h1 class="tool-title">Audio Latency & Sync Test</h1>
+      <p class="tool-desc">Test your wireless Bluetooth earbuds for lag. Check if the visual flashes perfectly match the audio beeps on your device.</p>
+      
+      <div class="metronome-container">
+        <div class="metronome-dot" id="visualDot"></div>
       </div>
 
-      <div class="control-row">
-        <button class="btn" onclick="triggerSyncPulse()">Trigger Single Pulse</button>
-        <button class="btn btn-secondary" id="auto-btn" onclick="toggleContinuousLoop()">Start Rhythm Loop (1.2s)</button>
-      </div>
+      <div class="status-text" id="statusMessage">Connect your Bluetooth device and click start.</div>
+      
+      <button class="btn-main" id="startBtn" onclick="toggleTest()">Start Sync Test</button>
+    </div>
+  </main>
 
-      <!-- Advanced Latency Settings -->
-      <div class="advanced-toggle">
-        <button class="advanced-btn" type="button" onclick="toggleAdvanced()">
-          ⚙️ <span>Advanced Calibration & Pulse Settings</span>
-        </button>
-        <div class="advanced-content" id="advanced-box">
-          <div class="adv-row">
-            <label>Tone Pitch Frequency:</label>
-            <select id="tone-freq">
-              <option value="880" selected>880 Hz (High Crisp Staccato)</option>
-              <option value="440">440 Hz (Middle A Tone)</option>
-              <option value="220">220 Hz (Low Bass Impulse)</option>
-            </select>
-          </div>
-          <div class="adv-row">
-            <label>Manual Audio Delay Offset (ms):</label>
-            <input type="number" id="audio-offset" value="0" min="0" max="500" step="10" style="width: 75px;">
-          </div>
-          <div class="adv-row">
-            <label>Loop Cadence:</label>
-            <select id="cadence-select">
-              <option value="1200" selected>1.2 Seconds (Standard Observation)</option>
-              <option value="800">0.8 Seconds (Rapid Reflex Check)</option>
-              <option value="1600">1.6 Seconds (Relaxed Diagnostic)</option>
-            </select>
-          </div>
-        </div>
+  <!-- Feature Image -->
+  <div style="max-width: 800px; margin: 0 auto 40px; padding: 0 24px; text-align: center;">
+    <img src="audio-latency.jpg" alt="Wireless earbuds and stopwatch symbolizing audio latency" style="width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);">
+  </div>
+
+  <!-- Value-Added Content for SEO -->
+  <section class="content-section">
+    <h2 class="section-title">How to Test Your Earbuds</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h4>Connect Earbuds</h4>
+        <p>Ensure your wireless headphones or TWS earbuds are paired and connected to your smartphone or PC.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h4>Start the Metronome</h4>
+        <p>Click "Start Sync Test". The central dot will begin flashing bright green exactly once every second.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h4>Look and Listen</h4>
+        <p>Focus on the flashing dot. The audio system will trigger a sharp "tick" sound precisely at the same millisecond the color changes.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <h4>Analyze the Delay</h4>
+        <p>If you hear the tick slightly *after* you see the green flash, your Bluetooth headphones suffer from audio latency.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO FAQ -->
+  <section class="content-section" style="max-width: 800px; margin-top: 0;">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        What causes Bluetooth audio latency?
+        <span>▼</span>
+      </button>
+      <div class="faq-answer">
+        Wireless audio data has to be compressed by your phone, transmitted through the air, received by your earbuds, decompressed, and played. This conversion process takes time (usually between 100ms and 300ms), causing a noticeable delay when watching videos or gaming.
       </div>
     </div>
 
-    <!-- 3-Step Tutorial with Images -->
-    <section class="tutorial-section">
-      <h2 class="section-title">How to Measure Bluetooth Audio Latency</h2>
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-badge">1</div>
-          <img src="https://via.placeholder.com/400x250/eff6ff/3b82f6?text=Connect+Headphones" alt="Step 1: Connect Headphones" class="step-image">
-          <h3>Connect Headphones</h3>
-          <p>Pair your wireless earbuds or Bluetooth headset to your device and set a comfortable volume.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-badge">2</div>
-          <img src="https://via.placeholder.com/400x250/eff6ff/3b82f6?text=Watch+the+Flash" alt="Step 2: Watch Flash" class="step-image">
-          <h3>Watch the Screen Flash</h3>
-          <p>Look directly at the visual pulse box while listening intently for the acoustic click tone.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-badge">3</div>
-          <img src="https://via.placeholder.com/400x250/eff6ff/3b82f6?text=Gauge+Delay" alt="Step 3: Gauge Delay" class="step-image">
-          <h3>Gauge Synchronization</h3>
-          <p>If you see the flash before hearing the beep, it indicates that transmission lag is present in your link.</p>
-        </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        How can I fix the audio delay?
+        <span>▼</span>
+      </button>
+      <div class="faq-answer">
+        If your earbuds have a dedicated "Gaming Mode" or "Low Latency Mode", turn it on. Alternatively, ensure both your phone and earbuds support modern, fast codecs like aptX Low Latency (aptX LL) or Bluetooth 5.2. Unfortunately, cheap earbuds with basic SBC codecs will always have lag.
       </div>
-    </section>
+    </div>
 
-    <!-- Why Choose Our Tool Section -->
-    <section>
-      <h2 class="section-title">Features of the In-Browser AV Sync Test</h2>
-      <div class="features-grid">
-        <div class="feature-box">
-          <h4>⏱️ Web Audio Precision</h4>
-          <p>Uses Web Audio API timers to schedule sound pulses, providing a more consistent test than basic media playback.</p>
-        </div>
-        <div class="feature-box">
-          <h4>🚫 Unbuffered Evaluation</h4>
-          <p>Unlike standard streaming videos, your browser generally won't attempt to automatically compensate or mask audio lag for these direct API calls.</p>
-        </div>
-        <div class="feature-box">
-          <h4>🎮 Gamer & Editor Optimized</h4>
-          <p>Helps you evaluate Low-Latency or Gaming Modes on modern True Wireless Stereo (TWS) hardware.</p>
-        </div>
-        <div class="feature-box">
-          <h4>📱 Platform Agnostic</h4>
-          <p>Operates across modern web browsers on different operating systems.</p>
-        </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Why don't I notice latency while listening to Spotify?
+        <span>▼</span>
+      </button>
+      <div class="faq-answer">
+        When listening to pure audio (like Spotify or Apple Music), there is no visual component for your brain to compare the sound to. Latency only becomes obvious when there is a visual cue, such as an actor's lips moving or a gunshot in a video game.
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Accordion FAQ -->
-    <section class="faq-container">
-      <h2 class="section-title">Frequently Asked Questions</h2>
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          Why is there latency on Bluetooth but not on wired headphones?
-          <span class="faq-arrow">▼</span>
-        </button>
-        <div class="faq-answer">
-          Wired headphones transmit electrical signals almost instantly. Bluetooth transmits audio as data packets over radio bands. Encoding the audio, transmitting the data, and decoding it inside the earbuds introduces a buffer delay (often between 50ms to 250ms).
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          Why do movie streaming apps look in-sync when gaming feels delayed?
-          <span class="faq-arrow">▼</span>
-        </button>
-        <div class="faq-answer">
-          Many video streaming apps (like Netflix and YouTube) use automatic delay compensation. They deliberately hold back the visual video stream so it aligns with the delayed Bluetooth audio. Interactive tasks like gaming cannot be pre-buffered, which exposes the true hardware latency.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          How can I improve audio sync delay?
-          <span class="faq-arrow">▼</span>
-        </button>
-        <div class="faq-answer">
-          Try enabling 'Low Latency' or 'Gaming Mode' in your earbud's companion app if available. Switching to codecs like aptX Adaptive or LDAC (if your hardware supports them) can also help reduce buffer delays.
-        </div>
-      </div>
-    </section>
-
-    <!-- Comprehensive SEO Guide -->
-    <article class="seo-article">
-      <h2>Understanding Bluetooth Codecs and Acoustic Desynchronization</h2>
-      <p>Audio-visual desynchronization can be irritating. You watch a character speak on screen, but the sound hits your ears a split second later. Or you tap an action button in a game, and the sound effect is delayed. In acoustic engineering, this disconnect is termed <em>AV latency</em>.</p>
-      <p>While wired headsets provide effectively zero latency, cutting the cord introduces digital processing. Before audio plays from your wireless earbuds, your device must compress the sound into a Bluetooth codec, transmit it as radio frequency packets, buffer it in the receiver chip, and convert it back to analog audio. Using an online <strong>Xiaomi earbuds latency test</strong> allows you to evaluate this delay.</p>
-
-      <h3>Common Bluetooth Codecs and Latency</h3>
-      <p>The specific codec negotiated between your smartphone and your audio receiver influences the total transmission latency:</p>
-      <ul>
-        <li><strong>SBC (Subband Codec):</strong> The universal baseline codec. Typical latency ranges from <strong>150ms to 250ms</strong>. It is fine for music but can be sluggish for gaming.</li>
-        <li><strong>AAC (Advanced Audio Coding):</strong> Standard on many devices. While it delivers good audio quality, latency can vary between <strong>120ms and 200ms</strong> depending on the hardware.</li>
-        <li><strong>aptX Low Latency & aptX Adaptive:</strong> Engineered specifically for interactive media, these protocols aim to drop buffer windows closer to <strong>40ms to 80ms</strong>.</li>
-      </ul>
-
-      <h3>Evaluating True Latency</h3>
-      <p>Testing audio delay by searching for "audio sync test" videos on streaming platforms can be misleading. Modern operating systems often communicate with the media player to apply automatic delay compensation, intentionally delaying the video frames to match the Bluetooth audio stream.</p>
-      <p>Our tool generates dynamic tone pulses in real time via the Web Audio API, which generally bypasses media player delay compensation. What you see and hear provides a more accurate representation of your hardware's raw connection performance.</p>
-    </article>
-  </main>
-
+  <!-- Global Footer -->
   <footer>
-    <p style="margin-bottom: 8px;">&copy; 2026 MiMusic.net Studio. Free browser-based DSP tools.</p>
-    <p style="font-size: 0.75rem; color: #94a3b8;">Disclaimer: MiMusic.net is an independent web utility and is not affiliated with or endorsed by Xiaomi Inc. or the official Mi Music app.</p>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="brand-logo" style="margin-bottom: 16px;">🎵 MiMusic<span>.net</span></a>
+        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
+        <p style="font-weight: 600; color: var(--text-dark);">Contact: Sobl5910@gmail.com</p>
+      </div>
+      <div class="footer-col">
+        <h5>Popular Tools</h5>
+        <ul>
+          <li><a href="/volume-booster/">Volume Booster</a></li>
+          <li><a href="/speaker-cleaner/">Speaker Cleaner</a></li>
+          <li><a href="/8d-audio/">8D Spatial Audio</a></li>
+          <li><a href="/pitch-shifter/">Pitch & Tempo</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Analysis & Fixes</h5>
+        <ul>
+          <li><a href="/vocal-clarity/">Vocal Clarity</a></li>
+          <li><a href="/video-to-audio/">Video to Audio</a></li>
+          <li><a href="/decibel-meter/">Decibel Meter</a></li>
+          <li><a href="/audio-latency/" style="color: var(--accent);">Latency Test</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="/about.html">About Mi Music</a></li>
+          <li><a href="/install.html">Installation Guide</a></li>
+          <li><a href="/troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="/tools.html">All Audio Tools</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MiMusic.net. Independent audio guides and web tools.</p>
+    </div>
   </footer>
 
+  <!-- Scripts for Tool Functionality & UI -->
   <script>
-    let actx, loopInterval = null;
-    const box = document.getElementById('flash-box');
-    const label = document.getElementById('flash-label');
-    const icon = document.getElementById('flash-icon');
-    const autoBtn = document.getElementById('auto-btn');
-
-    function triggerSyncPulse() {
-      if (!actx) {
-        actx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-
-      const offsetMs = parseInt(document.getElementById('audio-offset').value) || 0;
-      const targetFreq = parseInt(document.getElementById('tone-freq').value) || 880;
-
-      const now = actx.currentTime + (offsetMs / 1000);
-      const osc = actx.createOscillator();
-      const gain = actx.createGain();
-
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(targetFreq, now);
-
-      gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.85, now + 0.005);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
-
-      osc.connect(gain);
-      gain.connect(actx.destination);
-
-      osc.start(now);
-      osc.stop(now + 0.09);
-
-      box.classList.add('active-pulse');
-      label.innerText = 'PULSE!';
-      icon.innerText = '🔊';
-
-      setTimeout(() => {
-        box.classList.remove('active-pulse');
-        label.innerText = 'Click Box or Press Trigger';
-        icon.innerText = '⚡';
-      }, 90);
-    }
-
-    function toggleContinuousLoop() {
-      if (!loopInterval) {
-        const cadence = parseInt(document.getElementById('cadence-select').value) || 1200;
-        triggerSyncPulse();
-        loopInterval = setInterval(triggerSyncPulse, cadence);
-        autoBtn.innerText = 'Stop Rhythm Loop';
-        autoBtn.style.background = 'var(--danger)';
-        autoBtn.style.color = '#fff';
-      } else {
-        clearInterval(loopInterval);
-        loopInterval = null;
-        autoBtn.innerText = 'Start Rhythm Loop (1.2s)';
-        autoBtn.style.background = '#f1f5f9';
-        autoBtn.style.color = 'var(--text-dark)';
-      }
-    }
-
-    function toggleAdvanced() {
-      const box = document.getElementById('advanced-box');
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
-    }
-
+    // FAQ Toggle
     function toggleFaq(btn) {
       const answer = btn.nextElementSibling;
-      const arrow = btn.querySelector('.faq-arrow');
+      const arrow = btn.querySelector('span');
       const isOpen = answer.style.display === 'block';
       answer.style.display = isOpen ? 'none' : 'block';
       arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
+
+    // Web Audio API Metronome Logic
+    let audioCtx = null;
+    let isTesting = false;
+    let intervalId = null;
+
+    function playTick() {
+      if (!audioCtx) return;
+      
+      // Visual Flash
+      const dot = document.getElementById('visualDot');
+      dot.classList.add('flash');
+      setTimeout(() => dot.classList.remove('flash'), 100); // Remove flash after 100ms
+
+      // Audio Beep
+      const osc = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(1000, audioCtx.currentTime); // 1000Hz beep
+      
+      // Sharp attack and decay to make it a click
+      gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(1, audioCtx.currentTime + 0.01);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+      
+      osc.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      
+      osc.start(audioCtx.currentTime);
+      osc.stop(audioCtx.currentTime + 0.1);
+    }
+
+    function toggleTest() {
+      const btn = document.getElementById('startBtn');
+      const statusText = document.getElementById('statusMessage');
+
+      if (!isTesting) {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
+        isTesting = true;
+        btn.textContent = "Stop Test";
+        btn.classList.add('stop');
+        statusText.textContent = "Look at the dot and listen to the beep. Do they match?";
+        
+        // Play immediately, then loop every 1000ms
+        playTick();
+        intervalId = setInterval(playTick, 1000);
+      } else {
+        isTesting = false;
+        clearInterval(intervalId);
+        
+        btn.textContent = "Start Sync Test";
+        btn.classList.remove('stop');
+        statusText.textContent = "Connect your Bluetooth device and click start.";
+      }
     }
   </script>
 </body>
