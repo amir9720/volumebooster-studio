@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MiMusic - Ultimate Guide, App Setup & Audio Fixes</title>
-  <meta name="description" content="Your complete guide to the Mi Music app. Learn how to install, fix playback issues, update your player, and access free online audio enhancement tools.">
+  <title>Mi Music App - Features, Download & User Guide</title>
+  <meta name="description" content="Your complete guide to the Mi Music app. Learn how to install, explore its features, fix playback issues, and get the official download link.">
+  <!-- اضافه کردن Favicon -->
+  <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
     :root {
       /* MiMusic Clean Light Theme Palette */
@@ -13,14 +15,11 @@
       --border: #e2e8f0;
       --accent: #4f46e5;
       --accent-hover: #4338ca;
-      --cyan: #06b6d4;
-      --pink: #ec4899;
-      --amber: #f59e0b;
-      --emerald: #10b981;
       --text: #334155;
       --text-dark: #0f172a;
       --muted: #64748b;
       --surface: #f1f5f9;
+      --play-store: #00a173; /* رنگ سبز مشابه گوگل پلی */
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { 
@@ -43,7 +42,6 @@
     .nav-btn { background: var(--accent); color: #fff; text-decoration: none; padding: 8px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; transition: 0.2s; white-space: nowrap; }
     .nav-btn:hover { background: var(--accent-hover); box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
 
-    /* Mobile Header Optimization */
     @media (max-width: 768px) {
       .nav-links .nav-link { display: none; }
       .nav-links { gap: 0; }
@@ -54,76 +52,48 @@
 
     /* Hero Section */
     .hero { max-width: 1000px; margin: 0 auto; padding: 65px 20px 45px; text-align: center; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(79, 70, 229, 0.1); border: 1px solid rgba(79, 70, 229, 0.2); color: #4338ca; padding: 6px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; margin-bottom: 22px; }
     .hero h1 { font-size: 2.9rem; font-weight: 800; line-height: 1.2; color: var(--text-dark); margin-bottom: 20px; letter-spacing: -0.03em; }
     .hero h1 span { color: var(--accent); }
     .hero-lead { font-size: 1.1rem; color: var(--muted); max-width: 720px; margin: 0 auto 30px; font-weight: 500; line-height: 1.6; }
-    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-    .cta-primary { background: var(--accent); color: #fff; text-decoration: none; padding: 14px 28px; border-radius: 12px; font-size: 1rem; font-weight: 700; transition: 0.2s; box-shadow: 0 4px 20px rgba(79, 70, 229, 0.35); }
-    .cta-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
-    .cta-secondary { background: #fff; color: var(--text-dark); text-decoration: none; padding: 14px 28px; border-radius: 12px; font-size: 1rem; font-weight: 600; border: 1px solid #cbd5e1; transition: 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .cta-secondary:hover { background: var(--surface); border-color: #94a3b8; }
+    
+    .download-badge { display: inline-flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #cbd5e1; padding: 12px 24px; border-radius: 50px; font-size: 1rem; font-weight: 700; color: var(--text-dark); text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: 0.2s; margin-bottom: 40px; }
+    .download-badge:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); border-color: var(--play-store); }
+    .download-badge span { color: var(--play-store); }
 
     @media (max-width: 600px) {
       .hero { padding: 40px 16px 30px; }
       .hero h1 { font-size: 2.2rem; }
       .hero-lead { font-size: 0.95rem; }
-      .cta-primary, .cta-secondary { width: 100%; max-width: 320px; text-align: center; }
     }
 
     /* Main Container */
-    .main-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .main-wrapper { max-width: 900px; margin: 0 auto; padding: 0 20px; }
 
-    /* Suite Section Headers */
-    .suite-section { margin-bottom: 65px; }
-    .section-head { text-align: left; margin-bottom: 26px; border-bottom: 2px solid var(--surface); padding-bottom: 14px; }
-    .section-badge { color: var(--accent); font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
-    .section-title { font-size: 1.65rem; font-weight: 800; color: var(--text-dark); margin-top: 4px; }
-    .section-desc { color: var(--muted); font-size: 0.95rem; margin-top: 4px; font-weight: 500; }
-
-    /* Tool Grid & Cards */
-    .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; }
-    .tool-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s ease; position: relative; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .tool-card:hover { transform: translateY(-4px); border-color: #a5b4fc; box-shadow: 0 12px 25px -5px rgba(79, 70, 229, 0.15); }
-    .card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
-    .card-icon { width: 50px; height: 50px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .card-tag { font-size: 0.72rem; font-weight: 800; padding: 4px 8px; border-radius: 6px; text-transform: uppercase; }
+    /* Content Article Section */
+    .content-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; padding: 40px; margin-bottom: 50px; text-align: left; color: var(--text); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+    .content-article h2 { color: var(--text-dark); font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; border-bottom: 2px solid var(--surface); padding-bottom: 10px; }
+    .content-article h3 { color: var(--text-dark); font-size: 1.3rem; font-weight: 700; margin: 28px 0 12px; }
+    .content-article p { margin-bottom: 18px; font-size: 1.05rem; font-weight: 500; line-height: 1.7; }
+    .content-article ul { padding-left: 24px; margin-bottom: 20px; font-size: 1.05rem; font-weight: 500; }
+    .content-article li { margin-bottom: 10px; }
     
-    .tag-blue { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
-    .tag-green { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; }
-    .tag-purple { background: #f5f3ff; color: #7c3aed; border: 1px solid #ddd6fe; }
-    .tag-amber { background: #fffbeb; color: #d97706; border: 1px solid #fde68a; }
-    .tag-pink { background: #fdf2f8; color: #db2777; border: 1px solid #fbcfe8; }
-    .tag-cyan { background: #ecfeff; color: #0891b2; border: 1px solid #a5f3fc; }
-
-    .tool-card h3 { color: var(--text-dark); font-size: 1.15rem; margin-bottom: 8px; font-weight: 800; }
-    .tool-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 20px; font-weight: 500; }
-    .card-action { display: flex; align-items: center; gap: 6px; color: var(--accent); font-size: 0.88rem; font-weight: 700; }
-
-    /* Feature Breakdown Block */
-    .feature-showcase { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 22px; margin-bottom: 65px; }
-    .showcase-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; padding: 30px 24px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
-    .showcase-box h4 { font-size: 1.15rem; font-weight: 800; color: var(--text-dark); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-    .showcase-box p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; font-weight: 500; }
+    .highlight-box { background: var(--surface); border-left: 4px solid var(--accent); padding: 18px 24px; border-radius: 0 12px 12px 0; margin: 24px 0; font-size: 1rem; color: var(--text-dark); font-weight: 500; }
 
     /* Accordion FAQ */
     .faq-container { margin-bottom: 65px; }
-    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-    .faq-question { width: 100%; padding: 18px 22px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-question:hover { color: var(--accent); background: var(--surface); }
+    .section-head { text-align: center; margin-bottom: 30px; }
+    .section-title { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); }
+    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .faq-question { width: 100%; padding: 20px 24px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1.05rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-question:hover { background: var(--surface); color: var(--accent); }
     .faq-arrow { font-size: 0.8rem; transition: transform 0.2s; }
-    .faq-answer { display: none; padding: 0 22px 20px; color: var(--muted); font-size: 0.95rem; font-weight: 500; line-height: 1.6; border-top: 1px solid var(--surface); padding-top: 14px; }
+    .faq-answer { display: none; padding: 0 24px 20px; color: var(--muted); font-size: 1rem; font-weight: 500; line-height: 1.6; border-top: 1px solid var(--surface); padding-top: 16px; }
 
     /* Global Brand Footer */
-    footer { border-top: 1px solid var(--border); background: var(--bg); padding: 50px 20px 40px; color: var(--muted); font-size: 0.9rem; }
-    .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 36px; margin-bottom: 40px; text-align: left; }
-    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } }
-    .footer-col h5 { color: var(--text-dark); font-size: 0.95rem; font-weight: 800; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; }
-    .footer-col ul { list-style: none; }
-    .footer-col li { margin-bottom: 10px; }
-    .footer-col a { color: var(--muted); font-weight: 500; text-decoration: none; transition: 0.2s; }
-    .footer-col a:hover { color: var(--accent); }
-    .footer-bottom { max-width: 1100px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; text-align: center; font-size: 0.85rem; font-weight: 500; }
+    footer { border-top: 1px solid var(--border); background: var(--card-bg); padding: 40px 20px; text-align: center; color: var(--muted); font-size: 0.9rem; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 20px; flex-wrap: wrap; }
+    .footer-links a { color: var(--text-dark); text-decoration: none; font-weight: 600; transition: 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
   </style>
 </head>
 <body>
@@ -133,300 +103,100 @@
     <div class="nav-inner">
       <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
       <nav class="nav-links">
-        <!-- لینک‌ها به صفحات مجزا که ساخته‌ایم هدایت می‌شوند -->
-        <a href="about.html" class="nav-link">About Mi Music</a>
-        <a href="install.html" class="nav-link">Install & Update</a>
+        <a href="about.html" class="nav-link">About Features</a>
+        <a href="install.html" class="nav-link">Installation</a>
         <a href="troubleshooting.html" class="nav-link">Troubleshooting</a>
-        <a href="guide.html" class="nav-link" style="color: var(--accent); font-weight: 700;">📖 User Guide</a>
-        <a href="#free-tools" class="nav-btn">Online Tools</a>
+        <!-- لینک به صفحه جدید ابزارها که باید بسازیم -->
+        <a href="tools.html" class="nav-btn">Free Audio Tools</a>
       </nav>
     </div>
   </header>
 
   <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-badge">📱 The Ultimate Audio Resource</div>
-    <h1>Everything You Need to Know About <span>Mi Music</span></h1>
-    <p class="hero-lead">Your definitive guide to the default music player for Xiaomi and MIUI devices. Discover features, learn how to fix common playback issues, and explore our free suite of online audio utilities designed to enhance your listening experience.</p>
-    <div class="hero-actions">
-      <!-- هدایت به صفحه مقالات -->
-      <a href="about.html" class="cta-primary">Explore the Guide</a>
-      <a href="#free-tools" class="cta-secondary">Jump to Audio Tools &rarr;</a>
-    </div>
+    <!-- H1 دقیقاً طبق درخواست استاد -->
+    <h1>Mi Music App: Features and Usage Guide</h1>
+    <p class="hero-lead">Welcome to the unofficial hub for Xiaomi's default audio player. Learn about its core capabilities, discover how to manage your local library effectively, and find solutions to common playback issues.</p>
+    
+    <!-- لینک مستقیم به گوگل پلی طبق درخواست استاد -->
+    <a href="https://play.google.com/store/apps/details?id=com.miui.player" target="_blank" rel="noopener noreferrer" class="download-badge">
+      📱 Get it on <span>Google Play</span>
+    </a>
   </section>
 
   <!-- Main Content Area -->
   <main class="main-wrapper">
 
-    <!-- Suite Section: Free Online Tools -->
-    <section class="suite-section" id="free-tools">
-      <div class="section-head">
-        <span class="section-badge">Browser Utilities</span>
-        <h2 class="section-title">Free Audio Processing Tools</h2>
-        <p class="section-desc">While the Mi Music app is great for playback, sometimes your audio files need a little help. We've built a suite of free, browser-based tools to help you enhance, analyze, and fix your audio files without installing heavy desktop software. <strong>All tools process files locally in your browser to ensure complete privacy.</strong></p>
+    <!-- Dedicated App Content -->
+    <article class="content-article">
+      <h2>Why Choose the Mi Music App?</h2>
+      <p>Pre-installed on millions of MIUI and HyperOS devices globally, the <strong>Mi Music</strong> application is engineered to provide a lightweight, battery-efficient local music listening experience. Unlike heavy subscription-based streaming platforms, it focuses heavily on playing your personal collection of MP3s, FLACs, and AAC files directly from your device's storage.</p>
+      
+      <h3>Verified Core Features</h3>
+      <ul>
+        <li><strong>Broad Format Decoding:</strong> Natively supports high-fidelity audio formats including FLAC and WAV without the need to download third-party codecs.</li>
+        <li><strong>Integrated Mi Sound Enhancer:</strong> Directly communicates with Xiaomi's hardware equalizer, offering specific acoustic presets designed to optimize output for various Xiaomi and Redmi earbuds.</li>
+        <li><strong>Dynamic Lyrics Syncing:</strong> Automatically detects and displays LRC files in your music directory so you can read along with the vocals.</li>
+        <li><strong>Sleep Timer & Ringtone Cutter:</strong> Built-in utilities allow you to set auto-shutoff timers for bedtime or trim your favorite chorus to use as a phone ringtone.</li>
+      </ul>
+
+      <div class="highlight-box">
+        💡 <strong>Pro Tip:</strong> To get the absolute best audio quality from your Xiaomi device, go to your phone's Settings > Sound & Vibration > Sound Effects, and ensure 'Mi Sound Enhancer' is toggled on when using wired headphones.
       </div>
+      
+      <h3>Need to Edit Your Audio Files?</h3>
+      <p>While the app is an excellent player, it does not include advanced audio editing features like volume boosting, 8D spatial panning, or vocal isolation. If you need to modify an audio file before adding it to your library, you can use our <a href="tools.html" style="color:var(--accent); font-weight:700; text-decoration:none;">Free Online Audio Tools</a>. They work directly in your browser with zero uploads required.</p>
+    </article>
 
-      <div class="tools-grid">
-        <!-- 1. Volume Booster -->
-        <a href="/volume-booster/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">🔊</div>
-              <span class="card-tag tag-blue">Enhance</span>
-            </div>
-            <h3>Volume Booster</h3>
-            <p>Amplify quiet audio and video recordings safely with built-in anti-clipping protection.</p>
-          </div>
-          <div class="card-action">Launch Tool &rarr;</div>
-        </a>
-
-        <!-- 2. Speaker Cleaner -->
-        <a href="/speaker-cleaner/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">💧</div>
-              <span class="card-tag tag-amber">Utility</span>
-            </div>
-            <h3>Speaker Cleaner</h3>
-            <p>Expel trapped water droplets and dust from smartphone speaker grills using sonic pulses.</p>
-          </div>
-          <div class="card-action">Launch Tool &rarr;</div>
-        </a>
-
-        <!-- 3. 8D Audio -->
-        <a href="/8d-audio/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">🎧</div>
-              <span class="card-tag tag-purple">Spatial</span>
-            </div>
-            <h3>8D Audio Converter</h3>
-            <p>Transform standard stereo tracks into an immersive 360-degree rotating binaural soundstage.</p>
-          </div>
-          <div class="card-action">Launch Tool &rarr;</div>
-        </a>
-
-        <!-- 4. Vocal Clarity -->
-        <a href="/vocal-clarity/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">🗣️</div>
-              <span class="card-tag tag-green">Filter</span>
-            </div>
-            <h3>Vocal Clarity Enhancer</h3>
-            <p>Reduce background mud and boost speech frequencies for clear podcast playback.</p>
-          </div>
-          <div class="card-action">Launch Tool &rarr;</div>
-        </a>
-
-        <!-- 5. Pitch & Speed -->
-        <a href="/pitch-shifter/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">🎚️</div>
-              <span class="card-tag tag-blue">Edit</span>
-            </div>
-            <h3>Pitch & Speed Shifter</h3>
-            <p>Fine-tune playback speed from 0.5x to 2.0x while locking musical key.</p>
-          </div>
-          <div class="card-action">Launch Tool &rarr;</div>
-        </a>
-
-        <!-- 6. Decibel Meter -->
-        <a href="/decibel-meter/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">📊</div>
-              <span class="card-tag tag-pink">Measure</span>
-            </div>
-            <h3>Real-Time Decibel Meter</h3>
-            <p>Measure ambient room loudness (dB SPL) directly via your device microphone.</p>
-          </div>
-          <div class="card-action">Launch Tool &rarr;</div>
-        </a>
-
-        <!-- 7. Video to Audio -->
-        <a href="/video-to-audio/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">🎬</div>
-              <span class="card-tag tag-amber">Extract</span>
-            </div>
-            <h3>Video to Audio</h3>
-            <p>Extract uncompressed audio tracks from MP4 and MOV videos locally.</p>
-          </div>
-          <div class="card-action">Launch Tool &rarr;</div>
-        </a>
-
-        <!-- 8. Audio Latency -->
-        <a href="/audio-latency/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">⚡</div>
-              <span class="card-tag tag-cyan">Test</span>
-            </div>
-            <h3>Audio Latency Test</h3>
-            <p>Measure Bluetooth audio delay and AV sync lag on your wireless earbuds.</p>
-          </div>
-          <div class="card-action">Launch Tool &rarr;</div>
-        </a>
-
-        <!-- 9. Voice Changer -->
-        <a href="/voice-transformer/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">🎙️</div>
-              <span class="card-tag tag-purple">Fun</span>
-            </div>
-            <h3>Voice Changer FX</h3>
-            <p>Apply fun vocal formants like Helium or Monster to your microphone recordings.</p>
-          </div>
-          <div class="card-action">Launch Tool &rarr;</div>
-        </a>
-
-        <!-- 10. Reverse Audio -->
-        <a href="/reverse-audio/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">🔄</div>
-              <span class="card-tag tag-blue">Edit</span>
-            </div>
-            <h3>Reverse Audio</h3>
-            <p>Play music backwards and export inverted waveforms with zero quality loss.</p>
-          </div>
-          <div class="card-action">Launch Tool &rarr;</div>
-        </a>
-
-        <!-- 11. Binaural Beats -->
-        <a href="/binaural-waves/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">🧠</div>
-              <span class="card-tag tag-green">Focus</span>
-            </div>
-            <h3>Binaural Audio Waves</h3>
-            <p>Generate relaxing ambient frequency offsets for study and deep focus.</p>
-          </div>
-          <div class="card-action">Launch Tool &rarr;</div>
-        </a>
-
-        <!-- 12. Hearing Test -->
-        <a href="/hearing-test/" class="tool-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">🦻</div>
-              <span class="card-tag tag-pink">Health</span>
-            </div>
-            <h3>High Frequency Test</h3>
-            <p>Check your upper auditory range and test your headphone treble limits.</p>
-          </div>
-          <div class="card-action">Launch Tool &rarr;</div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Architectural Deep-Dive -->
-    <section class="feature-showcase">
-      <div class="showcase-box">
-        <h4>🔒 100% In-Browser Privacy</h4>
-        <p>Unlike traditional converters that upload your files to remote servers, our audio utilities execute entirely inside your local browser memory (RAM). Not a single audio frame is ever stored or transmitted across external networks.</p>
-      </div>
-      <div class="showcase-box">
-        <h4>⚡ Zero Conversion Latency</h4>
-        <p>No waiting in cloud processing queues or uploading multi-gigabyte files. Our Web Audio API pipeline taps directly into your device's CPU and hardware decoders for immediate response.</p>
-      </div>
-      <div class="showcase-box">
-        <h4>🎧 Uncompressed Fidelity</h4>
-        <p>Our tools avoid the double-compression degradation common on ad-supported sites. We process audio using floating-point math to maintain the highest possible audio quality during export.</p>
-      </div>
-    </section>
-
-    <!-- Accordion FAQ -->
+    <!-- Real User FAQ Section -->
     <section class="faq-container">
       <div class="section-head">
-        <span class="section-badge">Support</span>
         <h2 class="section-title">Frequently Asked Questions</h2>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Is this website affiliated with Xiaomi?
+          How do I update the app if I don't have a Xiaomi phone?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          No. MiMusic.net is an independent, community-driven resource and web utility platform. We provide guides and browser-based audio tools, but we are not affiliated with, endorsed by, or connected to Xiaomi Inc.
+          While the app is optimized for MIUI devices, a global version is available on the Google Play Store for other Android devices. You can install and update it directly through the Play Store link provided at the top of this page.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Why use these online tools instead of an app?
+          Why is my local music not showing up in the library?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Our browser-based tools require no installation, do not ask for intrusive permissions (like access to your contacts or location), and process files locally. They offer a safe, fast, and private way to edit audio on any device.
+          The app's media scanner might be filtering out files. Open the app settings, navigate to "Advanced settings," and tap "Filter audio files." Ensure that filters for file size (e.g., hiding files under 500KB) or length are not accidentally hiding your tracks.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Can I use these tools on my iPhone or PC?
+          Can I stream online music with this app?
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Yes! While our guides focus on Android/MIUI users, the web utilities themselves are platform-agnostic. They work perfectly on iOS Safari, macOS, Windows, and any modern web browser.
+          This depends heavily on your region. In certain markets (like India), Xiaomi has partnered with local streaming services (such as Hungama) to integrate online streaming. However, in European and Global ROMs, the app often functions strictly as an offline local media player.
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- Global Brand Footer -->
+  <!-- Global Footer -->
   <footer>
-    <div class="footer-grid">
-      <div class="footer-col">
-        <h5>🎵 MiMusic.net</h5>
-        <p style="margin-bottom: 14px; font-size: 0.88rem; font-weight: 500; line-height: 1.6;">Your independent guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
-        <p style="font-size: 0.85rem; color: #64748b; font-weight: 600;">Contact: Sobl5910@gmail.com</p>
-      </div>
-
-      <div class="footer-col">
-        <h5>Popular Tools</h5>
-        <ul>
-          <li><a href="/volume-booster/">Volume Booster</a></li>
-          <li><a href="/speaker-cleaner/">Speaker Cleaner</a></li>
-          <li><a href="/8d-audio/">8D Spatial Audio</a></li>
-          <li><a href="/pitch-shifter/">Pitch & Tempo</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h5>Analysis & Fixes</h5>
-        <ul>
-          <li><a href="/vocal-clarity/">Vocal Clarity</a></li>
-          <li><a href="/video-to-audio/">Video to Audio</a></li>
-          <li><a href="/decibel-meter/">Decibel Meter</a></li>
-          <li><a href="/audio-latency/">Latency Test</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h5>Fun & Focus</h5>
-        <ul>
-          <li><a href="/voice-transformer/">Voice Changer</a></li>
-          <li><a href="/reverse-audio/">Reverse Audio</a></li>
-          <li><a href="/binaural-waves/">Binaural Beats</a></li>
-          <li><a href="/hearing-test/">Hearing Test</a></li>
-        </ul>
-      </div>
+    <div class="footer-links">
+      <a href="about.html">App Features</a>
+      <a href="install.html">Download Guide</a>
+      <a href="troubleshooting.html">Troubleshooting</a>
+      <a href="tools.html">Free Audio Tools</a>
     </div>
-
-    <div class="footer-bottom">
-      <p style="margin-bottom: 12px;">
-        <a href="guide.html" style="color: var(--accent); text-decoration: none; font-weight: 700; font-size: 0.95rem;">📖 Read our Platform User Guide & Help Center</a>
-      </p>
-      <p>&copy; 2026 MiMusic.net. Independent audio guides and web tools.</p>
-    </div>
+    <p>&copy; 2026 MiMusic.net. An independent information resource and web utility hub.</p>
+    <p style="font-size: 0.8rem; margin-top: 10px;">Not affiliated with or endorsed by Xiaomi Inc.</p>
   </footer>
 
   <script>
