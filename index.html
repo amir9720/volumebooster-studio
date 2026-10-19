@@ -5,108 +5,114 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Music App - Features, Download & User Guide</title>
   <meta name="description" content="Your complete guide to the Mi Music app. Learn how to install, explore its features, fix playback issues, and get the official download link.">
-  <!-- اضافه کردن Favicon -->
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
+    /* Modern UI Variables */
     :root {
-      /* MiMusic Clean Light Theme Palette */
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --border: #e2e8f0;
-      --accent: #4f46e5;
-      --accent-hover: #4338ca;
-      --text: #334155;
-      --text-dark: #0f172a;
-      --muted: #64748b;
-      --surface: #f1f5f9;
-      --play-store: #00a173; /* رنگ سبز مشابه گوگل پلی */
+      --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
+      --border: #e2e8f0; --border-hover: #cbd5e1;
+      --accent: #4f46e5; --accent-hover: #4338ca; --accent-light: #e0e7ff;
+      --text-dark: #0f172a; --text: #334155; --muted: #64748b;
+      --play-store: #00a173; --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
     }
+    
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { 
-      background: var(--bg); 
-      background-image: linear-gradient(180deg, #f0f4ff 0%, #f8fafc 400px); 
-      color: var(--text); 
-      min-height: 100vh; 
-      line-height: 1.6; 
-      overflow-x: hidden; 
-    }
+    body { background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
 
-    /* Top Brand Navigation */
-    .header-nav { width: 100%; border-bottom: 1px solid var(--border); background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
-    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
-    .brand-logo { color: var(--text-dark); font-size: 1.25rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; letter-spacing: -0.02em; white-space: nowrap; }
+    /* Navigation */
+    .header-nav { width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow-sm); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .brand-logo { color: var(--text-dark); font-size: 1.3rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; letter-spacing: -0.02em; }
     .brand-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 20px; align-items: center; }
-    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.2s; white-space: nowrap; }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
     .nav-link:hover { color: var(--accent); }
-    .nav-btn { background: var(--accent); color: #fff; text-decoration: none; padding: 8px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; transition: 0.2s; white-space: nowrap; }
-    .nav-btn:hover { background: var(--accent-hover); box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
+    .nav-btn { background: var(--accent); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 700; transition: 0.3s; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); }
+    .nav-btn:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(79, 70, 229, 0.3); }
 
-    @media (max-width: 768px) {
-      .nav-links .nav-link { display: none; }
-      .nav-links { gap: 0; }
-      .nav-inner { padding: 12px 16px; }
-      .brand-logo { font-size: 1.15rem; }
-      .nav-btn { padding: 7px 14px; font-size: 0.8rem; }
-    }
+    /* Hero Section - Rich & Engaging */
+    .hero { background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%); padding: 80px 24px 60px; text-align: center; }
+    .hero-inner { max-width: 900px; margin: 0 auto; }
+    .hero h1 { font-size: 3.5rem; font-weight: 900; color: var(--text-dark); line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.03em; }
+    .hero p { font-size: 1.25rem; color: var(--text); max-width: 750px; margin: 0 auto 36px; font-weight: 500; }
+    .hero-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .btn-playstore { display: flex; align-items: center; gap: 10px; background: var(--surface); border: 2px solid var(--border); padding: 14px 28px; border-radius: 50px; font-size: 1.05rem; font-weight: 800; color: var(--text-dark); text-decoration: none; transition: 0.3s; box-shadow: var(--shadow-sm); }
+    .btn-playstore:hover { border-color: var(--play-store); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-playstore span { color: var(--play-store); }
+    .hero-image { width: 100%; max-width: 800px; height: 350px; margin: 50px auto 0; background: url('https://via.placeholder.com/800x350/ffffff/4f46e5?text=Beautiful+App+Mockup+Image+Here') center/cover; border-radius: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); }
 
-    /* Hero Section */
-    .hero { max-width: 1000px; margin: 0 auto; padding: 65px 20px 45px; text-align: center; }
-    .hero h1 { font-size: 2.9rem; font-weight: 800; line-height: 1.2; color: var(--text-dark); margin-bottom: 20px; letter-spacing: -0.03em; }
-    .hero h1 span { color: var(--accent); }
-    .hero-lead { font-size: 1.1rem; color: var(--muted); max-width: 720px; margin: 0 auto 30px; font-weight: 500; line-height: 1.6; }
+    /* Stats / Achievements Box */
+    .stats-container { max-width: 1000px; margin: -30px auto 60px; position: relative; z-index: 10; background: var(--surface); border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border); display: grid; grid-template-columns: repeat(3, 1fr); padding: 30px; text-align: center; }
+    .stat-item { border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-number { font-size: 2.2rem; font-weight: 900; color: var(--accent); margin-bottom: 4px; }
+    .stat-label { font-size: 0.95rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* Core Features Grid */
+    .section { max-width: 1200px; margin: 0 auto 80px; padding: 0 24px; }
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-header h2 { font-size: 2.4rem; font-weight: 800; color: var(--text-dark); margin-bottom: 16px; }
+    .section-header p { font-size: 1.1rem; color: var(--muted); max-width: 600px; margin: 0 auto; }
     
-    .download-badge { display: inline-flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #cbd5e1; padding: 12px 24px; border-radius: 50px; font-size: 1rem; font-weight: 700; color: var(--text-dark); text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: 0.2s; margin-bottom: 40px; }
-    .download-badge:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); border-color: var(--play-store); }
-    .download-badge span { color: var(--play-store); }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .feature-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: 0.3s; box-shadow: var(--shadow-sm); }
+    .feature-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: var(--shadow-md); }
+    .feature-icon { width: 56px; height: 56px; background: var(--accent-light); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 20px; }
+    .feature-card h3 { font-size: 1.25rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; }
+    .feature-card p { font-size: 0.95rem; color: var(--text); line-height: 1.6; }
 
+    /* Mid-Page CTA (Tools Promotion) */
+    .cta-banner { background: var(--text-dark); border-radius: 24px; padding: 50px 40px; text-align: center; margin: 0 auto 80px; color: #fff; position: relative; overflow: hidden; }
+    .cta-banner::before { content: ''; position: absolute; top: -50%; left: -10%; width: 50%; height: 200%; background: radial-gradient(circle, rgba(79,70,229,0.3) 0%, transparent 70%); }
+    .cta-content { position: relative; z-index: 2; }
+    .cta-banner h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 16px; }
+    .cta-banner p { font-size: 1.1rem; color: #cbd5e1; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .btn-tools { background: var(--accent); color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-size: 1.05rem; font-weight: 700; transition: 0.3s; display: inline-block; }
+    .btn-tools:hover { background: #6366f1; box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4); }
+
+    /* FAQ Accordion */
+    .faq-wrapper { max-width: 800px; margin: 0 auto; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
+    .faq-question { width: 100%; padding: 20px 24px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1.1rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-question:hover { background: var(--surface-alt); }
+    .faq-answer { display: none; padding: 0 24px 20px; color: var(--muted); font-size: 1rem; line-height: 1.6; border-top: 1px solid var(--surface-alt); padding-top: 16px; }
+
+    /* FAT FOOTER - For SEO & Internal Linking */
+    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
+    .footer-col h5 { color: var(--text-dark); font-size: 1rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .footer-col ul { list-style: none; padding: 0; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a { color: var(--muted); font-weight: 500; text-decoration: none; transition: 0.2s; }
+    .footer-col a:hover { color: var(--accent); padding-left: 4px; }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .stats-container { grid-template-columns: 1fr; gap: 20px; padding: 20px; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+      .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
     @media (max-width: 600px) {
-      .hero { padding: 40px 16px 30px; }
-      .hero h1 { font-size: 2.2rem; }
-      .hero-lead { font-size: 0.95rem; }
+      .hero h1 { font-size: 2.4rem; }
+      .nav-links { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
     }
-
-    /* Main Container */
-    .main-wrapper { max-width: 900px; margin: 0 auto; padding: 0 20px; }
-
-    /* Content Article Section */
-    .content-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; padding: 40px; margin-bottom: 50px; text-align: left; color: var(--text); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
-    .content-article h2 { color: var(--text-dark); font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; border-bottom: 2px solid var(--surface); padding-bottom: 10px; }
-    .content-article h3 { color: var(--text-dark); font-size: 1.3rem; font-weight: 700; margin: 28px 0 12px; }
-    .content-article p { margin-bottom: 18px; font-size: 1.05rem; font-weight: 500; line-height: 1.7; }
-    .content-article ul { padding-left: 24px; margin-bottom: 20px; font-size: 1.05rem; font-weight: 500; }
-    .content-article li { margin-bottom: 10px; }
-    
-    .highlight-box { background: var(--surface); border-left: 4px solid var(--accent); padding: 18px 24px; border-radius: 0 12px 12px 0; margin: 24px 0; font-size: 1rem; color: var(--text-dark); font-weight: 500; }
-
-    /* Accordion FAQ */
-    .faq-container { margin-bottom: 65px; }
-    .section-head { text-align: center; margin-bottom: 30px; }
-    .section-title { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); }
-    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .faq-question { width: 100%; padding: 20px 24px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1.05rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-question:hover { background: var(--surface); color: var(--accent); }
-    .faq-arrow { font-size: 0.8rem; transition: transform 0.2s; }
-    .faq-answer { display: none; padding: 0 24px 20px; color: var(--muted); font-size: 1rem; font-weight: 500; line-height: 1.6; border-top: 1px solid var(--surface); padding-top: 16px; }
-
-    /* Global Brand Footer */
-    footer { border-top: 1px solid var(--border); background: var(--card-bg); padding: 40px 20px; text-align: center; color: var(--muted); font-size: 0.9rem; }
-    .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 20px; flex-wrap: wrap; }
-    .footer-links a { color: var(--text-dark); text-decoration: none; font-weight: 600; transition: 0.2s; }
-    .footer-links a:hover { color: var(--accent); }
   </style>
 </head>
 <body>
 
-  <!-- Top Sticky Navigation Bar -->
+  <!-- Navigation -->
   <header class="header-nav">
     <div class="nav-inner">
       <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
       <nav class="nav-links">
-        <a href="about.html" class="nav-link">About Features</a>
+        <a href="about.html" class="nav-link">App Features</a>
         <a href="install.html" class="nav-link">Installation</a>
         <a href="troubleshooting.html" class="nav-link">Troubleshooting</a>
-        <!-- لینک به صفحه جدید ابزارها که باید بسازیم -->
         <a href="tools.html" class="nav-btn">Free Audio Tools</a>
       </nav>
     </div>
@@ -114,95 +120,163 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <!-- H1 دقیقاً طبق درخواست استاد -->
-    <h1>Mi Music App: Features and Usage Guide</h1>
-    <p class="hero-lead">Welcome to the unofficial hub for Xiaomi's default audio player. Learn about its core capabilities, discover how to manage your local library effectively, and find solutions to common playback issues.</p>
-    
-    <!-- لینک مستقیم به گوگل پلی طبق درخواست استاد -->
-    <a href="https://play.google.com/store/apps/details?id=com.miui.player" target="_blank" rel="noopener noreferrer" class="download-badge">
-      📱 Get it on <span>Google Play</span>
-    </a>
+    <div class="hero-inner">
+      <h1>Mi Music App: Features and Usage Guide</h1>
+      <p>Your definitive guide to Xiaomi's default audio player. Discover hidden features, fix playback issues, and explore our suite of free online audio tools.</p>
+      <div class="hero-buttons">
+        <a href="https://play.google.com/store/apps/details?id=com.miui.player" target="_blank" rel="noopener noreferrer" class="btn-playstore">
+          📱 Get it on <span>Google Play</span>
+        </a>
+      </div>
+      <!-- Place for a massive high quality image/mockup -->
+      <div class="hero-image"></div>
+    </div>
   </section>
 
-  <!-- Main Content Area -->
-  <main class="main-wrapper">
+  <!-- Stats / Trust Indicators -->
+  <div class="stats-container">
+    <div class="stat-item">
+      <div class="stat-number">12+</div>
+      <div class="stat-label">Free Audio Utilities</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Browser Based</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">Zero</div>
+      <div class="stat-label">Data Uploads</div>
+    </div>
+  </div>
 
-    <!-- Dedicated App Content -->
-    <article class="content-article">
+  <!-- Detailed Features Grid -->
+  <section class="section">
+    <div class="section-header">
       <h2>Why Choose the Mi Music App?</h2>
-      <p>Pre-installed on millions of MIUI and HyperOS devices globally, the <strong>Mi Music</strong> application is engineered to provide a lightweight, battery-efficient local music listening experience. Unlike heavy subscription-based streaming platforms, it focuses heavily on playing your personal collection of MP3s, FLACs, and AAC files directly from your device's storage.</p>
-      
-      <h3>Verified Core Features</h3>
-      <ul>
-        <li><strong>Broad Format Decoding:</strong> Natively supports high-fidelity audio formats including FLAC and WAV without the need to download third-party codecs.</li>
-        <li><strong>Integrated Mi Sound Enhancer:</strong> Directly communicates with Xiaomi's hardware equalizer, offering specific acoustic presets designed to optimize output for various Xiaomi and Redmi earbuds.</li>
-        <li><strong>Dynamic Lyrics Syncing:</strong> Automatically detects and displays LRC files in your music directory so you can read along with the vocals.</li>
-        <li><strong>Sleep Timer & Ringtone Cutter:</strong> Built-in utilities allow you to set auto-shutoff timers for bedtime or trim your favorite chorus to use as a phone ringtone.</li>
-      </ul>
-
-      <div class="highlight-box">
-        💡 <strong>Pro Tip:</strong> To get the absolute best audio quality from your Xiaomi device, go to your phone's Settings > Sound & Vibration > Sound Effects, and ensure 'Mi Sound Enhancer' is toggled on when using wired headphones.
+      <p>Pre-installed on millions of MIUI and HyperOS devices globally, it provides a lightweight, battery-efficient local music listening experience.</p>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎧</div>
+        <h3>Broad Format Decoding</h3>
+        <p>Natively supports high-fidelity audio formats including FLAC and WAV without the need to download third-party audio codecs.</p>
       </div>
-      
-      <h3>Need to Edit Your Audio Files?</h3>
-      <p>While the app is an excellent player, it does not include advanced audio editing features like volume boosting, 8D spatial panning, or vocal isolation. If you need to modify an audio file before adding it to your library, you can use our <a href="tools.html" style="color:var(--accent); font-weight:700; text-decoration:none;">Free Online Audio Tools</a>. They work directly in your browser with zero uploads required.</p>
-    </article>
-
-    <!-- Real User FAQ Section -->
-    <section class="faq-container">
-      <div class="section-head">
-        <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="feature-card">
+        <div class="feature-icon">🎛️</div>
+        <h3>Mi Sound Enhancer</h3>
+        <p>Directly communicates with Xiaomi's hardware equalizer, offering specific acoustic presets designed to optimize output for your earbuds.</p>
       </div>
+      <div class="feature-card">
+        <div class="feature-icon">📜</div>
+        <h3>Dynamic Lyrics</h3>
+        <p>Automatically detects and displays local LRC files in your music directory so you can read along with the vocals while listening.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⏱️</div>
+        <h3>Sleep Timer & Cutter</h3>
+        <p>Built-in utilities allow you to set auto-shutoff timers for bedtime or easily trim your favorite chorus to use as a custom ringtone.</p>
+      </div>
+    </div>
+  </section>
 
+  <!-- Mid-Page Call to Action (Driving traffic to Tools) -->
+  <section class="section">
+    <div class="cta-banner">
+      <div class="cta-content">
+        <h2>Need to Edit Your Audio Files?</h2>
+        <p>While the app is an excellent player, it doesn't include advanced editing. Use our suite of free online tools to boost volume, apply 8D effects, or extract audio from video directly in your browser.</p>
+        <a href="tools.html" class="btn-tools">Explore 12 Free Audio Tools</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section (Accordion) -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-wrapper">
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
           How do I update the app if I don't have a Xiaomi phone?
-          <span class="faq-arrow">▼</span>
+          <span>▼</span>
         </button>
         <div class="faq-answer">
-          While the app is optimized for MIUI devices, a global version is available on the Google Play Store for other Android devices. You can install and update it directly through the Play Store link provided at the top of this page.
+          While the app is optimized for MIUI devices, a global version is available on the Google Play Store for other Android devices. You can install and update it directly through the official Play Store link.
         </div>
       </div>
-
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
           Why is my local music not showing up in the library?
-          <span class="faq-arrow">▼</span>
+          <span>▼</span>
         </button>
         <div class="faq-answer">
-          The app's media scanner might be filtering out files. Open the app settings, navigate to "Advanced settings," and tap "Filter audio files." Ensure that filters for file size (e.g., hiding files under 500KB) or length are not accidentally hiding your tracks.
+          The app's media scanner might be filtering out files. Open settings, navigate to "Advanced settings," and tap "Filter audio files." Ensure that filters for file size or track length are not hiding your music.
         </div>
       </div>
-
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          Can I stream online music with this app?
-          <span class="faq-arrow">▼</span>
+          Are your audio tools safe to use?
+          <span>▼</span>
         </button>
         <div class="faq-answer">
-          This depends heavily on your region. In certain markets (like India), Xiaomi has partnered with local streaming services (such as Hungama) to integrate online streaming. However, in European and Global ROMs, the app often functions strictly as an offline local media player.
+          Absolutely. All 12 of our audio utilities process your files locally within your device's browser memory (RAM). Your audio files are never uploaded to our servers, ensuring 100% privacy.
         </div>
       </div>
-    </section>
-
-  </main>
-
-  <!-- Global Footer -->
-  <footer>
-    <div class="footer-links">
-      <a href="about.html">App Features</a>
-      <a href="install.html">Download Guide</a>
-      <a href="troubleshooting.html">Troubleshooting</a>
-      <a href="tools.html">Free Audio Tools</a>
     </div>
-    <p>&copy; 2026 MiMusic.net. An independent information resource and web utility hub.</p>
-    <p style="font-size: 0.8rem; margin-top: 10px;">Not affiliated with or endorsed by Xiaomi Inc.</p>
+  </section>
+
+  <!-- FAT FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="brand-logo" style="margin-bottom: 16px;">🎵 MiMusic<span>.net</span></a>
+        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
+        <p style="font-weight: 600; color: var(--text-dark);">Contact: Sobl5910@gmail.com</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Popular Tools</h5>
+        <ul>
+          <li><a href="/volume-booster/">Volume Booster</a></li>
+          <li><a href="/speaker-cleaner/">Speaker Cleaner</a></li>
+          <li><a href="/8d-audio/">8D Spatial Audio</a></li>
+          <li><a href="/pitch-shifter/">Pitch & Tempo</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Analysis & Fixes</h5>
+        <ul>
+          <li><a href="/vocal-clarity/">Vocal Clarity</a></li>
+          <li><a href="/video-to-audio/">Video to Audio</a></li>
+          <li><a href="/decibel-meter/">Decibel Meter</a></li>
+          <li><a href="/audio-latency/">Latency Test</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="about.html">About Mi Music</a></li>
+          <li><a href="install.html">Installation Guide</a></li>
+          <li><a href="troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="tools.html">All Audio Tools</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 MiMusic.net. Independent audio guides and web tools.</p>
+      <p style="font-size: 0.85rem;">Not affiliated with or endorsed by Xiaomi Inc.</p>
+    </div>
   </footer>
 
   <script>
     function toggleFaq(btn) {
       const answer = btn.nextElementSibling;
-      const arrow = btn.querySelector('.faq-arrow');
+      const arrow = btn.querySelector('span');
       const isOpen = answer.style.display === 'block';
       answer.style.display = isOpen ? 'none' : 'block';
       arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
