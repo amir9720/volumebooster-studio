@@ -68,8 +68,8 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    /* فضای کاری ابزار به صورت کارت شیشه‌ای شناور */
-    .workspace { padding: 60px 24px 40px; text-align: center; }
+    /* فضای تعاملی ابزار */
+    .workspace { padding: 60px 24px 35px; text-align: center; }
     .tool-container { 
       max-width: 720px; 
       margin: 0 auto; 
@@ -109,7 +109,6 @@
       100% { transform: scale(1.06); box-shadow: 0 0 24px rgba(139, 92, 246, 0.5); } 
     }
 
-    /* کنترل‌های آپلود فایل */
     .file-upload-wrapper { margin-bottom: 26px; }
     .file-upload-label { 
       display: inline-block; 
@@ -196,8 +195,47 @@
       box-shadow: 0 10px 25px -4px rgba(239, 68, 68, 0.4); 
     }
 
-    /* عکس هوش مصنوعی */
-    .feature-wrapper { max-width: 880px; margin: 30px auto 50px; padding: 0 24px; text-align: center; }
+    /* باکس‌های ویژگی کلیدی دقیقاً زیر کادر ابزار (Feature Boxes مدنظر استاد) */
+    .features-row { 
+      max-width: 1000px; 
+      margin: 10px auto 50px; 
+      padding: 0 24px; 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+      gap: 18px; 
+    }
+    .feature-box { 
+      background: var(--surface-glass); 
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border); 
+      border-radius: 20px; 
+      padding: 22px 18px; 
+      box-shadow: var(--glass-shadow); 
+      transition: all 0.3s ease; 
+      display: flex; 
+      gap: 14px; 
+      align-items: flex-start; 
+    }
+    .feature-box:hover { 
+      transform: translateY(-4px); 
+      background: var(--surface-glass-hover); 
+      box-shadow: var(--glass-shadow-hover); 
+    }
+    .feature-box .f-icon { 
+      font-size: 1.8rem; 
+      line-height: 1; 
+      background: #ffffff; 
+      border: 1px solid var(--glass-border); 
+      padding: 10px; 
+      border-radius: 14px; 
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); 
+    }
+    .feature-box h4 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+    .feature-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* کادر عکس هوش مصنوعی */
+    .feature-wrapper { max-width: 880px; margin: 10px auto 50px; padding: 0 24px; text-align: center; }
     .feature-image { 
       width: 100%; 
       border-radius: 28px; 
@@ -205,24 +243,55 @@
       display: block; 
     }
 
-    /* کادر مقاله جامع و سوالات متداول */
-    .content-section { 
-      max-width: 900px; 
-      margin: 0 auto 70px; 
-      padding: 45px; 
-      background: var(--surface-glass); 
-      backdrop-filter: blur(18px); 
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--glass-border); 
-      border-radius: 28px; 
-      box-shadow: var(--glass-shadow); 
-    }
-    .content-section h2 { font-size: 2.1rem; font-weight: 900; color: var(--text-dark); margin-bottom: 22px; letter-spacing: -0.02em; }
-    .content-section h3 { font-size: 1.48rem; font-weight: 800; color: var(--text-dark); margin: 36px 0 18px; }
-    .content-section p { font-size: 1.08rem; margin-bottom: 22px; line-height: 1.95; color: var(--text-main); }
-    .content-section ul { margin-bottom: 28px; padding-left: 24px; }
-    .content-section li { margin-bottom: 12px; font-size: 1.04rem; color: var(--text-main); }
+    /* ساختار بصری، کارت‌محور و خردشده مقاله سئو (جلوگیری از دیوار متنی) */
+    .content-container { max-width: 1000px; margin: 0 auto 70px; padding: 0 24px; }
     
+    .content-hero-card {
+      background: var(--surface-glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      box-shadow: var(--glass-shadow);
+      margin-bottom: 26px;
+    }
+    .content-hero-card h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.02em; }
+    .content-hero-card p { font-size: 1.05rem; color: var(--text-main); line-height: 1.9; }
+
+    /* کارت‌های گام‌به‌گام مراحل */
+    .steps-container {
+      background: var(--surface-glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      margin-bottom: 26px;
+      box-shadow: var(--glass-shadow);
+    }
+    .steps-container h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 20px; }
+    .step-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 24px; }
+    .step-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      transition: 0.3s;
+    }
+    .step-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .step-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    .step-card h4 { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+    .step-card p { font-size: 0.95rem; color: var(--text-main); line-height: 1.65; }
+
     .tutorial-image { 
       width: 100%; 
       max-width: 620px; 
@@ -230,19 +299,54 @@
       border-radius: 20px; 
       border: 1px solid var(--glass-border); 
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06); 
-      margin: 28px auto 14px; 
+      margin: 15px auto; 
       display: block; 
     }
-    .image-caption { text-align: center; font-size: 0.92rem; color: var(--text-muted); margin-bottom: 34px; font-style: italic; }
+    .image-caption { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; font-style: italic; }
+
+    /* گرید دو ستونه مباحث تخصصی */
+    .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 22px; margin-bottom: 26px; }
+    .topic-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: var(--glass-shadow);
+      transition: 0.3s;
+    }
+    .topic-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .topic-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .topic-card p { font-size: 0.98rem; color: var(--text-main); line-height: 1.85; }
+
+    /* باکس هایلایت امنیتی پنهان‌سازی هویت صوتی */
+    .callout-box {
+      background: linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
+      border: 1.5px solid rgba(99, 102, 241, 0.3);
+      border-radius: 22px;
+      padding: 30px;
+      margin-bottom: 26px;
+      box-shadow: var(--glass-shadow);
+    }
+    .callout-box h3 { font-size: 1.35rem; font-weight: 900; color: var(--text-dark); margin-bottom: 12px; }
+    .callout-box p { font-size: 1rem; color: var(--text-main); line-height: 1.85; margin-bottom: 14px; }
+    .callout-box ul { padding-left: 20px; }
+    .callout-box li { font-size: 0.96rem; color: var(--text-main); margin-bottom: 6px; }
 
     /* آکاردئون سوالات متداول */
-    .faq-container { margin-top: 25px; display: flex; flex-direction: column; gap: 14px; }
+    .faq-wrapper-card {
+      background: var(--surface-glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      box-shadow: var(--glass-shadow);
+    }
+    .faq-container { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
     .faq-item { 
       background: rgba(255, 255, 255, 0.85); 
       border: 1px solid var(--glass-border); 
-      border-radius: 18px; 
+      border-radius: 16px; 
       overflow: hidden; 
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); 
       transition: all 0.2s ease; 
     }
     .faq-item:hover { border-color: rgba(99, 102, 241, 0.4); }
@@ -250,9 +354,9 @@
       width: 100%; 
       background: none; 
       border: none; 
-      padding: 22px 26px; 
+      padding: 20px 24px; 
       text-align: left; 
-      font-size: 1.08rem; 
+      font-size: 1.05rem; 
       font-weight: 800; 
       color: var(--text-dark); 
       display: flex; 
@@ -262,17 +366,17 @@
       transition: 0.2s; 
     }
     .faq-question:hover { color: var(--accent); }
-    .faq-icon { font-size: 0.9rem; transition: transform 0.3s ease; color: var(--accent); }
+    .faq-icon { font-size: 0.85rem; transition: transform 0.3s ease; color: var(--accent); }
     .faq-answer { 
       max-height: 0; 
       overflow: hidden; 
       transition: max-height 0.35s ease, padding 0.35s ease; 
-      padding: 0 26px; 
+      padding: 0 24px; 
       color: var(--text-main); 
-      font-size: 1.02rem; 
-      line-height: 1.85; 
+      font-size: 0.98rem; 
+      line-height: 1.8; 
     }
-    .faq-item.active .faq-answer { max-height: 250px; padding: 0 26px 24px 26px; }
+    .faq-item.active .faq-answer { max-height: 250px; padding: 0 24px 22px 24px; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
 
     /* فوتر کریستالی */
@@ -298,12 +402,14 @@
       .nav-links { display: none; }
       .hamburger { display: block; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .content-section { padding: 26px; margin: 0 16px 50px; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .content-hero-card, .steps-container, .callout-box, .faq-wrapper-card { padding: 24px; }
       .tool-container { padding: 35px 20px; }
       .preset-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
+      .features-row { grid-template-columns: 1fr; }
       .preset-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -318,7 +424,7 @@
         <a href="/about.html" class="nav-link">About App</a>
         <a href="/install.html" class="nav-link">Installation</a>
         <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-        <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+        <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
       </nav>
       <button class="hamburger" id="menuBtn">☰</button>
     </div>
@@ -331,7 +437,7 @@
     <a href="/about.html" class="nav-link">About App</a>
     <a href="/install.html" class="nav-link">Installation</a>
     <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-    <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+    <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
   </nav>
 
   <!-- فضای تعاملی ابزار -->
@@ -359,88 +465,155 @@
     </div>
   </main>
 
+  <!-- ردیف باکس‌های ویژگی کلیدی ابزار (Feature Boxes مدنظر استاد) -->
+  <section class="features-row">
+    <div class="feature-box">
+      <span class="f-icon">🎙️</span>
+      <div>
+        <h4>Instant Resampling</h4>
+        <p>Disables pitch preservation algorithms to naturally shift vocal formants in real-time.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">🔒</span>
+      <div>
+        <h4>Client-Side Sandbox</h4>
+        <p>Your voice recordings remain 100% confidential inside your local device memory.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">⚡</span>
+      <div>
+        <h4>Zero Rendering Lag</h4>
+        <p>Immediate playback without server queues, conversion timeouts, or lossy downloads.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">🎭</span>
+      <div>
+        <h4>Biometric Disguise</h4>
+        <p>Effectively conceals unique vocal harmonic identities for anonymous podcasts and notes.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- تصویر هوش مصنوعی با نام voice-transformer.jpg -->
   <div class="feature-wrapper">
     <img src="voice-transformer.jpg" alt="A futuristic robotic voice changer device with glowing sound waves" class="feature-image">
   </div>
 
-  <!-- مقاله جامع، انسانی و سئو شده (> ۵۵۰ کلمه) -->
-  <section class="content-section">
-    <h2>The Science of Vocal Pitch Modulation and Resampling</h2>
-    <p>Human speech carries a distinct acoustic identity defined by fundamental frequencies, vocal tract resonances, and formant structures. When an individual speaks, their vocal cords vibrate at specific frequencies typically ranging between 85 Hz and 255 Hz. Modifying these characteristics has traditionally required specialized analog hardware vocoders or complex DSP workstations. In modern digital production, pitch transformation has evolved into a vital creative technique utilized across film sound design, video game voice acting, podcast production, and social media content creation.</p>
+  <!-- محتوای سئو و آموزشی به صورت بلوک‌ها و کارت‌های تفکیک‌شده بصری -->
+  <section class="content-container">
 
-    <p>The <strong>MiMusic Voice Transformer</strong> accomplishes vocal re-pitching through advanced browser-based resampling techniques. By explicitly disabling the browser's automatic pitch correction algorithms (the <code>preservesPitch</code> directive), our tool recalculates the temporal density of audio samples. Increasing playback speed shifts both the fundamental frequency and the harmonic formant envelopes upward, producing the classic animated chipmunk effect. Conversely, decelerating playback expands the acoustic waveforms, lowering frequencies into a resonant, deep cinematic register.</p>
+    <!-- کارت معرفی تحلیلی -->
+    <div class="content-hero-card">
+      <h2>The Science of Vocal Pitch Modulation and Resampling</h2>
+      <p>Human speech carries a distinct acoustic identity defined by fundamental frequencies, vocal tract resonances, and formant structures. When an individual speaks, their vocal cords vibrate at specific frequencies typically ranging between 85 Hz and 255 Hz. Modifying these characteristics has traditionally required specialized analog hardware vocoders or complex DSP workstations. In modern digital production, pitch transformation has evolved into a vital creative technique utilized across film sound design, video game voice acting, podcast production, and social media content creation.</p>
+      <p style="margin-top: 12px;">The <strong>MiMusic Voice Transformer</strong> accomplishes vocal re-pitching through advanced browser-based resampling techniques. By explicitly disabling the browser's automatic pitch correction algorithms, our tool recalculates the temporal density of audio samples in memory, shifting both fundamental frequencies and harmonic formant envelopes in real time.</p>
+    </div>
 
-    <h3>Step-by-Step Guide: How to Transform Any Audio Recording</h3>
-    <p>Transforming voice memos, vocal tracks, or funny audio snippets takes only a few clicks inside your web browser:</p>
+    <!-- کارت راهنمای گام‌به‌گام همراه تصویر -->
+    <div class="steps-container">
+      <h3>Step-by-Step Guide: How to Transform Any Audio Recording</h3>
+      <p style="color: var(--text-muted); font-size: 1.02rem;">Follow these three simple steps to apply instant vocal effects:</p>
 
-    <!-- تصویر اسکرین‌شات آموزشی با نام voice-transformer-guide.jpg -->
-    <img src="voice-transformer-guide.jpg" alt="Step by step voice transformer guide" class="tutorial-image">
-    <p class="image-caption">Select your audio recording, click a preset voice style, and hit play.</p>
+      <img src="transformer-guide.jpg" alt="Step by step voice transformer guide" class="tutorial-image">
+      <p class="image-caption">Select your audio recording, click a preset voice style, and hit play.</p>
 
-    <ul>
-      <li><strong>Step 1: Upload Your Audio Track:</strong> Tap the dashed file selector to browse your device storage. We support standard audio formats including MP3, WAV, AAC, and OGG files.</li>
-      <li><strong>Step 2: Choose Your Target Preset:</strong> Click on one of the pre-configured acoustic styles:
-        <ul style="margin-top: 8px; margin-bottom: 8px;">
-          <li><em>🐿️ Chipmunk (1.5x Speed & Pitch):</em> Shifts vocal formants upward into a comical, high-energy register.</li>
-          <li><em>👹 Deep Monster (0.6x Speed & Pitch):</em> Lowers the vocal range into a heavy, dramatic baritone.</li>
-          <li><em>👤 Normal (1.0x Baseline):</em> Restores audio playback to its original studio recording speed.</li>
-        </ul>
-      </li>
-      <li><strong>Step 3: Play and Preview Live:</strong> Click the "Play Transformed Voice" button. The sound engine executes the transformation in real time without lag.</li>
-    </ul>
-
-    <h3>Creative Use Cases: From Social Content to Voice Privacy</h3>
-    <p>Vocal transformation serves far more purposes than simple novelty entertainment. Content creators routinely deploy altered vocal registers to differentiate dialogue between animated characters, create dramatic narrative tension in storytelling podcasts, or generate recognizable audio signatures for viral short-form videos on YouTube and TikTok.</p>
-
-    <p>Beyond creative entertainment, voice masking is a fundamental tool for digital privacy. A person's vocal signature is considered biometric data. If you are uploading investigative journalism recordings, whistleblower interviews, public testimonial clips, or community feedback recordings where identity protection is paramount, altering the fundamental pitch and formant spectrum prevents automatic acoustic biometric matching.</p>
-
-    <h3>100% Client-Side Privacy: Your Voice Stays on Your Device</h3>
-    <p>Commercial voice modification services often transmit user audio files to remote servers for conversion. This introduces severe privacy hazards, especially for sensitive voice memos and confidential interviews. MiMusic.net runs completely on client-side Web Audio and HTML5 pipelines. Your audio is decoded directly inside your device memory, transformed instantaneously, and never transmitted over the internet.</p>
-
-    <!-- بخش سوالات متداول آکاردئونی تعاملی -->
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>How does the Voice Transformer alter my vocal pitch?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Our tool manipulates the underlying audio sample clock using native HTML5 media controls. By disengaging automatic pitch correction, speeding up playback shifts the harmonic frequencies upward into higher octaves, while slowing it down shifts them into deeper registers.</p>
+      <div class="step-cards-grid">
+        <div class="step-card">
+          <span class="step-badge">Step 1</span>
+          <h4>Upload Audio Track</h4>
+          <p>Tap the dashed file selector to browse device storage. We support standard formats including MP3, WAV, AAC, and OGG.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Are my uploaded voice files stored on your servers?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>No. Your files are processed 100% locally in your device RAM via browser sandboxing. No recordings are ever uploaded, recorded, or transmitted to any third-party server.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 2</span>
+          <h4>Choose Style Preset</h4>
+          <p>Click on Chipmunk (1.5x) for energetic high registers, Deep Monster (0.6x) for heavy baritone, or Normal (1.0x) to reset.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Can I use this tool to disguise my voice for privacy?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Yes. Pitch shifting significantly disrupts individual vocal resonance and formant fingerprints, making it an effective basic tool for concealing identity in podcasts, interviews, and public voice notes.</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>What audio formats can I upload to the Voice Transformer?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>The tool supports all major browser-compatible audio formats, including MP3, WAV, AAC, M4A, and OGG files on both desktop and mobile platforms.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 3</span>
+          <h4>Preview in Real Time</h4>
+          <p>Hit "Play Transformed Voice". The browser hardware-accelerated sound engine executes the effect instantly without rendering delays.</p>
         </div>
       </div>
     </div>
+
+    <!-- گرید موضوعی تخصصی دو ستونه -->
+    <div class="topics-grid">
+      <div class="topic-card">
+        <h3>🐿️ Chipmunk & High-Speed Modulation</h3>
+        <p>Accelerating playback speed by 1.5x compresses digital sound wave cycles chronologically. Because automatic phase vocoders are bypassed, the harmonic formant peaks of spoken vowels shift upward into higher octaves. This mimics a drastically shortened human vocal tract, generating the beloved animated high-energy cartoon voice popularized in viral videos and meme clips.</p>
+      </div>
+
+      <div class="topic-card">
+        <h3>👹 Deep Monster & Sub-Harmonic Registers</h3>
+        <p>Decelerating playback down to 0.6x expands the temporal spacing of acoustic oscillations. This mechanical stretching drags vocal formants downward, transforming ordinary speech into an ominous, heavy, and resonant baritone. Sound designers frequently layer this technique with ambient reverbs to produce menacing villain dialogue in indie games and podcasts.</p>
+      </div>
+    </div>
+
+    <!-- باکس هایلایت امنیتی و حریم خصوصی کلاینت‌ساید -->
+    <div class="callout-box">
+      <h3>🔒 Acoustic Biometric Disguise: Guarding Your Digital Privacy</h3>
+      <p>A person's vocal signature is considered biometric data. In an age of automated acoustic surveillance and voice-matching artificial intelligence, uploading whistleblowing recordings, sensitive journalistic testimonials, or public interview notes requires dependable identity masking:</p>
+      <ul>
+        <li><strong>Formant Disruption:</strong> Shifting pitch and speed completely scrambles acoustic formant fingerprints, defeating basic biometric voice matching.</li>
+        <li><strong>100% In-Memory Processing:</strong> Unlike cloud converters that save voice clips on external servers, your audio is processed strictly inside your device RAM.</li>
+        <li><strong>Zero Permanent Footprint:</strong> Closing the browser tab destroys all audio buffers instantly, leaving no digital trail behind.</li>
+      </ul>
+    </div>
+
+    <!-- کارت سوالات متداول آکاردئونی -->
+    <div class="faq-wrapper-card">
+      <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin-bottom: 10px;">Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How does the Voice Transformer alter my vocal pitch?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Our tool manipulates the underlying audio sample clock using native HTML5 media controls. By disengaging automatic pitch correction, speeding up playback shifts the harmonic frequencies upward into higher octaves, while slowing it down shifts them into deeper registers.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Are my uploaded voice files stored on your servers?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. Your files are processed 100% locally in your device RAM via browser sandboxing. No recordings are ever uploaded, recorded, or transmitted to any third-party server.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Can I use this tool to disguise my voice for privacy?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. Pitch shifting significantly disrupts individual vocal resonance and formant fingerprints, making it an effective basic tool for concealing identity in podcasts, interviews, and public voice notes.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What audio formats can I upload to the Voice Transformer?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>The tool supports all major browser-compatible audio formats, including MP3, WAV, AAC, M4A, and OGG files on both desktop and mobile platforms.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- فوتر کریستالی -->
@@ -486,7 +659,6 @@
 
   <!-- اسکریپت‌های منو و ترانسفورمر صوتی -->
   <script>
-    // منوی ناوبری
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
@@ -499,13 +671,11 @@
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    // اسکریپت آکاردئونی سوالات متداول
     function toggleFaq(button) {
       const item = button.parentElement;
       item.classList.toggle('active');
     }
 
-    // منطق ترانسفورمر صوتی با حفظ عدم تصحیح فرکانسی
     let audioElement = new Audio();
     let currentRate = 1.5;
     let isPlaying = false;
