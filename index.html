@@ -11,7 +11,8 @@
       --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
       --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca; 
       --accent-light: #e0e7ff; --text-dark: #0f172a; --text: #334155; 
-      --muted: #64748b; --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+      --muted: #64748b; --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
@@ -32,17 +33,34 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    .hero { padding: 80px 24px 60px; background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); text-align: center; }
+    .hero { padding: 80px 24px 40px; background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); text-align: center; }
     .hero h1 { font-size: 2.8rem; font-weight: 900; color: var(--text-dark); margin-bottom: 16px; letter-spacing: -0.03em; }
-    .hero p { font-size: 1.15rem; color: var(--muted); max-width: 700px; margin: 0 auto 30px; line-height: 1.8; }
+    .hero p { font-size: 1.15rem; color: var(--muted); max-width: 700px; margin: 0 auto; line-height: 1.8; }
 
-    .tools-section { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+    .tools-section { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
     .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
     .tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-decoration: none; color: inherit; transition: 0.3s; box-shadow: var(--shadow-md); display: flex; flex-direction: column; justify-content: space-between; }
     .tool-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow-lg); }
     .tool-card h3 { font-size: 1.25rem; font-weight: 800; color: var(--text-dark); margin-bottom: 10px; }
     .tool-card p { font-size: 0.95rem; color: var(--muted); margin-bottom: 20px; }
     .tool-link-text { color: var(--accent); font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; }
+
+    .content-section { max-width: 900px; margin: 40px auto 60px; padding: 0 24px; }
+    .content-section h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 24px; }
+    .content-section h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin: 32px 0 16px; }
+    .content-section p { font-size: 1.1rem; margin-bottom: 20px; line-height: 1.8; color: var(--text); }
+    
+    .feature-image { width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); margin: 30px 0; display: block; }
+
+    /* استایل آکاردئونی سوالات متداول */
+    .faq-container { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); }
+    .faq-question { width: 100%; background: none; border: none; padding: 18px 20px; text-align: left; font-size: 1.05rem; font-weight: 800; color: var(--text-dark); display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
+    .faq-question:hover { background: var(--surface-alt); color: var(--accent); }
+    .faq-icon { font-size: 0.85rem; transition: transform 0.3s ease; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding: 0 20px; color: var(--text); font-size: 1rem; line-height: 1.7; }
+    .faq-item.active .faq-answer { max-height: 250px; padding: 0 20px 20px 20px; }
+    .faq-item.active .faq-icon { transform: rotate(180deg); }
 
     footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; margin-top: 80px; }
     .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
@@ -190,6 +208,50 @@
     </div>
   </section>
 
+  <!-- بخش مقاله سئو شده و عکس هوش مصنوعی mimusic-hero.jpg -->
+  <section class="content-section">
+    <h2>The Ultimate Suite of Web-Based Audio Utilities</h2>
+    <p>MiMusic.net provides professional-grade, browser-based audio tools designed to give you complete control over your sound experience. Whether you need to clean trapped water from your smartphone speakers, boost low audio tracks, convert video formats, or test your hearing range, our platform delivers instant performance right inside your web browser.</p>
+    
+    <!-- عکس هوش مصنوعی صفحه اصلی با نام صحیح mimusic-hero.jpg -->
+    <img src="mimusic-hero.jpg" alt="A futuristic digital audio workstation with glowing sound waves and audio spectrum analyzer" class="feature-image">
+
+    <p>All processing is performed locally on your device via HTML5 and the Web Audio API, guaranteeing absolute file privacy and lightning-fast execution without requiring external application installations.</p>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Are all tools on MiMusic.net completely free?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes! Every single tool and utility on our platform is 100% free to use with no hidden subscription fees or registration walls.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Do I need to install any mobile app or software?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>No installation is required. All utilities run directly inside modern web browsers like Google Chrome, Firefox, Safari, and Edge on both mobile and desktop devices.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Is my personal data and audio safe?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Absolute privacy is guaranteed. Because our tools leverage client-side browser processing, your personal audio and video files never leave your device.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <div class="footer-grid">
       <div class="footer-col">
@@ -242,6 +304,12 @@
 
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
+
+    // اسکریپت آکاردئونی سوالات متداول
+    function toggleFaq(button) {
+      const item = button.parentElement;
+      item.classList.toggle('active');
+    }
   </script>
 </body>
 </html>
