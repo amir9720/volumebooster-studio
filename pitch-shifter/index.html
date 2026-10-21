@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Audio Pitch & Tempo Shifter Online | Mi Music Tools</title>
-  <meta name="description" content="Change the pitch and playback speed (tempo) of any audio file independently. Perfect for musicians, singers, and language learners. Works directly in browser.">
+  <title>Pitch & Tempo Changer - Audio Speed Controller | Mi Music Tools</title>
+  <meta name="description" content="Change the speed, tempo, and pitch of any audio file online. Create Nightcore or Slowed effects instantly in your browser without losing quality.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
-    /* Global Variables & Base */
+    /* Global Variables & Base Setup */
     :root {
       --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
       --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca; 
@@ -16,16 +16,26 @@
       --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); line-height: 1.6; }
+    body { background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
 
-    /* Navigation */
+    /* Modern Responsive Navigation */
     .header-nav { width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
     .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
-    .brand-logo { color: var(--text-dark); font-size: 1.3rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand-logo { color: var(--text-dark); font-size: 1.4rem; font-weight: 900; text-decoration: none; display: flex; align-items: center; gap: 8px; letter-spacing: -0.02em; }
     .brand-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 24px; align-items: center; }
-    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    
+    /* Desktop Nav */
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-link { color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
     .nav-link:hover { color: var(--accent); }
+
+    /* Mobile Hamburger Menu */
+    .hamburger { display: none; background: none; border: none; font-size: 1.8rem; color: var(--text-dark); cursor: pointer; z-index: 1001; }
+    .mobile-menu { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--surface); box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; padding: 80px 24px 24px; display: flex; flex-direction: column; gap: 20px; z-index: 999; }
+    .mobile-menu.open { right: 0; }
+    .mobile-menu .nav-link { font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
+    .overlay.active { opacity: 1; visibility: visible; }
 
     /* Tool Workspace Area */
     .workspace { padding: 60px 24px 40px; background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); text-align: center; }
@@ -34,172 +44,156 @@
     .tool-desc { font-size: 1.05rem; color: var(--muted); margin-bottom: 30px; }
     
     .status-ring { width: 120px; height: 120px; border-radius: 50%; background: var(--surface-alt); margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; font-size: 3rem; border: 4px solid var(--border); transition: 0.3s; }
-    .status-ring.active { border-color: var(--accent); color: var(--accent); animation: pulse 1.5s infinite; }
-    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(79, 70, 229, 0); } 100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); } }
+    .status-ring.active { border-color: #f59e0b; color: #f59e0b; animation: bouncePitch 1s infinite alternate; }
+    @keyframes bouncePitch { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-10px) scale(1.05); box-shadow: 0 15px 25px rgba(245, 158, 11, 0.3); } }
 
     /* Tool Controls */
     .file-upload-wrapper { margin-bottom: 24px; }
-    .file-upload-label { display: inline-block; background: var(--surface-alt); border: 2px dashed var(--border-hover); padding: 20px 40px; border-radius: 12px; cursor: pointer; font-weight: 600; color: var(--text-dark); transition: 0.3s; width: 100%; max-width: 400px; }
+    .file-upload-label { display: inline-block; background: var(--surface-alt); border: 2px dashed var(--border); padding: 20px 40px; border-radius: 12px; cursor: pointer; font-weight: 600; color: var(--text-dark); transition: 0.3s; width: 100%; max-width: 400px; }
     .file-upload-label:hover { border-color: var(--accent); background: var(--accent-light); }
     input[type="file"] { display: none; }
+
+    .control-panel { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 30px; max-width: 400px; margin-left: auto; margin-right: auto; text-align: left; }
+    .slider-wrapper label { display: flex; justify-content: space-between; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; font-size: 1.05rem; }
+    input[type="range"] { width: 100%; cursor: pointer; accent-color: var(--accent); margin-bottom: 20px; }
     
-    .slider-group { background: var(--surface-alt); padding: 20px; border-radius: 12px; margin-bottom: 24px; max-width: 400px; margin-left: auto; margin-right: auto; text-align: left; border: 1px solid var(--border); }
-    .slider-wrapper { margin-bottom: 16px; }
-    .slider-wrapper:last-child { margin-bottom: 0; }
-    .slider-wrapper label { display: flex; justify-content: space-between; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; font-size: 0.95rem; }
-    .slider-wrapper span { color: var(--accent); background: var(--surface); padding: 2px 8px; border-radius: 6px; border: 1px solid var(--border); }
-    input[type="range"] { width: 100%; cursor: pointer; accent-color: var(--accent); }
+    .checkbox-wrapper { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .checkbox-wrapper input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; }
+    .checkbox-wrapper label { font-weight: 600; color: var(--text-dark); font-size: 0.95rem; cursor: pointer; }
+    .checkbox-desc { font-size: 0.85rem; color: var(--muted); margin-left: 28px; line-height: 1.4; }
 
     .btn-main { background: var(--accent); color: #fff; border: none; padding: 16px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); width: 100%; max-width: 300px; }
     .btn-main:hover { background: var(--accent-hover); transform: translateY(-2px); }
     .btn-main:disabled { background: var(--muted); cursor: not-allowed; transform: none; box-shadow: none; }
     .btn-main.stop { background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); }
 
-    /* Guide / How to use */
-    .content-section { max-width: 1000px; margin: 40px auto 60px; padding: 0 24px; }
-    .section-title { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); margin-bottom: 30px; text-align: center; }
+    /* Thick Content Section for AdSense */
+    .content-section { max-width: 900px; margin: 0 auto 60px; padding: 0 24px; }
+    .content-section h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 24px; }
+    .content-section h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin: 32px 0 16px; }
+    .content-section p { font-size: 1.1rem; margin-bottom: 20px; line-height: 1.8; color: var(--text); }
     
-    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 60px; }
-    .step-card { background: var(--surface); padding: 24px; border-radius: 16px; border: 1px solid var(--border); position: relative; }
-    .step-number { position: absolute; top: -15px; left: 24px; width: 34px; height: 34px; background: var(--text-dark); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; }
-    .step-card h4 { font-size: 1.1rem; color: var(--text-dark); margin: 10px 0; }
-    .step-card p { font-size: 0.9rem; color: var(--muted); }
-
-    /* FAQ Section */
-    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; }
-    .faq-question { width: 100%; padding: 20px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1.05rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-answer { display: none; padding: 0 20px 20px; color: var(--muted); font-size: 0.95rem; line-height: 1.6; border-top: 1px solid var(--surface-alt); padding-top: 16px; }
+    /* Tutorial Image Styling */
+    .tutorial-image { width: 100%; max-width: 600px; height: auto; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow-md); margin: 24px auto; display: block; }
+    .image-caption { text-align: center; font-size: 0.9rem; color: var(--muted); margin-top: -12px; margin-bottom: 32px; font-style: italic; }
 
     /* Footer */
-    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; }
+    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; margin-top: 80px; }
     .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
     .footer-col h5 { color: var(--text-dark); font-size: 1rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
     .footer-col ul { list-style: none; padding: 0; }
     .footer-col li { margin-bottom: 12px; }
     .footer-col a { color: var(--muted); text-decoration: none; transition: 0.2s; }
     .footer-col a:hover { color: var(--accent); }
-    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
 
-    @media (max-width: 768px) {
+    /* Media Queries */
+    @media (max-width: 900px) {
       .nav-links { display: none; }
+      .hamburger { display: block; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
       .tool-container { padding: 30px 20px; }
+      .control-panel { padding: 16px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Global Header -->
+  <!-- Navigation with Hamburger Menu -->
   <header class="header-nav">
     <div class="nav-inner">
       <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
       <nav class="nav-links">
-        <a href="/about.html" class="nav-link">App Features</a>
+        <a href="/about.html" class="nav-link">About App</a>
         <a href="/install.html" class="nav-link">Installation</a>
-        <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 700;">Free Audio Tools</a>
+        <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
+        <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
       </nav>
+      <button class="hamburger" id="menuBtn">☰</button>
     </div>
   </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="overlay" id="overlay"></div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="/" class="brand-logo" style="margin-bottom: 20px;">🎵 MiMusic<span>.net</span></a>
+    <a href="/about.html" class="nav-link">About App</a>
+    <a href="/install.html" class="nav-link">Installation</a>
+    <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
+    <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+  </nav>
 
   <!-- Interactive Tool Workspace -->
   <main class="workspace">
     <div class="tool-container">
-      <h1 class="tool-title">Pitch & Tempo Shifter</h1>
-      <p class="tool-desc">Modify the speed (tempo) and key (pitch) of any music file independently. Ideal for musicians, transcribers, and singers.</p>
+      <h1 class="tool-title">Pitch & Tempo Changer</h1>
+      <p class="tool-desc">Speed up or slow down your music. Create popular Nightcore (fast & high) or Slowed (deep & slow) effects right in your browser.</p>
       
       <div class="status-ring" id="statusIcon">🎚️</div>
       
       <div class="file-upload-wrapper">
         <label class="file-upload-label" for="audioFile">
-          <span id="fileNameDisplay">📁 Upload Music (MP3, WAV)</span>
+          <span id="fileNameDisplay">📁 Select Audio File (MP3, WAV)</span>
         </label>
         <input type="file" id="audioFile" accept="audio/*" onchange="handleFileSelect(event)">
       </div>
 
-      <div class="slider-group">
+      <div class="control-panel">
         <div class="slider-wrapper">
-          <label>Speed (Tempo): <span id="speedValue">1.0x</span></label>
+          <label>Playback Speed: <span id="speedValue">1.0x</span></label>
           <input type="range" id="speedSlider" min="0.5" max="2.0" step="0.05" value="1.0" oninput="updateSpeed(this.value)">
         </div>
-        
-        <div class="slider-wrapper">
-          <label>Preserve Original Pitch?</label>
-          <div style="display: flex; gap: 10px; margin-top: 5px;">
-            <label style="font-weight: normal;"><input type="radio" name="pitchLock" value="true" checked onchange="togglePitchLock()"> Yes (Lock Key)</label>
-            <label style="font-weight: normal;"><input type="radio" name="pitchLock" value="false" onchange="togglePitchLock()"> No (Change Pitch with Speed)</label>
-          </div>
+
+        <div class="checkbox-wrapper">
+          <input type="checkbox" id="pitchToggle" onchange="updatePitchLogic()" checked>
+          <label for="pitchToggle">Preserve Original Pitch</label>
         </div>
+        <p class="checkbox-desc">Keep checked to only change the speed. Uncheck to link speed and pitch (creates Nightcore/Turntable effects).</p>
       </div>
       
-      <button class="btn-main" id="playBtn" onclick="togglePlayback()" disabled>Play Modified Track</button>
+      <button class="btn-main" id="playBtn" onclick="togglePlayback()" disabled>Play Modified Audio</button>
     </div>
   </main>
 
-  <!-- Feature Image -->
+  <!-- AI Generated Feature Image -->
   <div style="max-width: 800px; margin: 0 auto 40px; padding: 0 24px; text-align: center;">
-    <img src="pitch-shifter.jpg" alt="Audio mixing console with pitch and tempo sliders" style="width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);">
+    <img src="pitch-shifter.jpg" alt="Glowing equalizer sliders representing audio pitch and tempo controls" style="width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);">
   </div>
 
-  <!-- Value-Added Content for SEO -->
+  <!-- Comprehensive SEO & How-to Content -->
   <section class="content-section">
-    <h2 class="section-title">How to Use the Shifter</h2>
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-number">1</div>
-        <h4>Select Your Track</h4>
-        <p>Upload the song or backing track you want to modify. MP3 and WAV formats provide the best processing results.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">2</div>
-        <h4>Adjust Tempo</h4>
-        <p>Use the slider to slow down the song (for practicing an instrument or learning a language) or speed it up.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">3</div>
-        <h4>Pitch Control</h4>
-        <p>By default, we preserve the original pitch. If you select "No", the pitch will drop as the song slows down, creating a deep, stretched effect.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">4</div>
-        <h4>Live Playback</h4>
-        <p>Hit play to hear your modifications instantly. Changes are applied in real-time within your web browser.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SEO FAQ -->
-  <section class="content-section" style="max-width: 800px; margin-top: 0;">
-    <h2 class="section-title">Frequently Asked Questions</h2>
+    <h2>Understanding Audio Pitch and Tempo</h2>
+    <p>Whether you are a musician trying to learn a fast guitar solo, or a content creator looking to make the next viral TikTok sound, controlling the speed and pitch of an audio file is essential. Historically, altering these parameters required heavy desktop software. The native Mi Music app allows for basic playback speed adjustments, but it doesn't offer deep control over the tonal key (pitch) of the track.</p>
     
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        What does "Preserve Original Pitch" mean?
-        <span>▼</span>
-      </button>
-      <div class="faq-answer">
-        In standard audio processing, if you slow down a track, the voice drops and sounds like a monster. If you select "Yes (Lock Key)", our engine uses a time-stretching algorithm to slow down the music while keeping the singer's voice and the musical key exactly the same.
-      </div>
-    </div>
+    <p><strong>Tempo</strong> refers to the speed or pace of a given piece of music, usually measured in Beats Per Minute (BPM). <strong>Pitch</strong>, on the other hand, refers to the highness or lowness of a sound, determined by the frequency of the sound waves. Our browser-based Pitch & Tempo changer gives you the power to manipulate both simultaneously or independently.</p>
 
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        Is this tool useful for musicians?
-        <span>▼</span>
-      </button>
-      <div class="faq-answer">
-        Absolutely. Guitarists and pianists frequently use this tool to slow down fast guitar solos by 50% without changing the notes (locking the pitch). This makes it much easier to learn and transcribe complex musical parts by ear.
-      </div>
-    </div>
+    <h3>Creating Viral Effects: Nightcore & Slowed</h3>
+    <p>If you uncheck the "Preserve Original Pitch" box in our tool, the audio engine will link the speed and pitch together, simulating the physical behavior of a vinyl record player. This allows you to easily create two of the most popular audio trends on the internet:</p>
+    
+    <ul>
+      <li style="margin-bottom: 12px;"><strong>Nightcore (Speed > 1.2x):</strong> By increasing the speed to 1.2x or higher without preserving the pitch, the tempo gets faster and the vocals become noticeably higher and energetic. This upbeat style originated in the early 2000s and remains massively popular in anime and gaming communities.</li>
+      <li style="margin-bottom: 12px;"><strong>Slowed + Reverb (Speed < 0.85x):</strong> By dropping the speed slider below 1.0x, the track slows down, and the pitch drops deeply. This creates a moody, atmospheric, and relaxed vibe, often used in lo-fi aesthetic videos.</li>
+    </ul>
 
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        Can I save or download the modified audio?
-        <span>▼</span>
-      </button>
-      <div class="faq-answer">
-        Currently, this tool functions as a real-time playback utility. You can listen and practice directly in the browser. Exporting processed files requires heavier server-side processing, which we avoid to ensure your files remain 100% private and never leave your device.
-      </div>
-    </div>
+    <h3>How to Use the Pitch & Tempo Tool</h3>
+    <p>Our tool utilizes the modern HTML5 Audio API to process your modifications in real-time, meaning there is zero rendering wait time and no files uploaded to cloud servers. Follow these steps:</p>
+
+    <!-- User's Real UI Screenshot -->
+    <img src="pitch-guide.jpg" alt="Step by step pitch and tempo changer guide" class="tutorial-image" style="display: block;">
+    <p class="image-caption">Use the slider to set the speed, and toggle the checkbox for different pitch effects.</p>
+
+    <ul>
+      <li style="margin-bottom: 12px;"><strong>Step 1: Upload Your Track.</strong> Click the dashed upload area and select any MP3, WAV, or OGG file from your device.</li>
+      <li style="margin-bottom: 12px;"><strong>Step 2: Adjust the Speed Slider.</strong> Move the slider left to slow the track down (down to 0.5x half-speed) or right to speed it up (up to 2.0x double-speed).</li>
+      <li style="margin-bottom: 12px;"><strong>Step 3: Toggle the Pitch Setting.</strong> If you only want to speed up a podcast or an audiobook, leave "Preserve Original Pitch" CHECKED. If you want to create a musical effect like Nightcore, UNCHECK the box.</li>
+      <li style="margin-bottom: 12px;"><strong>Step 4: Play and Experiment.</strong> Click the Play button. You can adjust the slider and toggle the checkbox while the audio is actively playing to instantly hear the difference!</li>
+    </ul>
+
+    <h3>Is Quality Lost During Conversion?</h3>
+    <p>When preserving the pitch while drastically changing the tempo (time-stretching), minor audio artifacts can sometimes occur depending on your browser's specific audio decoding engine. However, when linking speed and pitch (unchecking the box), the audio wave is simply read faster or slower, resulting in zero digital distortion or quality loss, perfectly replicating analog hardware.</p>
   </section>
 
   <!-- Global Footer -->
@@ -207,7 +201,7 @@
     <div class="footer-grid">
       <div class="footer-col">
         <a href="/" class="brand-logo" style="margin-bottom: 16px;">🎵 MiMusic<span>.net</span></a>
-        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
+        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent educational guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
         <p style="font-weight: 600; color: var(--text-dark);">Contact: Sobl5910@gmail.com</p>
       </div>
       <div class="footer-col">
@@ -229,12 +223,12 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Resources</h5>
+        <h5>Legal & Resources</h5>
         <ul>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
           <li><a href="/about.html">About Mi Music</a></li>
-          <li><a href="/install.html">Installation Guide</a></li>
-          <li><a href="/troubleshooting.html">Troubleshooting</a></li>
-          <li><a href="/tools.html">All Audio Tools</a></li>
         </ul>
       </div>
     </div>
@@ -243,20 +237,30 @@
     </div>
   </footer>
 
-  <!-- Scripts for Tool Functionality & UI -->
+  <!-- Scripts for Menu and Audio Tool Functionality -->
   <script>
-    // FAQ Toggle
-    function toggleFaq(btn) {
-      const answer = btn.nextElementSibling;
-      const arrow = btn.querySelector('span');
-      const isOpen = answer.style.display === 'block';
-      answer.style.display = isOpen ? 'none' : 'block';
-      arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+    // Hamburger Menu Logic
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('overlay');
+
+    function toggleMenu() {
+      mobileMenu.classList.toggle('open');
+      overlay.classList.toggle('active');
     }
 
-    // HTML5 Audio API for Pitch & Tempo
+    menuBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+
+    // Audio Tool Logic
     let audioElement = new Audio();
     let isPlaying = false;
+
+    // Ensure audio element supports pitch preservation cross-browser
+    audioElement.preservesPitch = true;
+    if ('mozPreservesPitch' in audioElement) {
+      audioElement.mozPreservesPitch = true;
+    }
 
     function handleFileSelect(event) {
       const file = event.target.files[0];
@@ -267,26 +271,27 @@
         const fileURL = URL.createObjectURL(file);
         audioElement.src = fileURL;
         
-        // Apply current UI settings to new file
-        updateAudioSettings();
+        // Reset controls
+        document.getElementById('speedSlider').value = 1.0;
+        document.getElementById('speedValue').textContent = "1.0x";
+        document.getElementById('pitchToggle').checked = true;
+        updatePitchLogic();
+        updateSpeed(1.0);
       }
     }
 
     function updateSpeed(val) {
-      document.getElementById('speedValue').textContent = parseFloat(val).toFixed(2) + 'x';
-      updateAudioSettings();
+      const speedVal = parseFloat(val).toFixed(2);
+      document.getElementById('speedValue').textContent = speedVal + 'x';
+      audioElement.playbackRate = speedVal;
     }
 
-    function togglePitchLock() {
-      updateAudioSettings();
-    }
-
-    function updateAudioSettings() {
-      const speed = document.getElementById('speedSlider').value;
-      const preservePitch = document.querySelector('input[name="pitchLock"]:checked').value === 'true';
-      
-      audioElement.playbackRate = speed;
-      audioElement.preservesPitch = preservePitch;
+    function updatePitchLogic() {
+      const preserve = document.getElementById('pitchToggle').checked;
+      audioElement.preservesPitch = preserve;
+      if ('mozPreservesPitch' in audioElement) {
+        audioElement.mozPreservesPitch = preserve;
+      }
     }
 
     function togglePlayback() {
@@ -294,18 +299,19 @@
       const icon = document.getElementById('statusIcon');
 
       if (!isPlaying) {
-        updateAudioSettings(); // Ensure settings are applied right before play
-        audioElement.play();
-        isPlaying = true;
-        
-        btn.textContent = "Pause Audio";
-        btn.classList.add('stop');
-        icon.classList.add('active');
+        audioElement.play().then(() => {
+          isPlaying = true;
+          btn.textContent = "Stop Audio";
+          btn.classList.add('stop');
+          icon.classList.add('active');
+        }).catch(err => {
+          console.error("Playback failed:", err);
+          alert("Playback blocked by browser. Please interact with the page first.");
+        });
       } else {
         audioElement.pause();
         isPlaying = false;
-        
-        btn.textContent = "Play Modified Track";
+        btn.textContent = "Play Modified Audio";
         btn.classList.remove('stop');
         icon.classList.remove('active');
       }
@@ -314,7 +320,7 @@
     // Reset UI when audio finishes
     audioElement.addEventListener('ended', function() {
       isPlaying = false;
-      document.getElementById('playBtn').textContent = "Play Modified Track";
+      document.getElementById('playBtn').textContent = "Play Modified Audio";
       document.getElementById('playBtn').classList.remove('stop');
       document.getElementById('statusIcon').classList.remove('active');
     });
