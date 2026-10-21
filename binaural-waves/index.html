@@ -3,91 +3,315 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Binaural Beats Generator - Focus & Meditation Waves | Mi Music Tools</title>
-  <meta name="description" content="Generate binaural beats for deep focus, study, relaxation, and sleep. Free web-based brainwave entrainment sound generator with custom sliders.">
+  <title>Binaural Beats Generator - Focus & Meditation Waves | MiMusic.net</title>
+  <meta name="description" content="Generate binaural beats for deep focus, study, relaxation, and sleep. Free web-based brainwave entrainment sound generator with custom sliders and stereo synthesis.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
+    /* تم یخی کریستالی و شیشه‌ای منطبق با استانداردهای صفحه اصلی */
     :root {
-      --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
-      --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca; 
-      --accent-light: #e0e7ff; --text-dark: #0f172a; --text: #334155; 
-      --muted: #64748b; --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+      --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
+      --surface-glass: rgba(255, 255, 255, 0.72);
+      --surface-glass-hover: rgba(255, 255, 255, 0.92);
+      --glass-border: rgba(255, 255, 255, 0.85);
+      --accent: #4f46e5;
+      --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #3b82f6 100%);
+      --accent-hover: #4338ca;
+      --text-dark: #0f172a;
+      --text-main: #334155;
+      --text-muted: #64748b;
+      --glass-shadow: 0 12px 35px -5px rgba(148, 163, 184, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+      --glass-shadow-hover: 0 20px 45px -4px rgba(79, 70, 229, 0.22), 0 0 0 1.5px rgba(255, 255, 255, 0.95) inset;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
 
-    .header-nav { width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.8; min-height: 100vh; overflow-x: hidden; }
+
+    /* هدر ناوبری شیشه‌ای */
+    .header-nav { 
+      width: 100%; 
+      background: rgba(255, 255, 255, 0.75); 
+      backdrop-filter: blur(18px); 
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--glass-border); 
+      position: sticky; 
+      top: 0; 
+      z-index: 1000; 
+    }
     .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
-    .brand-logo { color: var(--text-dark); font-size: 1.4rem; font-weight: 900; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand-logo { color: var(--text-dark); font-size: 1.45rem; font-weight: 900; text-decoration: none; display: flex; align-items: center; gap: 8px; letter-spacing: -0.02em; }
     .brand-logo span { color: var(--accent); }
     
     .nav-links { display: flex; gap: 28px; align-items: center; }
-    .nav-link { color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .nav-link { color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
     .nav-link:hover { color: var(--accent); }
 
     .hamburger { display: none; background: none; border: none; font-size: 1.8rem; color: var(--text-dark); cursor: pointer; z-index: 1001; }
-    .mobile-menu { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--surface); box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; padding: 80px 24px 24px; display: flex; flex-direction: column; gap: 20px; z-index: 999; }
+    .mobile-menu { 
+      position: fixed; 
+      top: 0; 
+      right: -100%; 
+      width: 290px; 
+      height: 100vh; 
+      background: rgba(255, 255, 255, 0.96); 
+      backdrop-filter: blur(25px);
+      box-shadow: -15px 0 35px rgba(0, 0, 0, 0.1); 
+      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      padding: 80px 24px 24px; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 20px; 
+      z-index: 999; 
+    }
     .mobile-menu.open { right: 0; }
-    .mobile-menu .nav-link { font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
-    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
+    .mobile-menu .nav-link { font-size: 1.1rem; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 12px; }
+    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    .workspace { padding: 60px 24px 40px; background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); text-align: center; }
-    .tool-container { max-width: 700px; margin: 0 auto; background: var(--surface); border-radius: 24px; padding: 40px; box-shadow: var(--shadow-md); border: 1px solid var(--border); }
-    .tool-title { font-size: 2.2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 16px; }
-    .tool-desc { font-size: 1.05rem; color: var(--muted); margin-bottom: 30px; }
+    /* فضای کاری ابزار به صورت کارت شیشه‌ای شناور */
+    .workspace { padding: 60px 24px 40px; text-align: center; }
+    .tool-container { 
+      max-width: 720px; 
+      margin: 0 auto; 
+      background: var(--surface-glass); 
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 30px; 
+      padding: 45px 35px; 
+      box-shadow: var(--glass-shadow); 
+      border: 1px solid var(--glass-border); 
+      position: relative;
+    }
+    .tool-title { font-size: 2.3rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.03em; }
+    .tool-desc { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 25px; line-height: 1.7; max-width: 580px; margin-left: auto; margin-right: auto; }
     
-    .status-ring { width: 100px; height: 100px; border-radius: 50%; background: var(--surface-alt); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; border: 4px solid var(--border); transition: 0.3s; }
-    .status-ring.active { border-color: #06b6d4; color: #06b6d4; animation: wavePulse 2s infinite; }
-    @keyframes wavePulse { 0% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(6, 182, 212, 0); } 100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); } }
+    .status-ring { 
+      width: 110px; 
+      height: 110px; 
+      border-radius: 50%; 
+      background: rgba(255, 255, 255, 0.9); 
+      margin: 0 auto 24px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 2.8rem; 
+      border: 3px solid var(--glass-border); 
+      box-shadow: 0 8px 24px rgba(6, 182, 212, 0.15);
+      transition: all 0.3s ease; 
+    }
+    .status-ring.active { 
+      border-color: #06b6d4; 
+      color: #06b6d4; 
+      animation: wavePulse 1.8s infinite; 
+    }
+    @keyframes wavePulse { 
+      0% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.45); transform: scale(1); } 
+      70% { box-shadow: 0 0 0 24px rgba(6, 182, 212, 0); transform: scale(1.04); } 
+      100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); transform: scale(1); } 
+    }
 
-    .headphone-warning { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 12px 16px; border-radius: 12px; font-weight: 700; font-size: 0.95rem; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .headphone-warning { 
+      background: rgba(254, 242, 242, 0.8); 
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(254, 202, 202, 0.6); 
+      color: #991b1b; 
+      padding: 14px 20px; 
+      border-radius: 16px; 
+      font-weight: 800; 
+      font-size: 0.95rem; 
+      margin-bottom: 28px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 10px; 
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.06);
+    }
 
-    .control-card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; text-align: left; }
-    .control-group { margin-bottom: 20px; }
+    /* پنل کنترل اسلایدرهای فرکانس */
+    .control-card { 
+      background: rgba(255, 255, 255, 0.8); 
+      border: 1px solid var(--glass-border); 
+      border-radius: 22px; 
+      padding: 26px 28px; 
+      margin-bottom: 30px; 
+      text-align: left; 
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    }
+    .control-group { margin-bottom: 22px; }
     .control-group:last-child { margin-bottom: 0; }
     
-    .control-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .control-label { font-weight: 700; color: var(--text-dark); font-size: 0.95rem; }
-    .control-value-box { background: var(--surface); border: 1px solid var(--border); padding: 4px 12px; border-radius: 8px; font-weight: 800; color: var(--accent); font-size: 0.95rem; min-width: 60px; text-align: center; }
+    .control-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .control-label { font-weight: 800; color: var(--text-dark); font-size: 0.98rem; }
+    .control-value-box { 
+      background: var(--surface-glass); 
+      border: 1px solid var(--glass-border); 
+      padding: 4px 14px; 
+      border-radius: 10px; 
+      font-weight: 800; 
+      color: var(--accent); 
+      font-size: 0.95rem; 
+      min-width: 70px; 
+      text-align: center; 
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
 
-    input[type="range"] { width: 100%; cursor: pointer; accent-color: var(--accent); margin-bottom: 8px; }
-    .state-indicator { text-align: center; font-weight: 700; color: #10b981; font-size: 0.95rem; margin-top: 6px; }
+    input[type="range"] { 
+      width: 100%; 
+      height: 8px;
+      cursor: pointer; 
+      accent-color: var(--accent); 
+      border-radius: 5px;
+      background: #e2e8f0;
+      outline: none;
+      margin-bottom: 10px; 
+    }
+    .state-indicator { 
+      text-align: center; 
+      font-weight: 800; 
+      color: #10b981; 
+      font-size: 0.96rem; 
+      margin-top: 6px; 
+      letter-spacing: 0.01em;
+    }
 
-    .btn-main { background: var(--accent); color: #fff; border: none; padding: 16px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); width: 100%; max-width: 300px; display: block; margin: 0 auto; }
-    .btn-main:hover { background: var(--accent-hover); transform: translateY(-2px); }
-    .btn-main.stop { background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); }
+    .btn-main { 
+      background: var(--accent-gradient); 
+      color: #fff; 
+      border: none; 
+      padding: 18px 44px; 
+      border-radius: 50px; 
+      font-size: 1.15rem; 
+      font-weight: 800; 
+      cursor: pointer; 
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      box-shadow: 0 10px 25px -4px rgba(79, 70, 229, 0.4); 
+      width: 100%; 
+      max-width: 320px; 
+      display: block; 
+      margin: 0 auto; 
+    }
+    .btn-main:hover { 
+      transform: translateY(-3px) scale(1.02); 
+      box-shadow: 0 16px 32px -4px rgba(79, 70, 229, 0.55); 
+    }
+    .btn-main.stop { 
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); 
+      box-shadow: 0 10px 25px -4px rgba(239, 68, 68, 0.4); 
+    }
 
-    .content-section { max-width: 900px; margin: 0 auto 60px; padding: 0 24px; }
-    .content-section h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 24px; }
-    .content-section h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin: 32px 0 16px; }
-    .content-section p { font-size: 1.1rem; margin-bottom: 20px; line-height: 1.8; color: var(--text); }
+    /* کادر عکس هوش مصنوعی */
+    .feature-wrapper { max-width: 880px; margin: 30px auto 50px; padding: 0 24px; text-align: center; }
+    .feature-image { 
+      width: 100%; 
+      border-radius: 28px; 
+      box-shadow: 0 22px 45px -10px rgba(79, 70, 229, 0.18), 0 0 0 1.5px var(--glass-border); 
+      display: block; 
+    }
+
+    /* کادر مقاله جامع و سوالات متداول */
+    .content-section { 
+      max-width: 900px; 
+      margin: 0 auto 70px; 
+      padding: 45px; 
+      background: var(--surface-glass); 
+      backdrop-filter: blur(18px); 
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--glass-border); 
+      border-radius: 28px; 
+      box-shadow: var(--glass-shadow); 
+    }
+    .content-section h2 { font-size: 2.1rem; font-weight: 900; color: var(--text-dark); margin-bottom: 22px; letter-spacing: -0.02em; }
+    .content-section h3 { font-size: 1.48rem; font-weight: 800; color: var(--text-dark); margin: 36px 0 18px; }
+    .content-section p { font-size: 1.08rem; margin-bottom: 22px; line-height: 1.95; color: var(--text-main); }
+    .content-section ul { margin-bottom: 28px; padding-left: 24px; }
+    .content-section li { margin-bottom: 12px; font-size: 1.04rem; color: var(--text-main); }
     
-    .tutorial-image { width: 100%; max-width: 600px; height: auto; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow-md); margin: 24px auto; display: block; }
-    .image-caption { text-align: center; font-size: 0.9rem; color: var(--muted); margin-top: -12px; margin-bottom: 32px; font-style: italic; }
+    .tutorial-image { 
+      width: 100%; 
+      max-width: 620px; 
+      height: auto; 
+      border-radius: 20px; 
+      border: 1px solid var(--glass-border); 
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06); 
+      margin: 28px auto 14px; 
+      display: block; 
+    }
+    .image-caption { text-align: center; font-size: 0.92rem; color: var(--text-muted); margin-bottom: 34px; font-style: italic; }
 
-    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; margin-top: 80px; }
+    /* آکاردئون سوالات متداول */
+    .faq-container { margin-top: 25px; display: flex; flex-direction: column; gap: 14px; }
+    .faq-item { 
+      background: rgba(255, 255, 255, 0.85); 
+      border: 1px solid var(--glass-border); 
+      border-radius: 18px; 
+      overflow: hidden; 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); 
+      transition: all 0.2s ease; 
+    }
+    .faq-item:hover { border-color: rgba(99, 102, 241, 0.4); }
+    .faq-question { 
+      width: 100%; 
+      background: none; 
+      border: none; 
+      padding: 22px 26px; 
+      text-align: left; 
+      font-size: 1.08rem; 
+      font-weight: 800; 
+      color: var(--text-dark); 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      cursor: pointer; 
+      transition: 0.2s; 
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon { font-size: 0.9rem; transition: transform 0.3s ease; color: var(--accent); }
+    .faq-answer { 
+      max-height: 0; 
+      overflow: hidden; 
+      transition: max-height 0.35s ease, padding 0.35s ease; 
+      padding: 0 26px; 
+      color: var(--text-main); 
+      font-size: 1.02rem; 
+      line-height: 1.85; 
+    }
+    .faq-item.active .faq-answer { max-height: 250px; padding: 0 26px 24px 26px; }
+    .faq-item.active .faq-icon { transform: rotate(180deg); }
+
+    /* فوتر کریستالی */
+    footer { 
+      border-top: 1px solid var(--glass-border); 
+      background: rgba(255, 255, 255, 0.75); 
+      backdrop-filter: blur(18px); 
+      -webkit-backdrop-filter: blur(18px);
+      padding: 65px 24px 45px; 
+      color: var(--text-muted); 
+      font-size: 0.95rem; 
+      margin-top: 80px; 
+    }
     .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
-    .footer-col h5 { color: var(--text-dark); font-size: 1rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
+    .footer-col h5 { color: var(--text-dark); font-size: 1.05rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
     .footer-col ul { list-style: none; padding: 0; }
     .footer-col li { margin-bottom: 12px; }
-    .footer-col a { color: var(--muted); text-decoration: none; transition: 0.2s; }
+    .footer-col a { color: var(--text-muted); text-decoration: none; transition: 0.2s; }
     .footer-col a:hover { color: var(--accent); }
-    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
 
     @media (max-width: 900px) {
       .nav-links { display: none; }
       .hamburger { display: block; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .content-section { padding: 26px; margin: 0 16px 50px; }
+      .tool-container { padding: 35px 20px; }
     }
     @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
-      .tool-container { padding: 30px 20px; }
     }
   </style>
 </head>
 <body>
 
+  <!-- ناوبری شیشه‌ای -->
   <header class="header-nav">
     <div class="nav-inner">
       <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
@@ -101,6 +325,7 @@
     </div>
   </header>
 
+  <!-- منوی موبایل -->
   <div class="overlay" id="overlay"></div>
   <nav class="mobile-menu" id="mobileMenu">
     <a href="/" class="brand-logo" style="margin-bottom: 20px;">🎵 MiMusic<span>.net</span></a>
@@ -110,10 +335,11 @@
     <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
   </nav>
 
+  <!-- فضای تعاملی ابزار -->
   <main class="workspace">
     <div class="tool-container">
       <h1 class="tool-title">Binaural Beats Generator</h1>
-      <p class="tool-desc">Generate specialized brainwave frequencies for deep focus, relaxation, meditation, and sleep enhancement.</p>
+      <p class="tool-desc">Synthesize pure brainwave entrainment frequencies for deep focus, creative study, meditation, and restorative sleep right inside your browser.</p>
       
       <div class="status-ring" id="statusIcon">🧠</div>
 
@@ -124,7 +350,7 @@
       <div class="control-card">
         <div class="control-group">
           <div class="control-header">
-            <span class="control-label">Brainwave State (Beat Freq):</span>
+            <span class="control-label">Brainwave State (Beat Offset):</span>
             <div class="control-value-box"><span id="beatVal">10</span> Hz</div>
           </div>
           <input type="range" id="beatSlider" min="1" max="30" step="1" value="10" oninput="updateFrequencies()">
@@ -135,7 +361,7 @@
 
         <div class="control-group">
           <div class="control-header">
-            <span class="control-label">Carrier Frequency (Pitch):</span>
+            <span class="control-label">Carrier Frequency (Base Pitch):</span>
             <div class="control-value-box"><span id="carrierVal">200</span> Hz</div>
           </div>
           <input type="range" id="carrierSlider" min="100" max="500" step="10" value="200" oninput="updateFrequencies()">
@@ -146,44 +372,95 @@
     </div>
   </main>
 
-  <!-- عکس هوش مصنوعی -->
-  <div style="max-width: 800px; margin: 0 auto 40px; padding: 0 24px; text-align: center;">
-    <img src="binaural-waves.jpg" alt="Glowing brainwave frequencies and audio waves visualization" style="width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);">
+  <!-- تصویر هوش مصنوعی با نام binaural-waves.jpg -->
+  <div class="feature-wrapper">
+    <img src="binaural-waves.jpg" alt="Glowing brainwave frequencies and audio waves visualization" class="feature-image">
   </div>
 
+  <!-- مقاله تخصصی، انسانی و سئو شده (> ۶۵۰ کلمه) -->
   <section class="content-section">
-    <h2>What Are Binaural Beats?</h2>
-    <p>Binaural beats are an auditory illusion created when two slightly different pure tone frequencies are played separately into each ear through headphones. For example, if a 200 Hz tone is played in your left ear and a 204 Hz tone is played in your right ear, your brain processes the difference—a pulsing 4 Hz beat. This phenomenon encourages brainwave entrainment, gently guiding your mental state toward relaxation, focus, or deep sleep.</p>
-    
-    <p>The <strong>MiMusic Binaural Beats Generator</strong> utilizes precise Web Audio API oscillators to generate these frequencies in real-time right inside your browser, completely free and without requiring external downloads or app installations.</p>
+    <h2>The Psychoacoustics of Brainwave Entrainment: How the Brain Hears Phantom Pulses</h2>
+    <p>Discovered in 1839 by German physicist Heinrich Wilhelm Dove and popularized in the 1970s by biophysicist Gerald Oster, binaural beats are one of the most fascinating psychoacoustic illusions in sensory neuroscience. Unlike monaural beats—which occur when two competing sound waves physically collide in the air to produce acoustic amplitude fluttering—a binaural beat does not exist anywhere in the physical room. It is a subjective, cognitive artifact synthesized entirely within the human brainstem.</p>
 
-    <h3>Brainwave Frequency Categories Explained</h3>
-    <p>Different frequency offsets target distinct states of consciousness:</p>
-    
+    <p>When you present two continuous, pure sinusoidal tones of slightly different frequencies separately to each ear via stereo headphones (for example, a 200 Hz tone to the left ear and a 210 Hz tone to the right ear), the two signals do not merge in the ear canal. Instead, neural signals from the auditory nerves travel up to the <strong>superior olivary complex</strong>—the brainstem structure responsible for sound localization and spatial orientation. Attempting to reconcile the phase discrepancy between both ears, the brain synthesizes a third phantom rhythm oscillating at the exact mathematical difference: 10 Hz. This neurological synchronization is known as the <em>Frequency Following Response (FFR)</em> or brainwave entrainment.</p>
+
+    <h3>Mapping the Five Key Electroencephalographic (EEG) Brainwave Bands</h3>
+    <p>Human consciousness fluctuates continuously across five distinct electrical frequency bands, measured in cycles per second (Hertz). Adjusting the beat offset slider on the generator targets specific mental states:</p>
     <ul>
-      <li style="margin-bottom: 12px;"><strong>Delta Waves (1 - 4 Hz):</strong> Associated with deep, dreamless sleep and physical body restoration.</li>
-      <li style="margin-bottom: 12px;"><strong>Theta Waves (4 - 8 Hz):</strong> Linked to deep meditation, intuition, relaxation, and memory consolidation.</li>
-      <li style="margin-bottom: 12px;"><strong>Alpha Waves (8 - 14 Hz):</strong> Promotes a calm, relaxed yet alert state ideal for light studying and creative work.</li>
-      <li style="margin-bottom: 12px;"><strong>Beta Waves (14 - 30 Hz):</strong> Associated with active concentration, sharp alertness, and problem-solving.</li>
+      <li><strong>Delta Waves (1 Hz to 3 Hz):</strong> The slowest neural rhythms, dominant during stage 3 and stage 4 dreamless slow-wave sleep. Delta entrainment encourages autonomic nervous system recovery, hormone regulation, and physical cellular repair.</li>
+      <li><strong>Theta Waves (4 Hz to 7 Hz):</strong> Linked to the twilight hypnagogic state, deep transcendental meditation, REM dreaming, and subconscious memory consolidation. Highly valued by practitioners of mindfulness and creative visualization.</li>
+      <li><strong>Alpha Waves (8 Hz to 13 Hz):</strong> The electrophysiological signature of relaxed, effortless alertness. Alpha rhythms suppress mental chatter and cortisol, establishing the calm mental equilibrium ideal for creative problem-solving and flow-state reading.</li>
+      <li><strong>Beta Waves (14 Hz to 30 Hz):</strong> The frequency of high-arousal cognitive engagement, analytical logic, critical thinking, and rigorous academic study. Excellent for overcoming afternoon brain fog and fatigue.</li>
     </ul>
 
-    <h3>How to Use the Generator (Step-by-Step)</h3>
-    <p>Follow these quick instructions to begin your brainwave session:</p>
+    <h3>Understanding Carrier Frequencies: Finding Your Acoustic Comfort Zone</h3>
+    <p>A crucial yet often overlooked parameter in brainwave synthesis is the <strong>carrier frequency</strong>—the underlying musical pitch carrying the binaural offset. If you set a 10 Hz Alpha beat offset with a high 400 Hz carrier, the tone will sound like a bright, humming violin note. If you lower the carrier to 150 Hz, the pitch shifts into a warm, warm cello-like drone.</p>
 
-    <!-- عکس آموزشی با اسم مستقل -->
-    <img src="binaural-guide.jpg" alt="Step by step binaural beats generator guide" class="tutorial-image" style="display: block;">
-    <p class="image-caption">Put on your headphones, adjust the brainwave sliders, and click start.</p>
+    <p>Neuroscience research indicates that lower carrier frequencies (between 150 Hz and 250 Hz) are significantly more effective for binaural entrainment because the superior olivary complex tracks phase cycles far more accurately in the lower auditory spectrum. Our interactive tool lets you customize the carrier pitch in real time to match your personal acoustic sensitivity without disturbing the target brainwave beat.</p>
+
+    <h3>Step-by-Step Guide: Conducting a Calibrated Entrainment Session</h3>
+    <p>To experience the full cognitive benefits of brainwave synchronization, follow this structured routine:</p>
+
+    <!-- تصویر اسکرین‌شات آموزشی با نام binaural-guide.jpg -->
+    <img src="binaural-guide.jpg" alt="Step by step binaural beats generator guide" class="tutorial-image">
+    <p class="image-caption">Put on your stereo headphones, choose your target mental state, and start the tone.</p>
 
     <ul>
-      <li style="margin-bottom: 12px;"><strong>Step 1: Put On Headphones.</strong> Binaural beats physically require stereo separation. Regular speakers will not produce the brainwave entrainment effect.</li>
-      <li style="margin-bottom: 12px;"><strong>Step 2: Adjust Sliders.</strong> Use the sliders to customize your target brainwave state and carrier frequency.</li>
-      <li style="margin-bottom: 12px;"><strong>Step 3: Start Listening.</strong> Click the start button and relax in a quiet environment for the best results.</li>
+      <li><strong>Step 1: Put On Stereo Headphones:</strong> Headphones or separate earbuds are strictly mandatory. Binaural synthesis requires completely isolated stereo channels; playing the sound through phone speakers or desktop monitors blends the waves in open air, eliminating the brainstem illusion.</li>
+      <li><strong>Step 2: Select Your Target Frequency Offset:</strong> Use the top slider to dial in your goal (e.g., 10 Hz for Alpha study, or 3 Hz for nighttime sleep preparation).</li>
+      <li><strong>Step 3: Tune the Carrier Pitch:</strong> Adjust the bottom slider between 150 Hz and 250 Hz until the tone feels soothing, unobtrusive, and pleasant to your ears.</li>
+      <li><strong>Step 4: Set a Moderate Listening Volume:</strong> Keep your device volume at roughly 30% to 50%. Entrainment is driven by frequency phase matching, not volume loudness. Listen comfortably for 15 to 30 minutes while studying or meditating.</li>
     </ul>
 
-    <h3>Safe Listening Guidelines</h3>
-    <p>Keep your device volume at a comfortable, moderate level. Do not listen to binaural beats while driving or operating machinery that requires your full active attention.</p>
+    <h3>100% In-Browser Synthesis: Pure Math, Zero Compression</h3>
+    <p>Many pre-recorded binaural tracks found on streaming platforms or YouTube suffer from MP3 compression artifacts. Lossy encoders often discard subtle stereo phase discrepancies to save file size, severely dampening the neural entrainment effect. MiMusic.net generates pure mathematical sine waves locally using uncompressed 32-bit floating-point <code>OscillatorNode</code> algorithms via the Web Audio API. Everything runs 100% in-memory with zero internet latency, zero data tracking, and pristine phase precision.</p>
+
+    <!-- بخش سوالات متداول آکاردئونی تعاملی -->
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Why are stereo headphones strictly required for this tool?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Binaural beats rely entirely on phase reconciliation inside your brainstem. If you play the tones through phone or room speakers, the sound waves physically mix in the open air before reaching your ears. Only isolated stereo headphones allow each ear to receive its dedicated pure frequency.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>What is the best carrier frequency for studying and reading?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>For cognitive work and study, a carrier frequency between 180 Hz and 220 Hz paired with an 8 Hz to 12 Hz Alpha beat offset provides the most comfortable, non-intrusive auditory backdrop without inducing ear fatigue.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>How long should I listen to binaural beats to feel an effect?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Most individuals experience noticeable cognitive shifts and neural entrainment within 10 to 15 minutes of uninterrupted listening. Sessions between 20 and 45 minutes are ideal for study periods or pre-sleep wind-down routines.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Are binaural beats safe to use every day?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, binaural beats are non-invasive and safe for daily use at moderate listening volumes. However, you should never listen while driving, operating heavy machinery, or engaging in tasks that require acute physical vigilance.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
+  <!-- فوتر کریستالی -->
   <footer>
     <div class="footer-grid">
       <div class="footer-col">
@@ -224,7 +501,9 @@
     </div>
   </footer>
 
+  <!-- اسکریپت‌های منو و مولد استریو امواج بیناورال -->
   <script>
+    // منوی ناوبری
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
@@ -237,6 +516,13 @@
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
+    // اسکریپت آکاردئونی سوالات متداول
+    function toggleFaq(button) {
+      const item = button.parentElement;
+      item.classList.toggle('active');
+    }
+
+    // منطق مهندسی امواج بیناورال Web Audio API با کانال‌های تفکیک‌شده استریو
     let audioCtx = null;
     let oscLeft = null;
     let oscRight = null;
@@ -288,12 +574,13 @@
         oscRight.type = 'sine';
         oscRight.frequency.value = carrier + beat;
 
+        // ادغام‌کننده دو کاناله جهت تفکیک دقیق فرکانس‌های چپ و راست
         const merger = audioCtx.createChannelMerger(2);
         const gainNode = audioCtx.createGain();
         gainNode.gain.value = 0.25;
 
-        oscLeft.connect(merger, 0, 0);
-        oscRight.connect(merger, 0, 1);
+        oscLeft.connect(merger, 0, 0);   // کانال چپ
+        oscRight.connect(merger, 0, 1);  // کانال راست
 
         merger.connect(gainNode);
         gainNode.connect(audioCtx.destination);
