@@ -3,91 +3,249 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Decibel Meter - Sound Level Sound Pressure Tester | Mi Music Tools</title>
-  <meta name="description" content="Measure sound pressure level and ambient noise in decibels (dB) online using your microphone. Free web-based sound level meter tool.">
+  <title>Online Decibel Meter - Sound Level Sound Pressure Tester | MiMusic.net</title>
+  <meta name="description" content="Measure ambient sound pressure levels and room noise in decibels (dB SPL) online using your microphone. Free, private, browser-based sound level meter tool.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
-    /* Global Variables & Base Setup */
+    /* تم یخی کریستالی و شیشه‌ای هماهنگ با صفحه اصلی */
     :root {
-      --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
-      --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca; 
-      --accent-light: #e0e7ff; --text-dark: #0f172a; --text: #334155; 
-      --muted: #64748b; --shadow-sm: 0 1px 2px rgba(0,0,0,0.05); 
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+      --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
+      --surface-glass: rgba(255, 255, 255, 0.72);
+      --surface-glass-hover: rgba(255, 255, 255, 0.92);
+      --glass-border: rgba(255, 255, 255, 0.85);
+      --accent: #4f46e5;
+      --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #3b82f6 100%);
+      --accent-hover: #4338ca;
+      --text-dark: #0f172a;
+      --text-main: #334155;
+      --text-muted: #64748b;
+      --glass-shadow: 0 12px 35px -5px rgba(148, 163, 184, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+      --glass-shadow-hover: 0 20px 45px -4px rgba(79, 70, 229, 0.22), 0 0 0 1.5px rgba(255, 255, 255, 0.95) inset;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
 
-    /* Modern Responsive Navigation */
-    .header-nav { width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.8; min-height: 100vh; overflow-x: hidden; }
+
+    /* هدر ناوبری شیشه‌ای */
+    .header-nav { 
+      width: 100%; 
+      background: rgba(255, 255, 255, 0.75); 
+      backdrop-filter: blur(18px); 
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--glass-border); 
+      position: sticky; 
+      top: 0; 
+      z-index: 1000; 
+    }
     .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
-    .brand-logo { color: var(--text-dark); font-size: 1.4rem; font-weight: 900; text-decoration: none; display: flex; align-items: center; gap: 8px; letter-spacing: -0.02em; }
+    .brand-logo { color: var(--text-dark); font-size: 1.45rem; font-weight: 900; text-decoration: none; display: flex; align-items: center; gap: 8px; letter-spacing: -0.02em; }
     .brand-logo span { color: var(--accent); }
     
-    /* Desktop Nav */
     .nav-links { display: flex; gap: 28px; align-items: center; }
-    .nav-link { color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .nav-link { color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
     .nav-link:hover { color: var(--accent); }
 
-    /* Mobile Hamburger Menu */
     .hamburger { display: none; background: none; border: none; font-size: 1.8rem; color: var(--text-dark); cursor: pointer; z-index: 1001; }
-    .mobile-menu { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--surface); box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; padding: 80px 24px 24px; display: flex; flex-direction: column; gap: 20px; z-index: 999; }
+    .mobile-menu { 
+      position: fixed; 
+      top: 0; 
+      right: -100%; 
+      width: 290px; 
+      height: 100vh; 
+      background: rgba(255, 255, 255, 0.96); 
+      backdrop-filter: blur(25px);
+      box-shadow: -15px 0 35px rgba(0, 0, 0, 0.1); 
+      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      padding: 80px 24px 24px; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 20px; 
+      z-index: 999; 
+    }
     .mobile-menu.open { right: 0; }
-    .mobile-menu .nav-link { font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
-    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
+    .mobile-menu .nav-link { font-size: 1.1rem; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 12px; }
+    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    /* Tool Workspace Area */
-    .workspace { padding: 60px 24px 40px; background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); text-align: center; }
-    .tool-container { max-width: 700px; margin: 0 auto; background: var(--surface); border-radius: 24px; padding: 40px; box-shadow: var(--shadow-md); border: 1px solid var(--border); }
-    .tool-title { font-size: 2.2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 16px; letter-spacing: -0.03em; }
-    .tool-desc { font-size: 1.05rem; color: var(--muted); margin-bottom: 30px; }
+    /* فضای کاری ابزار به صورت کارت شیشه‌ای شناور */
+    .workspace { padding: 60px 24px 40px; text-align: center; }
+    .tool-container { 
+      max-width: 720px; 
+      margin: 0 auto; 
+      background: var(--surface-glass); 
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 30px; 
+      padding: 45px 35px; 
+      box-shadow: var(--glass-shadow); 
+      border: 1px solid var(--glass-border); 
+      position: relative;
+    }
+    .tool-title { font-size: 2.3rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.03em; }
+    .tool-desc { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 30px; line-height: 1.7; max-width: 580px; margin-left: auto; margin-right: auto; }
     
-    .status-ring { width: 140px; height: 140px; border-radius: 50%; background: var(--surface-alt); margin: 0 auto 30px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 4px solid var(--border); transition: 0.3s; }
-    .status-ring.active { border-color: #f97316; box-shadow: 0 0 25px rgba(249, 115, 22, 0.3); }
-    .db-value { font-size: 2rem; font-weight: 900; color: var(--text-dark); }
-    .db-unit { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; font-weight: 700; }
+    .status-ring { 
+      width: 130px; 
+      height: 130px; 
+      border-radius: 50%; 
+      background: rgba(255, 255, 255, 0.9); 
+      margin: 0 auto 30px; 
+      display: flex; 
+      flex-direction: column;
+      align-items: center; 
+      justify-content: center; 
+      border: 3px solid var(--glass-border); 
+      box-shadow: 0 8px 24px rgba(249, 115, 22, 0.15);
+      transition: all 0.3s ease; 
+    }
+    .status-ring.active { 
+      border-color: #f97316; 
+      animation: dbPulse 1.2s infinite alternate; 
+    }
+    @keyframes dbPulse { 
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.35); } 
+      100% { transform: scale(1.05); box-shadow: 0 0 25px rgba(249, 115, 22, 0.5); } 
+    }
+    .db-value { font-size: 2.4rem; font-weight: 900; color: var(--text-dark); line-height: 1.1; }
+    .db-unit { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em; }
 
-    /* Tool Controls */
-    .btn-main { background: var(--accent); color: #fff; border: none; padding: 18px 40px; border-radius: 50px; font-size: 1.15rem; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); width: 100%; max-width: 320px; }
-    .btn-main:hover { background: var(--accent-hover); transform: translateY(-2px); }
-    .btn-main.stop { background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); }
+    .btn-main { 
+      background: var(--accent-gradient); 
+      color: #fff; 
+      border: none; 
+      padding: 18px 44px; 
+      border-radius: 50px; 
+      font-size: 1.15rem; 
+      font-weight: 800; 
+      cursor: pointer; 
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      box-shadow: 0 10px 25px -4px rgba(79, 70, 229, 0.4); 
+      width: 100%; 
+      max-width: 320px; 
+    }
+    .btn-main:hover { 
+      transform: translateY(-3px) scale(1.02); 
+      box-shadow: 0 16px 32px -4px rgba(79, 70, 229, 0.55); 
+    }
+    .btn-main.stop { 
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); 
+      box-shadow: 0 10px 25px -4px rgba(239, 68, 68, 0.4); 
+    }
 
-    /* Thick Content Section for AdSense */
-    .content-section { max-width: 900px; margin: 0 auto 60px; padding: 0 24px; }
-    .content-section h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 24px; }
-    .content-section h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin: 32px 0 16px; }
-    .content-section p { font-size: 1.1rem; margin-bottom: 20px; line-height: 1.8; color: var(--text); }
+    /* کادر عکس هوش مصنوعی */
+    .feature-wrapper { max-width: 880px; margin: 30px auto 50px; padding: 0 24px; text-align: center; }
+    .feature-image { 
+      width: 100%; 
+      border-radius: 28px; 
+      box-shadow: 0 22px 45px -10px rgba(79, 70, 229, 0.18), 0 0 0 1.5px var(--glass-border); 
+      display: block; 
+    }
+
+    /* کادر مقاله جامع و سوالات متداول */
+    .content-section { 
+      max-width: 900px; 
+      margin: 0 auto 70px; 
+      padding: 45px; 
+      background: var(--surface-glass); 
+      backdrop-filter: blur(18px); 
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--glass-border); 
+      border-radius: 28px; 
+      box-shadow: var(--glass-shadow); 
+    }
+    .content-section h2 { font-size: 2.1rem; font-weight: 900; color: var(--text-dark); margin-bottom: 22px; letter-spacing: -0.02em; }
+    .content-section h3 { font-size: 1.48rem; font-weight: 800; color: var(--text-dark); margin: 36px 0 18px; }
+    .content-section p { font-size: 1.08rem; margin-bottom: 22px; line-height: 1.95; color: var(--text-main); }
+    .content-section ul { margin-bottom: 28px; padding-left: 24px; }
+    .content-section li { margin-bottom: 12px; font-size: 1.04rem; color: var(--text-main); }
     
-    /* Tutorial Image Styling */
-    .tutorial-image { width: 100%; max-width: 600px; height: auto; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow-md); margin: 24px auto; display: block; }
-    .image-caption { text-align: center; font-size: 0.9rem; color: var(--muted); margin-top: -12px; margin-bottom: 32px; font-style: italic; }
+    .tutorial-image { 
+      width: 100%; 
+      max-width: 620px; 
+      height: auto; 
+      border-radius: 20px; 
+      border: 1px solid var(--glass-border); 
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06); 
+      margin: 28px auto 14px; 
+      display: block; 
+    }
+    .image-caption { text-align: center; font-size: 0.92rem; color: var(--text-muted); margin-bottom: 34px; font-style: italic; }
 
-    /* Footer */
-    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; margin-top: 80px; }
+    /* آکاردئون سوالات متداول */
+    .faq-container { margin-top: 25px; display: flex; flex-direction: column; gap: 14px; }
+    .faq-item { 
+      background: rgba(255, 255, 255, 0.85); 
+      border: 1px solid var(--glass-border); 
+      border-radius: 18px; 
+      overflow: hidden; 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); 
+      transition: all 0.2s ease; 
+    }
+    .faq-item:hover { border-color: rgba(99, 102, 241, 0.4); }
+    .faq-question { 
+      width: 100%; 
+      background: none; 
+      border: none; 
+      padding: 22px 26px; 
+      text-align: left; 
+      font-size: 1.08rem; 
+      font-weight: 800; 
+      color: var(--text-dark); 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      cursor: pointer; 
+      transition: 0.2s; 
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon { font-size: 0.9rem; transition: transform 0.3s ease; color: var(--accent); }
+    .faq-answer { 
+      max-height: 0; 
+      overflow: hidden; 
+      transition: max-height 0.35s ease, padding 0.35s ease; 
+      padding: 0 26px; 
+      color: var(--text-main); 
+      font-size: 1.02rem; 
+      line-height: 1.85; 
+    }
+    .faq-item.active .faq-answer { max-height: 250px; padding: 0 26px 24px 26px; }
+    .faq-item.active .faq-icon { transform: rotate(180deg); }
+
+    /* فوتر کریستالی */
+    footer { 
+      border-top: 1px solid var(--glass-border); 
+      background: rgba(255, 255, 255, 0.75); 
+      backdrop-filter: blur(18px); 
+      -webkit-backdrop-filter: blur(18px);
+      padding: 65px 24px 45px; 
+      color: var(--text-muted); 
+      font-size: 0.95rem; 
+      margin-top: 80px; 
+    }
     .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
-    .footer-col h5 { color: var(--text-dark); font-size: 1rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
+    .footer-col h5 { color: var(--text-dark); font-size: 1.05rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
     .footer-col ul { list-style: none; padding: 0; }
     .footer-col li { margin-bottom: 12px; }
-    .footer-col a { color: var(--muted); text-decoration: none; transition: 0.2s; }
+    .footer-col a { color: var(--text-muted); text-decoration: none; transition: 0.2s; }
     .footer-col a:hover { color: var(--accent); }
-    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
 
-    /* Media Queries */
     @media (max-width: 900px) {
       .nav-links { display: none; }
       .hamburger { display: block; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .content-section { padding: 26px; margin: 0 16px 50px; }
+      .tool-container { padding: 35px 20px; }
     }
     @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
-      .tool-container { padding: 30px 20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation with Hamburger Menu -->
+  <!-- ناوبری شیشه‌ای -->
   <header class="header-nav">
     <div class="nav-inner">
       <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
@@ -101,7 +259,7 @@
     </div>
   </header>
 
-  <!-- Mobile Menu Overlay -->
+  <!-- منوی موبایل -->
   <div class="overlay" id="overlay"></div>
   <nav class="mobile-menu" id="mobileMenu">
     <a href="/" class="brand-logo" style="margin-bottom: 20px;">🎵 MiMusic<span>.net</span></a>
@@ -111,11 +269,11 @@
     <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
   </nav>
 
-  <!-- Interactive Tool Workspace -->
+  <!-- فضای تعاملی ابزار -->
   <main class="workspace">
     <div class="tool-container">
       <h1 class="tool-title">Online Decibel Meter</h1>
-      <p class="tool-desc">Measure ambient noise and sound pressure levels in real-time directly using your device microphone.</p>
+      <p class="tool-desc">Measure ambient room acoustics and real-time environmental sound pressure levels directly through your device microphone. 100% private, browser-based DSP analysis.</p>
       
       <div class="status-ring" id="statusRing">
         <span class="db-value" id="dbDisplay">0</span>
@@ -126,36 +284,97 @@
     </div>
   </main>
 
-  <!-- AI Generated Feature Image -->
-  <div style="max-width: 800px; margin: 0 auto 40px; padding: 0 24px; text-align: center;">
-    <img src="decibel-meter.jpg" alt="A modern digital sound level decibel meter gauge" style="width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);">
+  <!-- تصویر هوش مصنوعی با نام decibel-meter.jpg -->
+  <div class="feature-wrapper">
+    <img src="decibel-meter.jpg" alt="A modern digital sound level decibel meter gauge" class="feature-image">
   </div>
 
-  <!-- Comprehensive SEO & How-to Content -->
+  <!-- مقاله تخصصی، انسانی و سئو شده (> ۶۵۰ کلمه) -->
   <section class="content-section">
-    <h2>Understanding Decibels and Sound Pressure</h2>
-    <p>Sound is measured in decibels (dB), a logarithmic unit used to express the ratio of a given sound pressure against a standard baseline. Normal human breathing registers around 10 dB, a quiet conversation sits around 60 dB, while a rock concert or siren can easily exceed 100 dB to 120 dB.</p>
-    
-    <p>The <strong>MiMusic Decibel Meter</strong> transforms your smartphone or computer microphone into a reliable sound level indicator. Whether you want to check how loud your room is, test your headphones, or ensure your music listening habits are safe for your ears, our browser-based tool gives you instant measurements.</p>
+    <h2>The Science of Sound Pressure: Understanding the Decibel (dB) Scale</h2>
+    <p>Acoustic energy is fundamentally physical mechanical vibration traveling through air as alternating waves of atmospheric compression and rarefaction. When discussing loudness, the human auditory system does not interpret changes in sound pressure linearly. If a sound wave doubles in physical atmospheric pressure, your brain does not register it as twice as loud; rather, human perception follows a logarithmic progression. To quantify sound in a manner that mirrors biological human hearing, acoustic scientists utilize the <strong>decibel (dB)</strong> scale.</p>
 
-    <h3>How to Use the Decibel Meter (Step-by-Step)</h3>
-    <p>Using our sound level meter requires no app installation; it runs safely within your browser.</p>
+    <p>The standard reference for airborne acoustics is Sound Pressure Level (SPL), expressed mathematically against the quietest sound a healthy human ear can perceive—the threshold of hearing ($20 \text{ micropascals}$ of pressure, defined as $0\text{ dB SPL}$). Because the scale is logarithmic, an increase of $10\text{ dB}$ represents a tenfold increase in physical acoustic intensity and sounds approximately twice as loud to the human brain. An increase of $20\text{ dB}$ represents a hundredfold surge in acoustic energy. The <strong>MiMusic Online Decibel Meter</strong> taps into your device's microphone via the native Web Audio API, calculating continuous Root Mean Square (RMS) and Fast Fourier Transform (FFT) amplitude averages to provide an immediate numerical readout of ambient noise.</p>
 
-    <!-- User's Real UI Screenshot -->
-    <img src="decibel-guide.jpg" alt="Step by step decibel meter guide" class="tutorial-image" style="display: block;">
-    <p class="image-caption">Grant microphone permission and view real-time decibel levels.</p>
-
+    <h3>Everyday Acoustic Reference Points: How Loud Is Your Environment?</h3>
+    <p>To put decibel measurements into practical perspective, consider these standard real-world sound benchmarks:</p>
     <ul>
-      <li style="margin-bottom: 12px;"><strong>Step 1: Start the Meter.</strong> Click the "Start Sound Meter" button.</li>
-      <li style="margin-bottom: 12px;"><strong>Step 2: Grant Permission.</strong> Allow your browser access to your device microphone when prompted.</li>
-      <li style="margin-bottom: 12px;"><strong>Step 3: Monitor Noise Levels.</strong> Watch the digital meter update in real-time as sound enters your microphone.</li>
+      <li><strong>10 to 25 dB SPL:</strong> Barely audible. Rustling leaves, a ticking watch at distance, or a tranquil recording studio vocal booth.</li>
+      <li><strong>30 to 45 dB SPL:</strong> Quiet ambient space. A peaceful rural library, nighttime bedroom, or hushed whisper.</li>
+      <li><strong>50 to 65 dB SPL:</strong> Moderate social activity. Standard indoor conversations, ambient office background noise, or gentle rainfall.</li>
+      <li><strong>70 to 80 dB SPL:</strong> Elevated noise. Heavy highway traffic, vacuum cleaners, hair dryers, or noisy restaurant dining rooms.</li>
+      <li><strong>85 to 100 dB SPL:</strong> Potential danger threshold. Power lawnmowers, factory machinery, subway cars, and high-volume personal earbuds.</li>
+      <li><strong>110 to 130+ dB SPL:</strong> Immediate pain and trauma threshold. Live rock concerts, emergency vehicle sirens, pneumatic jackhammers, or jet engine takeoffs within 50 meters.</li>
     </ul>
 
-    <h3>Protecting Your Hearing</h3>
-    <p>Prolonged exposure to sounds above 85 dB can cause permanent hearing damage over time. Use this meter to keep your environment and music listening levels safe.</p>
+    <h3>Occupational Safety Standards: The 85 dB Threshold</h3>
+    <p>According to health guidelines published by the National Institute for Occupational Safety and Health (NIOSH) and the World Health Organization (WHO), sustained exposure to environmental sound pressure levels exceeding <strong>85 dBA</strong> causes gradual, irreversible acoustic damage to the inner ear's delicate stereocilia. Under standard regulatory occupational standards, an individual can safely work in an 85 dB environment for up to 8 hours without hearing protection.</p>
+
+    <p>Crucially, because of the logarithmic nature of sound energy, the permissible exposure duration is halved for every $3\text{ dB}$ increase. At $88\text{ dB}$, safe unprotected exposure drops to 4 hours; at $91\text{ dB}$, it falls to 2 hours; and at $100\text{ dB}$ (typical of many nightclub venues and gym fitness classes), permanent noise-induced hearing threshold shifts can initiate in under 15 minutes. Monitoring ambient sound levels using an accessible online meter gives you the awareness needed to protect your hearing.</p>
+
+    <h3>Step-by-Step Guide: How to Measure Room Noise with Your Microphone</h3>
+    <p>Using our web-based sound level meter takes only moments on mobile or desktop:</p>
+
+    <!-- تصویر اسکرین‌شات آموزشی با نام decibel-guide.jpg -->
+    <img src="decibel-guide.jpg" alt="Step by step decibel meter guide" class="tutorial-image">
+    <p class="image-caption">Click Start Sound Meter, grant microphone permission, and view live ambient noise readings.</p>
+
+    <ul>
+      <li><strong>Step 1: Activate the Meter:</strong> Tap the "Start Sound Meter" button.</li>
+      <li><strong>Step 2: Grant Browser Permission:</strong> When prompted by your browser (Chrome, Safari, Firefox), tap "Allow" to grant temporary microphone access.</li>
+      <li><strong>Step 3: Monitor Live Acoustics:</strong> Observe the numeric display update in real time as environmental noise enters your device microphone.</li>
+      <li><strong>Step 4: Stop and Disengage:</strong> When finished, tap "Stop Meter". The microphone hardware track immediately powers down and tears down the media stream.</li>
+    </ul>
+
+    <h3>100% In-Browser Privacy: No Voice Recording or Audio Storage</h3>
+    <p>Many downloaded mobile decibel apps from app stores demand invasive permissions, running background analytics trackers or uploading audio clips to cloud servers. MiMusic.net operates under strict zero-recording client-side architecture. The microphone input stream is routed strictly into an in-memory <code>AnalyserNode</code> for mathematical frequency calculation; no audio data is ever written to disk, buffered into audio files, or transmitted over the internet.</p>
+
+    <!-- بخش سوالات متداول آکاردئونی تعاملی -->
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>How accurate is a browser decibel meter compared to professional hardware?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Our tool provides an excellent relative estimate of environmental noise levels. However, dedicated Type 1 and Type 2 sound level meters feature factory-calibrated pre-polarized capsules. Consumer smartphones incorporate automatic gain control (AGC) and noise-suppression chips that can compress extreme peaks above 95 dB.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Does this tool record my conversations or store audio clips?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Never. The microphone stream is processed strictly in temporary device RAM to calculate real-time frequency amplitudes. No recordings are saved, cached, or transmitted to any remote servers.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>At what decibel level should I wear earplugs?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Audiologists recommend wearing hearing protection (such as high-fidelity earplugs or industrial earmuffs) in any environment that consistently registers at or above 85 dB SPL, especially during concerts, motorsport events, or when operating power tools.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Why does the decibel reading differ between my phone and computer?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Every device utilizes different microphone capsule hardware, analog-to-digital converters (ADCs), and internal preamplifiers. Microphones calibrated for voice calls naturally filter sub-bass rumbles differently than laptop array microphones.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- Global Footer -->
+  <!-- فوتر کریستالی -->
   <footer>
     <div class="footer-grid">
       <div class="footer-col">
@@ -177,8 +396,8 @@
         <ul>
           <li><a href="/vocal-clarity/">Vocal Clarity</a></li>
           <li><a href="/video-to-audio/">Video to Audio</a></li>
-          <li><a href="/audio-latency/">Latency Test</a></li>
           <li><a href="/decibel-meter/" style="color: var(--accent);">Decibel Meter</a></li>
+          <li><a href="/hearing-test/">Hearing Test</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -196,8 +415,9 @@
     </div>
   </footer>
 
-  <!-- Scripts for Menu and Decibel Logic -->
+  <!-- اسکریپت‌های منو و دسی‌بل‌متر -->
   <script>
+    // منوی ناوبری
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
@@ -210,6 +430,13 @@
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
+    // اسکریپت آکاردئونی سوالات متداول
+    function toggleFaq(button) {
+      const item = button.parentElement;
+      item.classList.toggle('active');
+    }
+
+    // منطق مهندسی تحلیل فرکانس و سطح صدا (AnalyserNode)
     let audioCtx = null;
     let micStream = null;
     let analyser = null;
@@ -250,7 +477,7 @@
           }
           updateMeter();
         }).catch(err => {
-          alert("Microphone access denied or not supported.");
+          alert("Microphone access denied or not supported by your browser.");
           console.error(err);
         });
       } else {
