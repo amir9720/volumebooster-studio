@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Volume Booster Online - Make Audio Louder | MiMusic.net</title>
-  <meta name="description" content="Increase the volume of any audio or music file directly in your browser. A free, safe, and private web tool to boost MP3 and WAV files without distortion.">
+  <meta name="description" content="Increase the volume of any audio or music file directly in your browser. A free, safe, and private web tool to boost MP3 and WAV files up to 300% without distortion.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
-    /* تم یخی کریستالی و شیشه‌ای هماهنگ با صفحه اصلی */
+    /* تم یخی کریستالی و شیشه‌ای منطبق با صفحه اصلی */
     :root {
       --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
       --surface-glass: rgba(255, 255, 255, 0.72);
@@ -68,8 +68,8 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    /* فضای کاری ابزار به صورت کارت شیشه‌ای شناور */
-    .workspace { padding: 60px 24px 40px; text-align: center; }
+    /* فضای تعاملی ابزار */
+    .workspace { padding: 60px 24px 35px; text-align: center; }
     .tool-container { 
       max-width: 720px; 
       margin: 0 auto; 
@@ -110,7 +110,6 @@
       100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); transform: scale(1); } 
     }
 
-    /* کنترل‌های آپلود و اسلایدر شیشه‌ای */
     .file-upload-wrapper { margin-bottom: 26px; }
     .file-upload-label { 
       display: inline-block; 
@@ -194,8 +193,47 @@
       box-shadow: 0 10px 25px -4px rgba(239, 68, 68, 0.4); 
     }
 
-    /* عکس هوش مصنوعی */
-    .feature-wrapper { max-width: 880px; margin: 30px auto 50px; padding: 0 24px; text-align: center; }
+    /* باکس‌های ویژگی کلیدی دقیقاً زیر کادر ابزار (Feature Boxes مدنظر استاد) */
+    .features-row { 
+      max-width: 1000px; 
+      margin: 10px auto 50px; 
+      padding: 0 24px; 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+      gap: 18px; 
+    }
+    .feature-box { 
+      background: var(--surface-glass); 
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border); 
+      border-radius: 20px; 
+      padding: 22px 18px; 
+      box-shadow: var(--glass-shadow); 
+      transition: all 0.3s ease; 
+      display: flex; 
+      gap: 14px; 
+      align-items: flex-start; 
+    }
+    .feature-box:hover { 
+      transform: translateY(-4px); 
+      background: var(--surface-glass-hover); 
+      box-shadow: var(--glass-shadow-hover); 
+    }
+    .feature-box .f-icon { 
+      font-size: 1.8rem; 
+      line-height: 1; 
+      background: #ffffff; 
+      border: 1px solid var(--glass-border); 
+      padding: 10px; 
+      border-radius: 14px; 
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); 
+    }
+    .feature-box h4 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+    .feature-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* کادر عکس هوش مصنوعی */
+    .feature-wrapper { max-width: 880px; margin: 10px auto 50px; padding: 0 24px; text-align: center; }
     .feature-image { 
       width: 100%; 
       border-radius: 28px; 
@@ -203,24 +241,55 @@
       display: block; 
     }
 
-    /* کادر مقاله جامع و سوالات متداول */
-    .content-section { 
-      max-width: 900px; 
-      margin: 0 auto 70px; 
-      padding: 45px; 
-      background: var(--surface-glass); 
+    /* ساختار بصری، کارت‌محور و خردشده مقاله سئو (جلوگیری از دیوار متنی) */
+    .content-container { max-width: 1000px; margin: 0 auto 70px; padding: 0 24px; }
+    
+    .content-hero-card {
+      background: var(--surface-glass);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--glass-border); 
-      border-radius: 28px; 
-      box-shadow: var(--glass-shadow); 
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      box-shadow: var(--glass-shadow);
+      margin-bottom: 26px;
     }
-    .content-section h2 { font-size: 2.1rem; font-weight: 900; color: var(--text-dark); margin-bottom: 22px; letter-spacing: -0.02em; }
-    .content-section h3 { font-size: 1.48rem; font-weight: 800; color: var(--text-dark); margin: 36px 0 18px; }
-    .content-section p { font-size: 1.08rem; margin-bottom: 22px; line-height: 1.95; color: var(--text-main); }
-    .content-section ul { margin-bottom: 28px; padding-left: 24px; }
-    .content-section li { margin-bottom: 12px; font-size: 1.04rem; color: var(--text-main); }
-    
+    .content-hero-card h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.02em; }
+    .content-hero-card p { font-size: 1.05rem; color: var(--text-main); line-height: 1.9; }
+
+    /* کارت‌های گام‌به‌گام مراحل */
+    .steps-container {
+      background: var(--surface-glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      margin-bottom: 26px;
+      box-shadow: var(--glass-shadow);
+    }
+    .steps-container h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 20px; }
+    .step-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 24px; }
+    .step-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      transition: 0.3s;
+    }
+    .step-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .step-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    .step-card h4 { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+    .step-card p { font-size: 0.95rem; color: var(--text-main); line-height: 1.65; }
+
     .tutorial-image { 
       width: 100%; 
       max-width: 620px; 
@@ -228,19 +297,54 @@
       border-radius: 20px; 
       border: 1px solid var(--glass-border); 
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06); 
-      margin: 28px auto 14px; 
+      margin: 15px auto; 
       display: block; 
     }
-    .image-caption { text-align: center; font-size: 0.92rem; color: var(--text-muted); margin-bottom: 34px; font-style: italic; }
+    .image-caption { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; font-style: italic; }
+
+    /* گرید دو ستونه مباحث تخصصی */
+    .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 22px; margin-bottom: 26px; }
+    .topic-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: var(--glass-shadow);
+      transition: 0.3s;
+    }
+    .topic-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .topic-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .topic-card p { font-size: 0.98rem; color: var(--text-main); line-height: 1.85; }
+
+    /* باکس هایلایت امنیتی */
+    .callout-box {
+      background: linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
+      border: 1.5px solid rgba(99, 102, 241, 0.3);
+      border-radius: 22px;
+      padding: 30px;
+      margin-bottom: 26px;
+      box-shadow: var(--glass-shadow);
+    }
+    .callout-box h3 { font-size: 1.35rem; font-weight: 900; color: var(--text-dark); margin-bottom: 12px; }
+    .callout-box p { font-size: 1rem; color: var(--text-main); line-height: 1.85; margin-bottom: 14px; }
+    .callout-box ul { padding-left: 20px; }
+    .callout-box li { font-size: 0.96rem; color: var(--text-main); margin-bottom: 6px; }
 
     /* آکاردئون سوالات متداول */
-    .faq-container { margin-top: 25px; display: flex; flex-direction: column; gap: 14px; }
+    .faq-wrapper-card {
+      background: var(--surface-glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      box-shadow: var(--glass-shadow);
+    }
+    .faq-container { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
     .faq-item { 
       background: rgba(255, 255, 255, 0.85); 
       border: 1px solid var(--glass-border); 
-      border-radius: 18px; 
+      border-radius: 16px; 
       overflow: hidden; 
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); 
       transition: all 0.2s ease; 
     }
     .faq-item:hover { border-color: rgba(99, 102, 241, 0.4); }
@@ -248,9 +352,9 @@
       width: 100%; 
       background: none; 
       border: none; 
-      padding: 22px 26px; 
+      padding: 20px 24px; 
       text-align: left; 
-      font-size: 1.08rem; 
+      font-size: 1.05rem; 
       font-weight: 800; 
       color: var(--text-dark); 
       display: flex; 
@@ -260,24 +364,24 @@
       transition: 0.2s; 
     }
     .faq-question:hover { color: var(--accent); }
-    .faq-icon { font-size: 0.9rem; transition: transform 0.3s ease; color: var(--accent); }
+    .faq-icon { font-size: 0.85rem; transition: transform 0.3s ease; color: var(--accent); }
     .faq-answer { 
       max-height: 0; 
       overflow: hidden; 
       transition: max-height 0.35s ease, padding 0.35s ease; 
-      padding: 0 26px; 
+      padding: 0 24px; 
       color: var(--text-main); 
-      font-size: 1.02rem; 
-      line-height: 1.85; 
+      font-size: 0.98rem; 
+      line-height: 1.8; 
     }
-    .faq-item.active .faq-answer { max-height: 250px; padding: 0 26px 24px 26px; }
+    .faq-item.active .faq-answer { max-height: 250px; padding: 0 24px 22px 24px; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
 
     /* فوتر کریستالی */
     footer { 
       border-top: 1px solid var(--glass-border); 
       background: rgba(255, 255, 255, 0.75); 
-      backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px); 
       -webkit-backdrop-filter: blur(18px);
       padding: 65px 24px 45px; 
       color: var(--text-muted); 
@@ -296,11 +400,13 @@
       .nav-links { display: none; }
       .hamburger { display: block; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .content-section { padding: 26px; margin: 0 16px 50px; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .content-hero-card, .steps-container, .callout-box, .faq-wrapper-card { padding: 24px; }
       .tool-container { padding: 35px 20px; }
     }
     @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
+      .features-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -314,20 +420,20 @@
         <a href="/about.html" class="nav-link">About App</a>
         <a href="/install.html" class="nav-link">Installation</a>
         <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-        <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+        <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
       </nav>
       <button class="hamburger" id="menuBtn">☰</button>
     </div>
   </header>
 
-  <!-- منوی ریسپانسیو موبایل -->
+  <!-- منوی موبایل -->
   <div class="overlay" id="overlay"></div>
   <nav class="mobile-menu" id="mobileMenu">
     <a href="/" class="brand-logo" style="margin-bottom: 20px;">🎵 MiMusic<span>.net</span></a>
     <a href="/about.html" class="nav-link">About App</a>
     <a href="/install.html" class="nav-link">Installation</a>
     <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-    <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+    <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
   </nav>
 
   <!-- فضای تعاملی ابزار -->
@@ -357,82 +463,155 @@
     </div>
   </main>
 
+  <!-- ردیف باکس‌های ویژگی کلیدی ابزار (Feature Boxes مدنظر استاد) -->
+  <section class="features-row">
+    <div class="feature-box">
+      <span class="f-icon">⚡</span>
+      <div>
+        <h4>Up to 300% Gain</h4>
+        <p>Mathematical software multiplication overrides weak recording levels safely.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">🔒</span>
+      <div>
+        <h4>100% In-Memory</h4>
+        <p>Private recordings never leave your device. Processed locally in RAM.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">🎛️</span>
+      <div>
+        <h4>Smooth DSP Curve</h4>
+        <p>Exponential target ramps prevent click artifacts and sudden loudness jumps.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">📱</span>
+      <div>
+        <h4>Cross-Device Ready</h4>
+        <p>Works natively across Android, iOS Safari, and desktop web browsers.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- تصویر هوش مصنوعی با نام volume-booster.jpg -->
   <div class="feature-wrapper">
     <img src="volume-booster.jpg" alt="Glowing soundwave symbolizing audio volume boost" class="feature-image">
   </div>
 
-  <!-- مقاله جامع، انسانی و سئو شده (> ۶۰۰ کلمه) -->
-  <section class="content-section">
-    <h2>Overcoming Hardware Limits: How Digital Volume Boosting Works</h2>
-    <p>Every smartphone, tablet, and laptop features built-in mechanical volume buttons capped at a hardware ceiling of 100%. While this safeguard prevents hardware strain on internal speakers, it assumes that the audio file itself was mastered at standard commercial loudness levels. When you encounter a quiet voice note, an old digitized recording, a whispered remote conference lecture, or an indie track mastered at conservative decibel levels, maxing out your device volume still leaves the dialogue practically inaudible.</p>
+  <!-- محتوای سئو و آموزشی به صورت بلوک‌ها و کارت‌های تفکیک‌شده بصری -->
+  <section class="content-container">
 
-    <p>The <strong>MiMusic Audio Volume Booster</strong> solves this mismatch by applying digital gain staging inside your browser before the sound signal hits your physical headphone or speaker amplifier. Utilizing the native Web Audio API, our utility taps directly into the browser's floating-point audio engine. It parses the raw waveform data, recalculates peak amplitude points, and multiplies the mathematical gain curve in real-time, allowing you to boost output volume up to three times (300%) its original mastering limit.</p>
+    <!-- کارت معرفی تحلیلی -->
+    <div class="content-hero-card">
+      <h2>Overcoming Hardware Limits: How Digital Volume Boosting Works</h2>
+      <p>Every smartphone, tablet, and laptop features built-in mechanical volume buttons capped at a hardware ceiling of 100%. While this safeguard prevents hardware strain on internal speakers, it assumes that the audio file itself was mastered at standard commercial loudness levels. When you encounter a quiet voice note, an old digitized recording, a whispered remote conference lecture, or an indie track mastered at conservative decibel levels, maxing out your device volume still leaves the dialogue practically inaudible.</p>
+      <p style="margin-top: 12px;">The <strong>MiMusic Audio Volume Booster</strong> solves this mismatch by applying digital gain staging inside your browser before the sound signal hits your physical headphone or speaker amplifier. Utilizing the native Web Audio API, our utility taps directly into the browser's floating-point audio engine, recalculating peak amplitude points in real-time to boost output volume up to three times (300%) its original mastering limit.</p>
+    </div>
 
-    <h3>Step-by-Step Guide: How to Amplify Any Audio Track</h3>
-    <p>Boosting your audio files takes only a few seconds and requires no technical knowledge. Here is the exact workflow:</p>
+    <!-- کارت راهنمای گام‌به‌گام همراه تصویر -->
+    <div class="steps-container">
+      <h3>Step-by-Step Guide: How to Amplify Any Audio Track</h3>
+      <p style="color: var(--text-muted); font-size: 1.02rem;">Follow these three straightforward steps to safely amplify quiet media:</p>
 
-    <!-- تصویر اسکرین‌شات آموزشی با نام volume-guide.jpg -->
-    <img src="volume-guide.jpg" alt="Step by step volume booster guide" class="tutorial-image">
-    <p class="image-caption">Select your audio file, customize your gain multiplier slider, and hit play.</p>
+      <img src="volume-guide.jpg" alt="Step by step volume booster guide" class="tutorial-image">
+      <p class="image-caption">Select your audio file, customize your gain multiplier slider, and hit play.</p>
 
-    <ul>
-      <li><strong>Step 1: Load Your Source File:</strong> Click the dashed file selection box to browse your device storage. We support all common audio formats including MP3, WAV, AAC, and OGG files.</li>
-      <li><strong>Step 2: Set Your Gain Staging:</strong> Use the interactive slider to select your desired output gain. The baseline 100% represents the file's natural volume. Sliding up to 200% doubles the signal amplitude, while 300% delivers maximum software boost.</li>
-      <li><strong>Step 3: Listen and Fine-Tune Live:</strong> Tap the "Play Boosted Audio" button. You can freely drag the gain slider in real-time while listening to identify the clearest, most comfortable acoustic balance.</li>
-    </ul>
-
-    <h3>Understanding Digital Clipping and Speaker Health</h3>
-    <p>While digital amplification is extraordinarily effective, understanding acoustic headroom is crucial for maintaining pristine sound fidelity. In digital audio, amplitude is bounded by a ceiling known as 0 dBFS (Decibels relative to Full Scale). When a digital multiplier forces wave peaks past this threshold, the tops of the sine waves get squared off. Audio engineers refer to this phenomenon as <em>digital clipping</em>.</p>
-
-    <p>Clipping introduces harsh harmonic distortion that sounds like scratching, crackling, or harsh fuzz. While standard smartphone limiters protect micro-speaker voice coils from physical tearing, prolonged exposure to heavy distortion can fatigue your ears. To maintain optimal fidelity, gradually raise the boost slider until the dialogue becomes easily intelligible, pausing before the audio begins to crackle or distort.</p>
-
-    <h3>100% Client-Side Processing: Total Security and Privacy</h3>
-    <p>Most commercial audio conversion portals force users to upload their personal files to remote cloud servers. This approach exposes personal voice memos and private recordings to third-party data interception, while creating tedious upload waits on mobile data connections. MiMusic.net functions entirely in-memory using client-side JavaScript. Your audio is decoded locally inside your device RAM, transformed instantaneously, and never leaves your browser sandbox.</p>
-
-    <!-- بخش سوالات متداول آکاردئونی تعاملی -->
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>How does this tool boost volume beyond 100% hardware limit?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Standard device volume controls regulate physical speaker amplification, but quiet files have low digital amplitude. Our tool multiplies the digital gain values of the audio signal mathematically in browser memory before sending it to your speakers, making inherently quiet recordings noticeably louder.</p>
+      <div class="step-cards-grid">
+        <div class="step-card">
+          <span class="step-badge">Step 1</span>
+          <h4>Load Your Source File</h4>
+          <p>Click the dashed selection box to browse local storage. Supports all standard formats including MP3, WAV, AAC, and OGG.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Can using a volume booster damage my phone speakers?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Modern mobile devices have hardware limiters to guard against physical blowout. However, extreme boost levels past 250% can cause digital clipping and distortion. If audio begins to crackle, slightly lower the boost slider to preserve speaker fidelity and protect your hearing.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 2</span>
+          <h4>Set Gain Multiplier</h4>
+          <p>Drag the interactive slider. 100% represents standard volume, 200% doubles the signal, and 300% unleashes maximum software boost.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Are my uploaded songs or recordings stored on your servers?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>No. Your files are processed 100% locally inside your device web browser via the Web Audio API. Nothing is uploaded, stored, or analyzed on remote servers.</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Does this booster work with Bluetooth headphones and car audio?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Yes! Because the amplified audio stream is routed through your browser's primary audio output bus, the boosted signal transmits seamlessly over Bluetooth headphones, AUX cords, and external speakers.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 3</span>
+          <h4>Listen & Fine-Tune</h4>
+          <p>Hit "Play Boosted Audio". You can freely slide the multiplier in real-time while playback is active to find the clearest acoustic balance.</p>
         </div>
       </div>
     </div>
+
+    <!-- گرید موضوعی تخصصی دو ستونه -->
+    <div class="topics-grid">
+      <div class="topic-card">
+        <h3>📊 Understanding 0 dBFS & Digital Clipping</h3>
+        <p>In digital signal processing, amplitude is strictly bounded by a mathematical ceiling known as 0 dBFS (Decibels relative to Full Scale). When a gain multiplier forces wave peaks past this threshold, the crests of the sine waves get squared off. Audio engineers refer to this phenomenon as <em>digital clipping</em>, which creates harsh distortion. If scratchy noise appears, slightly lower the slider to retain clarity.</p>
+      </div>
+
+      <div class="topic-card">
+        <h3>🛡️ Speaker Driver Health & Ear Safety</h3>
+        <p>Modern mobile phones integrate internal limiters that safeguard micro-speakers against instantaneous physical blowouts. However, prolonged playback of heavily clipped audio can fatigue internal voice coils and strain your hearing. We recommend boosting until speech is comfortably intelligible, pausing before harsh harmonics emerge.</p>
+      </div>
+    </div>
+
+    <!-- باکس مقایسه‌ای امنیتی -->
+    <div class="callout-box">
+      <h3>🔒 Why Choose Client-Side Processing Over Traditional APKs?</h3>
+      <p>Traditional volume boosting apps require installing heavy APK files that often run background analytics services, draining battery and presenting intrusive ads. MiMusic.net guarantees an entirely modern approach:</p>
+      <ul>
+        <li><strong>Zero Battery Drain:</strong> Closes completely when you exit the tab with zero background processes.</li>
+        <li><strong>No File Uploads:</strong> Audio stays entirely within local RAM and is never sent to third-party cloud servers.</li>
+        <li><strong>Universal Compatibility:</strong> Works seamlessly across Bluetooth headphones, car AUX connections, and phone speakers.</li>
+      </ul>
+    </div>
+
+    <!-- کارت سوالات متداول آکاردئونی -->
+    <div class="faq-wrapper-card">
+      <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin-bottom: 10px;">Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How does this tool boost volume beyond the 100% hardware limit?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Standard device volume controls regulate physical speaker amplification, but quiet files have low digital amplitude. Our tool multiplies the digital gain values of the audio signal mathematically in browser memory before sending it to your speakers, making inherently quiet recordings noticeably louder.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Can using a volume booster damage my phone speakers?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Modern mobile devices have hardware limiters to guard against physical blowout. However, extreme boost levels past 250% can cause digital clipping and distortion. If audio begins to crackle, slightly lower the boost slider to preserve speaker fidelity and protect your hearing.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Are my uploaded songs or recordings stored on your servers?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. Your files are processed 100% locally inside your device web browser via the Web Audio API. Nothing is uploaded, stored, or analyzed on remote servers.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Does this booster work with Bluetooth headphones and car audio?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! Because the amplified audio stream is routed through your browser's primary audio output bus, the boosted signal transmits seamlessly over Bluetooth headphones, AUX cords, and external speakers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- فوتر کریستالی -->
@@ -476,9 +655,8 @@
     </div>
   </footer>
 
-  <!-- اسکریپت‌های صوتی و تعاملی -->
+  <!-- اسکریپت‌های منو و پردازش صوتی -->
   <script>
-    // منوی ریسپانسیو
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
@@ -491,13 +669,11 @@
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    // اسکریپت آکاردئونی سوالات متداول
     function toggleFaq(button) {
       const item = button.parentElement;
       item.classList.toggle('active');
     }
 
-    // منطق مهندسی پردازش صوت (Web Audio API)
     let audioCtx = null;
     let audioSource = null;
     let gainNode = null;
