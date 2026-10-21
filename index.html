@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Binaural Beats Generator - Focus & Meditation Waves | Mi Music Tools</title>
-  <meta name="description" content="Generate binaural beats for deep focus, study, relaxation, and sleep. Free web-based brainwave entrainment sound generator with custom sliders.">
+  <title>MiMusic.net - Free Online Audio Tools & Sound Utilities</title>
+  <meta name="description" content="Explore a powerful suite of free, browser-based audio tools. Volume booster, speaker cleaner, 8D audio, decibel meter, and more. No downloads required.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
     :root {
       --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
       --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca; 
       --accent-light: #e0e7ff; --text-dark: #0f172a; --text: #334155; 
-      --muted: #64748b; --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+      --muted: #64748b; --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
@@ -33,49 +32,17 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    .workspace { padding: 60px 24px 40px; background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); text-align: center; }
-    .tool-container { max-width: 700px; margin: 0 auto; background: var(--surface); border-radius: 24px; padding: 40px; box-shadow: var(--shadow-md); border: 1px solid var(--border); }
-    .tool-title { font-size: 2.2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 16px; }
-    .tool-desc { font-size: 1.05rem; color: var(--muted); margin-bottom: 30px; }
-    
-    .status-ring { width: 100px; height: 100px; border-radius: 50%; background: var(--surface-alt); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; border: 4px solid var(--border); transition: 0.3s; }
-    .status-ring.active { border-color: #06b6d4; color: #06b6d4; animation: wavePulse 2s infinite; }
-    @keyframes wavePulse { 0% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(6, 182, 212, 0); } 100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); } }
+    .hero { padding: 80px 24px 60px; background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); text-align: center; }
+    .hero h1 { font-size: 2.8rem; font-weight: 900; color: var(--text-dark); margin-bottom: 16px; letter-spacing: -0.03em; }
+    .hero p { font-size: 1.15rem; color: var(--muted); max-width: 700px; margin: 0 auto 30px; line-height: 1.8; }
 
-    .headphone-warning { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 12px 16px; border-radius: 12px; font-weight: 700; font-size: 0.95rem; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-
-    .control-card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; text-align: left; }
-    .control-group { margin-bottom: 20px; }
-    .control-group:last-child { margin-bottom: 0; }
-    
-    .control-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .control-label { font-weight: 700; color: var(--text-dark); font-size: 0.95rem; }
-    .control-value-box { background: var(--surface); border: 1px solid var(--border); padding: 4px 12px; border-radius: 8px; font-weight: 800; color: var(--accent); font-size: 0.95rem; min-width: 60px; text-align: center; }
-
-    input[type="range"] { width: 100%; cursor: pointer; accent-color: var(--accent); margin-bottom: 8px; }
-    .state-indicator { text-align: center; font-weight: 700; color: #10b981; font-size: 0.95rem; margin-top: 6px; }
-
-    .btn-main { background: var(--accent); color: #fff; border: none; padding: 16px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); width: 100%; max-width: 300px; display: block; margin: 0 auto; }
-    .btn-main:hover { background: var(--accent-hover); transform: translateY(-2px); }
-    .btn-main.stop { background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); }
-
-    .content-section { max-width: 900px; margin: 0 auto 60px; padding: 0 24px; }
-    .content-section h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 24px; }
-    .content-section h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin: 32px 0 16px; }
-    .content-section p { font-size: 1.1rem; margin-bottom: 20px; line-height: 1.8; color: var(--text); }
-    
-    .tutorial-image { width: 100%; max-width: 600px; height: auto; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow-md); margin: 24px auto; display: block; }
-    .image-caption { text-align: center; font-size: 0.9rem; color: var(--muted); margin-top: -12px; margin-bottom: 32px; font-style: italic; }
-
-    /* Accordion FAQ Styles */
-    .faq-container { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
-    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); }
-    .faq-question { width: 100%; background: none; border: none; padding: 18px 20px; text-align: left; font-size: 1.05rem; font-weight: 800; color: var(--text-dark); display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
-    .faq-question:hover { background: var(--surface-alt); color: var(--accent); }
-    .faq-icon { font-size: 0.85rem; transition: transform 0.3s ease; }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding: 0 20px; color: var(--text); font-size: 1rem; line-height: 1.7; }
-    .faq-item.active .faq-answer { max-height: 250px; padding: 0 20px 20px 20px; }
-    .faq-item.active .faq-icon { transform: rotate(180deg); }
+    .tools-section { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-decoration: none; color: inherit; transition: 0.3s; box-shadow: var(--shadow-md); display: flex; flex-direction: column; justify-content: space-between; }
+    .tool-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow-lg); }
+    .tool-card h3 { font-size: 1.25rem; font-weight: 800; color: var(--text-dark); margin-bottom: 10px; }
+    .tool-card p { font-size: 0.95rem; color: var(--muted); margin-bottom: 20px; }
+    .tool-link-text { color: var(--accent); font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; }
 
     footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; margin-top: 80px; }
     .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
@@ -90,10 +57,7 @@
       .nav-links { display: none; }
       .hamburger { display: block; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 600px) {
-      .footer-grid { grid-template-columns: 1fr; }
-      .tool-container { padding: 30px 20px; }
+      .hero h1 { font-size: 2.2rem; }
     }
   </style>
 </head>
@@ -121,108 +85,108 @@
     <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
   </nav>
 
-  <main class="workspace">
-    <div class="tool-container">
-      <h1 class="tool-title">Binaural Beats Generator</h1>
-      <p class="tool-desc">Generate specialized brainwave frequencies for deep focus, relaxation, meditation, and sleep enhancement.</p>
-      
-      <div class="status-ring" id="statusIcon">🧠</div>
-
-      <div class="headphone-warning">
-        ⚠️ Stereo Headphones Strictly Required
-      </div>
-
-      <div class="control-card">
-        <div class="control-group">
-          <div class="control-header">
-            <span class="control-label">Brainwave State (Beat Freq):</span>
-            <div class="control-value-box"><span id="beatVal">10</span> Hz</div>
-          </div>
-          <input type="range" id="beatSlider" min="1" max="30" step="1" value="10" oninput="updateFrequencies()">
-          <div class="state-indicator" id="stateName">Alpha (Relaxation)</div>
-        </div>
-
-        <hr style="border: none; border-top: 1px solid var(--border); margin: 20px 0;">
-
-        <div class="control-group">
-          <div class="control-header">
-            <span class="control-label">Carrier Frequency (Pitch):</span>
-            <div class="control-value-box"><span id="carrierVal">200</span> Hz</div>
-          </div>
-          <input type="range" id="carrierSlider" min="100" max="500" step="10" value="200" oninput="updateFrequencies()">
-        </div>
-      </div>
-      
-      <button class="btn-main" id="playBtn" onclick="togglePlayback()">Start Binaural Beats</button>
-    </div>
+  <main class="hero">
+    <h1>Free Online Audio Tools & Utilities</h1>
+    <p>Welcome to MiMusic.net. Discover our complete collection of browser-based audio tools designed for volume boosting, spatial sound, frequency testing, and sound cleanups without installing any software.</p>
   </main>
 
-  <!-- عکس هوش مصنوعی -->
-  <div style="max-width: 800px; margin: 0 auto 40px; padding: 0 24px; text-align: center;">
-    <img src="binaural-waves.jpg" alt="Glowing brainwave frequencies and audio waves visualization" style="width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);">
-  </div>
-
-  <section class="content-section">
-    <h2>What Are Binaural Beats?</h2>
-    <p>Binaural beats are an auditory illusion created when two slightly different pure tone frequencies are played separately into each ear through headphones[span_0](start_span)[span_0](end_span). For example, if a 200 Hz tone is played in your left ear and a 204 Hz tone is played in your right ear, your brain processes the difference—a pulsing 4 Hz beat[span_1](start_span)[span_1](end_span). This phenomenon encourages brainwave entrainment, gently guiding your mental state toward relaxation, focus, or deep sleep[span_2](start_span)[span_2](end_span).</p>
-    
-    <p>The <strong>MiMusic Binaural Beats Generator</strong> utilizes precise Web Audio API oscillators to generate these frequencies in real-time right inside your browser, completely free and without requiring external downloads or app installations.</p>
-
-    <h3>Brainwave Frequency Categories Explained</h3>
-    <p>Different frequency offsets target distinct states of consciousness:</p>
-    
-    <ul>
-      <li style="margin-bottom: 12px;"><strong>Delta Waves (1 - 4 Hz):</strong> Associated with deep, dreamless sleep and physical body restoration.</li>
-      <li style="margin-bottom: 12px;"><strong>Theta Waves (4 - 8 Hz):</strong> Linked to deep meditation, intuition, relaxation, and memory consolidation.</li>
-      <li style="margin-bottom: 12px;"><strong>Alpha Waves (8 - 14 Hz):</strong> Promotes a calm, relaxed yet alert state ideal for light studying and creative work[span_3](start_span)[span_3](end_span).</li>
-      <li style="margin-bottom: 12px;"><strong>Beta Waves (14 - 30 Hz):</strong> Associated with active concentration, sharp alertness, and problem-solving.</li>
-    </ul>
-
-    <h3>How to Use the Generator (Step-by-Step)</h3>
-    <p>Follow these quick instructions to begin your brainwave session:</p>
-
-    <!-- عکس آموزشی با نام مستقل binaural-guide.jpg -->
-    <img src="binaural-guide.jpg" alt="Step by step binaural beats generator guide" class="tutorial-image" style="display: block;">
-    <p class="image-caption">Put on your headphones, adjust the brainwave sliders, and click start[span_4](start_span)[span_4](end_span).</p>
-
-    <ul>
-      <li style="margin-bottom: 12px;"><strong>Step 1: Put On Headphones.</strong> Binaural beats physically require stereo separation. Regular speakers will not produce the brainwave entrainment effect[span_5](start_span)[span_5](end_span).</li>
-      <li style="margin-bottom: 12px;"><strong>Step 2: Adjust Sliders.</strong> Use the sliders to customize your target brainwave state and carrier frequency[span_6](start_span)[span_6](end_span).</li>
-      <li style="margin-bottom: 12px;"><strong>Step 3: Start Listening.</strong> Click the start button and relax in a quiet environment for the best results.</li>
-    </ul>
-
-    <!-- بخش سوالات متداول آکاردئونی (دستور استاد) -->
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Why are stereo headphones required for binaural beats?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Binaural beats require two separate frequency streams to be delivered independently to each ear (left and right channels). Standard phone speakers mix the audio together, destroying the brainwave entrainment effect.</p>
+  <section class="tools-section">
+    <div class="tools-grid">
+      <a href="/volume-booster/" class="tool-card">
+        <div>
+          <h3>Volume Booster</h3>
+          <p>Boost your mobile audio and media player volume beyond maximum limits safely.</p>
         </div>
-      </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Is this brainwave generator completely free?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Yes! All tools on MiMusic.net are 100% free, run directly inside your browser via the Web Audio API, and require no software installation.</p>
+      <a href="/speaker-cleaner/" class="tool-card">
+        <div>
+          <h3>Speaker Cleaner</h3>
+          <p>Eject water and dust from your phone speakers using high-frequency sound waves.</p>
         </div>
-      </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Can I listen to binaural beats while working or studying?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Yes, Alpha and Beta wave frequencies are specifically designed to enhance focus, calm concentration, and productivity during work or study sessions.</p>
+      <a href="/8d-audio/" class="tool-card">
+        <div>
+          <h3>8D Spatial Audio</h3>
+          <p>Convert standard stereo tracks into immersive 3D rotating surround sound.</p>
         </div>
-      </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/pitch-shifter/" class="tool-card">
+        <div>
+          <h3>Pitch & Tempo Changer</h3>
+          <p>Modify audio playback speed and musical pitch in real-time online.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/vocal-clarity/" class="tool-card">
+        <div>
+          <h3>Vocal Clarity Booster</h3>
+          <p>Enhance speech intelligibility and voice clarity in audio recordings.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/bass-booster/" class="tool-card">
+        <div>
+          <h3>Bass Booster</h3>
+          <p>Amplify low frequencies and give punchy deep bass to your tracks.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/video-to-audio/" class="tool-card">
+        <div>
+          <h3>Video to Audio Converter</h3>
+          <p>Extract clean MP3 audio tracks directly from MP4 video files locally.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/audio-latency/" class="tool-card">
+        <div>
+          <h3>Audio Latency Tester</h3>
+          <p>Measure Bluetooth headphone delay and sound sync lag in milliseconds.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/decibel-meter/" class="tool-card">
+        <div>
+          <h3>Online Decibel Meter</h3>
+          <p>Measure ambient room noise levels in decibels using your microphone.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/hearing-test/" class="tool-card">
+        <div>
+          <h3>Online Hearing Test</h3>
+          <p>Test your ear frequency range and hearing limits with custom pure tones.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/reverse-audio/" class="tool-card">
+        <div>
+          <h3>Reverse Audio Tool</h3>
+          <p>Flip music and voice recordings backward to create unique audio effects.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/binaural-waves/" class="tool-card">
+        <div>
+          <h3>Binaural Beats Generator</h3>
+          <p>Generate brainwave entrainment frequencies for focus, meditation, and sleep.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
     </div>
   </section>
 
@@ -245,9 +209,9 @@
       <div class="footer-col">
         <h5>Analysis & Fixes</h5>
         <ul>
-          <li><a href="/binaural-waves/" style="color: var(--accent);">Binaural Waves</a></li>
           <li><a href="/vocal-clarity/">Vocal Clarity</a></li>
           <li><a href="/video-to-audio/">Video to Audio</a></li>
+          <li><a href="/audio-latency/">Latency Test</a></li>
           <li><a href="/decibel-meter/">Decibel Meter</a></li>
         </ul>
       </div>
@@ -278,99 +242,6 @@
 
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
-
-    // Accordion Toggle Function
-    function toggleFaq(button) {
-      const item = button.parentElement;
-      item.classList.toggle('active');
-    }
-
-    let audioCtx = null;
-    let oscLeft = null;
-    let oscRight = null;
-    let isPlaying = false;
-
-    function updateFrequencies() {
-      const beat = parseFloat(document.getElementById('beatSlider').value);
-      const carrier = parseFloat(document.getElementById('carrierSlider').value);
-
-      document.getElementById('beatVal').textContent = beat;
-      document.getElementById('carrierVal').textContent = carrier;
-
-      const stateEl = document.getElementById('stateName');
-      if (beat >= 1 && beat <= 3) {
-        stateEl.textContent = "Delta (Deep Sleep)";
-        stateEl.style.color = "#3b82f6";
-      } else if (beat >= 4 && beat <= 7) {
-        stateEl.textContent = "Theta (Meditation)";
-        stateEl.style.color = "#8b5cf6";
-      } else if (beat >= 8 && beat <= 13) {
-        stateEl.textContent = "Alpha (Relaxation)";
-        stateEl.style.color = "#10b981";
-      } else {
-        stateEl.textContent = "Beta (Active Focus)";
-        stateEl.style.color = "#f59e0b";
-      }
-
-      if (isPlaying && audioCtx) {
-        const now = audioCtx.currentTime;
-        oscLeft.frequency.setValueAtTime(carrier, now);
-        oscRight.frequency.setValueAtTime(carrier + beat, now);
-      }
-    }
-
-    function togglePlayback() {
-      const btn = document.getElementById('playBtn');
-      const icon = document.getElementById('statusIcon');
-      const beat = parseFloat(document.getElementById('beatSlider').value);
-      const carrier = parseFloat(document.getElementById('carrierSlider').value);
-
-      if (!isPlaying) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        
-        oscLeft = audioCtx.createOscillator();
-        oscLeft.type = 'sine';
-        oscLeft.frequency.value = carrier;
-
-        oscRight = audioCtx.createOscillator();
-        oscRight.type = 'sine';
-        oscRight.frequency.value = carrier + beat;
-
-        const merger = audioCtx.createChannelMerger(2);
-        const gainNode = audioCtx.createGain();
-        gainNode.gain.value = 0.25;
-
-        oscLeft.connect(merger, 0, 0);
-        oscRight.connect(merger, 0, 1);
-
-        merger.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-
-        oscLeft.start();
-        oscRight.start();
-
-        isPlaying = true;
-        btn.textContent = "Stop Binaural Beats";
-        btn.classList.add('stop');
-        icon.classList.add('active');
-      } else {
-        if (oscLeft) {
-          oscLeft.stop();
-          oscLeft.disconnect();
-        }
-        if (oscRight) {
-          oscRight.stop();
-          oscRight.disconnect();
-        }
-        if (audioCtx) {
-          audioCtx.close();
-        }
-        isPlaying = false;
-        btn.textContent = "Start Binaural Beats";
-        btn.classList.remove('stop');
-        icon.classList.remove('active');
-      }
-    }
   </script>
 </body>
 </html>
