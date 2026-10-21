@@ -3,101 +3,302 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Hearing Test - Check Your Ear Frequency Range | Mi Music Tools</title>
-  <meta name="description" content="Test your hearing frequency range online using your headphones. Free browser-based audiometric hearing test tool with custom frequency selection.">
+  <title>Online Hearing Test - Check Your Ear Frequency Range | MiMusic.net</title>
+  <meta name="description" content="Test your hearing frequency range online using your headphones. Free browser-based audiometric hearing test tool with custom pure-tone frequency selection.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
-    /* Global Variables & Base Setup */
+    /* تم یخی کریستالی و شیشه‌ای منطبق با استانداردهای صفحه اصلی */
     :root {
-      --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
-      --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca; 
-      --accent-light: #e0e7ff; --text-dark: #0f172a; --text: #334155; 
-      --muted: #64748b; --shadow-sm: 0 1px 2px rgba(0,0,0,0.05); 
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+      --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
+      --surface-glass: rgba(255, 255, 255, 0.72);
+      --surface-glass-hover: rgba(255, 255, 255, 0.92);
+      --glass-border: rgba(255, 255, 255, 0.85);
+      --accent: #4f46e5;
+      --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #3b82f6 100%);
+      --accent-hover: #4338ca;
+      --text-dark: #0f172a;
+      --text-main: #334155;
+      --text-muted: #64748b;
+      --glass-shadow: 0 12px 35px -5px rgba(148, 163, 184, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+      --glass-shadow-hover: 0 20px 45px -4px rgba(79, 70, 229, 0.22), 0 0 0 1.5px rgba(255, 255, 255, 0.95) inset;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
 
-    /* Modern Responsive Navigation */
-    .header-nav { width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.8; min-height: 100vh; overflow-x: hidden; }
+
+    /* هدر ناوبری شیشه‌ای */
+    .header-nav { 
+      width: 100%; 
+      background: rgba(255, 255, 255, 0.75); 
+      backdrop-filter: blur(18px); 
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--glass-border); 
+      position: sticky; 
+      top: 0; 
+      z-index: 1000; 
+    }
     .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
-    .brand-logo { color: var(--text-dark); font-size: 1.4rem; font-weight: 900; text-decoration: none; display: flex; align-items: center; gap: 8px; letter-spacing: -0.02em; }
+    .brand-logo { color: var(--text-dark); font-size: 1.45rem; font-weight: 900; text-decoration: none; display: flex; align-items: center; gap: 8px; letter-spacing: -0.02em; }
     .brand-logo span { color: var(--accent); }
     
-    /* Desktop Nav */
     .nav-links { display: flex; gap: 28px; align-items: center; }
-    .nav-link { color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .nav-link { color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
     .nav-link:hover { color: var(--accent); }
 
-    /* Mobile Hamburger Menu */
     .hamburger { display: none; background: none; border: none; font-size: 1.8rem; color: var(--text-dark); cursor: pointer; z-index: 1001; }
-    .mobile-menu { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--surface); box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; padding: 80px 24px 24px; display: flex; flex-direction: column; gap: 20px; z-index: 999; }
+    .mobile-menu { 
+      position: fixed; 
+      top: 0; 
+      right: -100%; 
+      width: 290px; 
+      height: 100vh; 
+      background: rgba(255, 255, 255, 0.96); 
+      backdrop-filter: blur(25px);
+      box-shadow: -15px 0 35px rgba(0, 0, 0, 0.1); 
+      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      padding: 80px 24px 24px; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 20px; 
+      z-index: 999; 
+    }
     .mobile-menu.open { right: 0; }
-    .mobile-menu .nav-link { font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
-    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
+    .mobile-menu .nav-link { font-size: 1.1rem; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 12px; }
+    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    /* Tool Workspace Area */
-    .workspace { padding: 60px 24px 40px; background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); text-align: center; }
-    .tool-container { max-width: 700px; margin: 0 auto; background: var(--surface); border-radius: 24px; padding: 40px; box-shadow: var(--shadow-md); border: 1px solid var(--border); }
-    .tool-title { font-size: 2.2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 16px; letter-spacing: -0.03em; }
-    .tool-desc { font-size: 1.05rem; color: var(--muted); margin-bottom: 30px; }
+    /* فضای کاری ابزار به صورت کارت شیشه‌ای شناور */
+    .workspace { padding: 60px 24px 40px; text-align: center; }
+    .tool-container { 
+      max-width: 720px; 
+      margin: 0 auto; 
+      background: var(--surface-glass); 
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 30px; 
+      padding: 45px 35px; 
+      box-shadow: var(--glass-shadow); 
+      border: 1px solid var(--glass-border); 
+      position: relative;
+    }
+    .tool-title { font-size: 2.3rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.03em; }
+    .tool-desc { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 30px; line-height: 1.7; max-width: 580px; margin-left: auto; margin-right: auto; }
     
-    .status-ring { width: 120px; height: 120px; border-radius: 50%; background: var(--surface-alt); margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; font-size: 3rem; border: 4px solid var(--border); transition: 0.3s; }
-    .status-ring.active { border-color: #8b5cf6; color: #8b5cf6; animation: testPulse 1s infinite; }
-    @keyframes testPulse { 0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(139, 92, 246, 0); } 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); } }
+    .status-ring { 
+      width: 110px; 
+      height: 110px; 
+      border-radius: 50%; 
+      background: rgba(255, 255, 255, 0.9); 
+      margin: 0 auto 30px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 2.8rem; 
+      border: 3px solid var(--glass-border); 
+      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
+      transition: all 0.3s ease; 
+    }
+    .status-ring.active { 
+      border-color: #8b5cf6; 
+      color: #8b5cf6; 
+      animation: testPulse 1.2s infinite; 
+    }
+    @keyframes testPulse { 
+      0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.45); transform: scale(1); } 
+      70% { box-shadow: 0 0 0 22px rgba(139, 92, 246, 0); transform: scale(1.04); } 
+      100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); transform: scale(1); } 
+    }
 
-    /* Control Panel & Frequency Buttons */
-    .control-panel { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; max-width: 450px; margin-left: auto; margin-right: auto; text-align: left; }
-    .control-panel label { font-weight: 700; color: var(--text-dark); display: block; margin-bottom: 12px; font-size: 1rem; }
+    /* پنل کنترل فرکانس‌ها */
+    .control-panel { 
+      background: rgba(255, 255, 255, 0.8); 
+      border: 1px solid var(--glass-border); 
+      border-radius: 22px; 
+      padding: 26px 28px; 
+      margin-bottom: 32px; 
+      max-width: 480px; 
+      margin-left: auto; 
+      margin-right: auto; 
+      text-align: left; 
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    }
+    .control-panel label { font-weight: 800; color: var(--text-dark); display: block; margin-bottom: 14px; font-size: 1rem; }
     
-    .freq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
-    .freq-btn { background: var(--surface); border: 2px solid var(--border); padding: 10px; border-radius: 8px; font-weight: 700; color: var(--text-dark); cursor: pointer; transition: 0.2s; }
-    .freq-btn:hover { border-color: var(--accent); background: var(--accent-light); }
-    .freq-btn.selected { background: var(--accent); color: white; border-color: var(--accent); }
+    .freq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    .freq-btn { 
+      background: rgba(255, 255, 255, 0.85); 
+      border: 1.5px solid var(--glass-border); 
+      padding: 12px 10px; 
+      border-radius: 14px; 
+      font-weight: 800; 
+      color: var(--text-dark); 
+      cursor: pointer; 
+      transition: all 0.25s ease; 
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+      font-size: 0.92rem;
+    }
+    .freq-btn:hover { 
+      border-color: rgba(99, 102, 241, 0.4); 
+      background: #ffffff; 
+      transform: translateY(-2px);
+    }
+    .freq-btn.selected { 
+      background: var(--accent-gradient); 
+      color: white; 
+      border-color: transparent; 
+      box-shadow: 0 8px 18px rgba(79, 70, 229, 0.35); 
+    }
 
-    .btn-main { background: var(--accent); color: #fff; border: none; padding: 16px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); width: 100%; max-width: 300px; }
-    .btn-main:hover { background: var(--accent-hover); transform: translateY(-2px); }
-    .btn-main.stop { background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); }
+    .test-info-badge { 
+      text-align: center; 
+      background: var(--surface-glass); 
+      border: 1px solid var(--glass-border); 
+      padding: 8px 16px; 
+      border-radius: 12px; 
+      font-weight: 800; 
+      color: var(--accent); 
+      font-size: 0.95rem; 
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
 
-    .test-info { margin-top: 16px; font-weight: 700; color: var(--text-dark); font-size: 1rem; }
+    .btn-main { 
+      background: var(--accent-gradient); 
+      color: #fff; 
+      border: none; 
+      padding: 16px 42px; 
+      border-radius: 50px; 
+      font-size: 1.1rem; 
+      font-weight: 800; 
+      cursor: pointer; 
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      box-shadow: 0 10px 25px -4px rgba(79, 70, 229, 0.4); 
+      width: 100%; 
+      max-width: 320px; 
+    }
+    .btn-main:hover { 
+      transform: translateY(-3px) scale(1.02); 
+      box-shadow: 0 16px 32px -4px rgba(79, 70, 229, 0.55); 
+    }
+    .btn-main.stop { 
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); 
+      box-shadow: 0 10px 25px -4px rgba(239, 68, 68, 0.4); 
+    }
 
-    /* Thick Content Section for AdSense */
-    .content-section { max-width: 900px; margin: 0 auto 60px; padding: 0 24px; }
-    .content-section h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 24px; }
-    .content-section h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin: 32px 0 16px; }
-    .content-section p { font-size: 1.1rem; margin-bottom: 20px; line-height: 1.8; color: var(--text); }
+    /* کادر عکس هوش مصنوعی */
+    .feature-wrapper { max-width: 880px; margin: 30px auto 50px; padding: 0 24px; text-align: center; }
+    .feature-image { 
+      width: 100%; 
+      border-radius: 28px; 
+      box-shadow: 0 22px 45px -10px rgba(79, 70, 229, 0.18), 0 0 0 1.5px var(--glass-border); 
+      display: block; 
+    }
+
+    /* کادر مقاله جامع و سوالات متداول */
+    .content-section { 
+      max-width: 900px; 
+      margin: 0 auto 70px; 
+      padding: 45px; 
+      background: var(--surface-glass); 
+      backdrop-filter: blur(18px); 
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--glass-border); 
+      border-radius: 28px; 
+      box-shadow: var(--glass-shadow); 
+    }
+    .content-section h2 { font-size: 2.1rem; font-weight: 900; color: var(--text-dark); margin-bottom: 22px; letter-spacing: -0.02em; }
+    .content-section h3 { font-size: 1.48rem; font-weight: 800; color: var(--text-dark); margin: 36px 0 18px; }
+    .content-section p { font-size: 1.08rem; margin-bottom: 22px; line-height: 1.95; color: var(--text-main); }
+    .content-section ul { margin-bottom: 28px; padding-left: 24px; }
+    .content-section li { margin-bottom: 12px; font-size: 1.04rem; color: var(--text-main); }
     
-    /* Tutorial Image Styling */
-    .tutorial-image { width: 100%; max-width: 600px; height: auto; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow-md); margin: 24px auto; display: block; }
-    .image-caption { text-align: center; font-size: 0.9rem; color: var(--muted); margin-top: -12px; margin-bottom: 32px; font-style: italic; }
+    .tutorial-image { 
+      width: 100%; 
+      max-width: 620px; 
+      height: auto; 
+      border-radius: 20px; 
+      border: 1px solid var(--glass-border); 
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06); 
+      margin: 28px auto 14px; 
+      display: block; 
+    }
+    .image-caption { text-align: center; font-size: 0.92rem; color: var(--text-muted); margin-bottom: 34px; font-style: italic; }
 
-    /* Footer */
-    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; margin-top: 80px; }
+    /* آکاردئون سوالات متداول */
+    .faq-container { margin-top: 25px; display: flex; flex-direction: column; gap: 14px; }
+    .faq-item { 
+      background: rgba(255, 255, 255, 0.85); 
+      border: 1px solid var(--glass-border); 
+      border-radius: 18px; 
+      overflow: hidden; 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); 
+      transition: all 0.2s ease; 
+    }
+    .faq-item:hover { border-color: rgba(99, 102, 241, 0.4); }
+    .faq-question { 
+      width: 100%; 
+      background: none; 
+      border: none; 
+      padding: 22px 26px; 
+      text-align: left; 
+      font-size: 1.08rem; 
+      font-weight: 800; 
+      color: var(--text-dark); 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      cursor: pointer; 
+      transition: 0.2s; 
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon { font-size: 0.9rem; transition: transform 0.3s ease; color: var(--accent); }
+    .faq-answer { 
+      max-height: 0; 
+      overflow: hidden; 
+      transition: max-height 0.35s ease, padding 0.35s ease; 
+      padding: 0 26px; 
+      color: var(--text-main); 
+      font-size: 1.02rem; 
+      line-height: 1.85; 
+    }
+    .faq-item.active .faq-answer { max-height: 250px; padding: 0 26px 24px 26px; }
+    .faq-item.active .faq-icon { transform: rotate(180deg); }
+
+    /* فوتر کریستالی */
+    footer { 
+      border-top: 1px solid var(--glass-border); 
+      background: rgba(255, 255, 255, 0.75); 
+      backdrop-filter: blur(18px); 
+      -webkit-backdrop-filter: blur(18px);
+      padding: 65px 24px 45px; 
+      color: var(--text-muted); 
+      font-size: 0.95rem; 
+      margin-top: 80px; 
+    }
     .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
-    .footer-col h5 { color: var(--text-dark); font-size: 1rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
+    .footer-col h5 { color: var(--text-dark); font-size: 1.05rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
     .footer-col ul { list-style: none; padding: 0; }
     .footer-col li { margin-bottom: 12px; }
-    .footer-col a { color: var(--muted); text-decoration: none; transition: 0.2s; }
+    .footer-col a { color: var(--text-muted); text-decoration: none; transition: 0.2s; }
     .footer-col a:hover { color: var(--accent); }
-    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
 
-    /* Media Queries */
     @media (max-width: 900px) {
       .nav-links { display: none; }
       .hamburger { display: block; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .content-section { padding: 26px; margin: 0 16px 50px; }
+      .tool-container { padding: 35px 20px; }
+      .freq-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
-      .tool-container { padding: 30px 20px; }
-      .freq-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation with Hamburger Menu -->
+  <!-- ناوبری شیشه‌ای -->
   <header class="header-nav">
     <div class="nav-inner">
       <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
@@ -111,7 +312,7 @@
     </div>
   </header>
 
-  <!-- Mobile Menu Overlay -->
+  <!-- منوی موبایل -->
   <div class="overlay" id="overlay"></div>
   <nav class="mobile-menu" id="mobileMenu">
     <a href="/" class="brand-logo" style="margin-bottom: 20px;">🎵 MiMusic<span>.net</span></a>
@@ -121,11 +322,11 @@
     <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
   </nav>
 
-  <!-- Interactive Tool Workspace -->
+  <!-- فضای تعاملی ابزار -->
   <main class="workspace">
     <div class="tool-container">
       <h1 class="tool-title">Online Hearing Test</h1>
-      <p class="tool-desc">Select a specific test frequency, put your headphones on, and check your ear frequency range.</p>
+      <p class="tool-desc">Evaluate your ear frequency sensitivity across key auditory octaves. Generate pure mathematical sine waves from 250 Hz to 16,000 Hz directly in your browser.</p>
       
       <div class="status-ring" id="statusIcon">👂</div>
 
@@ -139,43 +340,98 @@
           <button class="freq-btn" onclick="setFrequency(12000, this)">12,000 Hz</button>
           <button class="freq-btn" onclick="setFrequency(16000, this)">16,000 Hz</button>
         </div>
-        <div class="test-info" id="frequencyDisplay">Selected: 250 Hz</div>
+        <div class="test-info-badge" id="frequencyDisplay">Selected: 250 Hz</div>
       </div>
       
       <button class="btn-main" id="testBtn" onclick="toggleTest()">Play Tone</button>
     </div>
   </main>
 
-  <!-- AI Generated Feature Image -->
-  <div style="max-width: 800px; margin: 0 auto 40px; padding: 0 24px; text-align: center;">
-    <img src="hearing-test.jpg" alt="A futuristic ear graphic surrounded by sound frequency waves" style="width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);">
+  <!-- تصویر هوش مصنوعی با نام hearing-test.jpg -->
+  <div class="feature-wrapper">
+    <img src="hearing-test.jpg" alt="A futuristic ear graphic surrounded by sound frequency waves" class="feature-image">
   </div>
 
-  <!-- Comprehensive SEO & How-to Content -->
+  <!-- مقاله تخصصی، انسانی و سئو شده (> ۶۵۰ کلمه) -->
   <section class="content-section">
-    <h2>Why Check Your Hearing Frequency Range?</h2>
-    <p>Human hearing typically spans from 20 Hz (very low bass) up to 20,000 Hz (very high pitch). However, as we age or experience exposure to loud environments and headphones, our ability to hear high frequencies diminishes. Checking your hearing range regularly helps you monitor ear health.</p>
-    
-    <p>The <strong>MiMusic Hearing Test</strong> uses precise Web Audio oscillators to generate pure test tones across custom selectable frequencies. By wearing headphones in a quiet room, you can test each frequency band individually to discover your upper hearing limit.</p>
+    <h2>The Biology of Human Hearing: Frequency Tonotopy and the Cochlea</h2>
+    <p>The human auditory system is one of nature’s most sophisticated sensory transductive mechanisms, capable of deciphering sound vibrations spanning from 20 Hz (deep resonant bass) up to 20,000 Hz (ultra-high frequency treble). Sound waves travel down the ear canal, striking the tympanic membrane (eardrum) and setting three miniature middle-ear bones (malleus, incus, and stapes) into mechanical vibration. These ossicles amplify the kinetic energy, transmitting hydraulic waves into the fluid-filled cochlea of the inner ear.</p>
 
-    <h3>How to Take the Hearing Test (Step-by-Step)</h3>
-    <p>Follow these simple instructions to test your ears safely and accurately.</p>
+    <p>Inside the cochlea lies the basilar membrane, which operates on an acoustic architectural principle known as <em>tonotopy</em>. The physical base of the cochlear spiral, which is narrow and stiff, resonates exclusively in response to high-frequency sounds like 8,000 Hz and 16,000 Hz. As the membrane spirals toward the apex, it becomes wider and more flexible, registering low-frequency tones down to 250 Hz. Thousands of microscopic stereocilia (hair cells) lining the membrane bend in response to these vibrations, triggering electrical impulses transmitted directly along the auditory nerve to the brain's temporal lobe.</p>
 
-    <!-- User's Real UI Screenshot -->
-    <img src="hearing-guide.jpg" alt="Step by step hearing test guide" class="tutorial-image" style="display: block;">
-    <p class="image-caption">Put on headphones, select a frequency button, and click play.</p>
+    <h3>Why High Frequencies Decline First: Understanding Presbycusis and Noise Strain</h3>
+    <p>Unlike muscle tissue, mammalian auditory hair cells do not regenerate once damaged. Because incoming acoustic waves must physically traverse the base of the cochlea regardless of their destination frequency, the hair cells tuned to high-frequency tones experience constant physical wear and tear throughout life. This inevitable biological aging process is termed <em>presbycusis</em>.</p>
+
+    <p>In the digital age, regular exposure to noisy urban traffic, loud concerts, and high-volume headphone listening accelerates high-frequency threshold shifts. People typically notice difficulty hearing upper sibilants in speech (like the letters <em>s</em>, <em>f</em>, and <em>th</em>) before realizing they have experienced hearing degradation. Periodic testing across key reference octaves—such as 4 kHz, 8 kHz, 12 kHz, and 16 kHz—serves as an invaluable benchmark for monitoring your auditory health over time.</p>
+
+    <h3>Generating Pure Sine Waves via the Web Audio API</h3>
+    <p>Real-world sounds, musical instruments, and speech are complex acoustic cocktails comprised of fundamental pitches and dozens of layered harmonic overtones. If a testing tool played an ordinary MP3 bell tone or recorded chime, you might hear the lower harmonic resonance of the sound even if your ear could not perceive the primary high-frequency pitch.</p>
+
+    <p>The <strong>MiMusic Online Hearing Test</strong> utilizes hardware-accelerated <code>OscillatorNode</code> instances native to the Web Audio API to synthesize mathematically pristine sine waves. A pure sine wave possesses zero harmonic distortion and zero sideband overtones; 100% of the acoustic energy is concentrated strictly at the target hertz frequency. This allows you to verify your genuine auditory reception at each discrete octave band without acoustic artifacts muddying the results.</p>
+
+    <h3>Step-by-Step Guide: Conducting an Accurate Hearing Range Test</h3>
+    <p>For the most reliable self-assessment, follow this calibrated procedure:</p>
+
+    <!-- تصویر اسکرین‌شات آموزشی با نام hearing-guide.jpg -->
+    <img src="hearing-guide.jpg" alt="Step by step hearing test guide" class="tutorial-image">
+    <p class="image-caption">Wear stereo headphones, set your device volume to a moderate level, and test each frequency band.</p>
 
     <ul>
-      <li style="margin-bottom: 12px;"><strong>Step 1: Wear Headphones.</strong> Always use quality headphones or earbuds for accurate frequency isolation.</li>
-      <li style="margin-bottom: 12px;"><strong>Step 2: Select a Frequency.</strong> Choose from the frequency selector buttons (ranging from deep 250Hz up to ultra-high 16,000Hz).</li>
-      <li style="margin-bottom: 12px;"><strong>Step 3: Play and Listen.</strong> Click "Play Tone" to verify if you can clearly hear the sound in that frequency range.</li>
+      <li><strong>Step 1: Use Quality Over-Ear Headphones or Earbuds:</strong> Never conduct an audiometric test using smartphone speakers or laptop micro-drivers, as tiny speaker grilles cannot physically reproduce high frequencies cleanly.</li>
+      <li><strong>Step 2: Calibrate Volume at 1,000 Hz:</strong> Select 1,000 Hz and press "Play Tone". Adjust your device's volume to a comfortable, moderate listening level. <em>Do not increase the volume further</em> when testing higher frequencies to prevent sudden acoustic shock.</li>
+      <li><strong>Step 3: Test Progressively Upward:</strong> Step through 4,000 Hz, 8,000 Hz, 12,000 Hz, and 16,000 Hz. Note the highest frequency tone you can clearly distinguish.</li>
+      <li><strong>Step 4: Check Low-End Range:</strong> Select 250 Hz to test warm mid-bass response and confirm low-end membrane sensitivity.</li>
     </ul>
 
-    <h3>Disclaimer</h3>
-    <p>This web-based tool is intended for educational and entertainment purposes only and does not replace a professional clinical audiogram performed by a doctor.</p>
+    <h3>Important Clinical Disclaimer</h3>
+    <p>While this tool is engineered with pure mathematical synthesis, it is designed strictly for educational awareness, headphone frequency checking, and personal auditory tracking. Consumer headphones, Bluetooth codecs, and smartphone DACs do not have calibrated flat frequency curves. This test does not replace an official pure-tone clinical audiometry exam conducted in a sound-dampened chamber by a licensed audiologist.</p>
+
+    <!-- بخش سوالات متداول آکاردئونی تعاملی -->
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Why can't I hear frequencies above 12,000 Hz or 16,000 Hz?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Losing the ability to hear above 12 kHz to 16 kHz is a natural biological consequence of aging (presbycusis) and lifestyle noise exposure. Most healthy adults over age 25 have a practical ceiling between 14 kHz and 16 kHz. Additionally, many consumer earbuds naturally roll off response above 15 kHz.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Why are headphones strictly required for this test?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Smartphone and laptop speakers possess tiny physical cones that produce heavy harmonic distortion when pushed to high frequencies. Quality headphones channel pure sine waves directly into your ear canal without room reflections or speaker hardware distortion.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Is it dangerous to test high frequencies at maximum volume?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes. Never crank your device volume to maximum in an attempt to hear faint high-frequency tones. Pumping high-decibel energy into the ear can cause acute acoustic trauma or trigger temporary tinnitus. Always keep your volume at a moderate, comfortable baseline.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Can this tool diagnose clinical hearing loss?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>No. While this tool accurately generates pure frequencies, genuine clinical diagnoses require calibrated decibel hearing level (dB HL) equipment, bone-conduction transducers, and soundproof test environments administered by a licensed doctor.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- Global Footer -->
+  <!-- فوتر کریستالی -->
   <footer>
     <div class="footer-grid">
       <div class="footer-col">
@@ -216,8 +472,9 @@
     </div>
   </footer>
 
-  <!-- Scripts for Menu and Test Logic -->
+  <!-- اسکریپت‌های منو و مولد سینوس صوتی -->
   <script>
+    // منوی ناوبری
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
@@ -230,6 +487,13 @@
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
+    // اسکریپت آکاردئونی سوالات متداول
+    function toggleFaq(button) {
+      const item = button.parentElement;
+      item.classList.toggle('active');
+    }
+
+    // منطق تولید فرکانس خالص صوتی Web Audio API
     let audioCtx = null;
     let osc = null;
     let gainNode = null;
@@ -240,12 +504,11 @@
       currentFreq = freq;
       document.getElementById('frequencyDisplay').textContent = "Selected: " + freq.toLocaleString() + " Hz";
       
-      // Update button styles
       document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
 
-      // If actively playing, update frequency live
-      if (isTesting && osc) {
+      // به‌روزرسانی زنده فرکانس در صورت فعال بودن صدا
+      if (isTesting && osc && audioCtx) {
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
       }
     }
@@ -267,7 +530,7 @@
 
         osc.type = 'sine';
         osc.frequency.setValueAtTime(currentFreq, audioCtx.currentTime);
-        gainNode.gain.value = 0.3;
+        gainNode.gain.value = 0.3; // حجم صدای ایمن کالیبره‌شده
 
         osc.connect(gainNode);
         gainNode.connect(audioCtx.destination);
