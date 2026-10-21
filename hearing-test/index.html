@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Online Hearing Test - Check Your Ear Frequency Range | Mi Music Tools</title>
-  <meta name="description" content="Test your hearing frequency range online using your headphones. Free browser-based audiometric hearing test tool to check your ear health.">
+  <meta name="description" content="Test your hearing frequency range online using your headphones. Free browser-based audiometric hearing test tool with custom frequency selection.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
     /* Global Variables & Base Setup */
@@ -47,12 +47,20 @@
     .status-ring.active { border-color: #8b5cf6; color: #8b5cf6; animation: testPulse 1s infinite; }
     @keyframes testPulse { 0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(139, 92, 246, 0); } 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); } }
 
-    /* Tool Controls */
-    .btn-main { background: var(--accent); color: #fff; border: none; padding: 18px 40px; border-radius: 50px; font-size: 1.15rem; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); width: 100%; max-width: 320px; }
+    /* Control Panel & Frequency Buttons */
+    .control-panel { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; max-width: 450px; margin-left: auto; margin-right: auto; text-align: left; }
+    .control-panel label { font-weight: 700; color: var(--text-dark); display: block; margin-bottom: 12px; font-size: 1rem; }
+    
+    .freq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+    .freq-btn { background: var(--surface); border: 2px solid var(--border); padding: 10px; border-radius: 8px; font-weight: 700; color: var(--text-dark); cursor: pointer; transition: 0.2s; }
+    .freq-btn:hover { border-color: var(--accent); background: var(--accent-light); }
+    .freq-btn.selected { background: var(--accent); color: white; border-color: var(--accent); }
+
+    .btn-main { background: var(--accent); color: #fff; border: none; padding: 16px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); width: 100%; max-width: 300px; }
     .btn-main:hover { background: var(--accent-hover); transform: translateY(-2px); }
     .btn-main.stop { background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); }
 
-    .test-info { margin-top: 20px; font-weight: 700; color: var(--text-dark); font-size: 1.1rem; }
+    .test-info { margin-top: 16px; font-weight: 700; color: var(--text-dark); font-size: 1rem; }
 
     /* Thick Content Section for AdSense */
     .content-section { max-width: 900px; margin: 0 auto 60px; padding: 0 24px; }
@@ -83,6 +91,7 @@
     @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
       .tool-container { padding: 30px 20px; }
+      .freq-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -116,13 +125,24 @@
   <main class="workspace">
     <div class="tool-container">
       <h1 class="tool-title">Online Hearing Test</h1>
-      <p class="tool-desc">Test your ear frequency range and check your hearing capabilities using pure tone generation.</p>
+      <p class="tool-desc">Select a specific test frequency, put your headphones on, and check your ear frequency range.</p>
       
       <div class="status-ring" id="statusIcon">👂</div>
+
+      <div class="control-panel">
+        <label>Select Test Frequency:</label>
+        <div class="freq-grid">
+          <button class="freq-btn selected" onclick="setFrequency(250, this)">250 Hz</button>
+          <button class="freq-btn" onclick="setFrequency(1000, this)">1,000 Hz</button>
+          <button class="freq-btn" onclick="setFrequency(4000, this)">4,000 Hz</button>
+          <button class="freq-btn" onclick="setFrequency(8000, this)">8,000 Hz</button>
+          <button class="freq-btn" onclick="setFrequency(12000, this)">12,000 Hz</button>
+          <button class="freq-btn" onclick="setFrequency(16000, this)">16,000 Hz</button>
+        </div>
+        <div class="test-info" id="frequencyDisplay">Selected: 250 Hz</div>
+      </div>
       
-      <button class="btn-main" id="testBtn" onclick="toggleTest()">Start Hearing Test</button>
-      
-      <div class="test-info" id="frequencyDisplay">Press start to begin tone test</div>
+      <button class="btn-main" id="testBtn" onclick="toggleTest()">Play Tone</button>
     </div>
   </main>
 
@@ -136,19 +156,19 @@
     <h2>Why Check Your Hearing Frequency Range?</h2>
     <p>Human hearing typically spans from 20 Hz (very low bass) up to 20,000 Hz (very high pitch). However, as we age or experience exposure to loud environments and headphones, our ability to hear high frequencies diminishes. Checking your hearing range regularly helps you monitor ear health.</p>
     
-    <p>The <strong>MiMusic Hearing Test</strong> uses precise Web Audio oscillators to generate pure test tones across different frequencies. By wearing headphones in a quiet room, you can discover the upper limit of your hearing range.</p>
+    <p>The <strong>MiMusic Hearing Test</strong> uses precise Web Audio oscillators to generate pure test tones across custom selectable frequencies. By wearing headphones in a quiet room, you can test each frequency band individually to discover your upper hearing limit.</p>
 
     <h3>How to Take the Hearing Test (Step-by-Step)</h3>
     <p>Follow these simple instructions to test your ears safely and accurately.</p>
 
     <!-- User's Real UI Screenshot -->
     <img src="hearing-guide.jpg" alt="Step by step hearing test guide" class="tutorial-image" style="display: block;">
-    <p class="image-caption">Put on headphones, turn down background noise, and click start.</p>
+    <p class="image-caption">Put on headphones, select a frequency button, and click play.</p>
 
     <ul>
       <li style="margin-bottom: 12px;"><strong>Step 1: Wear Headphones.</strong> Always use quality headphones or earbuds for accurate frequency isolation.</li>
-      <li style="margin-bottom: 12px;"><strong>Step 2: Find a Quiet Room.</strong> Eliminate background noise to ensure you catch high-frequency tones.</li>
-      <li style="margin-bottom: 12px;"><strong>Step 3: Start the Test.</strong> Click the start button and listen as tones sweep upward.</li>
+      <li style="margin-bottom: 12px;"><strong>Step 2: Select a Frequency.</strong> Choose from the frequency selector buttons (ranging from deep 250Hz up to ultra-high 16,000Hz).</li>
+      <li style="margin-bottom: 12px;"><strong>Step 3: Play and Listen.</strong> Click "Play Tone" to verify if you can clearly hear the sound in that frequency range.</li>
     </ul>
 
     <h3>Disclaimer</h3>
@@ -212,50 +232,60 @@
 
     let audioCtx = null;
     let osc = null;
+    let gainNode = null;
+    let currentFreq = 250;
     let isTesting = false;
+
+    function setFrequency(freq, btn) {
+      currentFreq = freq;
+      document.getElementById('frequencyDisplay').textContent = "Selected: " + freq.toLocaleString() + " Hz";
+      
+      // Update button styles
+      document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+
+      // If actively playing, update frequency live
+      if (isTesting && osc) {
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      }
+    }
 
     function toggleTest() {
       const btn = document.getElementById('testBtn');
       const icon = document.getElementById('statusIcon');
-      const display = document.getElementById('frequencyDisplay');
 
       if (!isTesting) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
         osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
+        gainNode = audioCtx.createGain();
 
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(500, audioCtx.currentTime);
-        // Sweep up to 15000Hz over 15 seconds
-        osc.frequency.exponentialRampToValueAtTime(15000, audioCtx.currentTime + 15);
+        osc.frequency.setValueAtTime(currentFreq, audioCtx.currentTime);
+        gainNode.gain.value = 0.3;
 
-        gain.gain.value = 0.3;
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
 
         osc.start();
         isTesting = true;
-        btn.textContent = "Stop Test";
+        btn.textContent = "Stop Tone";
         btn.classList.add('stop');
         icon.classList.add('active');
-        display.textContent = "Playing frequency sweep (500Hz -> 15kHz)...";
-
-        osc.onended = () => {
-          if (isTesting) toggleTest();
-        };
       } else {
         if (osc) {
           osc.stop();
           osc.disconnect();
         }
-        if (audioCtx) {
-          audioCtx.close();
-        }
         isTesting = false;
-        btn.textContent = "Start Hearing Test";
+        btn.textContent = "Play Tone";
         btn.classList.remove('stop');
         icon.classList.remove('active');
-        display.textContent = "Test finished. Press start to re-test.";
       }
     }
   </script>
