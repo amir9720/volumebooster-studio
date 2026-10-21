@@ -3,30 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Voice Changer FX - Morph Audio Online | Mi Music Tools</title>
-  <meta name="description" content="Apply fun voice effects to your audio files directly in your browser. Transform into a chipmunk, deep monster, or use a vintage telephone filter.">
+  <title>Voice Transformer & Sound Effects Maker | Mi Music Tools</title>
+  <meta name="description" content="Transform your voice and audio files online. Free web-based voice changer with robotic, chipmunk, and deep pitch effect presets.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
-    /* Global Variables & Base */
+    /* Global Variables & Base Setup */
     :root {
       --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
       --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca; 
       --accent-light: #e0e7ff; --text-dark: #0f172a; --text: #334155; 
-      --muted: #64748b; --success: #10b981; --warning: #f59e0b;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05); --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
-      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+      --muted: #64748b; --shadow-sm: 0 1px 2px rgba(0,0,0,0.05); 
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); line-height: 1.6; }
+    body { background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
 
-    /* Navigation */
+    /* Modern Responsive Navigation */
     .header-nav { width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
     .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
-    .brand-logo { color: var(--text-dark); font-size: 1.3rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand-logo { color: var(--text-dark); font-size: 1.4rem; font-weight: 900; text-decoration: none; display: flex; align-items: center; gap: 8px; letter-spacing: -0.02em; }
     .brand-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 24px; align-items: center; }
-    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    
+    /* Desktop Nav */
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-link { color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
     .nav-link:hover { color: var(--accent); }
+
+    /* Mobile Hamburger Menu */
+    .hamburger { display: none; background: none; border: none; font-size: 1.8rem; color: var(--text-dark); cursor: pointer; z-index: 1001; }
+    .mobile-menu { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--surface); box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; padding: 80px 24px 24px; display: flex; flex-direction: column; gap: 20px; z-index: 999; }
+    .mobile-menu.open { right: 0; }
+    .mobile-menu .nav-link { font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
+    .overlay.active { opacity: 1; visibility: visible; }
 
     /* Tool Workspace Area */
     .workspace { padding: 60px 24px 40px; background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); text-align: center; }
@@ -35,162 +44,136 @@
     .tool-desc { font-size: 1.05rem; color: var(--muted); margin-bottom: 30px; }
     
     .status-ring { width: 120px; height: 120px; border-radius: 50%; background: var(--surface-alt); margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; font-size: 3rem; border: 4px solid var(--border); transition: 0.3s; }
-    .status-ring.active { border-color: var(--accent); color: var(--accent); transform: scale(1.05); box-shadow: 0 0 20px rgba(79, 70, 229, 0.2); }
+    .status-ring.active { border-color: #8b5cf6; color: #8b5cf6; animation: transformPulse 1s infinite alternate; }
+    @keyframes transformPulse { 0% { transform: scale(1); box-shadow: 0 0 0 rgba(139, 92, 246, 0.3); } 100% { transform: scale(1.06); box-shadow: 0 0 20px rgba(139, 92, 246, 0.5); } }
 
     /* Tool Controls */
     .file-upload-wrapper { margin-bottom: 24px; }
-    .file-upload-label { display: inline-block; background: var(--surface-alt); border: 2px dashed var(--border-hover); padding: 20px 40px; border-radius: 12px; cursor: pointer; font-weight: 600; color: var(--text-dark); transition: 0.3s; width: 100%; max-width: 400px; }
+    .file-upload-label { display: inline-block; background: var(--surface-alt); border: 2px dashed var(--border); padding: 20px 40px; border-radius: 12px; cursor: pointer; font-weight: 600; color: var(--text-dark); transition: 0.3s; width: 100%; max-width: 400px; }
     .file-upload-label:hover { border-color: var(--accent); background: var(--accent-light); }
     input[type="file"] { display: none; }
-    
-    .effect-selector { margin-bottom: 30px; }
-    .effect-selector select { width: 100%; max-width: 400px; padding: 14px 20px; border-radius: 12px; border: 2px solid var(--border); font-size: 1rem; font-weight: 600; color: var(--text-dark); background: var(--surface); cursor: pointer; outline: none; transition: 0.3s; }
-    .effect-selector select:hover, .effect-selector select:focus { border-color: var(--accent); }
+
+    .preset-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 30px; max-width: 450px; margin-left: auto; margin-right: auto; }
+    .preset-btn { background: var(--surface); border: 2px solid var(--border); padding: 12px; border-radius: 12px; font-weight: 700; color: var(--text-dark); cursor: pointer; transition: 0.2s; }
+    .preset-btn:hover { border-color: var(--accent); background: var(--accent-light); }
+    .preset-btn.selected { background: var(--accent); color: white; border-color: var(--accent); }
 
     .btn-main { background: var(--accent); color: #fff; border: none; padding: 16px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); width: 100%; max-width: 300px; }
     .btn-main:hover { background: var(--accent-hover); transform: translateY(-2px); }
     .btn-main:disabled { background: var(--muted); cursor: not-allowed; transform: none; box-shadow: none; }
     .btn-main.stop { background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); }
 
-    /* Guide / How to use */
-    .content-section { max-width: 1000px; margin: 40px auto 60px; padding: 0 24px; }
-    .section-title { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); margin-bottom: 30px; text-align: center; }
+    /* Thick Content Section for AdSense */
+    .content-section { max-width: 900px; margin: 0 auto 60px; padding: 0 24px; }
+    .content-section h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 24px; }
+    .content-section h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin: 32px 0 16px; }
+    .content-section p { font-size: 1.1rem; margin-bottom: 20px; line-height: 1.8; color: var(--text); }
     
-    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 60px; }
-    .step-card { background: var(--surface); padding: 24px; border-radius: 16px; border: 1px solid var(--border); position: relative; }
-    .step-number { position: absolute; top: -15px; left: 24px; width: 34px; height: 34px; background: var(--text-dark); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; }
-    .step-card h4 { font-size: 1.1rem; color: var(--text-dark); margin: 10px 0; }
-    .step-card p { font-size: 0.9rem; color: var(--muted); }
-
-    /* FAQ Section */
-    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; }
-    .faq-question { width: 100%; padding: 20px; text-align: left; background: none; border: none; color: var(--text-dark); font-size: 1.05rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-answer { display: none; padding: 0 20px 20px; color: var(--muted); font-size: 0.95rem; line-height: 1.6; border-top: 1px solid var(--surface-alt); padding-top: 16px; }
+    /* Tutorial Image Styling */
+    .tutorial-image { width: 100%; max-width: 600px; height: auto; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow-md); margin: 24px auto; display: block; }
+    .image-caption { text-align: center; font-size: 0.9rem; color: var(--muted); margin-top: -12px; margin-bottom: 32px; font-style: italic; }
 
     /* Footer */
-    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; }
+    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; margin-top: 80px; }
     .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
     .footer-col h5 { color: var(--text-dark); font-size: 1rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
     .footer-col ul { list-style: none; padding: 0; }
     .footer-col li { margin-bottom: 12px; }
     .footer-col a { color: var(--muted); text-decoration: none; transition: 0.2s; }
     .footer-col a:hover { color: var(--accent); }
-    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
 
-    @media (max-width: 768px) {
+    /* Media Queries */
+    @media (max-width: 900px) {
       .nav-links { display: none; }
+      .hamburger { display: block; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
       .tool-container { padding: 30px 20px; }
+      .preset-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Global Header -->
+  <!-- Navigation with Hamburger Menu -->
   <header class="header-nav">
     <div class="nav-inner">
       <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
       <nav class="nav-links">
-        <a href="/about.html" class="nav-link">App Features</a>
+        <a href="/about.html" class="nav-link">About App</a>
         <a href="/install.html" class="nav-link">Installation</a>
-        <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 700;">Free Audio Tools</a>
+        <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
+        <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
       </nav>
+      <button class="hamburger" id="menuBtn">☰</button>
     </div>
   </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="overlay" id="overlay"></div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="/" class="brand-logo" style="margin-bottom: 20px;">🎵 MiMusic<span>.net</span></a>
+    <a href="/about.html" class="nav-link">About App</a>
+    <a href="/install.html" class="nav-link">Installation</a>
+    <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
+    <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+  </nav>
 
   <!-- Interactive Tool Workspace -->
   <main class="workspace">
     <div class="tool-container">
-      <h1 class="tool-title">Voice Changer FX Studio</h1>
-      <p class="tool-desc">Morph your voice or any audio file with fun studio effects. Apply real-time filters instantly in your browser.</p>
+      <h1 class="tool-title">Voice Transformer</h1>
+      <p class="tool-desc">Apply fun vocal presets to your audio files. Choose from chipmunk, deep monster, or normal pitch modulation.</p>
       
-      <div class="status-ring" id="statusIcon">🎙️</div>
+      <div class="status-ring" id="statusIcon">🤖</div>
       
       <div class="file-upload-wrapper">
         <label class="file-upload-label" for="audioFile">
-          <span id="fileNameDisplay">📁 Upload Audio / Voice Note</span>
+          <span id="fileNameDisplay">📁 Select Audio File (MP3, WAV)</span>
         </label>
         <input type="file" id="audioFile" accept="audio/*" onchange="handleFileSelect(event)">
       </div>
 
-      <div class="effect-selector">
-        <select id="effectType" onchange="changeEffect()">
-          <option value="normal">Normal (No Effect)</option>
-          <option value="helium">🎈 Helium (High Pitch)</option>
-          <option value="monster">👹 Deep Monster (Low Pitch)</option>
-          <option value="telephone">☎️ Vintage Telephone</option>
-        </select>
+      <div class="preset-grid">
+        <button class="preset-btn selected" onclick="setPreset(1.5, 'Chipmunk', this)">🐿️ Chipmunk</button>
+        <button class="preset-btn" onclick="setPreset(0.6, 'Deep Monster', this)">👹 Deep</button>
+        <button class="preset-btn" onclick="setPreset(1.0, 'Normal', this)">👤 Normal</button>
       </div>
       
-      <button class="btn-main" id="playBtn" onclick="togglePlayback()" disabled>Play with Effect</button>
+      <button class="btn-main" id="playBtn" onclick="togglePlayback()" disabled>Play Transformed Voice</button>
     </div>
   </main>
 
-  <!-- Feature Image -->
+  <!-- AI Generated Feature Image -->
   <div style="max-width: 800px; margin: 0 auto 40px; padding: 0 24px; text-align: center;">
-    <img src="voice-changer.jpg" alt="Studio microphone with digital sound waves" style="width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);">
+    <img src="voice-transformer.jpg" alt="A futuristic robotic voice changer device with glowing sound waves" style="width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);">
   </div>
 
-  <!-- Value-Added Content for SEO -->
+  <!-- Comprehensive SEO & How-to Content -->
   <section class="content-section">
-    <h2 class="section-title">How to Morph Your Audio</h2>
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-number">1</div>
-        <h4>Upload a Recording</h4>
-        <p>Select a pre-recorded voice note, podcast snippet, or music file from your device. Supported formats include MP3, WAV, and M4A.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">2</div>
-        <h4>Choose an Effect</h4>
-        <p>Select from our preset filters like Helium (Chipmunk style), Deep Monster, or the Vintage Telephone bandpass filter.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">3</div>
-        <h4>Live Processing</h4>
-        <p>Hit play. Our Web Audio API engine will instantly apply pitch shifting or equalization without needing to buffer.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">4</div>
-        <h4>Zero Data Collection</h4>
-        <p>Your voice is sensitive data. This tool processes your audio entirely on your device's hardware, meaning we never hear or store it.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SEO FAQ -->
-  <section class="content-section" style="max-width: 800px; margin-top: 0;">
-    <h2 class="section-title">Frequently Asked Questions</h2>
+    <h2>Explore Fun Voice Effects Online</h2>
+    <p>Voice modification and audio transformation have become incredibly popular for content creators, prank callers, podcasters, and gamers. Whether you want to disguise your voice for privacy or create funny meme clips, altering your pitch opens up endless creative possibilities.</p>
     
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        How does the Pitch Shifting work?
-        <span>▼</span>
-      </button>
-      <div class="faq-answer">
-        To create the "Helium" or "Monster" effects, we manipulate the playback rate while disabling standard pitch preservation. Increasing the rate raises the frequency (chipmunk effect), while decreasing the rate stretches the waveform, resulting in a deep, booming voice.
-      </div>
-    </div>
+    <p>The <strong>MiMusic Voice Transformer</strong> allows you to instantly apply presets like high-pitched chipmunk tones or deep monster voice effects directly in your web browser. Everything is processed locally on your device for absolute speed and privacy.</p>
 
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        What is the Vintage Telephone effect?
-        <span>▼</span>
-      </button>
-      <div class="faq-answer">
-        Old telephones only transmitted a very narrow range of audio frequencies (roughly 300Hz to 3400Hz). We use a digital Biquad Filter to cut out all the high treble and deep bass from your file, instantly giving it that authentic, lo-fi phone call sound.
-      </div>
-    </div>
+    <h3>How to Use the Voice Transformer (Step-by-Step)</h3>
+    <p>Transforming your audio takes only three simple steps:</p>
 
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        Do I need to install a Voice Changer App?
-        <span>▼</span>
-      </button>
-      <div class="faq-answer">
-        No. Smartphone apps that demand background permissions can be a privacy concern, especially when dealing with microphone access. Our tool runs strictly inside the web browser sandbox, keeping your device safe and your storage free.
-      </div>
-    </div>
+    <!-- User's Real UI Screenshot -->
+    <img src="transformer-guide.jpg" alt="Step by step voice transformer guide" class="tutorial-image" style="display: block;">
+    <p class="image-caption">Upload your audio file, select a preset effect, and click play.</p>
+
+    <ul>
+      <li style="margin-bottom: 12px;"><strong>Step 1: Upload Your Audio.</strong> Click the upload box to select an MP3 or WAV voice recording or song.</li>
+      <li style="margin-bottom: 12px;"><strong>Step 2: Choose a Preset.</strong> Select your desired vocal effect from the preset grid (e.g., Chipmunk or Deep Monster).</li>
+      <li style="margin-bottom: 12px;"><strong>Step 3: Play and Enjoy.</strong> Click "Play Transformed Voice" to hear your modified audio in real-time.</li>
+    </ul>
+
+    <h3>Client-Side Privacy</h3>
+    <p>Your personal voice notes and audio recordings never leave your device. All playback and pitch shifting happen locally via HTML5 media controls.</p>
   </section>
 
   <!-- Global Footer -->
@@ -198,7 +181,7 @@
     <div class="footer-grid">
       <div class="footer-col">
         <a href="/" class="brand-logo" style="margin-bottom: 16px;">🎵 MiMusic<span>.net</span></a>
-        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
+        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent educational guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
         <p style="font-weight: 600; color: var(--text-dark);">Contact: Sobl5910@gmail.com</p>
       </div>
       <div class="footer-col">
@@ -215,17 +198,17 @@
         <ul>
           <li><a href="/vocal-clarity/">Vocal Clarity</a></li>
           <li><a href="/video-to-audio/">Video to Audio</a></li>
-          <li><a href="/decibel-meter/">Decibel Meter</a></li>
+          <li><a href="/voice-transformer/" style="color: var(--accent);">Voice Transformer</a></li>
           <li><a href="/audio-latency/">Latency Test</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Resources</h5>
+        <h5>Legal & Resources</h5>
         <ul>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
           <li><a href="/about.html">About Mi Music</a></li>
-          <li><a href="/install.html">Installation Guide</a></li>
-          <li><a href="/troubleshooting.html">Troubleshooting</a></li>
-          <li><a href="/tools.html">All Audio Tools</a></li>
         </ul>
       </div>
     </div>
@@ -234,23 +217,35 @@
     </div>
   </footer>
 
-  <!-- Scripts for Tool Functionality & UI -->
+  <!-- Scripts for Menu and Voice Transformer Logic -->
   <script>
-    // FAQ Toggle
-    function toggleFaq(btn) {
-      const answer = btn.nextElementSibling;
-      const arrow = btn.querySelector('span');
-      const isOpen = answer.style.display === 'block';
-      answer.style.display = isOpen ? 'none' : 'block';
-      arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('overlay');
+
+    function toggleMenu() {
+      mobileMenu.classList.toggle('open');
+      overlay.classList.toggle('active');
     }
 
-    // Web Audio API & HTML5 Audio for Effects
-    let audioCtx = null;
-    let audioSource = null;
-    let biquadFilter = null;
+    menuBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+
     let audioElement = new Audio();
+    let currentRate = 1.5;
     let isPlaying = false;
+
+    audioElement.preservesPitch = false;
+    if ('mozPreservesPitch' in audioElement) {
+      audioElement.mozPreservesPitch = false;
+    }
+
+    function setPreset(rate, name, btn) {
+      currentRate = rate;
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      audioElement.playbackRate = currentRate;
+    }
 
     function handleFileSelect(event) {
       const file = event.target.files[0];
@@ -258,44 +253,9 @@
         document.getElementById('fileNameDisplay').textContent = "🎵 " + file.name;
         document.getElementById('playBtn').disabled = false;
         
-        // Create object URL for the audio element
         const fileURL = URL.createObjectURL(file);
         audioElement.src = fileURL;
-        
-        // Reset effects when new file is loaded
-        changeEffect();
-      }
-    }
-
-    function changeEffect() {
-      const effect = document.getElementById('effectType').value;
-      const icon = document.getElementById('statusIcon');
-      
-      // Default reset
-      audioElement.playbackRate = 1.0;
-      audioElement.preservesPitch = true;
-      if (biquadFilter) {
-        biquadFilter.type = 'allpass'; // disables filter
-      }
-
-      if (effect === 'helium') {
-        audioElement.playbackRate = 1.6;
-        audioElement.preservesPitch = false; // Changes pitch with speed
-        icon.textContent = "🎈";
-      } else if (effect === 'monster') {
-        audioElement.playbackRate = 0.65;
-        audioElement.preservesPitch = false;
-        icon.textContent = "👹";
-      } else if (effect === 'telephone') {
-        icon.textContent = "☎️";
-        // Telephone effect requires Web Audio API Filter (setup during playback)
-        if (biquadFilter) {
-          biquadFilter.type = 'bandpass';
-          biquadFilter.frequency.value = 1500;
-          biquadFilter.Q.value = 1.5;
-        }
-      } else {
-        icon.textContent = "🎙️";
+        audioElement.playbackRate = currentRate;
       }
     }
 
@@ -304,43 +264,27 @@
       const icon = document.getElementById('statusIcon');
 
       if (!isPlaying) {
-        // Init Audio Context on first play
-        if (!audioCtx) {
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-          audioSource = audioCtx.createMediaElementSource(audioElement);
-          biquadFilter = audioCtx.createBiquadFilter();
-          
-          audioSource.connect(biquadFilter);
-          biquadFilter.connect(audioCtx.destination);
-          
-          // Apply current effect settings to newly created context
-          changeEffect(); 
-        }
-        
-        if (audioCtx.state === 'suspended') {
-          audioCtx.resume();
-        }
-
-        audioElement.play();
-        isPlaying = true;
-        
-        btn.textContent = "Pause Audio";
-        btn.classList.add('stop');
-        icon.classList.add('active');
+        audioElement.play().then(() => {
+          isPlaying = true;
+          btn.textContent = "Stop Audio";
+          btn.classList.add('stop');
+          icon.classList.add('active');
+        }).catch(err => {
+          console.error("Playback failed:", err);
+          alert("Playback blocked by browser.");
+        });
       } else {
         audioElement.pause();
         isPlaying = false;
-        
-        btn.textContent = "Play with Effect";
+        btn.textContent = "Play Transformed Voice";
         btn.classList.remove('stop');
         icon.classList.remove('active');
       }
     }
 
-    // Reset UI when audio finishes
     audioElement.addEventListener('ended', function() {
       isPlaying = false;
-      document.getElementById('playBtn').textContent = "Play with Effect";
+      document.getElementById('playBtn').textContent = "Play Transformed Voice";
       document.getElementById('playBtn').classList.remove('stop');
       document.getElementById('statusIcon').classList.remove('active');
     });
