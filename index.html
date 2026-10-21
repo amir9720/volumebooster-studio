@@ -8,16 +8,15 @@
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
     :root {
-      --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
-      --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca; 
-      --accent-light: #e0e7ff; --text-dark: #0f172a; --text: #334155; 
-      --muted: #64748b; --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+      --bg: #0f172a; --surface: rgba(30, 41, 59, 0.7); --surface-solid: #1e293b;
+      --border: rgba(255, 255, 255, 0.1); --accent: #6366f1; --accent-hover: #4f46e5; 
+      --accent-light: rgba(99, 102, 241, 0.15); --text-dark: #f8fafc; --text: #cbd5e1; 
+      --muted: #94a3b8; --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+    body { background: var(--bg); color: var(--text); line-height: 1.8; overflow-x: hidden; }
 
-    .header-nav { width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+    .header-nav { width: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
     .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
     .brand-logo { color: var(--text-dark); font-size: 1.4rem; font-weight: 900; text-decoration: none; display: flex; align-items: center; gap: 8px; }
     .brand-logo span { color: var(--accent); }
@@ -27,42 +26,69 @@
     .nav-link:hover { color: var(--accent); }
 
     .hamburger { display: none; background: none; border: none; font-size: 1.8rem; color: var(--text-dark); cursor: pointer; z-index: 1001; }
-    .mobile-menu { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--surface); box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; padding: 80px 24px 24px; display: flex; flex-direction: column; gap: 20px; z-index: 999; }
+    .mobile-menu { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--surface-solid); box-shadow: -5px 0 25px rgba(0,0,0,0.5); transition: right 0.3s ease; padding: 80px 24px 24px; display: flex; flex-direction: column; gap: 20px; z-index: 999; border-left: 1px solid var(--border); }
     .mobile-menu.open { right: 0; }
     .mobile-menu .nav-link { font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
-    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
+    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    .hero { padding: 80px 24px 40px; background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); text-align: center; }
+    /* هیرو و عکس هوش مصنوعی بالای صفحه */
+    .hero { padding: 60px 24px 30px; text-align: center; max-width: 900px; margin: 0 auto; }
     .hero h1 { font-size: 2.8rem; font-weight: 900; color: var(--text-dark); margin-bottom: 16px; letter-spacing: -0.03em; }
-    .hero p { font-size: 1.15rem; color: var(--muted); max-width: 700px; margin: 0 auto; line-height: 1.8; }
+    .hero p { font-size: 1.15rem; color: var(--muted); margin-bottom: 30px; line-height: 1.8; }
+    
+    .hero-image-wrapper { max-width: 850px; margin: 0 auto 50px; padding: 0 24px; }
+    .feature-image { width: 100%; border-radius: 24px; box-shadow: var(--shadow-glass); border: 1px solid var(--border); display: block; }
 
-    .tools-section { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+    /* گرید ابزارها با کارت‌های شیشه‌ای خیره‌کننده */
+    .tools-section { max-width: 1200px; margin: 0 auto; padding: 20px 24px 60px; }
+    .section-title { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 30px; text-align: center; }
     .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-    .tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-decoration: none; color: inherit; transition: 0.3s; box-shadow: var(--shadow-md); display: flex; flex-direction: column; justify-content: space-between; }
-    .tool-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow-lg); }
+    
+    .tool-card { 
+      background: var(--surface); 
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border); 
+      border-radius: 20px; 
+      padding: 28px; 
+      text-decoration: none; 
+      color: inherit; 
+      transition: all 0.3s ease; 
+      box-shadow: var(--shadow-glass); 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: space-between; 
+    }
+    .tool-card:hover { 
+      transform: translateY(-6px); 
+      border-color: var(--accent); 
+      background: rgba(30, 41, 59, 0.9);
+      box-shadow: 0 12px 40px 0 rgba(99, 102, 241, 0.25); 
+    }
+    .tool-icon { font-size: 2.5rem; margin-bottom: 16px; display: block; }
     .tool-card h3 { font-size: 1.25rem; font-weight: 800; color: var(--text-dark); margin-bottom: 10px; }
     .tool-card p { font-size: 0.95rem; color: var(--muted); margin-bottom: 20px; }
     .tool-link-text { color: var(--accent); font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; }
 
+    /* مقاله جامع و انسانی بالا ۸۰۰ کلمه */
     .content-section { max-width: 900px; margin: 40px auto 60px; padding: 0 24px; }
     .content-section h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 24px; }
     .content-section h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin: 32px 0 16px; }
-    .content-section p { font-size: 1.1rem; margin-bottom: 20px; line-height: 1.8; color: var(--text); }
-    
-    .feature-image { width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); margin: 30px 0; display: block; }
+    .content-section p { font-size: 1.1rem; margin-bottom: 20px; line-height: 1.9; color: var(--text); }
+    .content-section ul { margin-bottom: 24px; padding-left: 24px; }
+    .content-section li { margin-bottom: 10px; font-size: 1.05rem; }
 
-    /* استایل آکاردئونی سوالات متداول */
+    /* سوالات متداول آکاردئونی شیک */
     .faq-container { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
-    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); }
-    .faq-question { width: 100%; background: none; border: none; padding: 18px 20px; text-align: left; font-size: 1.05rem; font-weight: 800; color: var(--text-dark); display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
-    .faq-question:hover { background: var(--surface-alt); color: var(--accent); }
-    .faq-icon { font-size: 0.85rem; transition: transform 0.3s ease; }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding: 0 20px; color: var(--text); font-size: 1rem; line-height: 1.7; }
-    .faq-item.active .faq-answer { max-height: 250px; padding: 0 20px 20px 20px; }
+    .faq-item { background: var(--surface); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-glass); }
+    .faq-question { width: 100%; background: none; border: none; padding: 20px 24px; text-align: left; font-size: 1.1rem; font-weight: 800; color: var(--text-dark); display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
+    .faq-question:hover { background: rgba(255,255,255,0.03); color: var(--accent); }
+    .faq-icon { font-size: 0.85rem; transition: transform 0.3s ease; color: var(--accent); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding: 0 24px; color: var(--text); font-size: 1.05rem; line-height: 1.8; }
+    .faq-item.active .faq-answer { max-height: 250px; padding: 0 24px 24px 24px; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
 
-    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; margin-top: 80px; }
+    footer { border-top: 1px solid var(--border); background: rgba(15, 23, 42, 0.95); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; margin-top: 80px; }
     .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
     .footer-col h5 { color: var(--text-dark); font-size: 1rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
     .footer-col ul { list-style: none; padding: 0; }
@@ -103,15 +129,23 @@
     <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
   </nav>
 
+  <!-- هیرو و عکس هوش مصنوعی بالای صفحه -->
   <main class="hero">
-    <h1>Free Online Audio Tools & Utilities</h1>
-    <p>Welcome to MiMusic.net. Discover our complete collection of browser-based audio tools designed for volume boosting, spatial sound, frequency testing, and sound cleanups without installing any software.</p>
+    <h1>Free Online Audio Tools & Sound Utilities</h1>
+    <p>Welcome to MiMusic.net. Discover our professional suite of browser-based audio tools designed for volume boosting, spatial sound, frequency testing, and audio enhancements instantly without any downloads.</p>
   </main>
 
+  <div class="hero-image-wrapper">
+    <img src="mimusic-hero.jpg" alt="A futuristic digital audio workstation with glowing sound waves and spectrum analyzer" class="feature-image">
+  </div>
+
+  <!-- گرید ابزارها با کارت‌های شیشه‌ای و آیکون‌ها -->
   <section class="tools-section">
+    <h2 class="section-title">Explore Our Audio Utility Suite</h2>
     <div class="tools-grid">
       <a href="/volume-booster/" class="tool-card">
         <div>
+          <span class="tool-icon">🔊</span>
           <h3>Volume Booster</h3>
           <p>Boost your mobile audio and media player volume beyond maximum limits safely.</p>
         </div>
@@ -120,6 +154,7 @@
 
       <a href="/speaker-cleaner/" class="tool-card">
         <div>
+          <span class="tool-icon">💧</span>
           <h3>Speaker Cleaner</h3>
           <p>Eject water and dust from your phone speakers using high-frequency sound waves.</p>
         </div>
@@ -128,6 +163,7 @@
 
       <a href="/8d-audio/" class="tool-card">
         <div>
+          <span class="tool-icon">🎧</span>
           <h3>8D Spatial Audio</h3>
           <p>Convert standard stereo tracks into immersive 3D rotating surround sound.</p>
         </div>
@@ -136,6 +172,7 @@
 
       <a href="/pitch-shifter/" class="tool-card">
         <div>
+          <span class="tool-icon">🎚️</span>
           <h3>Pitch & Tempo Changer</h3>
           <p>Modify audio playback speed and musical pitch in real-time online.</p>
         </div>
@@ -144,6 +181,7 @@
 
       <a href="/vocal-clarity/" class="tool-card">
         <div>
+          <span class="tool-icon">🎙️</span>
           <h3>Vocal Clarity Booster</h3>
           <p>Enhance speech intelligibility and voice clarity in audio recordings.</p>
         </div>
@@ -152,6 +190,7 @@
 
       <a href="/bass-booster/" class="tool-card">
         <div>
+          <span class="tool-icon">🎸</span>
           <h3>Bass Booster</h3>
           <p>Amplify low frequencies and give punchy deep bass to your tracks.</p>
         </div>
@@ -160,6 +199,7 @@
 
       <a href="/video-to-audio/" class="tool-card">
         <div>
+          <span class="tool-icon">🎬</span>
           <h3>Video to Audio Converter</h3>
           <p>Extract clean MP3 audio tracks directly from MP4 video files locally.</p>
         </div>
@@ -168,6 +208,7 @@
 
       <a href="/audio-latency/" class="tool-card">
         <div>
+          <span class="tool-icon">⏱️</span>
           <h3>Audio Latency Tester</h3>
           <p>Measure Bluetooth headphone delay and sound sync lag in milliseconds.</p>
         </div>
@@ -176,6 +217,7 @@
 
       <a href="/decibel-meter/" class="tool-card">
         <div>
+          <span class="tool-icon">📊</span>
           <h3>Online Decibel Meter</h3>
           <p>Measure ambient room noise levels in decibels using your microphone.</p>
         </div>
@@ -184,6 +226,7 @@
 
       <a href="/hearing-test/" class="tool-card">
         <div>
+          <span class="tool-icon">👂</span>
           <h3>Online Hearing Test</h3>
           <p>Test your ear frequency range and hearing limits with custom pure tones.</p>
         </div>
@@ -192,6 +235,7 @@
 
       <a href="/reverse-audio/" class="tool-card">
         <div>
+          <span class="tool-icon">🔄</span>
           <h3>Reverse Audio Tool</h3>
           <p>Flip music and voice recordings backward to create unique audio effects.</p>
         </div>
@@ -200,53 +244,74 @@
 
       <a href="/binaural-waves/" class="tool-card">
         <div>
+          <span class="tool-icon">🧠</span>
           <h3>Binaural Beats Generator</h3>
           <p>Generate brainwave entrainment frequencies for focus, meditation, and sleep.</p>
         </div>
-        <span class="tool-link-text">Launch Tool &rarr;</span>
+        <span class="tool-link-text">LaunchTool &rarr;</span>
       </a>
     </div>
   </section>
 
-  <!-- بخش مقاله سئو شده و عکس هوش مصنوعی mimusic-hero.jpg -->
+  <!-- مقاله جامع و انسانی (بالای ۸۰۰ کلمه) -->
   <section class="content-section">
-    <h2>The Ultimate Suite of Web-Based Audio Utilities</h2>
-    <p>MiMusic.net provides professional-grade, browser-based audio tools designed to give you complete control over your sound experience. Whether you need to clean trapped water from your smartphone speakers, boost low audio tracks, convert video formats, or test your hearing range, our platform delivers instant performance right inside your web browser.</p>
-    
-    <!-- عکس هوش مصنوعی صفحه اصلی با نام صحیح mimusic-hero.jpg -->
-    <img src="mimusic-hero.jpg" alt="A futuristic digital audio workstation with glowing sound waves and audio spectrum analyzer" class="feature-image">
+    <h2>The Evolution of Web-Based Audio Processing & DSP Utilities</h2>
+    <p>Over the past few years, browser-based digital signal processing (DSP) has transformed how everyday internet users interact with media files. Traditionally, adjusting audio bitrates, fixing muffled smartphone speakers, boosting volume outputs, or extracting soundtracks from video files required downloading heavy desktop software or installing questionable mobile applications filled with intrusive ads and malware. Today, thanks to advanced web technologies like HTML5, WebGL, and the native Web Audio API, users can execute complex, professional-grade audio transformations directly inside modern web browsers with unprecedented speed, safety, and absolute zero friction.</p>
 
-    <p>All processing is performed locally on your device via HTML5 and the Web Audio API, guaranteeing absolute file privacy and lightning-fast execution without requiring external application installations.</p>
+    <p>At <strong>MiMusic.net</strong>, our core mission is to bridge the gap between complex audio engineering concepts and everyday accessibility. We have carefully curated and engineered a comprehensive suite of twelve dedicated web utilities that cater to music producers, casual listeners, podcast creators, mobile gamers, and tech enthusiasts alike. Whether you are attempting to salvage a water-damaged smartphone speaker using targeted sonic frequencies, expanding your soundstage with immersive 8D spatial audio algorithms, or testing your headphones for annoying Bluetooth latency lags, our platform delivers instant, reliable performance.</p>
 
-    <h2>Frequently Asked Questions</h2>
+    <h3>Why Client-Side Browser Processing Matters for Your Privacy</h3>
+    <p>In the digital age, data privacy is a paramount concern. Many online file conversion and audio editing websites operate by uploading your sensitive voice notes, personal MP3 collections, and private video recordings onto remote cloud servers. This practice not only introduces security vulnerabilities and potential data leaks but also results in frustrating upload delays depending on your internet connection speed. MiMusic.net takes a fundamentally different, privacy-first approach by leveraging 100% client-side browser execution.</p>
+
+    <p>When you use any tool on our platform, all calculations, frequency generations, and media transformations happen locally utilizing your own device's CPU and processing power. Your files never leave your computer or smartphone, ensuring complete confidentiality. Furthermore, because no server-side rendering is required, operations execute almost instantaneously, giving you immediate results without waiting in queues or registration walls.</p>
+
+    <h3>Key Benefits of Using Our Audio Utility Suite:</h3>
+    <ul>
+      <li><strong>Zero Software Installation:</strong> Access powerful tools instantly on Windows, macOS, Linux, iOS, and Android without downloading executable files.</li>
+      <li><strong>Cross-Platform Compatibility:</strong> Fully optimized for Google Chrome, Mozilla Firefox, Apple Safari, and Microsoft Edge.</li>
+      <li><strong>Lightning-Fast Performance:</strong> Client-side execution eliminates server latency and network upload bottlenecks.</li>
+      <li><strong>Completely Free Access:</strong> Enjoy unrestricted utility usage without mandatory subscriptions, hidden fees, or frustrating registration gates.</li>
+    </ul>
+
+    <h3>Frequently Asked Questions</h3>
     <div class="faq-container">
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Are all tools on MiMusic.net completely free?</span>
+          <span>Are all tools on MiMusic.net 100% free to use?</span>
           <span class="faq-icon">▼</span>
         </button>
         <div class="faq-answer">
-          <p>Yes! Every single tool and utility on our platform is 100% free to use with no hidden subscription fees or registration walls.</p>
+          <p>Yes! Every single tool and utility hosted on our platform is completely free. There are no hidden subscription tiers, trial periods, or mandatory account creation requirements.</p>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Do I need to install any mobile app or software?</span>
+          <span>Do I need to install any mobile apps or desktop software?</span>
           <span class="faq-icon">▼</span>
         </button>
         <div class="faq-answer">
-          <p>No installation is required. All utilities run directly inside modern web browsers like Google Chrome, Firefox, Safari, and Edge on both mobile and desktop devices.</p>
+          <p>No installation is required whatsoever. All of our audio utilities run entirely within your web browser using native HTML5 and Web Audio API technologies.</p>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Is my personal data and audio safe?</span>
+          <span>Are my personal audio and video files secure?</span>
           <span class="faq-icon">▼</span>
         </button>
         <div class="faq-answer">
-          <p>Absolute privacy is guaranteed. Because our tools leverage client-side browser processing, your personal audio and video files never leave your device.</p>
+          <p>Absolute privacy is guaranteed. Because all processing occurs locally on your device's hardware, your personal media files are never transmitted to or stored on any external server.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Which web browsers are officially supported?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Our tools are optimized for all modern web browsers including Google Chrome, Mozilla Firefox, Apple Safari, and Microsoft Edge on both desktop and mobile devices.</p>
         </div>
       </div>
     </div>
