@@ -7,7 +7,7 @@
   <meta name="description" content="Upload an audio file and reverse it instantly in your browser. Create backward sound effects, play music backward, and download the reversed audio for free.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
-    /* تم یخی کریستالی و شیشه‌ای منطبق با استانداردهای صفحه اصلی */
+    /* تم یخی کریستالی و شیشه‌ای منطبق با صفحه اصلی */
     :root {
       --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
       --surface-glass: rgba(255, 255, 255, 0.72);
@@ -68,8 +68,8 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    /* فضای کاری ابزار به صورت کارت شیشه‌ای شناور */
-    .workspace { padding: 60px 24px 40px; text-align: center; }
+    /* فضای تعاملی ابزار */
+    .workspace { padding: 60px 24px 35px; text-align: center; }
     .tool-container { 
       max-width: 720px; 
       margin: 0 auto; 
@@ -106,7 +106,6 @@
     }
     @keyframes reverseSpin { 100% { transform: rotate(-360deg); } }
 
-    /* کنترل‌های آپلود شیشه‌ای */
     .file-upload-wrapper { margin-bottom: 30px; }
     .file-upload-label { 
       display: inline-block; 
@@ -130,7 +129,7 @@
     }
     input[type="file"] { display: none; }
 
-    /* گروه دکمه‌ها */
+    /* دکمه‌های ترکیبی معکوس‌سازی و دانلود */
     .btn-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 15px; }
     .btn-main { 
       background: var(--accent-gradient); 
@@ -189,8 +188,47 @@
       box-shadow: none; 
     }
 
+    /* باکس‌های ویژگی کلیدی دقیقاً زیر کادر ابزار (Feature Boxes مدنظر استاد) */
+    .features-row { 
+      max-width: 1000px; 
+      margin: 10px auto 50px; 
+      padding: 0 24px; 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+      gap: 18px; 
+    }
+    .feature-box { 
+      background: var(--surface-glass); 
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border); 
+      border-radius: 20px; 
+      padding: 22px 18px; 
+      box-shadow: var(--glass-shadow); 
+      transition: all 0.3s ease; 
+      display: flex; 
+      gap: 14px; 
+      align-items: flex-start; 
+    }
+    .feature-box:hover { 
+      transform: translateY(-4px); 
+      background: var(--surface-glass-hover); 
+      box-shadow: var(--glass-shadow-hover); 
+    }
+    .feature-box .f-icon { 
+      font-size: 1.8rem; 
+      line-height: 1; 
+      background: #ffffff; 
+      border: 1px solid var(--glass-border); 
+      padding: 10px; 
+      border-radius: 14px; 
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); 
+    }
+    .feature-box h4 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+    .feature-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+
     /* کادر عکس هوش مصنوعی */
-    .feature-wrapper { max-width: 880px; margin: 30px auto 50px; padding: 0 24px; text-align: center; }
+    .feature-wrapper { max-width: 880px; margin: 10px auto 50px; padding: 0 24px; text-align: center; }
     .feature-image { 
       width: 100%; 
       border-radius: 28px; 
@@ -198,24 +236,55 @@
       display: block; 
     }
 
-    /* کادر مقاله جامع و سوالات متداول */
-    .content-section { 
-      max-width: 900px; 
-      margin: 0 auto 70px; 
-      padding: 45px; 
-      background: var(--surface-glass); 
-      backdrop-filter: blur(18px); 
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--glass-border); 
-      border-radius: 28px; 
-      box-shadow: var(--glass-shadow); 
-    }
-    .content-section h2 { font-size: 2.1rem; font-weight: 900; color: var(--text-dark); margin-bottom: 22px; letter-spacing: -0.02em; }
-    .content-section h3 { font-size: 1.48rem; font-weight: 800; color: var(--text-dark); margin: 36px 0 18px; }
-    .content-section p { font-size: 1.08rem; margin-bottom: 22px; line-height: 1.95; color: var(--text-main); }
-    .content-section ul { margin-bottom: 28px; padding-left: 24px; }
-    .content-section li { margin-bottom: 12px; font-size: 1.04rem; color: var(--text-main); }
+    /* ساختار بصری، کارت‌محور و خردشده مقاله سئو (جلوگیری از دیوار متنی) */
+    .content-container { max-width: 1000px; margin: 0 auto 70px; padding: 0 24px; }
     
+    .content-hero-card {
+      background: var(--surface-glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      box-shadow: var(--glass-shadow);
+      margin-bottom: 26px;
+    }
+    .content-hero-card h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.02em; }
+    .content-hero-card p { font-size: 1.05rem; color: var(--text-main); line-height: 1.9; }
+
+    /* کارت‌های گام‌به‌گام مراحل */
+    .steps-container {
+      background: var(--surface-glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      margin-bottom: 26px;
+      box-shadow: var(--glass-shadow);
+    }
+    .steps-container h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 20px; }
+    .step-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 24px; }
+    .step-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      transition: 0.3s;
+    }
+    .step-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .step-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    .step-card h4 { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+    .step-card p { font-size: 0.95rem; color: var(--text-main); line-height: 1.65; }
+
     .tutorial-image { 
       width: 100%; 
       max-width: 620px; 
@@ -223,19 +292,54 @@
       border-radius: 20px; 
       border: 1px solid var(--glass-border); 
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06); 
-      margin: 28px auto 14px; 
+      margin: 15px auto; 
       display: block; 
     }
-    .image-caption { text-align: center; font-size: 0.92rem; color: var(--text-muted); margin-bottom: 34px; font-style: italic; }
+    .image-caption { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; font-style: italic; }
+
+    /* گرید دو ستونه مباحث تخصصی */
+    .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 22px; margin-bottom: 26px; }
+    .topic-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: var(--glass-shadow);
+      transition: 0.3s;
+    }
+    .topic-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .topic-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .topic-card p { font-size: 0.98rem; color: var(--text-main); line-height: 1.85; }
+
+    /* باکس هایلایت تحلیلی */
+    .callout-box {
+      background: linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
+      border: 1.5px solid rgba(99, 102, 241, 0.3);
+      border-radius: 22px;
+      padding: 30px;
+      margin-bottom: 26px;
+      box-shadow: var(--glass-shadow);
+    }
+    .callout-box h3 { font-size: 1.35rem; font-weight: 900; color: var(--text-dark); margin-bottom: 12px; }
+    .callout-box p { font-size: 1rem; color: var(--text-main); line-height: 1.85; margin-bottom: 14px; }
+    .callout-box ul { padding-left: 20px; }
+    .callout-box li { font-size: 0.96rem; color: var(--text-main); margin-bottom: 6px; }
 
     /* آکاردئون سوالات متداول */
-    .faq-container { margin-top: 25px; display: flex; flex-direction: column; gap: 14px; }
+    .faq-wrapper-card {
+      background: var(--surface-glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      box-shadow: var(--glass-shadow);
+    }
+    .faq-container { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
     .faq-item { 
       background: rgba(255, 255, 255, 0.85); 
       border: 1px solid var(--glass-border); 
-      border-radius: 18px; 
+      border-radius: 16px; 
       overflow: hidden; 
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); 
       transition: all 0.2s ease; 
     }
     .faq-item:hover { border-color: rgba(99, 102, 241, 0.4); }
@@ -243,9 +347,9 @@
       width: 100%; 
       background: none; 
       border: none; 
-      padding: 22px 26px; 
+      padding: 20px 24px; 
       text-align: left; 
-      font-size: 1.08rem; 
+      font-size: 1.05rem; 
       font-weight: 800; 
       color: var(--text-dark); 
       display: flex; 
@@ -255,17 +359,17 @@
       transition: 0.2s; 
     }
     .faq-question:hover { color: var(--accent); }
-    .faq-icon { font-size: 0.9rem; transition: transform 0.3s ease; color: var(--accent); }
+    .faq-icon { font-size: 0.85rem; transition: transform 0.3s ease; color: var(--accent); }
     .faq-answer { 
       max-height: 0; 
       overflow: hidden; 
       transition: max-height 0.35s ease, padding 0.35s ease; 
-      padding: 0 26px; 
+      padding: 0 24px; 
       color: var(--text-main); 
-      font-size: 1.02rem; 
-      line-height: 1.85; 
+      font-size: 0.98rem; 
+      line-height: 1.8; 
     }
-    .faq-item.active .faq-answer { max-height: 250px; padding: 0 26px 24px 26px; }
+    .faq-item.active .faq-answer { max-height: 250px; padding: 0 24px 22px 24px; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
 
     /* فوتر کریستالی */
@@ -291,13 +395,15 @@
       .nav-links { display: none; }
       .hamburger { display: block; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .content-section { padding: 26px; margin: 0 16px 50px; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .content-hero-card, .steps-container, .callout-box, .faq-wrapper-card { padding: 24px; }
       .tool-container { padding: 35px 20px; }
       .btn-group { flex-direction: column; align-items: stretch; }
       .btn-main, .btn-secondary { max-width: 100%; }
     }
     @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
+      .features-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -311,7 +417,7 @@
         <a href="/about.html" class="nav-link">About App</a>
         <a href="/install.html" class="nav-link">Installation</a>
         <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-        <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+        <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
       </nav>
       <button class="hamburger" id="menuBtn">☰</button>
     </div>
@@ -324,7 +430,7 @@
     <a href="/about.html" class="nav-link">About App</a>
     <a href="/install.html" class="nav-link">Installation</a>
     <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-    <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+    <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
   </nav>
 
   <!-- فضای تعاملی ابزار -->
@@ -349,90 +455,155 @@
     </div>
   </main>
 
+  <!-- ردیف باکس‌های ویژگی کلیدی ابزار (Feature Boxes مدنظر استاد) -->
+  <section class="features-row">
+    <div class="feature-box">
+      <span class="f-icon">🔄</span>
+      <div>
+        <h4>Instant Array Flip</h4>
+        <p>Inverts millions of PCM stereo sample pointers across browser threads in under one second.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">🔒</span>
+      <div>
+        <h4>100% Client-Side</h4>
+        <p>Sound clips process entirely in local RAM; zero files are transmitted over the web.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">💾</span>
+      <div>
+        <h4>Lossless WAV Export</h4>
+        <p>Generates uncompressed 16-bit PCM WAV master files ready for video editors and DAWs.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">⚡</span>
+      <div>
+        <h4>Zero Generation Lag</h4>
+        <p>Immediate export generation without server render queues, timeouts, or watermarks.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- تصویر هوش مصنوعی با نام reverse-audio.jpg -->
   <div class="feature-wrapper">
     <img src="reverse-audio.jpg" alt="A swirling vortex visualization representing audio playing backward" class="feature-image">
   </div>
 
-  <!-- مقاله تخصصی، انسانی و سئو شده (> ۶۵۰ کلمه) -->
-  <section class="content-section">
-    <h2>The Art and Science of Audio Inversion: From Magnetic Tape to Browser DSP</h2>
-    <p>Playing sound backwards—historically known as <em>backmasking</em>—has been one of the most transformative creative techniques in audio production since the mid-20th century. During the analog era of the 1960s, recording pioneers like The Beatles and Jimi Hendrix accidentally discovered backward audio by manually threading physical reel-to-reel magnetic tapes across playback heads in reverse. What resulted was an entirely new acoustic dimension: sharp percussive attacks transformed into gentle, swelling fade-ins, while vocal syllables melted into surreal, dreamlike phrases.</p>
+  <!-- محتوای سئو و آموزشی به صورت بلوک‌ها و کارت‌های تفکیک‌شده بصری -->
+  <section class="content-container">
 
-    <p>In contemporary music genres—from modern trap and hip-hop to cinematic film scoring and ambient electronic music—audio reversal remains an essential sound design pillar. However, while analog producers required razor blades, splicing tape, and dedicated studio consoles, the <strong>MiMusic Reverse Audio Tool</strong> executes instantaneous, lossless sample inversion right inside your web browser. Utilizing high-performance client-side digital signal processing (DSP), our tool decodes, mirrors, and compiles backward audio streams without requiring heavy digital audio workstation (DAW) software or external plugins.</p>
+    <!-- کارت معرفی تحلیلی -->
+    <div class="content-hero-card">
+      <h2>The Art and Science of Audio Inversion: From Magnetic Tape to Browser DSP</h2>
+      <p>Playing sound backwards—historically known as <em>backmasking</em>—has been one of the most transformative creative techniques in audio production since the mid-20th century. During the analog era of the 1960s, recording pioneers like The Beatles and Jimi Hendrix accidentally discovered backward audio by manually threading physical reel-to-reel magnetic tapes across playback heads in reverse. What resulted was an entirely new acoustic dimension: sharp percussive attacks transformed into gentle, swelling fade-ins, while vocal syllables melted into surreal, dreamlike phrases.</p>
+      <p style="margin-top: 12px;">In contemporary music genres—from modern trap and hip-hop to cinematic film scoring and ambient electronic music—audio reversal remains an essential sound design pillar. The <strong>MiMusic Reverse Audio Tool</strong> executes instantaneous, lossless sample inversion right inside your web browser. Utilizing high-performance client-side digital signal processing (DSP), our tool decodes, mirrors, and compiles backward audio streams without requiring heavy DAW software or external plugins.</p>
+    </div>
 
-    <h3>How In-Memory PCM Sample Reversal Operates</h3>
-    <p>Digital sound is represented as a dense chronological sequence of numerical measurements known as Pulse Code Modulation (PCM) samples. In standard 44.1 kHz or 48 kHz studio audio, 44,100 to 48,000 discrete amplitude data points are captured every single second for each stereo channel. When you press play under normal conditions, the digital-to-analog converter (DAC) reads this array linearly from index zero to the final sample index.</p>
+    <!-- کارت راهنمای گام‌به‌گام همراه تصویر -->
+    <div class="steps-container">
+      <h3>Step-by-Step Guide: How to Reverse Any Sound File</h3>
+      <p style="color: var(--text-muted); font-size: 1.02rem;">Follow these three quick steps to flip your audio files backward:</p>
 
-    <p>Our tool deploys the native <strong>Web Audio API</strong> to ingest your audio file into a raw floating-point <code>AudioBuffer</code>. The algorithmic engine then isolates each independent stereo channel, instantiates a mirrored buffer of identical length and sample rate, and executes a symmetrical pointer loop: the sample residing at index <code>[length - 1 - i]</code> is written to index <code>[i]</code>. Because this calculation occurs in parallel across multi-threaded browser memory, a three-minute song containing over fifteen million individual stereo samples is inverted in less than a single second.</p>
+      <img src="reverse-guide.jpg" alt="Step by step reverse audio tool guide" class="tutorial-image">
+      <p class="image-caption">Upload your audio file, click Reverse Audio, and download the lossless reversed WAV file.</p>
 
-    <h3>Step-by-Step Guide: How to Reverse Any Sound File</h3>
-    <p>Creating reversed tracks and sound effects takes only a few quick clicks:</p>
-
-    <!-- تصویر اسکرین‌شات آموزشی با نام reverse-guide.jpg -->
-    <img src="reverse-guide.jpg" alt="Step by step reverse audio tool guide" class="tutorial-image">
-    <p class="image-caption">Upload your audio file, click Reverse Audio, and download the lossless reversed WAV file.</p>
-
-    <ul>
-      <li><strong>Step 1: Select Your Audio File:</strong> Tap the dashed file picker to load any standard audio recording from your phone or desktop, including MP3, WAV, AAC, or OGG tracks.</li>
-      <li><strong>Step 2: Initiate Instant Inversion:</strong> Tap the "Reverse Audio" button. The status icon spins while the Web Audio engine mirrors the PCM buffer data in local device memory.</li>
-      <li><strong>Step 3: Download Lossless Master:</strong> Once processing concludes, the "Download Reversed" button lights up. Tap it to immediately download the newly structured audio file as an uncompressed 16-bit PCM WAV file ready for your video editor or music project.</li>
-    </ul>
-
-    <h3>Creative Production Techniques to Try</h3>
-    <p>Reversing audio unlocks endless opportunities for creative exploration:</p>
-    <ul>
-      <li><strong>Cinematic Reverse Cymbal Swells:</strong> Reverse a loud crash cymbal hit. The natural slow decay of the brass transforms into a dramatic, rising whoosh that serves as the ultimate transitional cue right before a musical drop or video scene transition.</li>
-      <li><strong>Ambient Reverse Reverb Tails:</strong> Add heavy reverb to a vocal word, bounce the audio, and flip it backward. The reverb swell leads mysteriously into the spoken word itself, creating the signature ghostly vocal effect heard in modern thriller movie trailers.</li>
-      <li><strong>Subconscious Melodic Variations:</strong> Producers frequently take acoustic piano chord progressions or guitar riffs, flip them backward, and chop them into rhythmic four-bar loops to generate fresh melodic themes that feel strangely familiar yet completely original.</li>
-    </ul>
-
-    <h3>100% Client-Side Privacy: Zero Server Uploads</h3>
-    <p>Unlike conventional online file converters that require uploading your private recordings to obscure cloud servers, MiMusic.net functions exclusively inside your browser sandbox. Your audio data is read into local RAM, decoded, inverted, and packaged into a downloadable WAV blob entirely within your browser thread. No copies are saved, no bandwidth is wasted, and your creative work remains strictly confidential.</p>
-
-    <!-- بخش سوالات متداول آکاردئونی تعاملی -->
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Does reversing audio reduce the original sound quality?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Not at all. Our tool inverts raw uncompressed PCM sample points chronologically without applying lossy compression. The resulting reversed file is packaged as an uncompressed 16-bit WAV file, preserving 100% of the original acoustic fidelity.</p>
+      <div class="step-cards-grid">
+        <div class="step-card">
+          <span class="step-badge">Step 1</span>
+          <h4>Select Audio File</h4>
+          <p>Tap the dashed file picker to load any audio recording from your phone or desktop, including MP3, WAV, AAC, or OGG tracks.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Are my uploaded songs or voice notes uploaded to your server?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>No. Every step of the decoding, reversal, and file generation pipeline executes locally on your device's hardware via HTML5 and Web Audio APIs. Your files never leave your computer or phone.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 2</span>
+          <h4>Initiate Inversion</h4>
+          <p>Tap "Reverse Audio". The status icon spins while the Web Audio engine mirrors the PCM buffer data in local device memory.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Why is the downloaded file in WAV format?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>WAV is the universally accepted uncompressed audio standard across all video editors (Premiere, Final Cut, CapCut) and music DAWs (FL Studio, Ableton, Logic). It ensures pristine sound quality without the compression artifacts of MP3 re-encoding.</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Can I reverse audio files directly on my mobile phone?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Yes. The tool is fully optimized for mobile touchscreens and works smoothly on mobile browsers such as Chrome, Safari, and Firefox on both Android and iOS devices.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 3</span>
+          <h4>Download WAV Master</h4>
+          <p>Once processed, the "Download Reversed" button lights up. Tap it to download an uncompressed 16-bit PCM WAV file.</p>
         </div>
       </div>
     </div>
+
+    <!-- گرید موضوعی تخصصی دو ستونه -->
+    <div class="topics-grid">
+      <div class="topic-card">
+        <h3>🌀 Creative Production & Backmasking Techniques</h3>
+        <p>Reversing audio turns percussive transients into rising atmospheric risers. Sound designers frequently reverse crash cymbal hits to create dramatic whoosh transitions before beat drops. Similarly, adding heavy reverb to a vocal note, bouncing the track, and flipping it backward generates eerie, ghostly vocal tails favored in thriller movie trailers.</p>
+      </div>
+
+      <div class="topic-card">
+        <h3>🔬 Mathematical In-Memory PCM Reversal</h3>
+        <p>Standard 44.1 kHz digital audio stores 44,100 discrete amplitude measurements per second. Our tool isolates the left and right stereo channels in an uncompressed <code>AudioBuffer</code> and executes a symmetrical array loop: the sample at index <code>[length - 1 - i]</code> is written to index <code>[i]</code>, mirroring 15 million points in less than a second.</p>
+      </div>
+    </div>
+
+    <!-- باکس هایلایت تحلیلی حریم خصوصی و پردازش محلی -->
+    <div class="callout-box">
+      <h3>🔒 Local RAM Sandboxing: Studio Privacy Without Cloud Hazards</h3>
+      <p>Standard online file converters require uploading private vocal takes, proprietary song stems, or sensitive voice memos to external cloud servers. Beyond obvious bandwidth overhead, storing user media creates serious privacy liabilities:</p>
+      <ul>
+        <li><strong>Zero Remote Uploads:</strong> Audio stays 100% inside your browser memory; no data packets leave your device.</li>
+        <li><strong>No File Resampling Artifacts:</strong> Generates studio-grade WAV files without introducing lossy MP3 compression noise.</li>
+        <li><strong>Zero Permanent Footprint:</strong> Closing your browser tab immediately destroys in-memory audio buffers.</li>
+      </ul>
+    </div>
+
+    <!-- کارت سوالات متداول آکاردئونی -->
+    <div class="faq-wrapper-card">
+      <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin-bottom: 10px;">Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Does reversing audio reduce the original sound quality?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Not at all. Our tool inverts raw uncompressed PCM sample points chronologically without applying lossy compression. The resulting reversed file is packaged as an uncompressed 16-bit WAV file, preserving 100% of the original acoustic fidelity.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Are my uploaded songs or voice notes uploaded to your server?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. Every step of the decoding, reversal, and file generation pipeline executes locally on your device's hardware via HTML5 and Web Audio APIs. Your files never leave your computer or phone.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Why is the downloaded file in WAV format?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>WAV is the universally accepted uncompressed audio standard across all video editors (Premiere, Final Cut, CapCut) and music DAWs (FL Studio, Ableton, Logic). It ensures pristine sound quality without the compression artifacts of MP3 re-encoding.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Can I reverse audio files directly on my mobile phone?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. The tool is fully optimized for mobile touchscreens and works smoothly on mobile browsers such as Chrome, Safari, and Firefox on both Android and iOS devices.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- فوتر کریستالی -->
@@ -478,7 +649,6 @@
 
   <!-- اسکریپت‌های منو و وارونگی صوتی -->
   <script>
-    // منوی ناوبری
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
@@ -491,13 +661,11 @@
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    // اسکریپت آکاردئونی سوالات متداول
     function toggleFaq(button) {
       const item = button.parentElement;
       item.classList.toggle('active');
     }
 
-    // منطق مهندسی معکوس‌سازی بافر صوتی و صدور فایل WAV
     let audioCtx = null;
     let originalAudioBuffer = null;
     let reversedAudioBlob = null;
@@ -561,19 +729,18 @@
         pos += 4;
       }
 
-      // نوشتن هدر استاندارد RIFF WAVE
       writeString("RIFF");
       setUint32(length - 8);
       writeString("WAVE");
 
       writeString("fmt ");
-      setUint32(16); // طول چانک فرمت
-      setUint16(1);  // PCM استاندارد
+      setUint32(16);
+      setUint16(1);
       setUint16(numOfChan);
       setUint32(abuffer.sampleRate);
-      setUint32(abuffer.sampleRate * 2 * numOfChan); // بایت در ثانیه
-      setUint16(numOfChan * 2); // Block align
-      setUint16(16); // عمق بیت
+      setUint32(abuffer.sampleRate * 2 * numOfChan);
+      setUint16(numOfChan * 2);
+      setUint16(16);
 
       writeString("data");
       setUint32(length - pos - 4);
