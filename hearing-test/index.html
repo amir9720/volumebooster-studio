@@ -7,7 +7,7 @@
   <meta name="description" content="Test your hearing frequency range online using your headphones. Free browser-based audiometric hearing test tool with custom pure-tone frequency selection.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
-    /* تم یخی کریستالی و شیشه‌ای منطبق با استانداردهای صفحه اصلی */
+    /* تم یخی کریستالی و شیشه‌ای منطبق با صفحه اصلی */
     :root {
       --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
       --surface-glass: rgba(255, 255, 255, 0.72);
@@ -68,8 +68,8 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    /* فضای کاری ابزار به صورت کارت شیشه‌ای شناور */
-    .workspace { padding: 60px 24px 40px; text-align: center; }
+    /* فضای تعاملی ابزار */
+    .workspace { padding: 60px 24px 35px; text-align: center; }
     .tool-container { 
       max-width: 720px; 
       margin: 0 auto; 
@@ -115,7 +115,7 @@
       background: rgba(255, 255, 255, 0.8); 
       border: 1px solid var(--glass-border); 
       border-radius: 22px; 
-      padding: 26px 28px; 
+      padding: 24px 28px; 
       margin-bottom: 32px; 
       max-width: 480px; 
       margin-left: auto; 
@@ -185,8 +185,47 @@
       box-shadow: 0 10px 25px -4px rgba(239, 68, 68, 0.4); 
     }
 
+    /* باکس‌های ویژگی کلیدی دقیقاً زیر کادر ابزار (Feature Boxes مدنظر استاد) */
+    .features-row { 
+      max-width: 1000px; 
+      margin: 10px auto 50px; 
+      padding: 0 24px; 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+      gap: 18px; 
+    }
+    .feature-box { 
+      background: var(--surface-glass); 
+      backdrop-filter: blur(16px); 
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border); 
+      border-radius: 20px; 
+      padding: 22px 18px; 
+      box-shadow: var(--glass-shadow); 
+      transition: all 0.3s ease; 
+      display: flex; 
+      gap: 14px; 
+      align-items: flex-start; 
+    }
+    .feature-box:hover { 
+      transform: translateY(-4px); 
+      background: var(--surface-glass-hover); 
+      box-shadow: var(--glass-shadow-hover); 
+    }
+    .feature-box .f-icon { 
+      font-size: 1.8rem; 
+      line-height: 1; 
+      background: #ffffff; 
+      border: 1px solid var(--glass-border); 
+      padding: 10px; 
+      border-radius: 14px; 
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); 
+    }
+    .feature-box h4 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+    .feature-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+
     /* کادر عکس هوش مصنوعی */
-    .feature-wrapper { max-width: 880px; margin: 30px auto 50px; padding: 0 24px; text-align: center; }
+    .feature-wrapper { max-width: 880px; margin: 10px auto 50px; padding: 0 24px; text-align: center; }
     .feature-image { 
       width: 100%; 
       border-radius: 28px; 
@@ -194,24 +233,55 @@
       display: block; 
     }
 
-    /* کادر مقاله جامع و سوالات متداول */
-    .content-section { 
-      max-width: 900px; 
-      margin: 0 auto 70px; 
-      padding: 45px; 
-      background: var(--surface-glass); 
+    /* ساختار بصری، کارت‌محور و خردشده مقاله سئو (جلوگیری از دیوار متنی) */
+    .content-container { max-width: 1000px; margin: 0 auto 70px; padding: 0 24px; }
+    
+    .content-hero-card {
+      background: var(--surface-glass);
       backdrop-filter: blur(18px); 
       -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--glass-border); 
-      border-radius: 28px; 
-      box-shadow: var(--glass-shadow); 
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      box-shadow: var(--glass-shadow);
+      margin-bottom: 26px;
     }
-    .content-section h2 { font-size: 2.1rem; font-weight: 900; color: var(--text-dark); margin-bottom: 22px; letter-spacing: -0.02em; }
-    .content-section h3 { font-size: 1.48rem; font-weight: 800; color: var(--text-dark); margin: 36px 0 18px; }
-    .content-section p { font-size: 1.08rem; margin-bottom: 22px; line-height: 1.95; color: var(--text-main); }
-    .content-section ul { margin-bottom: 28px; padding-left: 24px; }
-    .content-section li { margin-bottom: 12px; font-size: 1.04rem; color: var(--text-main); }
-    
+    .content-hero-card h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.02em; }
+    .content-hero-card p { font-size: 1.05rem; color: var(--text-main); line-height: 1.9; }
+
+    /* کارت‌های گام‌به‌گام مراحل */
+    .steps-container {
+      background: var(--surface-glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      margin-bottom: 26px;
+      box-shadow: var(--glass-shadow);
+    }
+    .steps-container h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 20px; }
+    .step-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 24px; }
+    .step-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      transition: 0.3s;
+    }
+    .step-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .step-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    .step-card h4 { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+    .step-card p { font-size: 0.95rem; color: var(--text-main); line-height: 1.65; }
+
     .tutorial-image { 
       width: 100%; 
       max-width: 620px; 
@@ -219,19 +289,54 @@
       border-radius: 20px; 
       border: 1px solid var(--glass-border); 
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06); 
-      margin: 28px auto 14px; 
+      margin: 15px auto; 
       display: block; 
     }
-    .image-caption { text-align: center; font-size: 0.92rem; color: var(--text-muted); margin-bottom: 34px; font-style: italic; }
+    .image-caption { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; font-style: italic; }
+
+    /* گرید دو ستونه مباحث تخصصی */
+    .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 22px; margin-bottom: 26px; }
+    .topic-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: var(--glass-shadow);
+      transition: 0.3s;
+    }
+    .topic-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .topic-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .topic-card p { font-size: 0.98rem; color: var(--text-main); line-height: 1.85; }
+
+    /* باکس هایلایت تحلیلی ایمنی صدا */
+    .callout-box {
+      background: linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
+      border: 1.5px solid rgba(99, 102, 241, 0.3);
+      border-radius: 22px;
+      padding: 30px;
+      margin-bottom: 26px;
+      box-shadow: var(--glass-shadow);
+    }
+    .callout-box h3 { font-size: 1.35rem; font-weight: 900; color: var(--text-dark); margin-bottom: 12px; }
+    .callout-box p { font-size: 1rem; color: var(--text-main); line-height: 1.85; margin-bottom: 14px; }
+    .callout-box ul { padding-left: 20px; }
+    .callout-box li { font-size: 0.96rem; color: var(--text-main); margin-bottom: 6px; }
 
     /* آکاردئون سوالات متداول */
-    .faq-container { margin-top: 25px; display: flex; flex-direction: column; gap: 14px; }
+    .faq-wrapper-card {
+      background: var(--surface-glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      box-shadow: var(--glass-shadow);
+    }
+    .faq-container { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
     .faq-item { 
       background: rgba(255, 255, 255, 0.85); 
       border: 1px solid var(--glass-border); 
-      border-radius: 18px; 
+      border-radius: 16px; 
       overflow: hidden; 
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); 
       transition: all 0.2s ease; 
     }
     .faq-item:hover { border-color: rgba(99, 102, 241, 0.4); }
@@ -239,9 +344,9 @@
       width: 100%; 
       background: none; 
       border: none; 
-      padding: 22px 26px; 
+      padding: 20px 24px; 
       text-align: left; 
-      font-size: 1.08rem; 
+      font-size: 1.05rem; 
       font-weight: 800; 
       color: var(--text-dark); 
       display: flex; 
@@ -251,17 +356,17 @@
       transition: 0.2s; 
     }
     .faq-question:hover { color: var(--accent); }
-    .faq-icon { font-size: 0.9rem; transition: transform 0.3s ease; color: var(--accent); }
+    .faq-icon { font-size: 0.85rem; transition: transform 0.3s ease; color: var(--accent); }
     .faq-answer { 
       max-height: 0; 
       overflow: hidden; 
       transition: max-height 0.35s ease, padding 0.35s ease; 
-      padding: 0 26px; 
+      padding: 0 24px; 
       color: var(--text-main); 
-      font-size: 1.02rem; 
-      line-height: 1.85; 
+      font-size: 0.98rem; 
+      line-height: 1.8; 
     }
-    .faq-item.active .faq-answer { max-height: 250px; padding: 0 26px 24px 26px; }
+    .faq-item.active .faq-answer { max-height: 250px; padding: 0 24px 22px 24px; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
 
     /* فوتر کریستالی */
@@ -287,12 +392,14 @@
       .nav-links { display: none; }
       .hamburger { display: block; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .content-section { padding: 26px; margin: 0 16px 50px; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .content-hero-card, .steps-container, .callout-box, .faq-wrapper-card { padding: 24px; }
       .tool-container { padding: 35px 20px; }
       .freq-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
+      .features-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -306,7 +413,7 @@
         <a href="/about.html" class="nav-link">About App</a>
         <a href="/install.html" class="nav-link">Installation</a>
         <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-        <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+        <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
       </nav>
       <button class="hamburger" id="menuBtn">☰</button>
     </div>
@@ -319,7 +426,7 @@
     <a href="/about.html" class="nav-link">About App</a>
     <a href="/install.html" class="nav-link">Installation</a>
     <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-    <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+    <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
   </nav>
 
   <!-- فضای تعاملی ابزار -->
@@ -347,88 +454,161 @@
     </div>
   </main>
 
+  <!-- ردیف باکس‌های ویژگی کلیدی ابزار (Feature Boxes مدنظر استاد) -->
+  <section class="features-row">
+    <div class="feature-box">
+      <span class="f-icon">🎯</span>
+      <div>
+        <h4>Pure Sine Waves</h4>
+        <p>Synthesizes distortion-free mathematical sine waves with zero harmonic overtones.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">🔒</span>
+      <div>
+        <h4>100% In-Memory DSP</h4>
+        <p>Pure client-side oscillator nodes; no audio buffers or personal profiles are tracked.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">👂</span>
+      <div>
+        <h4>250 Hz - 16 kHz Span</h4>
+        <p>Covers speech formant foundations up to the highest adult auditory perception limits.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">🎧</span>
+      <div>
+        <h4>Stereo Isolation</h4>
+        <p>Designed for stereo headphones to evaluate discrete ear canal thresholds cleanly.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- تصویر هوش مصنوعی با نام hearing-test.jpg -->
   <div class="feature-wrapper">
     <img src="hearing-test.jpg" alt="A futuristic ear graphic surrounded by sound frequency waves" class="feature-image">
   </div>
 
-  <!-- مقاله تخصصی، انسانی و سئو شده (> ۶۵۰ کلمه) -->
-  <section class="content-section">
-    <h2>The Biology of Human Hearing: Frequency Tonotopy and the Cochlea</h2>
-    <p>The human auditory system is one of nature’s most sophisticated sensory transductive mechanisms, capable of deciphering sound vibrations spanning from 20 Hz (deep resonant bass) up to 20,000 Hz (ultra-high frequency treble). Sound waves travel down the ear canal, striking the tympanic membrane (eardrum) and setting three miniature middle-ear bones (malleus, incus, and stapes) into mechanical vibration. These ossicles amplify the kinetic energy, transmitting hydraulic waves into the fluid-filled cochlea of the inner ear.</p>
+  <!-- محتوای سئو و آموزشی به صورت بلوک‌ها و کارت‌های تفکیک‌شده بصری -->
+  <section class="content-container">
 
-    <p>Inside the cochlea lies the basilar membrane, which operates on an acoustic architectural principle known as <em>tonotopy</em>. The physical base of the cochlear spiral, which is narrow and stiff, resonates exclusively in response to high-frequency sounds like 8,000 Hz and 16,000 Hz. As the membrane spirals toward the apex, it becomes wider and more flexible, registering low-frequency tones down to 250 Hz. Thousands of microscopic stereocilia (hair cells) lining the membrane bend in response to these vibrations, triggering electrical impulses transmitted directly along the auditory nerve to the brain's temporal lobe.</p>
+    <!-- کارت معرفی تحلیلی -->
+    <div class="content-hero-card">
+      <h2>The Biology of Human Hearing: Frequency Tonotopy and the Cochlea</h2>
+      <p>The human auditory system is one of nature’s most sophisticated sensory transduction mechanisms, capable of deciphering sound vibrations spanning from 20 Hz (deep resonant bass) up to 20,000 Hz (ultra-high frequency treble). Sound waves travel down the ear canal, striking the tympanic membrane (eardrum) and setting three miniature middle-ear bones (malleus, incus, and stapes) into mechanical vibration. These ossicles amplify the kinetic energy, transmitting hydraulic waves into the fluid-filled cochlea of the inner ear.</p>
+      <p style="margin-top: 12px;">Inside the cochlea lies the basilar membrane, which operates on an acoustic architectural principle known as <em>tonotopy</em>. The physical base of the cochlear spiral, which is narrow and stiff, resonates exclusively in response to high-frequency sounds like 8,000 Hz and 16,000 Hz. As the membrane spirals toward the apex, it becomes wider and more flexible, registering low-frequency tones down to 250 Hz. Thousands of microscopic hair cells lining the membrane convert these physical ripples into electrical impulses sent directly to the auditory cortex.</p>
+    </div>
 
-    <h3>Why High Frequencies Decline First: Understanding Presbycusis and Noise Strain</h3>
-    <p>Unlike muscle tissue, mammalian auditory hair cells do not regenerate once damaged. Because incoming acoustic waves must physically traverse the base of the cochlea regardless of their destination frequency, the hair cells tuned to high-frequency tones experience constant physical wear and tear throughout life. This inevitable biological aging process is termed <em>presbycusis</em>.</p>
+    <!-- کارت راهنمای گام‌به‌گام همراه تصویر -->
+    <div class="steps-container">
+      <h3>Step-by-Step Guide: Conducting an Accurate Hearing Range Test</h3>
+      <p style="color: var(--text-muted); font-size: 1.02rem;">Follow this structured, calibrated procedure for a dependable self-assessment:</p>
 
-    <p>In the digital age, regular exposure to noisy urban traffic, loud concerts, and high-volume headphone listening accelerates high-frequency threshold shifts. People typically notice difficulty hearing upper sibilants in speech (like the letters <em>s</em>, <em>f</em>, and <em>th</em>) before realizing they have experienced hearing degradation. Periodic testing across key reference octaves—such as 4 kHz, 8 kHz, 12 kHz, and 16 kHz—serves as an invaluable benchmark for monitoring your auditory health over time.</p>
+      <img src="hearing-guide.jpg" alt="Step by step hearing test guide" class="tutorial-image">
+      <p class="image-caption">Wear stereo headphones, set your device volume to a moderate level, and test each frequency band.</p>
 
-    <h3>Generating Pure Sine Waves via the Web Audio API</h3>
-    <p>Real-world sounds, musical instruments, and speech are complex acoustic cocktails comprised of fundamental pitches and dozens of layered harmonic overtones. If a testing tool played an ordinary MP3 bell tone or recorded chime, you might hear the lower harmonic resonance of the sound even if your ear could not perceive the primary high-frequency pitch.</p>
-
-    <p>The <strong>MiMusic Online Hearing Test</strong> utilizes hardware-accelerated <code>OscillatorNode</code> instances native to the Web Audio API to synthesize mathematically pristine sine waves. A pure sine wave possesses zero harmonic distortion and zero sideband overtones; 100% of the acoustic energy is concentrated strictly at the target hertz frequency. This allows you to verify your genuine auditory reception at each discrete octave band without acoustic artifacts muddying the results.</p>
-
-    <h3>Step-by-Step Guide: Conducting an Accurate Hearing Range Test</h3>
-    <p>For the most reliable self-assessment, follow this calibrated procedure:</p>
-
-    <!-- تصویر اسکرین‌شات آموزشی با نام hearing-guide.jpg -->
-    <img src="hearing-guide.jpg" alt="Step by step hearing test guide" class="tutorial-image">
-    <p class="image-caption">Wear stereo headphones, set your device volume to a moderate level, and test each frequency band.</p>
-
-    <ul>
-      <li><strong>Step 1: Use Quality Over-Ear Headphones or Earbuds:</strong> Never conduct an audiometric test using smartphone speakers or laptop micro-drivers, as tiny speaker grilles cannot physically reproduce high frequencies cleanly.</li>
-      <li><strong>Step 2: Calibrate Volume at 1,000 Hz:</strong> Select 1,000 Hz and press "Play Tone". Adjust your device's volume to a comfortable, moderate listening level. <em>Do not increase the volume further</em> when testing higher frequencies to prevent sudden acoustic shock.</li>
-      <li><strong>Step 3: Test Progressively Upward:</strong> Step through 4,000 Hz, 8,000 Hz, 12,000 Hz, and 16,000 Hz. Note the highest frequency tone you can clearly distinguish.</li>
-      <li><strong>Step 4: Check Low-End Range:</strong> Select 250 Hz to test warm mid-bass response and confirm low-end membrane sensitivity.</li>
-    </ul>
-
-    <h3>Important Clinical Disclaimer</h3>
-    <p>While this tool is engineered with pure mathematical synthesis, it is designed strictly for educational awareness, headphone frequency checking, and personal auditory tracking. Consumer headphones, Bluetooth codecs, and smartphone DACs do not have calibrated flat frequency curves. This test does not replace an official pure-tone clinical audiometry exam conducted in a sound-dampened chamber by a licensed audiologist.</p>
-
-    <!-- بخش سوالات متداول آکاردئونی تعاملی -->
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Why can't I hear frequencies above 12,000 Hz or 16,000 Hz?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Losing the ability to hear above 12 kHz to 16 kHz is a natural biological consequence of aging (presbycusis) and lifestyle noise exposure. Most healthy adults over age 25 have a practical ceiling between 14 kHz and 16 kHz. Additionally, many consumer earbuds naturally roll off response above 15 kHz.</p>
+      <div class="step-cards-grid">
+        <div class="step-card">
+          <span class="step-badge">Step 1</span>
+          <h4>Use Stereo Headphones</h4>
+          <p>Never test through phone or laptop grilles. Small speakers produce heavy harmonic distortion that invalidates results.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Why are headphones strictly required for this test?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Smartphone and laptop speakers possess tiny physical cones that produce heavy harmonic distortion when pushed to high frequencies. Quality headphones channel pure sine waves directly into your ear canal without room reflections or speaker hardware distortion.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 2</span>
+          <h4>Calibrate Volume at 1 kHz</h4>
+          <p>Select 1,000 Hz, press "Play Tone", and adjust your device volume to a moderate level. <em>Do not raise it further</em>.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Is it dangerous to test high frequencies at maximum volume?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Yes. Never crank your device volume to maximum in an attempt to hear faint high-frequency tones. Pumping high-decibel energy into the ear can cause acute acoustic trauma or trigger temporary tinnitus. Always keep your volume at a moderate, comfortable baseline.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 3</span>
+          <h4>Step Frequencies Upward</h4>
+          <p>Step through 4 kHz, 8 kHz, 12 kHz, and 16 kHz. Note the highest pitch tone you can comfortably perceive.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Can this tool diagnose clinical hearing loss?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>No. While this tool accurately generates pure frequencies, genuine clinical diagnoses require calibrated decibel hearing level (dB HL) equipment, bone-conduction transducers, and soundproof test environments administered by a licensed doctor.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 4</span>
+          <h4>Check Low Baseline</h4>
+          <p>Select 250 Hz to test warm low-end membrane resonance and confirm low-frequency responsiveness.</p>
         </div>
       </div>
     </div>
+
+    <!-- گرید موضوعی تخصصی دو ستونه -->
+    <div class="topics-grid">
+      <div class="topic-card">
+        <h3>📉 Presbycusis & High-Frequency Loss</h3>
+        <p>Unlike muscle fibers, human stereocilia (cochlear hair cells) do not regenerate once damaged. Because incoming acoustic waves must travel past the base of the cochlea to reach the apex, high-frequency receptors experience constant lifetime physical wear. This natural biological aging process is termed <em>presbycusis</em>, making upper tones above 12 kHz harder to hear past age 25.</p>
+      </div>
+
+      <div class="topic-card">
+        <h3>🔬 Pure Sine Waves vs. Harmonic Audio</h3>
+        <p>Natural musical instruments and speech recordings are complex blends of fundamentals and layered harmonic overtones. If a test used an MP3 bell chime, your brain might hear the low-frequency resonance even if your ear missed the high pitch. Our Web Audio oscillator generates pure mathematical sine waves with zero harmonic distortion.</p>
+      </div>
+    </div>
+
+    <!-- باکس هایلایت تحلیلی ایمنی صدا -->
+    <div class="callout-box">
+      <h3>⚠️ Acoustic Safety Protocols & Clinical Disclaimer</h3>
+      <p>While this tool provides precise relative acoustic frequency synthesis, testing requires responsible hearing safety:</p>
+      <ul>
+        <li><strong>Never Maximize Volume:</strong> Pumping high-volume energy into your ears attempting to hear faint high tones risks acute acoustic trauma and tinnitus.</li>
+        <li><strong>Consumer Headphone Variances:</strong> Consumer earbuds do not have flat laboratory frequency curves; many naturally roll off response above 14 kHz.</li>
+        <li><strong>Not a Medical Diagnosis:</strong> This tool is engineered for educational awareness and gear checking. It does not replace a comprehensive clinical audiogram performed by a licensed doctor.</li>
+      </ul>
+    </div>
+
+    <!-- کارت سوالات متداول آکاردئونی -->
+    <div class="faq-wrapper-card">
+      <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin-bottom: 10px;">Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Why can't I hear frequencies above 12,000 Hz or 16,000 Hz?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Losing the ability to hear above 12 kHz to 16 kHz is a natural biological consequence of aging (presbycusis) and lifestyle noise exposure. Most healthy adults over age 25 have a practical ceiling between 14 kHz and 16 kHz. Additionally, many consumer earbuds naturally roll off response above 15 kHz.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Why are headphones strictly required for this test?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Smartphone and laptop speakers possess tiny physical cones that produce heavy harmonic distortion when pushed to high frequencies. Quality headphones channel pure sine waves directly into your ear canal without room reflections or speaker hardware distortion.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Is it dangerous to test high frequencies at maximum volume?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. Never crank your device volume to maximum in an attempt to hear faint high-frequency tones. Pumping high-decibel energy into the ear can cause acute acoustic trauma or trigger temporary tinnitus. Always keep your volume at a moderate, comfortable baseline.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Can this tool diagnose clinical hearing loss?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. While this tool accurately generates pure frequencies, genuine clinical diagnoses require calibrated decibel hearing level (dB HL) equipment, bone-conduction transducers, and soundproof test environments administered by a licensed doctor.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- فوتر کریستالی -->
@@ -474,7 +654,6 @@
 
   <!-- اسکریپت‌های منو و مولد سینوس صوتی -->
   <script>
-    // منوی ناوبری
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
@@ -487,13 +666,11 @@
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    // اسکریپت آکاردئونی سوالات متداول
     function toggleFaq(button) {
       const item = button.parentElement;
       item.classList.toggle('active');
     }
 
-    // منطق تولید فرکانس خالص صوتی Web Audio API
     let audioCtx = null;
     let osc = null;
     let gainNode = null;
@@ -507,7 +684,6 @@
       document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
 
-      // به‌روزرسانی زنده فرکانس در صورت فعال بودن صدا
       if (isTesting && osc && audioCtx) {
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
       }
@@ -530,7 +706,7 @@
 
         osc.type = 'sine';
         osc.frequency.setValueAtTime(currentFreq, audioCtx.currentTime);
-        gainNode.gain.value = 0.3; // حجم صدای ایمن کالیبره‌شده
+        gainNode.gain.value = 0.3;
 
         osc.connect(gainNode);
         gainNode.connect(audioCtx.destination);
