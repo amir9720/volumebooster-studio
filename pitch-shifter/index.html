@@ -7,7 +7,7 @@
   <meta name="description" content="Change the speed, tempo, and pitch of any audio file online. Create Nightcore or Slowed effects instantly in your browser without losing quality. Free and private.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
-    /* تم یخی کریستالی و شیشه‌ای منطبق با استانداردهای صفحه اصلی */
+    /* تم یخی کریستالی و شیشه‌ای منطبق با صفحه اصلی */
     :root {
       --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
       --surface-glass: rgba(255, 255, 255, 0.72);
@@ -68,8 +68,8 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    /* فضای کاری ابزار به صورت کارت شیشه‌ای شناور */
-    .workspace { padding: 60px 24px 40px; text-align: center; }
+    /* فضای تعاملی ابزار */
+    .workspace { padding: 60px 24px 35px; text-align: center; }
     .tool-container { 
       max-width: 720px; 
       margin: 0 auto; 
@@ -109,7 +109,6 @@
       100% { transform: translateY(-8px) scale(1.04); box-shadow: 0 16px 28px rgba(245, 158, 11, 0.35); } 
     }
 
-    /* کنترل‌های آپلود شیشه‌ای */
     .file-upload-wrapper { margin-bottom: 26px; }
     .file-upload-label { 
       display: inline-block; 
@@ -138,7 +137,7 @@
       background: rgba(255, 255, 255, 0.8); 
       border: 1px solid var(--glass-border); 
       border-radius: 22px; 
-      padding: 26px 28px; 
+      padding: 24px 28px; 
       margin-bottom: 32px; 
       max-width: 460px; 
       margin-left: auto; 
@@ -165,7 +164,7 @@
       border-radius: 5px;
       background: #e2e8f0;
       outline: none;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
     
     .checkbox-wrapper { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
@@ -203,8 +202,47 @@
       box-shadow: 0 10px 25px -4px rgba(239, 68, 68, 0.4); 
     }
 
+    /* باکس‌های ویژگی کلیدی دقیقاً زیر کادر ابزار (Feature Boxes مدنظر استاد) */
+    .features-row { 
+      max-width: 1000px; 
+      margin: 10px auto 50px; 
+      padding: 0 24px; 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+      gap: 18px; 
+    }
+    .feature-box { 
+      background: var(--surface-glass); 
+      backdrop-filter: blur(16px); 
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border); 
+      border-radius: 20px; 
+      padding: 22px 18px; 
+      box-shadow: var(--glass-shadow); 
+      transition: all 0.3s ease; 
+      display: flex; 
+      gap: 14px; 
+      align-items: flex-start; 
+    }
+    .feature-box:hover { 
+      transform: translateY(-4px); 
+      background: var(--surface-glass-hover); 
+      box-shadow: var(--glass-shadow-hover); 
+    }
+    .feature-box .f-icon { 
+      font-size: 1.8rem; 
+      line-height: 1; 
+      background: #ffffff; 
+      border: 1px solid var(--glass-border); 
+      padding: 10px; 
+      border-radius: 14px; 
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); 
+    }
+    .feature-box h4 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+    .feature-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+
     /* کادر عکس هوش مصنوعی */
-    .feature-wrapper { max-width: 880px; margin: 30px auto 50px; padding: 0 24px; text-align: center; }
+    .feature-wrapper { max-width: 880px; margin: 10px auto 50px; padding: 0 24px; text-align: center; }
     .feature-image { 
       width: 100%; 
       border-radius: 28px; 
@@ -212,24 +250,55 @@
       display: block; 
     }
 
-    /* کادر مقاله جامع و سوالات متداول */
-    .content-section { 
-      max-width: 900px; 
-      margin: 0 auto 70px; 
-      padding: 45px; 
-      background: var(--surface-glass); 
+    /* ساختار بصری، کارت‌محور و خردشده مقاله سئو (جلوگیری از دیوار متنی) */
+    .content-container { max-width: 1000px; margin: 0 auto 70px; padding: 0 24px; }
+    
+    .content-hero-card {
+      background: var(--surface-glass);
       backdrop-filter: blur(18px); 
       -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--glass-border); 
-      border-radius: 28px; 
-      box-shadow: var(--glass-shadow); 
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      box-shadow: var(--glass-shadow);
+      margin-bottom: 26px;
     }
-    .content-section h2 { font-size: 2.1rem; font-weight: 900; color: var(--text-dark); margin-bottom: 22px; letter-spacing: -0.02em; }
-    .content-section h3 { font-size: 1.48rem; font-weight: 800; color: var(--text-dark); margin: 36px 0 18px; }
-    .content-section p { font-size: 1.08rem; margin-bottom: 22px; line-height: 1.95; color: var(--text-main); }
-    .content-section ul { margin-bottom: 28px; padding-left: 24px; }
-    .content-section li { margin-bottom: 12px; font-size: 1.04rem; color: var(--text-main); }
-    
+    .content-hero-card h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.02em; }
+    .content-hero-card p { font-size: 1.05rem; color: var(--text-main); line-height: 1.9; }
+
+    /* کارت‌های گام‌به‌گام مراحل */
+    .steps-container {
+      background: var(--surface-glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      margin-bottom: 26px;
+      box-shadow: var(--glass-shadow);
+    }
+    .steps-container h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 20px; }
+    .step-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 24px; }
+    .step-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      transition: 0.3s;
+    }
+    .step-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .step-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    .step-card h4 { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+    .step-card p { font-size: 0.95rem; color: var(--text-main); line-height: 1.65; }
+
     .tutorial-image { 
       width: 100%; 
       max-width: 620px; 
@@ -237,19 +306,54 @@
       border-radius: 20px; 
       border: 1px solid var(--glass-border); 
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06); 
-      margin: 28px auto 14px; 
+      margin: 15px auto; 
       display: block; 
     }
-    .image-caption { text-align: center; font-size: 0.92rem; color: var(--text-muted); margin-bottom: 34px; font-style: italic; }
+    .image-caption { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; font-style: italic; }
+
+    /* گرید دو ستونه مباحث تخصصی */
+    .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 22px; margin-bottom: 26px; }
+    .topic-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: var(--glass-shadow);
+      transition: 0.3s;
+    }
+    .topic-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .topic-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .topic-card p { font-size: 0.98rem; color: var(--text-main); line-height: 1.85; }
+
+    /* باکس هایلایت تحلیلی کشش زمانی */
+    .callout-box {
+      background: linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
+      border: 1.5px solid rgba(99, 102, 241, 0.3);
+      border-radius: 22px;
+      padding: 30px;
+      margin-bottom: 26px;
+      box-shadow: var(--glass-shadow);
+    }
+    .callout-box h3 { font-size: 1.35rem; font-weight: 900; color: var(--text-dark); margin-bottom: 12px; }
+    .callout-box p { font-size: 1rem; color: var(--text-main); line-height: 1.85; margin-bottom: 14px; }
+    .callout-box ul { padding-left: 20px; }
+    .callout-box li { font-size: 0.96rem; color: var(--text-main); margin-bottom: 6px; }
 
     /* آکاردئون سوالات متداول */
-    .faq-container { margin-top: 25px; display: flex; flex-direction: column; gap: 14px; }
+    .faq-wrapper-card {
+      background: var(--surface-glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      box-shadow: var(--glass-shadow);
+    }
+    .faq-container { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
     .faq-item { 
       background: rgba(255, 255, 255, 0.85); 
       border: 1px solid var(--glass-border); 
-      border-radius: 18px; 
+      border-radius: 16px; 
       overflow: hidden; 
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); 
       transition: all 0.2s ease; 
     }
     .faq-item:hover { border-color: rgba(99, 102, 241, 0.4); }
@@ -257,9 +361,9 @@
       width: 100%; 
       background: none; 
       border: none; 
-      padding: 22px 26px; 
+      padding: 20px 24px; 
       text-align: left; 
-      font-size: 1.08rem; 
+      font-size: 1.05rem; 
       font-weight: 800; 
       color: var(--text-dark); 
       display: flex; 
@@ -269,17 +373,17 @@
       transition: 0.2s; 
     }
     .faq-question:hover { color: var(--accent); }
-    .faq-icon { font-size: 0.9rem; transition: transform 0.3s ease; color: var(--accent); }
+    .faq-icon { font-size: 0.85rem; transition: transform 0.3s ease; color: var(--accent); }
     .faq-answer { 
       max-height: 0; 
       overflow: hidden; 
       transition: max-height 0.35s ease, padding 0.35s ease; 
-      padding: 0 26px; 
+      padding: 0 24px; 
       color: var(--text-main); 
-      font-size: 1.02rem; 
-      line-height: 1.85; 
+      font-size: 0.98rem; 
+      line-height: 1.8; 
     }
-    .faq-item.active .faq-answer { max-height: 250px; padding: 0 26px 24px 26px; }
+    .faq-item.active .faq-answer { max-height: 250px; padding: 0 24px 22px 24px; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
 
     /* فوتر کریستالی */
@@ -305,11 +409,13 @@
       .nav-links { display: none; }
       .hamburger { display: block; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .content-section { padding: 26px; margin: 0 16px 50px; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .content-hero-card, .steps-container, .callout-box, .faq-wrapper-card { padding: 24px; }
       .tool-container { padding: 35px 20px; }
     }
     @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
+      .features-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -323,7 +429,7 @@
         <a href="/about.html" class="nav-link">About App</a>
         <a href="/install.html" class="nav-link">Installation</a>
         <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-        <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+        <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
       </nav>
       <button class="hamburger" id="menuBtn">☰</button>
     </div>
@@ -336,7 +442,7 @@
     <a href="/about.html" class="nav-link">About App</a>
     <a href="/install.html" class="nav-link">Installation</a>
     <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-    <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+    <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
   </nav>
 
   <!-- فضای تعاملی ابزار -->
@@ -372,92 +478,155 @@
     </div>
   </main>
 
+  <!-- ردیف باکس‌های ویژگی کلیدی ابزار (Feature Boxes مدنظر استاد) -->
+  <section class="features-row">
+    <div class="feature-box">
+      <span class="f-icon">🎚️</span>
+      <div>
+        <h4>0.50x to 2.00x Span</h4>
+        <p>Continuous dynamic speed slider with smooth 0.05x granular precision increments.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">🔒</span>
+      <div>
+        <h4>100% In-Memory DSP</h4>
+        <p>Audio is time-stretched strictly within browser RAM without cloud conversions.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">🎵</span>
+      <div>
+        <h4>Dual Time-Pitch Logic</h4>
+        <p>Toggle between clean pitch preservation or coupled analog vinyl turntable resampling.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">⚡</span>
+      <div>
+        <h4>Live Parameter Tweaks</h4>
+        <p>Adjust tempo and pitch settings dynamically during active playback with zero buffer lag.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- تصویر هوش مصنوعی با نام pitch-shifter.jpg -->
   <div class="feature-wrapper">
     <img src="pitch-shifter.jpg" alt="Glowing equalizer sliders representing audio pitch and tempo controls" class="feature-image">
   </div>
 
-  <!-- مقاله تخصصی، انسانی و سئو شده (> ۶۵۰ کلمه) -->
-  <section class="content-section">
-    <h2>The Digital Physics of Time-Stretching and Resampling</h2>
-    <p>In analog sound reproduction, playback speed and musical pitch were fundamentally inseparable. If you took a 33 RPM vinyl disc and spun it on a turntable at 45 RPM, the music sped up chronologically and every harmonic note shifted upward into a chipmunk-like higher register. Conversely, dragging your finger along the rim of the turntable platter slowed the track down while dropping the key into a low, droning baritone. This mechanical coupling occurs because physical playback speed directly alters the frequency at which recorded waveforms strike the playback needle.</p>
+  <!-- محتوای سئو و آموزشی به صورت بلوک‌ها و کارت‌های تفکیک‌شده بصری -->
+  <section class="content-container">
 
-    <p>In modern digital signal processing (DSP), audio engineers distinguish between two distinct transformation paradigms: <strong>resampling</strong> (where speed and pitch remain mechanically linked) and <strong>time-stretching</strong> (where playback speed changes while the musical key is preserved). The <strong>MiMusic Pitch & Tempo Changer</strong> puts both of these engineering capabilities directly into your browser, allowing you to manipulate audio files with zero lag, zero cloud rendering bottlenecks, and complete acoustic fidelity.</p>
+    <!-- کارت معرفی تحلیلی -->
+    <div class="content-hero-card">
+      <h2>The Digital Physics of Time-Stretching and Resampling</h2>
+      <p>In analog sound reproduction, playback speed and musical pitch were fundamentally inseparable. If you took a 33 RPM vinyl disc and spun it on a turntable at 45 RPM, the music sped up chronologically and every harmonic note shifted upward into a chipmunk-like higher register. Conversely, dragging your finger along the rim of the turntable platter slowed the track down while dropping the key into a low, droning baritone. This mechanical coupling occurs because physical playback speed directly alters the frequency at which recorded waveforms strike the playback needle.</p>
+      <p style="margin-top: 12px;">In modern digital signal processing (DSP), audio engineers distinguish between two distinct transformation paradigms: <strong>resampling</strong> (where speed and pitch remain mechanically linked) and <strong>time-stretching</strong> (where playback speed changes while the musical key is preserved). The <strong>MiMusic Pitch & Tempo Changer</strong> puts both of these engineering capabilities directly into your browser, allowing you to manipulate audio files with zero lag, zero cloud rendering bottlenecks, and complete acoustic fidelity.</p>
+    </div>
 
-    <h3>Choosing Between Clean Time-Stretching and Vinyl Resampling</h3>
-    <p>Depending on your creative or practical workflow, toggling pitch preservation produces radically different auditory outcomes:</p>
-    <ul>
-      <li><strong>Time-Stretching (Preserve Pitch Checked):</strong> When this setting is active, the browser's audio engine splits the incoming signal into tiny overlapping temporal windows, recalculating phase alignment using phase vocoder algorithms. This allows you to listen to long educational lectures, fast-paced interviews, or language study files at 1.5x or 2.0x speed without distorting the speaker's natural vocal timbre into squeaky pitches.</li>
-      <li><strong>Tape Resampling (Preserve Pitch Unchecked):</strong> When you disengage pitch preservation, the browser simply reads the digital audio buffer faster or slower without mathematical phase correction. This produces the pristine, analog tape-stop and turntable acceleration effects prized by music producers and TikTok creators.</li>
-    </ul>
+    <!-- کارت راهنمای گام‌به‌گام همراه تصویر -->
+    <div class="steps-container">
+      <h3>Step-by-Step Guide: How to Adjust Speed and Pitch Online</h3>
+      <p style="color: var(--text-muted); font-size: 1.02rem;">Follow these straightforward steps to manipulate audio playback in real time:</p>
 
-    <h3>Crafting Viral Aesthetics: Nightcore and Slowed + Reverb</h3>
-    <p>Disengaging pitch preservation unlocks the two most influential audio remix subcultures of the digital era:</p>
-    <ul>
-      <li><strong>Nightcore (1.20x to 1.35x Speed):</strong> Originating as a DIY dance remix phenomenon in the early 2000s, Nightcore accelerates high-energy pop, rock, or trance songs, elevating the vocals into an ecstatic, anime-inspired soprano range while intensifying rhythmic drive.</li>
-      <li><strong>Slowed & Chopped (0.75x to 0.88x Speed):</strong> Slowing down hip-hop, R&B, or indie tracks creates a moody, nostalgic, and deeply atmospheric lo-fi texture. The lowered vocal formants and elongated instrumental decays generate an intimate, dreamlike soundstage popular in aesthetic video edits.</li>
-    </ul>
+      <img src="pitch-guide.jpg" alt="Step by step pitch and tempo changer guide" class="tutorial-image">
+      <p class="image-caption">Upload your audio track, adjust the playback speed slider, and toggle pitch preservation as needed.</p>
 
-    <h3>Step-by-Step Guide: How to Adjust Speed and Pitch Online</h3>
-    <p>Customizing your audio files takes only a few quick adjustments in our interactive workspace:</p>
-
-    <!-- تصویر اسکرین‌شات آموزشی با نام pitch-guide.jpg -->
-    <img src="pitch-guide.jpg" alt="Step by step pitch and tempo changer guide" class="tutorial-image">
-    <p class="image-caption">Upload your audio track, adjust the playback speed slider, and toggle pitch preservation as needed.</p>
-
-    <ul>
-      <li><strong>Step 1: Upload Your Audio Track:</strong> Tap the dashed file picker to load any audio file from your device, including MP3, WAV, AAC, or OGG tracks.</li>
-      <li><strong>Step 2: Adjust Playback Tempo:</strong> Slide the speed control from 0.50x (half-speed slow motion) up to 2.00x (double-speed acceleration) in precise 0.05 increments.</li>
-      <li><strong>Step 3: Select Pitch Behavior:</strong> Keep "Preserve Original Pitch" checked if you are studying lecture notes or transcribing spoken word. Uncheck it if you want to create stylized Nightcore or slowed remixes.</li>
-      <li><strong>Step 4: Listen Live:</strong> Tap "Play Modified Audio". You can freely adjust the slider and flip the checkbox in real time during playback to hear instant transformations.</li>
-    </ul>
-
-    <h3>100% In-Memory Privacy: No Server Processing</h3>
-    <p>Traditional audio modification websites force you to upload private songs or sensitive voice memos to remote cloud servers, making you wait in conversion queues while burning mobile data. MiMusic.net executes all playback rate modulations locally within your browser's dedicated media thread. Your files remain entirely inside device RAM, guaranteeing immediate real-time playback and uncompromised privacy.</p>
-
-    <!-- بخش سوالات متداول آکاردئونی تعاملی -->
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>What is the difference between tempo and pitch?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Tempo refers to the chronological speed or beats-per-minute (BPM) of an audio track. Pitch refers to the acoustic frequency and musical key of the sound. Our tool allows you to change tempo independently or link both together like an analog turntable.</p>
+      <div class="step-cards-grid">
+        <div class="step-card">
+          <span class="step-badge">Step 1</span>
+          <h4>Upload Audio Track</h4>
+          <p>Tap the dashed file picker to load any audio file from your device, including MP3, WAV, AAC, or OGG tracks.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Why does unchecking 'Preserve Original Pitch' sound cleaner?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>When pitch is linked to speed, the browser simply reads existing audio samples faster or slower without mathematical phase slicing, resulting in zero digital artifacts. Preserving pitch at extreme speeds requires digital time-stretching algorithms that can introduce slight phase textures.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 2</span>
+          <h4>Adjust Playback Tempo</h4>
+          <p>Slide the speed control from 0.50x (half-speed slow motion) up to 2.00x (double-speed acceleration) in 0.05 increments.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Are my uploaded songs or recordings saved on your servers?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Never. All media decoding and real-time playback rate transformations happen strictly within your local browser memory using native HTML5 audio APIs. Your media never leaves your device.</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Can I adjust speed and pitch while the music is actively playing?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Yes! Our tool supports live dynamic parameter updates. You can drag the speed slider or toggle pitch preservation in real time during playback to instantly preview the sonic changes without restarting the track.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 3</span>
+          <h4>Select Pitch Behavior</h4>
+          <p>Keep "Preserve Pitch" checked for clean lecture study, or uncheck it to produce stylized Nightcore and slowed remixes.</p>
         </div>
       </div>
     </div>
+
+    <!-- گرید موضوعی تخصصی دو ستونه -->
+    <div class="topics-grid">
+      <div class="topic-card">
+        <h3>⚡ Nightcore (1.20x to 1.35x Speed)</h3>
+        <p>Originating as a DIY dance remix phenomenon in the early 2000s, Nightcore accelerates high-energy pop, rock, or trance songs, elevating the vocals into an ecstatic, anime-inspired soprano range while intensifying rhythmic drive. Unchecking pitch preservation replicates this signature viral sound cleanly.</p>
+      </div>
+
+      <div class="topic-card">
+        <h3>🌌 Slowed & Chopped (0.75x to 0.88x Speed)</h3>
+        <p>Slowing down hip-hop, R&B, or indie tracks creates a moody, nostalgic, and deeply atmospheric lo-fi texture. The lowered vocal formants and elongated instrumental decays generate an intimate, dreamlike soundstage popular in aesthetic video edits and chill study playlists.</p>
+      </div>
+    </div>
+
+    <!-- باکس هایلایت تحلیلی کشش زمانی -->
+    <div class="callout-box">
+      <h3>🔬 Phase Vocoder Time-Stretching vs. Tape Resampling</h3>
+      <p>Understanding which mode to choose depends entirely on your practical audio workflow:</p>
+      <ul>
+        <li><strong>Time-Stretching (Preserve Pitch Checked):</strong> The browser's audio engine recalculates phase vocoder windows in memory, accelerating educational podcasts or lectures to 1.5x speed without altering natural vocal timbre.</li>
+        <li><strong>Tape Resampling (Preserve Pitch Unchecked):</strong> Audio samples are read faster or slower without mathematical phase slicing, producing zero digital artifacts and perfectly mimicking analog magnetic tape machines.</li>
+        <li><strong>100% In-Memory Execution:</strong> Zero audio files are transmitted to cloud servers; all transformations execute locally on device processor threads.</li>
+      </ul>
+    </div>
+
+    <!-- کارت سوالات متداول آکاردئونی -->
+    <div class="faq-wrapper-card">
+      <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin-bottom: 10px;">Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What is the difference between tempo and pitch?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Tempo refers to the chronological speed or beats-per-minute (BPM) of an audio track. Pitch refers to the acoustic frequency and musical key of the sound. Our tool allows you to change tempo independently or link both together like an analog turntable.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Why does unchecking 'Preserve Original Pitch' sound cleaner?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>When pitch is linked to speed, the browser simply reads existing audio samples faster or slower without mathematical phase slicing, resulting in zero digital artifacts. Preserving pitch at extreme speeds requires digital time-stretching algorithms that can introduce slight phase textures.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Are my uploaded songs or recordings saved on your servers?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Never. All media decoding and real-time playback rate transformations happen strictly within your local browser memory using native HTML5 audio APIs. Your media never leaves your device.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Can I adjust speed and pitch while the music is actively playing?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! Our tool supports live dynamic parameter updates. You can drag the speed slider or toggle pitch preservation in real time during playback to instantly preview the sonic changes without restarting the track.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- فوتر کریستالی -->
@@ -503,7 +672,6 @@
 
   <!-- اسکریپت‌های منو و کنترل سرعت صوتی -->
   <script>
-    // منوی ناوبری
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
@@ -516,17 +684,14 @@
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    // اسکریپت آکاردئونی سوالات متداول
     function toggleFaq(button) {
       const item = button.parentElement;
       item.classList.toggle('active');
     }
 
-    // منطق مهندسی کنترل سرعت و زیروبمی صدا
     let audioElement = new Audio();
     let isPlaying = false;
 
-    // پیکربندی اولیه برای پشتیبانی کراس‌بروزر از حفظ پیچ
     audioElement.preservesPitch = true;
     if ('mozPreservesPitch' in audioElement) {
       audioElement.mozPreservesPitch = true;
@@ -541,7 +706,6 @@
         const fileURL = URL.createObjectURL(file);
         audioElement.src = fileURL;
         
-        // تنظیم مجدد کنترل‌ها
         document.getElementById('speedSlider').value = 1.0;
         document.getElementById('speedValue').textContent = "1.00x";
         document.getElementById('pitchToggle').checked = true;
