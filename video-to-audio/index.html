@@ -7,7 +7,7 @@
   <meta name="description" content="Extract audio tracks from video files instantly in your browser. Free, secure, and fast MP4, MOV, and WebM video to audio converter with zero data leaks.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
-    /* تم یخی کریستالی و شیشه‌ای هماهنگ با صفحه اصلی */
+    /* تم یخی کریستالی و شیشه‌ای منطبق با صفحه اصلی */
     :root {
       --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
       --surface-glass: rgba(255, 255, 255, 0.72);
@@ -68,8 +68,8 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    /* فضای کاری ابزار به صورت کارت شیشه‌ای شناور */
-    .workspace { padding: 60px 24px 40px; text-align: center; }
+    /* فضای تعاملی ابزار */
+    .workspace { padding: 60px 24px 35px; text-align: center; }
     .tool-container { 
       max-width: 720px; 
       margin: 0 auto; 
@@ -164,8 +164,47 @@
       box-shadow: 0 10px 25px -4px rgba(239, 68, 68, 0.4); 
     }
 
-    /* کادر عکس هوش مصنوعی با نام video-to-audio.jpg */
-    .feature-wrapper { max-width: 880px; margin: 30px auto 50px; padding: 0 24px; text-align: center; }
+    /* باکس‌های ویژگی کلیدی دقیقاً زیر کادر ابزار (Feature Boxes مدنظر استاد) */
+    .features-row { 
+      max-width: 1000px; 
+      margin: 10px auto 50px; 
+      padding: 0 24px; 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+      gap: 18px; 
+    }
+    .feature-box { 
+      background: var(--surface-glass); 
+      backdrop-filter: blur(16px); 
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border); 
+      border-radius: 20px; 
+      padding: 22px 18px; 
+      box-shadow: var(--glass-shadow); 
+      transition: all 0.3s ease; 
+      display: flex; 
+      gap: 14px; 
+      align-items: flex-start; 
+    }
+    .feature-box:hover { 
+      transform: translateY(-4px); 
+      background: var(--surface-glass-hover); 
+      box-shadow: var(--glass-shadow-hover); 
+    }
+    .feature-box .f-icon { 
+      font-size: 1.8rem; 
+      line-height: 1; 
+      background: #ffffff; 
+      border: 1px solid var(--glass-border); 
+      padding: 10px; 
+      border-radius: 14px; 
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); 
+    }
+    .feature-box h4 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+    .feature-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* کادر عکس هوش مصنوعی */
+    .feature-wrapper { max-width: 880px; margin: 10px auto 50px; padding: 0 24px; text-align: center; }
     .feature-image { 
       width: 100%; 
       border-radius: 28px; 
@@ -173,24 +212,55 @@
       display: block; 
     }
 
-    /* کادر مقاله جامع و سوالات متداول */
-    .content-section { 
-      max-width: 900px; 
-      margin: 0 auto 70px; 
-      padding: 45px; 
-      background: var(--surface-glass); 
-      backdrop-filter: blur(18px); 
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--glass-border); 
-      border-radius: 28px; 
-      box-shadow: var(--glass-shadow); 
-    }
-    .content-section h2 { font-size: 2.1rem; font-weight: 900; color: var(--text-dark); margin-bottom: 22px; letter-spacing: -0.02em; }
-    .content-section h3 { font-size: 1.48rem; font-weight: 800; color: var(--text-dark); margin: 36px 0 18px; }
-    .content-section p { font-size: 1.08rem; margin-bottom: 22px; line-height: 1.95; color: var(--text-main); }
-    .content-section ul { margin-bottom: 28px; padding-left: 24px; }
-    .content-section li { margin-bottom: 12px; font-size: 1.04rem; color: var(--text-main); }
+    /* ساختار بصری، کارت‌محور و خردشده مقاله سئو (جلوگیری از دیوار متنی) */
+    .content-container { max-width: 1000px; margin: 0 auto 70px; padding: 0 24px; }
     
+    .content-hero-card {
+      background: var(--surface-glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      box-shadow: var(--glass-shadow);
+      margin-bottom: 26px;
+    }
+    .content-hero-card h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.02em; }
+    .content-hero-card p { font-size: 1.05rem; color: var(--text-main); line-height: 1.9; }
+
+    /* کارت‌های گام‌به‌گام مراحل */
+    .steps-container {
+      background: var(--surface-glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      margin-bottom: 26px;
+      box-shadow: var(--glass-shadow);
+    }
+    .steps-container h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 20px; }
+    .step-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 24px; }
+    .step-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      transition: 0.3s;
+    }
+    .step-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .step-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    .step-card h4 { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+    .step-card p { font-size: 0.95rem; color: var(--text-main); line-height: 1.65; }
+
     .tutorial-image { 
       width: 100%; 
       max-width: 620px; 
@@ -198,19 +268,54 @@
       border-radius: 20px; 
       border: 1px solid var(--glass-border); 
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06); 
-      margin: 28px auto 14px; 
+      margin: 15px auto; 
       display: block; 
     }
-    .image-caption { text-align: center; font-size: 0.92rem; color: var(--text-muted); margin-bottom: 34px; font-style: italic; }
+    .image-caption { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; font-style: italic; }
+
+    /* گرید دو ستونه مباحث تخصصی */
+    .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 22px; margin-bottom: 26px; }
+    .topic-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: var(--glass-shadow);
+      transition: 0.3s;
+    }
+    .topic-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .topic-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .topic-card p { font-size: 0.98rem; color: var(--text-main); line-height: 1.85; }
+
+    /* باکس هایلایت تحلیلی */
+    .callout-box {
+      background: linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
+      border: 1.5px solid rgba(99, 102, 241, 0.3);
+      border-radius: 22px;
+      padding: 30px;
+      margin-bottom: 26px;
+      box-shadow: var(--glass-shadow);
+    }
+    .callout-box h3 { font-size: 1.35rem; font-weight: 900; color: var(--text-dark); margin-bottom: 12px; }
+    .callout-box p { font-size: 1rem; color: var(--text-main); line-height: 1.85; margin-bottom: 14px; }
+    .callout-box ul { padding-left: 20px; }
+    .callout-box li { font-size: 0.96rem; color: var(--text-main); margin-bottom: 6px; }
 
     /* آکاردئون سوالات متداول */
-    .faq-container { margin-top: 25px; display: flex; flex-direction: column; gap: 14px; }
+    .faq-wrapper-card {
+      background: var(--surface-glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      box-shadow: var(--glass-shadow);
+    }
+    .faq-container { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
     .faq-item { 
       background: rgba(255, 255, 255, 0.85); 
       border: 1px solid var(--glass-border); 
-      border-radius: 18px; 
+      border-radius: 16px; 
       overflow: hidden; 
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); 
       transition: all 0.2s ease; 
     }
     .faq-item:hover { border-color: rgba(99, 102, 241, 0.4); }
@@ -218,9 +323,9 @@
       width: 100%; 
       background: none; 
       border: none; 
-      padding: 22px 26px; 
+      padding: 20px 24px; 
       text-align: left; 
-      font-size: 1.08rem; 
+      font-size: 1.05rem; 
       font-weight: 800; 
       color: var(--text-dark); 
       display: flex; 
@@ -230,17 +335,17 @@
       transition: 0.2s; 
     }
     .faq-question:hover { color: var(--accent); }
-    .faq-icon { font-size: 0.9rem; transition: transform 0.3s ease; color: var(--accent); }
+    .faq-icon { font-size: 0.85rem; transition: transform 0.3s ease; color: var(--accent); }
     .faq-answer { 
       max-height: 0; 
       overflow: hidden; 
       transition: max-height 0.35s ease, padding 0.35s ease; 
-      padding: 0 26px; 
+      padding: 0 24px; 
       color: var(--text-main); 
-      font-size: 1.02rem; 
-      line-height: 1.85; 
+      font-size: 0.98rem; 
+      line-height: 1.8; 
     }
-    .faq-item.active .faq-answer { max-height: 250px; padding: 0 26px 24px 26px; }
+    .faq-item.active .faq-answer { max-height: 250px; padding: 0 24px 22px 24px; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
 
     /* فوتر کریستالی */
@@ -266,11 +371,13 @@
       .nav-links { display: none; }
       .hamburger { display: block; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .content-section { padding: 26px; margin: 0 16px 50px; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .content-hero-card, .steps-container, .callout-box, .faq-wrapper-card { padding: 24px; }
       .tool-container { padding: 35px 20px; }
     }
     @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
+      .features-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -284,7 +391,7 @@
         <a href="/about.html" class="nav-link">About App</a>
         <a href="/install.html" class="nav-link">Installation</a>
         <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-        <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+        <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
       </nav>
       <button class="hamburger" id="menuBtn">☰</button>
     </div>
@@ -297,7 +404,7 @@
     <a href="/about.html" class="nav-link">About App</a>
     <a href="/install.html" class="nav-link">Installation</a>
     <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-    <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+    <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
   </nav>
 
   <!-- فضای تعاملی ابزار -->
@@ -319,88 +426,155 @@
     </div>
   </main>
 
+  <!-- ردیف باکس‌های ویژگی کلیدی ابزار (Feature Boxes مدنظر استاد) -->
+  <section class="features-row">
+    <div class="feature-box">
+      <span class="f-icon">🎬</span>
+      <div>
+        <h4>Direct Stream Demux</h4>
+        <p>Decouples audio from heavy video frames instantly without lossy re-encoding.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">🔒</span>
+      <div>
+        <h4>100% Local Processing</h4>
+        <p>Private video memories and interviews never upload to third-party servers.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">⚡</span>
+      <div>
+        <h4>Zero Conversion Lag</h4>
+        <p>Decodes media locally in RAM with instant playback and zero server queues.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">🔋</span>
+      <div>
+        <h4>Storage & Battery Saver</h4>
+        <p>Reduces media footprints by over 85% and eliminates GPU rendering draw.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- تصویر هوش مصنوعی با نام video-to-audio.jpg -->
   <div class="feature-wrapper">
     <img src="video-to-audio.jpg" alt="A sleek video clapperboard transforming into sound waves" class="feature-image">
   </div>
 
-  <!-- مقاله جامع، انسانی و سئو شده (> ۶۰۰ کلمه) -->
-  <section class="content-section">
-    <h2>Demuxing Digital Media: How Video-to-Audio Extraction Works in the Browser</h2>
-    <p>Modern multimedia containers like MP4, MOV, and WebM are not monolithic files; they are multiplexed digital envelopes that bundle distinct video, audio, and subtitle streams together into a synchronized packet structure. When you record a live concert on your phone, download a tutorial webinar, or receive a video interview memo, the video frames (usually encoded in H.264, HEVC, or VP9) consume upwards of 85% to 90% of the total file size. The underlying soundtrack, typically encoded in AAC or Opus, requires only a fraction of that data footprint.</p>
+  <!-- محتوای سئو و آموزشی به صورت بلوک‌ها و کارت‌های تفکیک‌شده بصری -->
+  <section class="content-container">
 
-    <p>Playing video files solely to listen to spoken lectures or music tracks leads to unnecessary battery consumption on mobile devices. Smartphone displays and GPU video decoders require substantial wattage, while keeping the screen awake in your pocket risks accidental screen taps. The <strong>MiMusic Video to Audio Extractor</strong> demuxes the media container natively within your web browser, decoupling the high-bandwidth video feed from the audio stream so you can listen with peak efficiency.</p>
+    <!-- کارت معرفی تحلیلی -->
+    <div class="content-hero-card">
+      <h2>Demuxing Digital Media: How Video-to-Audio Extraction Works in the Browser</h2>
+      <p>Modern multimedia containers like MP4, MOV, and WebM are not monolithic files; they are multiplexed digital envelopes that bundle distinct video, audio, and subtitle streams together into a synchronized packet structure. When you record a live concert on your phone, download a tutorial webinar, or receive a video interview memo, the video frames (usually encoded in H.264, HEVC, or VP9) consume upwards of 85% to 90% of the total file size. The underlying soundtrack, typically encoded in AAC or Opus, requires only a fraction of that data footprint.</p>
+      <p style="margin-top: 12px;">Playing video files solely to listen to spoken lectures or music tracks leads to unnecessary battery consumption on mobile devices. Smartphone displays and GPU video decoders require substantial wattage, while keeping the screen awake in your pocket risks accidental screen taps. The <strong>MiMusic Video to Audio Extractor</strong> demuxes the media container natively within your web browser, decoupling the high-bandwidth video feed from the audio stream so you can listen with peak efficiency.</p>
+    </div>
 
-    <h3>Why Separating Audio from Video Saves Bandwidth, Storage, and Battery</h3>
-    <p>Converting video clips to lightweight audio streams offers tremendous practical advantages for everyday mobile users:</p>
-    <ul>
-      <li><strong>Drastic Storage Reduction:</strong> A standard 10-minute 1080p smartphone video file typically consumes between 200 MB and 400 MB of internal storage. Isolating the audio track reduces the footprint down to just 12 MB to 18 MB without sacrificing acoustic clarity.</li>
-      <li><strong>Battery Conservation & Background Playback:</strong> Audio-only decoding requires minimal CPU overhead compared to continuous 60fps video rendering, significantly extending phone battery life during long commutes or study sessions.</li>
-      <li><strong>Offline Playlist Integration:</strong> Extracted tracks can be seamlessly organized into lightweight music folders, speech libraries, or podcast apps like Mi Music without cluttering your camera roll.</li>
-    </ul>
+    <!-- کارت راهنمای گام‌به‌گام همراه تصویر -->
+    <div class="steps-container">
+      <h3>Step-by-Step Guide: How to Extract Audio from Any Video File</h3>
+      <p style="color: var(--text-muted); font-size: 1.02rem;">Extracting the soundtrack from your video clips takes only seconds:</p>
 
-    <h3>Step-by-Step Guide: How to Extract Audio from Any Video File</h3>
-    <p>Extracting the audio track from your video clips takes only a few seconds through our streamlined browser interface:</p>
+      <img src="video-guide.jpg" alt="Step by step video to audio converter guide" class="tutorial-image">
+      <p class="image-caption">Select your video recording, let the browser extract the audio stream, and click play.</p>
 
-    <!-- تصویر اسکرین‌شات آموزشی با نام video-guide.jpg -->
-    <img src="video-guide.jpg" alt="Step by step video to audio converter guide" class="tutorial-image">
-    <p class="image-caption">Select your video recording, let the browser extract the audio stream, and click play.</p>
-
-    <ul>
-      <li><strong>Step 1: Choose Your Video File:</strong> Click the dashed file selection area to browse your device storage. We support all common modern video containers, including MP4, MOV, MKV, and WebM files.</li>
-      <li><strong>Step 2: Instant Client-Side Stream Parsing:</strong> Upon file selection, your browser's native HTML5 media pipeline inspects the container metadata, isolating the audio stream track entirely within local memory.</li>
-      <li><strong>Step 3: Play and Listen:</strong> Tap the "Play Extracted Audio" button to listen immediately through your headphones or external speakers without rendering video frames.</li>
-    </ul>
-
-    <h3>Preserving Audio Fidelity: Codecs and Bitrate Integrity</h3>
-    <p>A common concern with online file converters is sound degradation. Many cloud converters re-encode uploaded media through aggressive, lossy compression presets to save cloud processing power, muddying vocal frequencies and shaving off high-end treble definition. Because MiMusic.net executes stream extraction directly inside your browser sandbox, the original audio codec bitrate (whether 128 kbps, 256 kbps, or 320 kbps AAC/Opus) is rendered with zero loss in resolution.</p>
-
-    <h3>Zero Cloud Uploads: Total Privacy for Confidential Recordings</h3>
-    <p>Standard online file converters require you to transmit private family videos, business conference calls, or sensitive video interviews to remote third-party servers. Beyond the obvious data privacy hazards and potential server breaches, uploading gigabytes of video over cellular data is agonizingly slow. MiMusic.net runs 100% client-side via JavaScript and HTML5 media APIs. Your video data never leaves your device memory, guaranteeing total privacy and immediate playback.</p>
-
-    <!-- بخش سوالات متداول آکاردئونی تعاملی -->
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Does extracting audio from video reduce the original sound quality?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>No. Our tool taps directly into the existing audio stream packaged inside the video container. It decodes the exact AAC, MP3, or Opus audio bitstream embedded by the original recorder without applying harsh compression or lossy downgrades.</p>
+      <div class="step-cards-grid">
+        <div class="step-card">
+          <span class="step-badge">Step 1</span>
+          <h4>Select Your Video Clip</h4>
+          <p>Tap the dashed file selector to browse local storage. Supports all common video formats including MP4, MOV, and WebM.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Are my private video files uploaded to your servers?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Never. All demuxing and audio playback processes occur locally within your web browser memory using HTML5. Your video clips are never uploaded, stored, or transmitted across the internet.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 2</span>
+          <h4>Instant Stream Isolation</h4>
+          <p>Your browser inspects container metadata in memory, isolating the underlying AAC/Opus audio track instantly.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Which video file formats are supported?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>The extractor supports all major video formats recognized by modern mobile and desktop browsers, including MP4, MOV, WebM, and MKV files encoded with AAC, MP3, or Opus soundtracks.</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Can I extract audio from videos recorded on my iPhone or Android?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Yes. The tool is fully optimized for mobile browsers like Chrome and Safari. You can directly select camera recordings or saved video downloads from your smartphone gallery.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 3</span>
+          <h4>Play and Enjoy Audio</h4>
+          <p>Click "Play Extracted Audio" to listen immediately through headphones or external speakers without rendering video frames.</p>
         </div>
       </div>
     </div>
+
+    <!-- گرید موضوعی تخصصی دو ستونه -->
+    <div class="topics-grid">
+      <div class="topic-card">
+        <h3>💾 Massive Storage & Battery Optimization</h3>
+        <p>A standard 10-minute 1080p video file recorded on modern smartphones easily consumes between 200 MB and 400 MB of internal storage. Isolating the audio track reduces that footprint down to just 12 MB to 18 MB without sacrificing acoustic clarity. Moreover, audio-only playback eliminates GPU rendering, significantly extending mobile battery life.</p>
+      </div>
+
+      <div class="topic-card">
+        <h3>🎧 Codec Fidelity & Bitrate Preservation</h3>
+        <p>Standard online file converters compress uploaded media aggressively with low-bitrate presets to conserve cloud server costs, shaving off delicate high frequencies. Because MiMusic.net executes stream extraction directly inside your browser sandbox, the original audio codec bitrate is preserved with zero loss in resolution.</p>
+      </div>
+    </div>
+
+    <!-- باکس هایلایت امنیتی و معماری کلاینت‌ساید -->
+    <div class="callout-box">
+      <h3>🔒 Why Client-Side Stream Demuxing Protects Your Confidentiality</h3>
+      <p>Standard online converters require users to transmit private family clips, business conference calls, or sensitive video interviews to remote cloud servers. Beyond obvious data privacy risks, uploading gigabytes of video over cellular data is agonizingly slow:</p>
+      <ul>
+        <li><strong>Zero Upload Latency:</strong> Audio is decoded directly from local memory without waiting for cloud transfer queues.</li>
+        <li><strong>Complete Confidentiality:</strong> No third-party server ever receives, logs, or stores your private video media.</li>
+        <li><strong>No File Size Restrictions:</strong> Processes high-definition recordings smoothly without artificial cloud upload ceilings.</li>
+      </ul>
+    </div>
+
+    <!-- کارت سوالات متداول آکاردئونی -->
+    <div class="faq-wrapper-card">
+      <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin-bottom: 10px;">Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Does extracting audio from video reduce the original sound quality?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. Our tool taps directly into the existing audio stream packaged inside the video container. It decodes the exact AAC, MP3, or Opus audio bitstream embedded by the original recorder without applying harsh compression or lossy downgrades.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Are my private video files uploaded to your servers?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Never. All demuxing and audio playback processes occur locally within your web browser memory using HTML5. Your video clips are never uploaded, stored, or transmitted across the internet.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Which video file formats are supported?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>The extractor supports all major video formats recognized by modern mobile and desktop browsers, including MP4, MOV, WebM, and MKV files encoded with AAC, MP3, or Opus soundtracks.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Can I extract audio from videos recorded on my iPhone or Android?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. The tool is fully optimized for mobile browsers like Chrome and Safari. You can directly select camera recordings or saved video downloads from your smartphone gallery.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- فوتر کریستالی -->
@@ -446,7 +620,6 @@
 
   <!-- اسکریپت‌های منو و اکسترکتور صوتی -->
   <script>
-    // منوی ناوبری
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
@@ -459,13 +632,11 @@
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    // اسکریپت آکاردئونی سوالات متداول
     function toggleFaq(button) {
       const item = button.parentElement;
       item.classList.toggle('active');
     }
 
-    // منطق اکسترکت و پخش صدا از فایل ویدیو
     let videoElement = document.createElement('video');
     let isPlaying = false;
 
