@@ -7,7 +7,7 @@
   <meta name="description" content="Convert any standard audio file into an immersive 8D spatial sound experience. Free browser-based 8D audio maker with smooth automated stereo panning.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
-    /* تم یخی کریستالی و شیشه‌ای منطبق با استانداردهای صفحه اصلی */
+    /* تم یخی کریستالی و شیشه‌ای منطبق با صفحه اصلی */
     :root {
       --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
       --surface-glass: rgba(255, 255, 255, 0.72);
@@ -68,13 +68,13 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    /* فضای کاری ابزار به صورت کارت شیشه‌ای شناور */
-    .workspace { padding: 60px 24px 40px; text-align: center; }
+    /* فضای تعاملی ابزار */
+    .workspace { padding: 60px 24px 35px; text-align: center; }
     .tool-container { 
       max-width: 720px; 
       margin: 0 auto; 
       background: var(--surface-glass); 
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px); 
       -webkit-backdrop-filter: blur(20px);
       border-radius: 30px; 
       padding: 45px 35px; 
@@ -176,13 +176,52 @@
       backdrop-filter: blur(10px);
       padding: 14px 20px; 
       border-radius: 16px; 
-      border: 1px solid rgba(251, 191, 36, 0.4);
+      border: 1px solid rgba(251, 191, 36, 0.4); 
       font-size: 0.95rem; 
       box-shadow: 0 4px 12px rgba(245, 158, 11, 0.08);
     }
 
+    /* باکس‌های ویژگی کلیدی دقیقاً زیر کادر ابزار (Feature Boxes مدنظر استاد) */
+    .features-row { 
+      max-width: 1000px; 
+      margin: 10px auto 50px; 
+      padding: 0 24px; 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+      gap: 18px; 
+    }
+    .feature-box { 
+      background: var(--surface-glass); 
+      backdrop-filter: blur(16px); 
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border); 
+      border-radius: 20px; 
+      padding: 22px 18px; 
+      box-shadow: var(--glass-shadow); 
+      transition: all 0.3s ease; 
+      display: flex; 
+      gap: 14px; 
+      align-items: flex-start; 
+    }
+    .feature-box:hover { 
+      transform: translateY(-4px); 
+      background: var(--surface-glass-hover); 
+      box-shadow: var(--glass-shadow-hover); 
+    }
+    .feature-box .f-icon { 
+      font-size: 1.8rem; 
+      line-height: 1; 
+      background: #ffffff; 
+      border: 1px solid var(--glass-border); 
+      padding: 10px; 
+      border-radius: 14px; 
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); 
+    }
+    .feature-box h4 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+    .feature-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+
     /* کادر عکس هوش مصنوعی */
-    .feature-wrapper { max-width: 880px; margin: 30px auto 50px; padding: 0 24px; text-align: center; }
+    .feature-wrapper { max-width: 880px; margin: 10px auto 50px; padding: 0 24px; text-align: center; }
     .feature-image { 
       width: 100%; 
       border-radius: 28px; 
@@ -190,24 +229,55 @@
       display: block; 
     }
 
-    /* کادر مقاله جامع و سوالات متداول */
-    .content-section { 
-      max-width: 900px; 
-      margin: 0 auto 70px; 
-      padding: 45px; 
-      background: var(--surface-glass); 
+    /* ساختار بصری، کارت‌محور و خردشده مقاله سئو (جلوگیری از دیوار متنی) */
+    .content-container { max-width: 1000px; margin: 0 auto 70px; padding: 0 24px; }
+    
+    .content-hero-card {
+      background: var(--surface-glass);
       backdrop-filter: blur(18px); 
       -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--glass-border); 
-      border-radius: 28px; 
-      box-shadow: var(--glass-shadow); 
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      box-shadow: var(--glass-shadow);
+      margin-bottom: 26px;
     }
-    .content-section h2 { font-size: 2.1rem; font-weight: 900; color: var(--text-dark); margin-bottom: 22px; letter-spacing: -0.02em; }
-    .content-section h3 { font-size: 1.48rem; font-weight: 800; color: var(--text-dark); margin: 36px 0 18px; }
-    .content-section p { font-size: 1.08rem; margin-bottom: 22px; line-height: 1.95; color: var(--text-main); }
-    .content-section ul { margin-bottom: 28px; padding-left: 24px; }
-    .content-section li { margin-bottom: 12px; font-size: 1.04rem; color: var(--text-main); }
-    
+    .content-hero-card h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.02em; }
+    .content-hero-card p { font-size: 1.05rem; color: var(--text-main); line-height: 1.9; }
+
+    /* کارت‌های گام‌به‌گام مراحل */
+    .steps-container {
+      background: var(--surface-glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      margin-bottom: 26px;
+      box-shadow: var(--glass-shadow);
+    }
+    .steps-container h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 20px; }
+    .step-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 24px; }
+    .step-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      transition: 0.3s;
+    }
+    .step-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .step-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    .step-card h4 { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+    .step-card p { font-size: 0.95rem; color: var(--text-main); line-height: 1.65; }
+
     .tutorial-image { 
       width: 100%; 
       max-width: 620px; 
@@ -215,19 +285,54 @@
       border-radius: 20px; 
       border: 1px solid var(--glass-border); 
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06); 
-      margin: 28px auto 14px; 
+      margin: 15px auto; 
       display: block; 
     }
-    .image-caption { text-align: center; font-size: 0.92rem; color: var(--text-muted); margin-bottom: 34px; font-style: italic; }
+    .image-caption { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; font-style: italic; }
+
+    /* گرید دو ستونه مباحث تخصصی */
+    .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 22px; margin-bottom: 26px; }
+    .topic-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: var(--glass-shadow);
+      transition: 0.3s;
+    }
+    .topic-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .topic-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .topic-card p { font-size: 0.98rem; color: var(--text-main); line-height: 1.85; }
+
+    /* باکس هایلایت تحلیلی الزام هدفون */
+    .callout-box {
+      background: linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
+      border: 1.5px solid rgba(99, 102, 241, 0.3);
+      border-radius: 22px;
+      padding: 30px;
+      margin-bottom: 26px;
+      box-shadow: var(--glass-shadow);
+    }
+    .callout-box h3 { font-size: 1.35rem; font-weight: 900; color: var(--text-dark); margin-bottom: 12px; }
+    .callout-box p { font-size: 1rem; color: var(--text-main); line-height: 1.85; margin-bottom: 14px; }
+    .callout-box ul { padding-left: 20px; }
+    .callout-box li { font-size: 0.96rem; color: var(--text-main); margin-bottom: 6px; }
 
     /* آکاردئون سوالات متداول */
-    .faq-container { margin-top: 25px; display: flex; flex-direction: column; gap: 14px; }
+    .faq-wrapper-card {
+      background: var(--surface-glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      box-shadow: var(--glass-shadow);
+    }
+    .faq-container { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
     .faq-item { 
       background: rgba(255, 255, 255, 0.85); 
       border: 1px solid var(--glass-border); 
-      border-radius: 18px; 
+      border-radius: 16px; 
       overflow: hidden; 
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); 
       transition: all 0.2s ease; 
     }
     .faq-item:hover { border-color: rgba(99, 102, 241, 0.4); }
@@ -235,9 +340,9 @@
       width: 100%; 
       background: none; 
       border: none; 
-      padding: 22px 26px; 
+      padding: 20px 24px; 
       text-align: left; 
-      font-size: 1.08rem; 
+      font-size: 1.05rem; 
       font-weight: 800; 
       color: var(--text-dark); 
       display: flex; 
@@ -247,17 +352,17 @@
       transition: 0.2s; 
     }
     .faq-question:hover { color: var(--accent); }
-    .faq-icon { font-size: 0.9rem; transition: transform 0.3s ease; color: var(--accent); }
+    .faq-icon { font-size: 0.85rem; transition: transform 0.3s ease; color: var(--accent); }
     .faq-answer { 
       max-height: 0; 
       overflow: hidden; 
       transition: max-height 0.35s ease, padding 0.35s ease; 
-      padding: 0 26px; 
+      padding: 0 24px; 
       color: var(--text-main); 
-      font-size: 1.02rem; 
-      line-height: 1.85; 
+      font-size: 0.98rem; 
+      line-height: 1.8; 
     }
-    .faq-item.active .faq-answer { max-height: 250px; padding: 0 26px 24px 26px; }
+    .faq-item.active .faq-answer { max-height: 250px; padding: 0 24px 22px 24px; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
 
     /* فوتر کریستالی */
@@ -283,11 +388,13 @@
       .nav-links { display: none; }
       .hamburger { display: block; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .content-section { padding: 26px; margin: 0 16px 50px; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .content-hero-card, .steps-container, .callout-box, .faq-wrapper-card { padding: 24px; }
       .tool-container { padding: 35px 20px; }
     }
     @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
+      .features-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -301,7 +408,7 @@
         <a href="/about.html" class="nav-link">About App</a>
         <a href="/install.html" class="nav-link">Installation</a>
         <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-        <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+        <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
       </nav>
       <button class="hamburger" id="menuBtn">☰</button>
     </div>
@@ -314,7 +421,7 @@
     <a href="/about.html" class="nav-link">About App</a>
     <a href="/install.html" class="nav-link">Installation</a>
     <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-    <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+    <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
   </nav>
 
   <!-- فضای تعاملی ابزار -->
@@ -340,87 +447,155 @@
     </div>
   </main>
 
+  <!-- ردیف باکس‌های ویژگی کلیدی ابزار (Feature Boxes مدنظر استاد) -->
+  <section class="features-row">
+    <div class="feature-box">
+      <span class="f-icon">🎧</span>
+      <div>
+        <h4>360° Dynamic Orbit</h4>
+        <p>Continuous sinusoidal stereo panning simulates physical 3D orbital motion around the listener.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">🔒</span>
+      <div>
+        <h4>100% In-Memory DSP</h4>
+        <p>Zero cloud uploads; your songs and audio files are processed strictly inside local RAM.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">⚡</span>
+      <div>
+        <h4>0.12 Hz LFO Oscillator</h4>
+        <p>Hardware-accelerated Low-Frequency Oscillator creates smooth, natural 8.3-second orbital loops.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">📱</span>
+      <div>
+        <h4>Universal Mobile Support</h4>
+        <p>Runs smoothly across mobile Chrome, iOS Safari, and desktop browsers without downloads.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- تصویر هوش مصنوعی با نام 8d-audio.jpg -->
   <div class="feature-wrapper">
     <img src="8d-audio.jpg" alt="Glowing headphones showing sound waves circling around a head" class="feature-image">
   </div>
 
-  <!-- مقاله تخصصی، انسانی و سئو شده (> ۶۵۰ کلمه) -->
-  <section class="content-section">
-    <h2>The Psychoacoustic Illusion: How 8D Audio Tricks Human Spatial Perception</h2>
-    <p>Despite its futuristic moniker, "8D Audio" does not operate in eight physical geometric dimensions. Instead, it refers to an advanced psychoacoustic illusion known in acoustic engineering as dynamic <strong>binaural spatialization</strong>. When listening to ordinary music tracks mixed in conventional stereo, audio is anchored between two static poles: the hard-left channel and the hard-right channel. When experienced through headphones, this static separation creates an artificial "in-head" sensation, where the soundstage feels confined directly between your ears.</p>
+  <!-- محتوای سئو و آموزشی به صورت بلوک‌ها و کارت‌های تفکیک‌شده بصری -->
+  <section class="content-container">
 
-    <p>In physical acoustic reality, however, the human brain determines the 3D position of an environmental sound through two vital biological mechanisms: <strong>Interaural Time Difference (ITD)</strong> and <strong>Interaural Level Difference (ILD)</strong>. If a sound originates from your left side, the pressure wave arrives at your left ear roughly $0.6\text{ ms}$ earlier than it reaches your right ear (ITD), while your head acts as an acoustic shadow that absorbs high frequencies, reducing the sound's volume at the far ear (ILD). The <strong>MiMusic 8D Audio Maker</strong> replicates these spatial cues algorithmically inside your web browser using native Web Audio API digital signal processing (DSP), making it sound as if the music is physically rotating in a continuous 360-degree orbit around your head.</p>
+    <!-- کارت معرفی تحلیلی -->
+    <div class="content-hero-card">
+      <h2>The Psychoacoustic Illusion: How 8D Audio Tricks Human Spatial Perception</h2>
+      <p>Despite its futuristic moniker, "8D Audio" does not operate in eight physical geometric dimensions. Instead, it refers to an advanced psychoacoustic illusion known in acoustic engineering as dynamic <strong>binaural spatialization</strong>. When listening to ordinary music tracks mixed in conventional stereo, audio is anchored between two static poles: the hard-left channel and the hard-right channel. When experienced through headphones, this static separation creates an artificial "in-head" sensation, where the soundstage feels confined directly between your ears.</p>
+      <p style="margin-top: 12px;">In physical acoustic reality, however, the human brain determines the 3D position of an environmental sound through two vital biological mechanisms: <strong>Interaural Time Difference (ITD)</strong> and <strong>Interaural Level Difference (ILD)</strong>. If a sound originates from your left side, the pressure wave arrives at your left ear roughly $0.6\text{ ms}$ earlier than it reaches your right ear (ITD), while your head acts as an acoustic shadow that absorbs high frequencies, reducing the sound's volume at the far ear (ILD). The <strong>MiMusic 8D Audio Maker</strong> replicates these spatial cues algorithmically inside your web browser using native Web Audio API digital signal processing (DSP), making it sound as if the music is physically rotating in a continuous 360-degree orbit around your head.</p>
+    </div>
 
-    <h3>How LFO-Driven Stereo Panning Simulates 360-Degree Motion</h3>
-    <p>To produce the sensation of a moving artist orbiting the listener, our tool deploys a continuous Low-Frequency Oscillator (LFO) hardwired directly into a high-precision <code>StereoPannerNode</code>. While audible music frequencies span from 20 Hz to 20,000 Hz, an LFO oscillates at an ultra-slow, sub-audible rate—specifically calibrated here at <strong>0.12 Hz</strong>.</p>
+    <!-- کارت راهنمای گام‌به‌گام همراه تصویر -->
+    <div class="steps-container">
+      <h3>Step-by-Step Guide: How to Turn Any Song into an 8D Track</h3>
+      <p style="color: var(--text-muted); font-size: 1.02rem;">Follow these three straightforward steps to experience 360-degree spatial audio:</p>
 
-    <p>At 0.12 Hz, the LFO takes approximately 8.3 seconds to complete one full sinusoidal cycle from $-1.0$ (complete left ear isolation) across $0.0$ (center forehead balance) to $+1.0$ (complete right ear isolation). By continuously modulating the pan property along a smooth mathematical sine wave, the track sweeps back and forth smoothly. When combined with natural headphone frequency reflections, your auditory cortex interprets this rhythmic panning as continuous 360-degree orbital motion rather than a simple flat stereo flip.</p>
+      <img src="8d-guide.jpg" alt="Step by step 8D audio maker guide" class="tutorial-image">
+      <p class="image-caption">Select your audio file, put on your stereo headphones, and click play to experience spatial rotation.</p>
 
-    <h3>Step-by-Step Guide: How to Turn Any Song into an 8D Track</h3>
-    <p>Transforming your favorite tracks into 8D audio takes only seconds with our streamlined workspace:</p>
-
-    <!-- تصویر اسکرین‌شات آموزشی با نام 8d-guide.jpg -->
-    <img src="8d-guide.jpg" alt="Step by step 8D audio maker guide" class="tutorial-image">
-    <p class="image-caption">Select your audio file, put on your stereo headphones, and click play to experience spatial rotation.</p>
-
-    <ul>
-      <li><strong>Step 1: Put On Stereo Headphones:</strong> This is an absolute physical necessity. 8D audio relies on isolated ear canal delivery; regular smartphone speakers or desktop monitors mix the sound waves in open air, completely canceling the spatial illusion.</li>
-      <li><strong>Step 2: Upload Your Audio Track:</strong> Tap the dashed file picker to select any music track from your device storage. We support all common formats including MP3, WAV, AAC, and OGG files. High-energy tracks with dynamic vocals and prominent basslines yield the most dramatic spatial effects.</li>
-      <li><strong>Step 3: Activate Spatial Playback:</strong> Click the "Play in 8D Audio" button. The Web Audio engine immediately patches the media stream through our automated LFO panner, sending the music on an effortless orbit around your head in real time.</li>
-    </ul>
-
-    <h3>Why Ordinary Room Speakers Cannot Reproduce 8D Audio</h3>
-    <p>A frequent point of confusion among listeners is why 8D audio tracks played through smartphone grilles or car sound systems sound unremarkable. When you listen to physical speakers in a room, an acoustic phenomenon known as <em>acoustic crosstalk</em> occurs: sound emitted by the left speaker travels across the room and enters your right ear, and vice versa. This acoustic mixing destroys the precise interaural differences required for binaural illusions.</p>
-
-    <p>Headphones and in-ear monitors physically isolate each audio channel directly against the ear canal, guaranteeing that the left channel enters only the left ear and the right channel enters only the right ear. Without this acoustic isolation, the brain cannot calculate simulated spatial trajectories.</p>
-
-    <h3>100% Client-Side Privacy: Instant Real-Time Processing</h3>
-    <p>Most online 8D converter services require you to upload entire MP3 files to third-party cloud servers, forcing you to wait in conversion queues before downloading heavy files. MiMusic.net executes all LFO oscillations and stereo panning entirely within your device's browser memory. Your personal audio files are never uploaded, stored, or transmitted over the internet, guaranteeing zero data usage, instantaneous playback, and total privacy.</p>
-
-    <!-- بخش سوالات متداول آکاردئونی تعاملی -->
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Why doesn't 8D audio work through phone speakers or soundbars?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>8D audio depends on strict binaural isolation. In a room, sound from a speaker reaches both ears simultaneously (acoustic crosstalk), destroying the simulated interaural time and level differences. Only headphones can deliver isolated channels directly to each ear.</p>
+      <div class="step-cards-grid">
+        <div class="step-card">
+          <span class="step-badge">Step 1</span>
+          <h4>Put On Stereo Headphones</h4>
+          <p>Headphones or earbuds are strictly mandatory. Standard room speakers mix audio in the air, canceling spatialization.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Does 8D audio actually use eight physical dimensions?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>No. "8D Audio" is a popular creative marketing term. Technically, the effect is 3-dimensional binaural spatial audio produced through dynamic stereo panning, subtle delay modeling, and psychoacoustic panning algorithms.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 2</span>
+          <h4>Select Your Audio File</h4>
+          <p>Tap the dashed file selector to browse local storage. Supports all common formats including MP3, WAV, AAC, and OGG.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Are my uploaded songs or audio files stored on your servers?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Never. All audio routing, oscillator calculations, and panning modulations execute locally in your browser memory via the Web Audio API. Your files never leave your device.</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>What types of music sound best with 8D spatialization?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Tracks featuring distinct lead vocals, rich atmospheric synthesizer pads, and punchy rhythmic baselines provide the most striking 8D experience, as the brain easily tracks melodic leads orbiting around the listening space.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 3</span>
+          <h4>Activate 8D Spatialization</h4>
+          <p>Click "Play in 8D Audio". The browser's LFO panner immediately begins orbiting the track smoothly around your head.</p>
         </div>
       </div>
     </div>
+
+    <!-- گرید موضوعی تخصصی دو ستونه -->
+    <div class="topics-grid">
+      <div class="topic-card">
+        <h3>🎧 Interaural Differences (ITD & ILD)</h3>
+        <p>Human spatial hearing relies on tiny timing and volume gaps between ears. When sound moves, your head creates an acoustic shadow that slightly muffles frequencies reaching the opposite ear. Our algorithm continually sweeps stereo distribution along a sinusoidal curve to reproduce these natural acoustic position cues.</p>
+      </div>
+
+      <div class="topic-card">
+        <h3>🔄 0.12 Hz LFO Orbital Calibration</h3>
+        <p>To produce the feeling of a live performer walking in circles around you, the panner is driven by a 0.12 Hz sub-audible Low-Frequency Oscillator. Taking approximately 8.3 seconds per full rotation, this speed allows your brain to track the orbital arc smoothly without causing motion sickness or disorientation.</p>
+      </div>
+    </div>
+
+    <!-- باکس هایلایت تحلیلی الزام هدفون -->
+    <div class="callout-box">
+      <h3>⚠️ Acoustic Crosstalk: Why Room Speakers Cannot Reproduce 8D Audio</h3>
+      <p>A frequent question is why 8D effects sound flat when played over phone grilles, Bluetooth soundbars, or car speakers:</p>
+      <ul>
+        <li><strong>Acoustic Crosstalk:</strong> In open air, sound from the left speaker crosses the room and hits your right ear (and vice-versa), destroying binaural phase cues.</li>
+        <li><strong>Headphone Isolation:</strong> Earbuds deliver isolated audio channels directly to each ear canal, enabling your brainstem to calculate artificial spatial trajectories.</li>
+        <li><strong>Client-Side Processing:</strong> No files are uploaded to cloud servers; transformations occur locally in RAM with zero data consumption.</li>
+      </ul>
+    </div>
+
+    <!-- کارت سوالات متداول آکاردئونی -->
+    <div class="faq-wrapper-card">
+      <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin-bottom: 10px;">Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Why doesn't 8D audio work through phone speakers or soundbars?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>8D audio depends on strict binaural isolation. In a room, sound from a speaker reaches both ears simultaneously (acoustic crosstalk), destroying the simulated interaural time and level differences. Only headphones can deliver isolated channels directly to each ear.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Does 8D audio actually use eight physical dimensions?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. "8D Audio" is a popular creative marketing term. Technically, the effect is 3-dimensional binaural spatial audio produced through dynamic stereo panning, subtle delay modeling, and psychoacoustic panning algorithms.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Are my uploaded songs or audio files stored on your servers?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Never. All audio routing, oscillator calculations, and panning modulations execute locally in your browser memory via the Web Audio API. Your files never leave your device.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What types of music sound best with 8D spatialization?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Tracks featuring distinct lead vocals, rich atmospheric synthesizer pads, and punchy rhythmic baselines provide the most striking 8D experience, as the brain easily tracks melodic leads orbiting around the listening space.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- فوتر کریستالی -->
@@ -466,7 +641,6 @@
 
   <!-- اسکریپت‌های منو و پردازش صوتی 8D -->
   <script>
-    // منوی ناوبری
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
@@ -479,13 +653,11 @@
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    // اسکریپت آکاردئونی سوالات متداول
     function toggleFaq(button) {
       const item = button.parentElement;
       item.classList.toggle('active');
     }
 
-    // منطق پردازش صوتی 8D با LFO خودکار Web Audio API
     let audioCtx = null;
     let audioSource = null;
     let pannerNode = null;
@@ -518,22 +690,19 @@
         if (!isInitialized) {
           audioSource = audioCtx.createMediaElementSource(audioElement);
           
-          // ایجاد استریو پانر جهت تفکیک چپ و راست
           pannerNode = audioCtx.createStereoPanner();
           
-          // ایجاد نوسان‌ساز با فرکانس پایین (LFO) جهت چرخش خودکار صدا
           lfo = audioCtx.createOscillator();
           lfo.type = 'sine';
-          lfo.frequency.value = 0.12; // دوره تناوب تقریبا ۸.۳ ثانیه برای یک دور کامل
+          lfo.frequency.value = 0.12;
           
           lfoGain = audioCtx.createGain();
-          lfoGain.gain.value = 1; // گردش کامل چپ تا راست
+          lfoGain.gain.value = 1;
           
           lfo.connect(lfoGain);
           lfoGain.connect(pannerNode.pan);
           lfo.start();
           
-          // مسیردهی صوتی
           audioSource.connect(pannerNode);
           pannerNode.connect(audioCtx.destination);
           
