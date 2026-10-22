@@ -7,7 +7,7 @@
   <meta name="description" content="Test audio latency and Bluetooth headphone delay directly in your browser. Free online sound sync tester with precise millisecond buffer measurements.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
-    /* تم یخی کریستالی و شیشه‌ای منطبق با استانداردهای صفحه اصلی */
+    /* تم یخی کریستالی و شیشه‌ای منطبق با صفحه اصلی */
     :root {
       --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
       --surface-glass: rgba(255, 255, 255, 0.72);
@@ -68,13 +68,13 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    /* فضای کاری ابزار به صورت کارت شیشه‌ای شناور */
-    .workspace { padding: 60px 24px 40px; text-align: center; }
+    /* فضای تعاملی ابزار */
+    .workspace { padding: 60px 24px 35px; text-align: center; }
     .tool-container { 
       max-width: 720px; 
       margin: 0 auto; 
       background: var(--surface-glass); 
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px); 
       -webkit-backdrop-filter: blur(20px);
       border-radius: 30px; 
       padding: 45px 35px; 
@@ -144,8 +144,47 @@
       width: 100%;
     }
 
+    /* باکس‌های ویژگی کلیدی دقیقاً زیر کادر ابزار (Feature Boxes مدنظر استاد) */
+    .features-row { 
+      max-width: 1000px; 
+      margin: 10px auto 50px; 
+      padding: 0 24px; 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+      gap: 18px; 
+    }
+    .feature-box { 
+      background: var(--surface-glass); 
+      backdrop-filter: blur(16px); 
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border); 
+      border-radius: 20px; 
+      padding: 22px 18px; 
+      box-shadow: var(--glass-shadow); 
+      transition: all 0.3s ease; 
+      display: flex; 
+      gap: 14px; 
+      align-items: flex-start; 
+    }
+    .feature-box:hover { 
+      transform: translateY(-4px); 
+      background: var(--surface-glass-hover); 
+      box-shadow: var(--glass-shadow-hover); 
+    }
+    .feature-box .f-icon { 
+      font-size: 1.8rem; 
+      line-height: 1; 
+      background: #ffffff; 
+      border: 1px solid var(--glass-border); 
+      padding: 10px; 
+      border-radius: 14px; 
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); 
+    }
+    .feature-box h4 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+    .feature-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+
     /* کادر عکس هوش مصنوعی */
-    .feature-wrapper { max-width: 880px; margin: 30px auto 50px; padding: 0 24px; text-align: center; }
+    .feature-wrapper { max-width: 880px; margin: 10px auto 50px; padding: 0 24px; text-align: center; }
     .feature-image { 
       width: 100%; 
       border-radius: 28px; 
@@ -153,24 +192,55 @@
       display: block; 
     }
 
-    /* کادر مقاله جامع و سوالات متداول */
-    .content-section { 
-      max-width: 900px; 
-      margin: 0 auto 70px; 
-      padding: 45px; 
-      background: var(--surface-glass); 
+    /* ساختار بصری، کارت‌محور و خردشده مقاله سئو (جلوگیری از دیوار متنی) */
+    .content-container { max-width: 1000px; margin: 0 auto 70px; padding: 0 24px; }
+    
+    .content-hero-card {
+      background: var(--surface-glass);
       backdrop-filter: blur(18px); 
       -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--glass-border); 
-      border-radius: 28px; 
-      box-shadow: var(--glass-shadow); 
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      box-shadow: var(--glass-shadow);
+      margin-bottom: 26px;
     }
-    .content-section h2 { font-size: 2.1rem; font-weight: 900; color: var(--text-dark); margin-bottom: 22px; letter-spacing: -0.02em; }
-    .content-section h3 { font-size: 1.48rem; font-weight: 800; color: var(--text-dark); margin: 36px 0 18px; }
-    .content-section p { font-size: 1.08rem; margin-bottom: 22px; line-height: 1.95; color: var(--text-main); }
-    .content-section ul { margin-bottom: 28px; padding-left: 24px; }
-    .content-section li { margin-bottom: 12px; font-size: 1.04rem; color: var(--text-main); }
-    
+    .content-hero-card h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.02em; }
+    .content-hero-card p { font-size: 1.05rem; color: var(--text-main); line-height: 1.9; }
+
+    /* کارت‌های گام‌به‌گام مراحل */
+    .steps-container {
+      background: var(--surface-glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      margin-bottom: 26px;
+      box-shadow: var(--glass-shadow);
+    }
+    .steps-container h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 20px; }
+    .step-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 24px; }
+    .step-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      transition: 0.3s;
+    }
+    .step-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .step-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    .step-card h4 { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+    .step-card p { font-size: 0.95rem; color: var(--text-main); line-height: 1.65; }
+
     .tutorial-image { 
       width: 100%; 
       max-width: 620px; 
@@ -178,19 +248,54 @@
       border-radius: 20px; 
       border: 1px solid var(--glass-border); 
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06); 
-      margin: 28px auto 14px; 
+      margin: 15px auto; 
       display: block; 
     }
-    .image-caption { text-align: center; font-size: 0.92rem; color: var(--text-muted); margin-bottom: 34px; font-style: italic; }
+    .image-caption { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; font-style: italic; }
+
+    /* گرید دو ستونه مباحث تخصصی */
+    .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 22px; margin-bottom: 26px; }
+    .topic-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: var(--glass-shadow);
+      transition: 0.3s;
+    }
+    .topic-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .topic-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .topic-card p { font-size: 0.98rem; color: var(--text-main); line-height: 1.85; }
+
+    /* باکس هایلایت تحلیلی کاهش لگ */
+    .callout-box {
+      background: linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
+      border: 1.5px solid rgba(99, 102, 241, 0.3);
+      border-radius: 22px;
+      padding: 30px;
+      margin-bottom: 26px;
+      box-shadow: var(--glass-shadow);
+    }
+    .callout-box h3 { font-size: 1.35rem; font-weight: 900; color: var(--text-dark); margin-bottom: 12px; }
+    .callout-box p { font-size: 1rem; color: var(--text-main); line-height: 1.85; margin-bottom: 14px; }
+    .callout-box ul { padding-left: 20px; }
+    .callout-box li { font-size: 0.96rem; color: var(--text-main); margin-bottom: 6px; }
 
     /* آکاردئون سوالات متداول */
-    .faq-container { margin-top: 25px; display: flex; flex-direction: column; gap: 14px; }
+    .faq-wrapper-card {
+      background: var(--surface-glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 38px;
+      box-shadow: var(--glass-shadow);
+    }
+    .faq-container { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
     .faq-item { 
       background: rgba(255, 255, 255, 0.85); 
       border: 1px solid var(--glass-border); 
-      border-radius: 18px; 
+      border-radius: 16px; 
       overflow: hidden; 
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); 
       transition: all 0.2s ease; 
     }
     .faq-item:hover { border-color: rgba(99, 102, 241, 0.4); }
@@ -198,9 +303,9 @@
       width: 100%; 
       background: none; 
       border: none; 
-      padding: 22px 26px; 
+      padding: 20px 24px; 
       text-align: left; 
-      font-size: 1.08rem; 
+      font-size: 1.05rem; 
       font-weight: 800; 
       color: var(--text-dark); 
       display: flex; 
@@ -210,17 +315,17 @@
       transition: 0.2s; 
     }
     .faq-question:hover { color: var(--accent); }
-    .faq-icon { font-size: 0.9rem; transition: transform 0.3s ease; color: var(--accent); }
+    .faq-icon { font-size: 0.85rem; transition: transform 0.3s ease; color: var(--accent); }
     .faq-answer { 
       max-height: 0; 
       overflow: hidden; 
       transition: max-height 0.35s ease, padding 0.35s ease; 
-      padding: 0 26px; 
+      padding: 0 24px; 
       color: var(--text-main); 
-      font-size: 1.02rem; 
-      line-height: 1.85; 
+      font-size: 0.98rem; 
+      line-height: 1.8; 
     }
-    .faq-item.active .faq-answer { max-height: 250px; padding: 0 26px 24px 26px; }
+    .faq-item.active .faq-answer { max-height: 250px; padding: 0 24px 22px 24px; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
 
     /* فوتر کریستالی */
@@ -246,11 +351,13 @@
       .nav-links { display: none; }
       .hamburger { display: block; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .content-section { padding: 26px; margin: 0 16px 50px; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .content-hero-card, .steps-container, .callout-box, .faq-wrapper-card { padding: 24px; }
       .tool-container { padding: 35px 20px; }
     }
     @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
+      .features-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -264,7 +371,7 @@
         <a href="/about.html" class="nav-link">About App</a>
         <a href="/install.html" class="nav-link">Installation</a>
         <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-        <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+        <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
       </nav>
       <button class="hamburger" id="menuBtn">☰</button>
     </div>
@@ -277,7 +384,7 @@
     <a href="/about.html" class="nav-link">About App</a>
     <a href="/install.html" class="nav-link">Installation</a>
     <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-    <a href="/tools.html" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+    <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
   </nav>
 
   <!-- فضای تعاملی ابزار -->
@@ -294,96 +401,155 @@
     </div>
   </main>
 
+  <!-- ردیف باکس‌های ویژگی کلیدی ابزار (Feature Boxes مدنظر استاد) -->
+  <section class="features-row">
+    <div class="feature-box">
+      <span class="f-icon">⏱️</span>
+      <div>
+        <h4>Millisecond Precision</h4>
+        <p>Directly measures hardware buffer roundtrip intervals via browser audio context threads.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">🎧</span>
+      <div>
+        <h4>Bluetooth Diagnostics</h4>
+        <p>Benchmark latency differences across SBC, AAC, aptX, and low-latency gaming codecs.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">🔒</span>
+      <div>
+        <h4>100% In-Memory DSP</h4>
+        <p>Pure client-side execution; zero microphone tracking, analytics, or remote network calls.</p>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <span class="f-icon">🎮</span>
+      <div>
+        <h4>Sync Optimization</h4>
+        <p>Identify hardware bottlenecks before playing competitive shooters or editing audio.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- تصویر هوش مصنوعی با نام audio-latency.jpg -->
   <div class="feature-wrapper">
     <img src="audio-latency.jpg" alt="Visual graph representing millisecond audio latency and sound delay" class="feature-image">
   </div>
 
-  <!-- مقاله تخصصی، انسانی و سئو شده (> ۶۵۰ کلمه) -->
-  <section class="content-section">
-    <h2>The Anatomy of Audio Latency: Understanding the Millisecond Gap</h2>
-    <p>In digital computing, sound playback is never truly instantaneous. Whenever an application triggers a sound effect, video soundtrack, or musical note, that digital command must navigate a complex software and hardware pipeline. The audio data is segmented into small buffers, processed by operating system audio engines (such as Windows WASAPI, macOS CoreAudio, or Android AAudio), routed through digital-to-analog converters (DACs), amplified, and physically pushed through headphone speaker diaphragms. The cumulative time delay required for this entire roundtrip is known as <strong>audio latency</strong>, measured in milliseconds (ms).</p>
+  <!-- محتوای سئو و آموزشی به صورت بلوک‌ها و کارت‌های تفکیک‌شده بصری -->
+  <section class="content-container">
 
-    <p>While a wired 3.5mm analog connection delivers near-instantaneous transmission with less than 5 to 10 ms of total latency, wireless audio introduces an entirely new layer of digital overhead. When using Bluetooth earbuds, the uncompressed digital stream must be compressed by a software codec, packetized into radio frequency bursts, transmitted across the 2.4 GHz spectrum, received by the earbud chip, reassembled, decoded, and converted to analog audio. The <strong>MiMusic Audio Latency Tester</strong> evaluates this hardware-software pipeline directly in your browser using the native Web Audio API, calculating audio context output latency so you can quantify playback delays.</p>
+    <!-- کارت معرفی تحلیلی -->
+    <div class="content-hero-card">
+      <h2>The Anatomy of Audio Latency: Understanding the Millisecond Gap</h2>
+      <p>In digital computing, sound playback is never truly instantaneous. Whenever an application triggers a sound effect, video soundtrack, or musical note, that digital command must navigate a complex software and hardware pipeline. The audio data is segmented into small buffers, processed by operating system audio engines (such as Windows WASAPI, macOS CoreAudio, or Android AAudio), routed through digital-to-analog converters (DACs), amplified, and physically pushed through headphone speaker diaphragms. The cumulative time delay required for this entire roundtrip is known as <strong>audio latency</strong>, measured in milliseconds (ms).</p>
+      <p style="margin-top: 12px;">While a wired 3.5mm analog connection delivers near-instantaneous transmission with less than 5 to 10 ms of total latency, wireless audio introduces an entirely new layer of digital overhead. When using Bluetooth earbuds, the uncompressed digital stream must be compressed by a software codec, packetized into radio frequency bursts, transmitted across the 2.4 GHz spectrum, received by the earbud chip, reassembled, decoded, and converted to analog audio. The <strong>MiMusic Audio Latency Tester</strong> evaluates this hardware-software pipeline directly in your browser using the native Web Audio API, calculating audio context output latency so you can quantify playback delays.</p>
+    </div>
 
-    <h3>Wireless Bluetooth Codecs: SBC, AAC, aptX, and LDAC Compared</h3>
-    <p>The primary factor influencing wireless latency on mobile devices is the underlying Bluetooth transmission codec negotiated between your smartphone and headphones:</p>
-    <ul>
-      <li><strong>SBC (Subband Coding):</strong> The mandatory baseline codec supported by all Bluetooth audio devices. SBC features an average latency of <strong>150 ms to 250 ms</strong>, making it prone to noticeable lip-sync delay during video playback and distracting input lag during gaming.</li>
-      <li><strong>AAC (Advanced Audio Coding):</strong> The standard codec utilized across Apple iOS devices. While offering superior perceptual audio fidelity at lower bitrates, its computational encoding overhead on Android devices can often cause latency exceeding <strong>200 ms</strong>.</li>
-      <li><strong>Qualcomm aptX & aptX Adaptive:</strong> Engineered specifically for low latency, standard aptX operates around 120 ms, while specialized aptX Low Latency (LL) protocols bring transmission delay down to an imperceptible <strong>35 ms to 40 ms</strong>.</li>
-      <li><strong>Sony LDAC:</strong> A high-resolution certified Bluetooth codec capable of transmitting up to 990 kbps. Because LDAC prioritizes acoustic bit depth over speed, its latency typically hovers between <strong>150 ms and 200 ms</strong>.</li>
-    </ul>
+    <!-- کارت راهنمای گام‌به‌گام همراه تصویر -->
+    <div class="steps-container">
+      <h3>Step-by-Step Guide: How to Benchmark Your Audio Delay</h3>
+      <p style="color: var(--text-muted); font-size: 1.02rem;">Follow these three steps to diagnose output latency on desktop or mobile:</p>
 
-    <h3>The Psychoacoustics of Lip-Sync and Gaming Lag</h3>
-    <p>Human perception is remarkably sensitive to visual-auditory timing discrepancies. In human face-to-face communication, sound naturally travels slower through air than light ($343 \text{ m/s}$ vs. $300,000 \text{ km/s}$), meaning our brains naturally tolerate sound arriving slightly <em>after</em> an image. According to International Telecommunication Union (ITU) broadcast standards, audio can lag behind video by up to <strong>+45 ms to +100 ms</strong> before the average viewer perceives annoying lip-sync desynchronization.</p>
+      <img src="latency-guide.jpg" alt="Step by step audio latency test guide" class="tutorial-image">
+      <p class="image-caption">Connect your target headphones, click Start Latency Test, and review measured buffer timing.</p>
 
-    <p>However, if audio leads video (arriving before visual movement), human brains detect the anomaly at just <strong>-15 ms</strong>. In fast-paced competitive mobile gaming (such as first-person shooters or rhythm games), a 200 ms Bluetooth audio lag means you hear an enemy's gunfire nearly a quarter of a second after it happens on screen. Benchmarking your system latency helps determine whether your current setup is viable for gaming or real-time media editing.</p>
-
-    <h3>Step-by-Step Guide: How to Benchmark Your Audio Delay</h3>
-    <p>Measuring your audio output latency takes only a few seconds through our online diagnostic tool:</p>
-
-    <!-- تصویر اسکرین‌شات آموزشی با نام latency-guide.jpg -->
-    <img src="latency-guide.jpg" alt="Step by step audio latency test guide" class="tutorial-image">
-    <p class="image-caption">Connect your target headphones, click Start Latency Test, and review measured buffer timing.</p>
-
-    <ul>
-      <li><strong>Step 1: Connect Your Audio Gear:</strong> Pair your wireless Bluetooth earbuds, or connect your wired headphones, to test your primary listening device.</li>
-      <li><strong>Step 2: Initialize Hardware Diagnostic:</strong> Click the "Start Latency Test" button. The tool synthesizes a 440 Hz test tone while interrogating the browser's audio output bus.</li>
-      <li><strong>Step 3: Analyze the Output Result:</strong> The meter displays your estimated hardware output latency in milliseconds. Values under 50 ms indicate excellent real-time responsiveness, while values exceeding 150 ms indicate standard wireless buffer delays.</li>
-    </ul>
-
-    <h3>How to Minimize Latency on Mobile Devices</h3>
-    <p>If your test results reveal high latency, several practical steps can dramatically improve performance:</p>
-    <ul>
-      <li><strong>Activate Gaming Mode:</strong> Most modern Bluetooth earbuds feature a dedicated "Game Mode" or "Low Latency Mode" that compresses wireless packet buffers, cutting latency down to 60–80 ms.</li>
-      <li><strong>Switch to Wired Audio:</strong> For rhythm games, competitive multiplayer titles, or music production, switching to wired USB-C or 3.5mm headphones completely eliminates wireless encoding delay.</li>
-      <li><strong>Check Developer Options:</strong> On Android devices, you can access Developer Settings to manually select low-latency Bluetooth codecs supported by your hardware.</li>
-    </ul>
-
-    <!-- بخش سوالات متداول آکاردئونی تعاملی -->
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>What is considered an acceptable audio latency level?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>For casual music listening, latency is irrelevant. For video streaming, latency under 100 ms is perfectly synchronized due to automatic media player offset compensation. For competitive mobile gaming and instrument monitoring, latency must remain under 40 ms to feel responsive.</p>
+      <div class="step-cards-grid">
+        <div class="step-card">
+          <span class="step-badge">Step 1</span>
+          <h4>Connect Audio Gear</h4>
+          <p>Pair your wireless Bluetooth earbuds, or plug in your wired 3.5mm/USB-C headphones to evaluate your target playback setup.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Why do video streaming apps look in sync even with high Bluetooth delay?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Modern video apps like YouTube and Netflix automatically delay video playback frames by the exact latency reported by your Bluetooth headphones. However, this compensatory trick only works for pre-recorded media; it cannot be applied to real-time interactive games or live voice chats.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 2</span>
+          <h4>Initiate Diagnostic</h4>
+          <p>Click "Start Latency Test". The tool synthesizes a pure 440 Hz pulse while polling browser audio output bus properties.</p>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>How does this tool measure latency in the browser?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Our tool queries the browser's native Web Audio API `AudioContext.outputLatency` and `baseLatency` properties, which calculate the estimated round-trip delay between the browser thread, operating system audio mixing buffers, and output hardware driver.</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Can software updates fix Bluetooth audio delay?</span>
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          <p>Yes. Earbud firmware updates frequently optimize transmission buffer handling. Furthermore, newer standards like Bluetooth 5.2, 5.3, and Bluetooth LE Audio (LC3 codec) offer substantial structural latency reductions over older Bluetooth 4.2 protocols.</p>
+        <div class="step-card">
+          <span class="step-badge">Step 3</span>
+          <h4>Analyze Output Result</h4>
+          <p>Review measured millisecond delay: under 50 ms indicates lightning-fast response; over 150 ms indicates wireless buffer lag.</p>
         </div>
       </div>
     </div>
+
+    <!-- گرید موضوعی تخصصی دو ستونه -->
+    <div class="topics-grid">
+      <div class="topic-card">
+        <h3>📶 Bluetooth Codec Comparison</h3>
+        <p>The primary driver of wireless lag is your device's active codec: baseline <strong>SBC</strong> typically hovers around 150–250 ms; <strong>AAC</strong> delivers high audio fidelity but often incurs 200 ms latency on Android; <strong>aptX Low Latency</strong> slashes delay to 35–40 ms; while high-res <strong>LDAC</strong> operates around 150–200 ms.</p>
+      </div>
+
+      <div class="topic-card">
+        <h3>🎯 Psychoacoustics of Lip-Sync</h3>
+        <p>International broadcast standards (ITU) establish that audio can lag behind video by +45 ms to +100 ms before viewers perceive noticeable lip-sync mismatch. However, in fast-paced mobile gaming, a 200 ms delay means you hear footsteps or shots a fifth of a second late, destroying competitive reaction times.</p>
+      </div>
+    </div>
+
+    <!-- باکس هایلایت تحلیلی کاهش لگ -->
+    <div class="callout-box">
+      <h3>⚡ Practical Protocols: How to Minimize Wireless Latency</h3>
+      <p>If your benchmark test reveals elevated delay numbers, try these quick optimization protocols:</p>
+      <ul>
+        <li><strong>Activate Gaming Mode:</strong> Most modern Bluetooth earbuds feature a dedicated "Game Mode" that shrinks wireless packet buffer size, dropping delay down to 60–80 ms.</li>
+        <li><strong>Switch to Wired Audio:</strong> For rhythm games, competitive multiplayer titles, or music production, switching to wired USB-C or 3.5mm headphones completely eliminates wireless encoding delay.</li>
+        <li><strong>Check Developer Options:</strong> On Android devices, you can access Developer Settings to manually select low-latency Bluetooth codecs supported by your hardware.</li>
+      </ul>
+    </div>
+
+    <!-- کارت سوالات متداول آکاردئونی -->
+    <div class="faq-wrapper-card">
+      <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin-bottom: 10px;">Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What is considered an acceptable audio latency level?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>For casual music listening, latency is irrelevant. For video streaming, latency under 100 ms is perfectly synchronized due to automatic media player offset compensation. For competitive mobile gaming and instrument monitoring, latency must remain under 40 ms to feel responsive.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Why do video streaming apps look in sync even with high Bluetooth delay?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Modern video apps like YouTube and Netflix automatically delay video playback frames by the exact latency reported by your Bluetooth headphones. However, this compensatory trick only works for pre-recorded media; it cannot be applied to real-time interactive games or live voice chats.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How does this tool measure latency in the browser?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Our tool queries the browser's native Web Audio API `AudioContext.outputLatency` and `baseLatency` properties, which calculate the estimated round-trip delay between the browser thread, operating system audio mixing buffers, and output hardware driver.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Can software updates fix Bluetooth audio delay?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. Earbud firmware updates frequently optimize transmission buffer handling. Furthermore, newer standards like Bluetooth 5.2, 5.3, and Bluetooth LE Audio (LC3 codec) offer substantial structural latency reductions over older Bluetooth 4.2 protocols.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- فوتر کریستالی -->
@@ -429,7 +595,6 @@
 
   <!-- اسکریپت‌های منو و تست تأخیر صدا -->
   <script>
-    // منوی ناوبری
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
@@ -442,13 +607,11 @@
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    // اسکریپت آکاردئونی سوالات متداول
     function toggleFaq(button) {
       const item = button.parentElement;
       item.classList.toggle('active');
     }
 
-    // منطق تست تأخیر بافر صوتی Web Audio API
     function startTest() {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const osc = audioCtx.createOscillator();
@@ -464,7 +627,6 @@
       osc.start();
       osc.stop(audioCtx.currentTime + 0.1);
       
-      // محاسبه تأخیر خروجی بافر همراه با فال‌بک مطمئن
       const rawLatency = audioCtx.outputLatency || audioCtx.baseLatency || 0.025;
       const latencyMs = Math.round(rawLatency * 1000);
       
