@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MiMusic.net - Free Online Audio Tools & Sound Utilities</title>
-  <meta name="description" content="Explore a powerful suite of free, browser-based audio tools. Volume booster, speaker cleaner, 8D audio, decibel meter, voice transformer, and more. 100% private.">
+  <title>Mi Music - Free Online Audio Tools & Sound Utilities</title>
+  <meta name="description" content="Explore Mi Music: a powerful suite of free, browser-based audio tools. Volume booster, speaker cleaner, 8D audio, decibel meter, voice transformer, and more.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
     /* تم یخی کریستالی و شیشه‌ای (Frosted Crystal Glassmorphism) */
@@ -156,52 +156,8 @@
     .feature-box h4 { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 6px; }
     .feature-box p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
 
-    /* گرید ۱۲ ابزار */
-    .tools-section { max-width: 1200px; margin: 0 auto; padding: 20px 24px 70px; }
-    .section-title { font-size: 2.2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 35px; text-align: center; letter-spacing: -0.02em; }
-    .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-    
-    .tool-card { 
-      background: var(--surface-glass); 
-      backdrop-filter: blur(16px); 
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--glass-border); 
-      border-radius: 24px; 
-      padding: 30px; 
-      text-decoration: none; 
-      color: inherit; 
-      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); 
-      box-shadow: var(--glass-shadow); 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: space-between; 
-      position: relative;
-    }
-    .tool-card:hover { 
-      transform: translateY(-8px); 
-      background: var(--surface-glass-hover); 
-      border-color: rgba(99, 102, 241, 0.45); 
-      box-shadow: var(--glass-shadow-hover); 
-    }
-    .tool-icon { 
-      width: 60px; 
-      height: 60px; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      background: rgba(255, 255, 255, 0.95); 
-      border: 1px solid var(--glass-border); 
-      border-radius: 18px; 
-      font-size: 1.85rem; 
-      margin-bottom: 22px; 
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.04); 
-    }
-    .tool-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; }
-    .tool-card p { font-size: 0.96rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.65; }
-    .tool-link-text { color: var(--accent); font-weight: 800; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px; }
-
-    /* ساختار بصری و خردشده مقاله سئو (جلوگیری از متن فشرده) */
-    .content-container { max-width: 1000px; margin: 30px auto 70px; padding: 0 24px; }
+    /* ساختار بصری مقاله و محتوای سئو */
+    .content-container { max-width: 1000px; margin: 30px auto 40px; padding: 0 24px; }
     
     .content-hero-card {
       background: var(--surface-glass);
@@ -284,6 +240,50 @@
     .faq-item.active .faq-answer { max-height: 250px; padding: 0 26px 24px 26px; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
 
+    /* بخش ابزارها در انتهای صفحه (More Tools مدنظر استاد) */
+    .tools-section { max-width: 1200px; margin: 40px auto 70px; padding: 20px 24px; }
+    .section-title { font-size: 2.3rem; font-weight: 900; color: var(--text-dark); margin-bottom: 35px; text-align: center; letter-spacing: -0.02em; }
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    
+    .tool-card { 
+      background: var(--surface-glass); 
+      backdrop-filter: blur(16px); 
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border); 
+      border-radius: 24px; 
+      padding: 30px; 
+      text-decoration: none; 
+      color: inherit; 
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); 
+      box-shadow: var(--glass-shadow); 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: space-between; 
+      position: relative;
+    }
+    .tool-card:hover { 
+      transform: translateY(-8px); 
+      background: var(--surface-glass-hover); 
+      border-color: rgba(99, 102, 241, 0.45); 
+      box-shadow: var(--glass-shadow-hover); 
+    }
+    .tool-icon { 
+      width: 60px; 
+      height: 60px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      background: rgba(255, 255, 255, 0.95); 
+      border: 1px solid var(--glass-border); 
+      border-radius: 18px; 
+      font-size: 1.85rem; 
+      margin-bottom: 22px; 
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.04); 
+    }
+    .tool-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; }
+    .tool-card p { font-size: 0.96rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.65; }
+    .tool-link-text { color: var(--accent); font-weight: 800; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px; }
+
     /* فوتر کریستالی */
     footer { 
       border-top: 1px solid var(--glass-border); 
@@ -293,7 +293,7 @@
       padding: 65px 24px 45px; 
       color: var(--text-muted); 
       font-size: 0.95rem; 
-      margin-top: 80px; 
+      margin-top: 60px; 
     }
     .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
     .footer-col h5 { color: var(--text-dark); font-size: 1.05rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
@@ -327,7 +327,7 @@
         <a href="/about.html" class="nav-link">About App</a>
         <a href="/install.html" class="nav-link">Installation</a>
         <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-        <a href="#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+        <a href="#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">More Tools</a>
       </nav>
       <button class="hamburger" id="menuBtn">☰</button>
     </div>
@@ -340,13 +340,13 @@
     <a href="/about.html" class="nav-link">About App</a>
     <a href="/install.html" class="nav-link">Installation</a>
     <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-    <a href="#tools" class="nav-link" style="color: var(--accent); font-weight: 800;" onclick="toggleMenu()">Free Audio Tools</a>
+    <a href="#tools" class="nav-link" style="color: var(--accent); font-weight: 800;" onclick="toggleMenu()">More Tools</a>
   </nav>
 
-  <!-- بخش هیرو و عکس شاخص -->
+  <!-- بخش هیرو (هدینگ ۱ شامل Mi Music طبق دستور استاد) -->
   <main class="hero">
     <div class="hero-badge">⚡ 100% Client-Side Web Audio DSP</div>
-    <h1>Free Online Audio Tools & Sound Utilities</h1>
+    <h1>Mi Music - Free Online Audio Tools & Sound Utilities</h1>
     <p>Discover our clean, browser-based suite of modern audio utilities. Boost volume, clear speaker moisture, experience 3D spatial rotation, test hearing thresholds, transform voices, and convert media without downloading any software.</p>
   </main>
 
@@ -354,12 +354,12 @@
     <img src="mimusic-hero.jpg" alt="A futuristic digital audio workstation with glowing sound waves and spectrum analyzer" class="feature-image">
     <div class="cta-container">
       <a href="#tools" class="cta-button">
-        Explore All Tools <span>↓</span>
+        Explore More Tools <span>↓</span>
       </a>
     </div>
   </div>
 
-  <!-- باکس‌های ویژگی کلیدی پلتفرم (Feature Boxes) -->
+  <!-- باکس‌های ویژگی کلیدی پلتفرم -->
   <section class="features-row">
     <div class="feature-box">
       <span class="f-icon">🔒</span>
@@ -391,121 +391,6 @@
         <h4>Lossless Audio Precision</h4>
         <p>High-resolution 32-bit floating point processing preserves original sound fidelity and dynamic range.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- گرید ۱۲ ابزار کاربردی (جایگزینی دقیق Voice Transformer) -->
-  <section class="tools-section" id="tools">
-    <h2 class="section-title">Explore Our Audio Utility Suite</h2>
-    <div class="tools-grid">
-      <a href="/volume-booster/" class="tool-card">
-        <div>
-          <div class="tool-icon">🔊</div>
-          <h3>Volume Booster</h3>
-          <p>Safely amplify audio tracks and quiet video files past your hardware's normal ceiling using software gain.</p>
-        </div>
-        <span class="tool-link-text">Launch Tool &rarr;</span>
-      </a>
-
-      <a href="/speaker-cleaner/" class="tool-card">
-        <div>
-          <div class="tool-icon">💧</div>
-          <h3>Speaker Cleaner</h3>
-          <p>Eject trapped moisture, dust, and grime from smartphone speaker grills using alternating high-power sound waves.</p>
-        </div>
-        <span class="tool-link-text">Launch Tool &rarr;</span>
-      </a>
-
-      <a href="/8d-audio/" class="tool-card">
-        <div>
-          <div class="tool-icon">🎧</div>
-          <h3>8D Spatial Audio</h3>
-          <p>Immerse yourself in dynamic 360-degree rotating stereo panning for regular headphones and earbuds.</p>
-        </div>
-        <span class="tool-link-text">Launch Tool &rarr;</span>
-      </a>
-
-      <a href="/pitch-shifter/" class="tool-card">
-        <div>
-          <div class="tool-icon">🎚️</div>
-          <h3>Pitch & Tempo Changer</h3>
-          <p>Fine-tune musical pitch semitones and playback speed independently without distorting overall voice clarity.</p>
-        </div>
-        <span class="tool-link-text">Launch Tool &rarr;</span>
-      </a>
-
-      <a href="/vocal-clarity/" class="tool-card">
-        <div>
-          <div class="tool-icon">🎙️</div>
-          <h3>Vocal Clarity Booster</h3>
-          <p>Isolate and brighten spoken dialogue while suppressing muffled low-end rumbles in lectures and podcasts.</p>
-        </div>
-        <span class="tool-link-text">Launch Tool &rarr;</span>
-      </a>
-
-      <!-- اتصال مستقیم به Voice Transformer -->
-      <a href="/voice-transformer/" class="tool-card">
-        <div>
-          <div class="tool-icon">🤖</div>
-          <h3>Voice Transformer</h3>
-          <p>Transform your voice with iconic presets like chipmunk, deep monster, and pitch modulation in real time.</p>
-        </div>
-        <span class="tool-link-text">Launch Tool &rarr;</span>
-      </a>
-
-      <a href="/video-to-audio/" class="tool-card">
-        <div>
-          <div class="tool-icon">🎬</div>
-          <h3>Video to Audio Converter</h3>
-          <p>Extract pristine MP3 and WAV audio soundtracks directly from MP4 and WebM video files entirely offline.</p>
-        </div>
-        <span class="tool-link-text">Launch Tool &rarr;</span>
-      </a>
-
-      <a href="/audio-latency/" class="tool-card">
-        <div>
-          <div class="tool-icon">⏱️</div>
-          <h3>Audio Latency Tester</h3>
-          <p>Benchmark Bluetooth headphone audio lag and lipsync delay with millisecond-precision audio-visual cues.</p>
-        </div>
-        <span class="tool-link-text">Launch Tool &rarr;</span>
-      </a>
-
-      <a href="/decibel-meter/" class="tool-card">
-        <div>
-          <div class="tool-icon">📊</div>
-          <h3>Online Decibel Meter</h3>
-          <p>Monitor ambient room noise levels and peak environmental acoustics in real-time through your microphone.</p>
-        </div>
-        <span class="tool-link-text">Launch Tool &rarr;</span>
-      </a>
-
-      <a href="/hearing-test/" class="tool-card">
-        <div>
-          <div class="tool-icon">👂</div>
-          <h3>Online Hearing Test</h3>
-          <p>Map your personal auditory range across low, mid, and high pure tones to evaluate ear sensitivity.</p>
-        </div>
-        <span class="tool-link-text">Launch Tool &rarr;</span>
-      </a>
-
-      <a href="/reverse-audio/" class="tool-card">
-        <div>
-          <div class="tool-icon">🔄</div>
-          <h3>Reverse Audio Tool</h3>
-          <p>Flip voice notes and song clips completely backward to craft eerie sound effects and creative reversals.</p>
-        </div>
-        <span class="tool-link-text">Launch Tool &rarr;</span>
-      </a>
-
-      <a href="/binaural-waves/" class="tool-card">
-        <div>
-          <div class="tool-icon">🧠</div>
-          <h3>Binaural Beats Generator</h3>
-          <p>Synthesize custom brainwave entrainment frequencies for alpha relaxation, beta focus, and deep delta sleep.</p>
-        </div>
-        <span class="tool-link-text">Launch Tool &rarr;</span>
-      </a>
     </div>
   </section>
 
@@ -598,6 +483,120 @@
       </div>
     </div>
 
+  </section>
+
+  <!-- بخش ابزارها در انتهای انتهای صفحه با عنوان More Tools (دستور استاد) -->
+  <section class="tools-section" id="tools">
+    <h2 class="section-title">More Tools</h2>
+    <div class="tools-grid">
+      <a href="/volume-booster/" class="tool-card">
+        <div>
+          <div class="tool-icon">🔊</div>
+          <h3>Volume Booster</h3>
+          <p>Safely amplify audio tracks and quiet video files past your hardware's normal ceiling using software gain.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/speaker-cleaner/" class="tool-card">
+        <div>
+          <div class="tool-icon">💧</div>
+          <h3>Speaker Cleaner</h3>
+          <p>Eject trapped moisture, dust, and grime from smartphone speaker grills using alternating high-power sound waves.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/8d-audio/" class="tool-card">
+        <div>
+          <div class="tool-icon">🎧</div>
+          <h3>8D Spatial Audio</h3>
+          <p>Immerse yourself in dynamic 360-degree rotating stereo panning for regular headphones and earbuds.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/pitch-shifter/" class="tool-card">
+        <div>
+          <div class="tool-icon">🎚️</div>
+          <h3>Pitch & Tempo Changer</h3>
+          <p>Fine-tune musical pitch semitones and playback speed independently without distorting overall voice clarity.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/vocal-clarity/" class="tool-card">
+        <div>
+          <div class="tool-icon">🎙️</div>
+          <h3>Vocal Clarity Booster</h3>
+          <p>Isolate and brighten spoken dialogue while suppressing muffled low-end rumbles in lectures and podcasts.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/voice-transformer/" class="tool-card">
+        <div>
+          <div class="tool-icon">🤖</div>
+          <h3>Voice Transformer</h3>
+          <p>Transform your voice with iconic presets like chipmunk, deep monster, and pitch modulation in real time.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/video-to-audio/" class="tool-card">
+        <div>
+          <div class="tool-icon">🎬</div>
+          <h3>Video to Audio Converter</h3>
+          <p>Extract pristine MP3 and WAV audio soundtracks directly from MP4 and WebM video files entirely offline.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/audio-latency/" class="tool-card">
+        <div>
+          <div class="tool-icon">⏱️</div>
+          <h3>Audio Latency Tester</h3>
+          <p>Benchmark Bluetooth headphone audio lag and lipsync delay with millisecond-precision audio-visual cues.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/decibel-meter/" class="tool-card">
+        <div>
+          <div class="tool-icon">📊</div>
+          <h3>Online Decibel Meter</h3>
+          <p>Monitor ambient room noise levels and peak environmental acoustics in real-time through your microphone.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/hearing-test/" class="tool-card">
+        <div>
+          <div class="tool-icon">👂</div>
+          <h3>Online Hearing Test</h3>
+          <p>Map your personal auditory range across low, mid, and high pure tones to evaluate ear sensitivity.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/reverse-audio/" class="tool-card">
+        <div>
+          <div class="tool-icon">🔄</div>
+          <h3>Reverse Audio Tool</h3>
+          <p>Flip voice notes and song clips completely backward to craft eerie sound effects and creative reversals.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+
+      <a href="/binaural-waves/" class="tool-card">
+        <div>
+          <div class="tool-icon">🧠</div>
+          <h3>Binaural Beats Generator</h3>
+          <p>Synthesize custom brainwave entrainment frequencies for alpha relaxation, beta focus, and deep delta sleep.</p>
+        </div>
+        <span class="tool-link-text">Launch Tool &rarr;</span>
+      </a>
+    </div>
   </section>
 
   <!-- فوتر کریستالی -->
