@@ -3,183 +3,137 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Mi Music App | Core Features & Overview</title>
-  <meta name="description" content="Discover the core features, format support, and system integrations of the Mi Music player. A complete overview of Xiaomi's default audio app.">
+  <title>About Us | Mi Music - Free Web Audio Utilities</title>
+  <meta name="description" content="Learn about Mi Music and our mission to provide high-quality, privacy-first, browser-based digital audio tools without requiring downloads.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
-    /* Global Variables & Base */
     :root {
-      --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
-      --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca; 
-      --accent-light: #e0e7ff; --text-dark: #0f172a; --text: #334155; 
-      --muted: #64748b; --success: #10b981; --warning: #f59e0b;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05); --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+      --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
+      --surface-glass: rgba(255, 255, 255, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.85);
+      --accent: #4f46e5;
+      --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #3b82f6 100%);
+      --text-dark: #0f172a;
+      --text-main: #334155;
+      --text-muted: #64748b;
+      --glass-shadow: 0 12px 35px -5px rgba(148, 163, 184, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); line-height: 1.7; }
 
-    /* Navigation */
-    .header-nav { width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.8; min-height: 100vh; }
+
+    .header-nav { 
+      width: 100%; 
+      background: rgba(255, 255, 255, 0.75); 
+      backdrop-filter: blur(18px); 
+      border-bottom: 1px solid var(--glass-border); 
+      position: sticky; 
+      top: 0; 
+      z-index: 1000; 
+    }
     .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
-    .brand-logo { color: var(--text-dark); font-size: 1.3rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .brand-logo { color: var(--text-dark); font-size: 1.45rem; font-weight: 900; text-decoration: none; display: flex; align-items: center; gap: 8px; }
     .brand-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 24px; align-items: center; }
-    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-link { color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
     .nav-link:hover { color: var(--accent); }
 
-    /* Article Header */
-    .article-header { background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); padding: 60px 24px 40px; text-align: center; border-bottom: 1px solid var(--border); }
-    .article-header h1 { font-size: 2.5rem; font-weight: 900; color: var(--text-dark); margin-bottom: 16px; letter-spacing: -0.02em; }
-    .article-header p { font-size: 1.1rem; color: var(--muted); max-width: 700px; margin: 0 auto; }
+    .main-container { max-width: 900px; margin: 50px auto 80px; padding: 0 24px; }
+    .glass-card {
+      background: var(--surface-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      padding: 45px 35px;
+      box-shadow: var(--glass-shadow);
+      margin-bottom: 30px;
+    }
+    h1 { font-size: 2.5rem; font-weight: 900; color: var(--text-dark); margin-bottom: 20px; letter-spacing: -0.02em; }
+    h2 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin: 30px 0 12px; }
+    p { font-size: 1.05rem; line-height: 1.85; margin-bottom: 16px; }
 
-    /* Content Area */
-    .content-container { max-width: 800px; margin: 40px auto 80px; padding: 0 24px; }
-    .content-container h2 { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); margin: 40px 0 20px; border-bottom: 2px solid var(--surface-alt); padding-bottom: 10px; }
-    .content-container p { margin-bottom: 20px; font-size: 1.05rem; }
+    .contact-badge {
+      background: rgba(79, 70, 229, 0.08);
+      border: 1px solid rgba(79, 70, 229, 0.2);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-top: 25px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .contact-badge a { color: var(--accent); text-decoration: none; font-weight: 800; }
 
-    /* Feature Grid */
-    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 40px; }
-    .feature-card { background: var(--surface); border: 1px solid var(--border); padding: 24px; border-radius: 16px; box-shadow: var(--shadow-sm); display: flex; align-items: flex-start; gap: 16px; }
-    .feature-icon { font-size: 2rem; background: var(--accent-light); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .feature-text h3 { margin-bottom: 8px; color: var(--text-dark); font-size: 1.1rem; }
-    .feature-text p { font-size: 0.95rem; color: var(--muted); margin: 0; }
-
-    /* Spec Table */
-    .spec-table { width: 100%; border-collapse: collapse; margin-bottom: 40px; background: var(--surface); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
-    .spec-table th, .spec-table td { padding: 16px 20px; text-align: left; border-bottom: 1px solid var(--border); }
-    .spec-table th { background: var(--surface-alt); color: var(--text-dark); font-weight: 800; width: 35%; }
-    .spec-table td { color: var(--text); }
-    .spec-table tr:last-child th, .spec-table tr:last-child td { border-bottom: none; }
-
-    /* Disclaimer Box */
-    .disclaimer-box { background: #f8fafc; border: 1px solid var(--border); padding: 20px; border-radius: 12px; font-size: 0.9rem; color: var(--muted); text-align: center; }
-
-    /* Footer */
-    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; }
+    footer { 
+      border-top: 1px solid var(--glass-border); 
+      background: rgba(255, 255, 255, 0.75); 
+      backdrop-filter: blur(18px); 
+      padding: 65px 24px 45px; 
+      color: var(--text-muted); 
+      font-size: 0.95rem; 
+      margin-top: 80px; 
+    }
     .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
-    .footer-col h5 { color: var(--text-dark); font-size: 1rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
-    .footer-col ul { list-style: none; padding: 0; }
+    .footer-col h5 { color: var(--text-dark); font-size: 1.05rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; }
     .footer-col li { margin-bottom: 12px; }
-    .footer-col a { color: var(--muted); text-decoration: none; transition: 0.2s; }
+    .footer-col a { color: var(--text-muted); text-decoration: none; transition: 0.2s; }
     .footer-col a:hover { color: var(--accent); }
-    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 24px; display: flex; justify-content: space-between; }
 
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
-      .spec-table th, .spec-table td { display: block; width: 100%; }
-      .spec-table th { background: transparent; padding-bottom: 4px; border-bottom: none; }
-      .spec-table td { padding-top: 4px; font-weight: 600; color: var(--text-dark); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
   <header class="header-nav">
     <div class="nav-inner">
       <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
       <nav class="nav-links">
-        <a href="/about.html" class="nav-link" style="color: var(--accent); font-weight: 700;">App Features</a>
+        <a href="/blog/" class="nav-link">Blog</a>
+        <a href="/about.html" class="nav-link" style="color: var(--accent);">About App</a>
         <a href="/install.html" class="nav-link">Installation</a>
         <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
-        <a href="/tools.html" class="nav-link">Free Audio Tools</a>
+        <a href="/#tools" class="nav-link">More Tools</a>
       </nav>
     </div>
   </header>
 
-  <!-- Article Header -->
-  <div class="article-header">
-    <h1>About Mi Music App</h1>
-    <p>Discover what makes this default audio player the preferred choice for millions of Android users. A deep dive into its core features and capabilities.</p>
-  </div>
+  <main class="main-container">
+    <div class="glass-card">
+      <h1>About Mi Music</h1>
+      <p>Welcome to <strong>MiMusic.net</strong>, your premier online destination for client-side digital signal processing (DSP) utilities and comprehensive mobile audio guides. Our mission is to make advanced audio processing accessible to everyone directly through the browser, without mandatory app downloads or subscriptions.</p>
 
-  <!-- Main Content -->
-  <main class="content-container">
-    
-    <p>Developed by Xiaomi Inc., the Mi Music application serves as the primary gateway for local audio playback across the entire MIUI and HyperOS ecosystem. However, it is not just restricted to Xiaomi phones; its global version is available for various Android devices, offering a lightweight, battery-efficient alternative to streaming-heavy applications.</p>
+      <h2>Our Core Mission</h2>
+      <p>Traditional audio modification often requires heavy software installations, costly licenses, or cloud converters that upload your personal media to third-party servers. We created Mi Music to revolutionize that workflow: harnessing the powerful Web Audio API to process all audio calculations directly inside your device's memory (RAM), ensuring zero bandwidth waste and uncompromising privacy.</p>
 
-    <h2>Key App Features</h2>
+      <h2>Privacy-First Audio DSP</h2>
+      <p>Whether you are cleaning water from phone speaker grilles, converting videos to MP3, transforming vocal pitch, or measuring room noise, your data remains 100% on your device. We do not store, listen to, or log your personal media files.</p>
 
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🎛️</div>
-        <div class="feature-text">
-          <h3>Advanced Equalizer</h3>
-          <p>Built-in integration with the system's "Mi Sound Enhancer", providing granular EQ bands and presets tailored for specific earphone models.</p>
-        </div>
-      </div>
+      <h2>Get in Touch</h2>
+      <p>Have questions, suggestions, or feedback regarding our platform or tools? We would love to hear from you.</p>
       
-      <div class="feature-card">
-        <div class="feature-icon">✂️</div>
-        <div class="feature-text">
-          <h3>Ringtone Cutter</h3>
-          <p>A native editing utility that allows you to trim any song and instantly set it as your device's ringtone without downloading third-party editors.</p>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📜</div>
-        <div class="feature-text">
-          <h3>Dynamic Lyrics Sync</h3>
-          <p>Automatically scans for and displays .lrc files located in your music folders, creating a karaoke-like experience directly on your lock screen.</p>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🌙</div>
-        <div class="feature-text">
-          <h3>Sleep Timer</h3>
-          <p>Set a countdown timer before going to bed. The app will automatically pause playback and prevent battery drain while you sleep.</p>
-        </div>
+      <div class="contact-badge">
+        <span>📧 Official Contact:</span>
+        <a href="mailto:info@mimusic.net">info@mimusic.net</a>
       </div>
     </div>
-
-    <h2>Technical Specifications</h2>
-    
-    <table class="spec-table">
-      <tbody>
-        <tr>
-          <th>Developer</th>
-          <td>Xiaomi Inc.</td>
-        </tr>
-        <tr>
-          <th>Supported OS</th>
-          <td>Android 6.0 (Marshmallow) and up</td>
-        </tr>
-        <tr>
-          <th>Core Function</th>
-          <td>Offline / Local Media Playback</td>
-        </tr>
-        <tr>
-          <th>Supported Formats</th>
-          <td>MP3, FLAC, WAV, AAC, OGG, M4A</td>
-        </tr>
-        <tr>
-          <th>Network Requirement</th>
-          <td>100% Offline (for local files)</td>
-        </tr>
-        <tr>
-          <th>Pricing</th>
-          <td>Free (Ad-supported in some regions)</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="disclaimer-box">
-      <strong>Independent Educational Resource</strong><br>
-      MiMusic.net is an independent informational platform providing installation guides, troubleshooting, and custom browser-based audio tools. We are not affiliated with, endorsed by, or sponsored by Xiaomi Inc. All app names, trademarks, and logos are the property of their respective owners.
-    </div>
-
   </main>
 
-  <!-- Global Footer -->
   <footer>
     <div class="footer-grid">
       <div class="footer-col">
         <a href="/" class="brand-logo" style="margin-bottom: 16px;">🎵 MiMusic<span>.net</span></a>
-        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
-        <p style="font-weight: 600; color: var(--text-dark);">Contact: Sobl5910@gmail.com</p>
+        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent educational guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
+        <p style="font-weight: 600; color: var(--text-dark);">Contact: info@mimusic.net</p>
       </div>
       <div class="footer-col">
         <h5>Popular Tools</h5>
@@ -195,17 +149,17 @@
         <ul>
           <li><a href="/vocal-clarity/">Vocal Clarity</a></li>
           <li><a href="/video-to-audio/">Video to Audio</a></li>
-          <li><a href="/decibel-meter/">Decibel Meter</a></li>
+          <li><a href="/voice-transformer/">Voice Transformer</a></li>
           <li><a href="/audio-latency/">Latency Test</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Resources</h5>
+        <h5>Explore & Legal</h5>
         <ul>
-          <li><a href="/about.html" style="color: var(--accent);">About Mi Music</a></li>
-          <li><a href="/install.html">Installation Guide</a></li>
-          <li><a href="/troubleshooting.html">Troubleshooting</a></li>
-          <li><a href="/tools.html">All Audio Tools</a></li>
+          <li><a href="/blog/">Blog Articles</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
         </ul>
       </div>
     </div>
