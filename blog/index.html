@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Music Blog - Audio Engineering Insights & App Guides</title>
+  <meta name="description" content="Explore expert audio tutorials, mobile player optimization tricks, sound frequency mechanics, and guides for Mi Music tools.">
+  <link rel="icon" type="image/jpeg" href="/logo.jpg">
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
+      --surface-glass: rgba(255, 255, 255, 0.72);
+      --surface-glass-hover: rgba(255, 255, 255, 0.95);
+      --glass-border: rgba(255, 255, 255, 0.85);
+      --accent: #4f46e5;
+      --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #3b82f6 100%);
+      --accent-hover: #4338ca;
+      --text-dark: #0f172a;
+      --text-main: #334155;
+      --text-muted: #64748b;
+      --glass-shadow: 0 12px 35px -5px rgba(148, 163, 184, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+      --glass-shadow-hover: 0 20px 45px -4px rgba(79, 70, 229, 0.22), 0 0 0 1.5px rgba(255, 255, 255, 0.95) inset;
+    }
+
+    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.8; min-height: 100vh; overflow-x: hidden; }
+
+    /* هدر شیشه‌ای */
+    .header-nav { 
+      width: 100%; 
+      background: rgba(255, 255, 255, 0.75); 
+      backdrop-filter: blur(18px); 
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--glass-border); 
+      position: sticky; 
+      top: 0; 
+      z-index: 1000; 
+    }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .brand-logo { color: var(--text-dark); font-size: 1.45rem; font-weight: 900; text-decoration: none; display: flex; align-items: center; gap: 10px; letter-spacing: -0.02em; }
+    .brand-logo img { width: 38px; height: 38px; border-radius: 11px; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25); display: block; object-fit: cover; }
+    .brand-logo span { color: var(--accent); }
+    
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-link { color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .nav-link:hover { color: var(--accent); }
+
+    .hamburger { display: none; background: none; border: none; font-size: 1.8rem; color: var(--text-dark); cursor: pointer; }
+    .mobile-menu { 
+      position: fixed; 
+      top: 0; 
+      right: -100%; 
+      width: 290px; 
+      height: 100vh; 
+      background: rgba(255, 255, 255, 0.96); 
+      backdrop-filter: blur(25px);
+      box-shadow: -15px 0 35px rgba(0, 0, 0, 0.1); 
+      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      padding: 80px 24px 24px; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 20px; 
+      z-index: 999; 
+    }
+    .mobile-menu.open { right: 0; }
+    .mobile-menu .nav-link { font-size: 1.1rem; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 12px; }
+    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
+    .overlay.active { opacity: 1; visibility: visible; }
+
+    /* هیرو بلاگ */
+    .blog-header { text-align: center; padding: 65px 24px 35px; max-width: 820px; margin: 0 auto; }
+    .badge { 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 6px; 
+      background: var(--surface-glass); 
+      border: 1px solid var(--glass-border); 
+      color: var(--accent); 
+      padding: 8px 18px; 
+      border-radius: 50px; 
+      font-size: 0.88rem; 
+      font-weight: 800; 
+      margin-bottom: 18px; 
+      box-shadow: var(--glass-shadow); 
+    }
+    .blog-header h1 { font-size: 2.7rem; font-weight: 900; color: var(--text-dark); margin-bottom: 16px; letter-spacing: -0.03em; }
+    .blog-header p { font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; }
+
+    /* چیدمان مقالات */
+    .blog-container { max-width: 1200px; margin: 20px auto 80px; padding: 0 24px; }
+    .articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+
+    .article-card {
+      background: var(--surface-glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--glass-shadow);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    .article-card:hover {
+      transform: translateY(-8px);
+      background: var(--surface-glass-hover);
+      box-shadow: var(--glass-shadow-hover);
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+    .article-tag {
+      align-self: flex-start;
+      background: rgba(79, 70, 229, 0.1);
+      color: var(--accent);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+    }
+    .article-card h2 { font-size: 1.45rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; line-height: 1.4; }
+    .article-card p { font-size: 1rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 24px; }
+    
+    .article-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      padding-top: 20px;
+      margin-top: auto;
+    }
+    .read-time { font-size: 0.88rem; color: var(--text-muted); font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .read-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+    .read-more-btn:hover { gap: 10px; }
+
+    /* فوتر کریستالی یکپارچه */
+    footer { 
+      border-top: 1px solid var(--glass-border); 
+      background: rgba(255, 255, 255, 0.75); 
+      backdrop-filter: blur(18px); 
+      padding: 65px 24px 45px; 
+      color: var(--text-muted); 
+      font-size: 0.95rem; 
+      margin-top: 80px; 
+    }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
+    .footer-col h5 { color: var(--text-dark); font-size: 1.05rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a { color: var(--text-muted); text-decoration: none; transition: 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .articles-grid { grid-template-columns: 1fr; }
+      .blog-header h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- هدر شیشه‌ای -->
+  <header class="header-nav">
+    <div class="nav-inner">
+      <a href="/" class="brand-logo">
+        <img src="/logo.jpg" alt="Mi Music Logo">
+        <div>MiMusic<span>.net</span></div>
+      </a>
+      <nav class="nav-links">
+        <a href="/blog/" class="nav-link" style="color: var(--accent); font-weight: 800;">Blog</a>
+        <a href="/about.html" class="nav-link">About App</a>
+        <a href="/install.html" class="nav-link">Installation</a>
+        <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
+        <a href="/#tools" class="nav-link">More Tools</a>
+      </nav>
+      <button class="hamburger" id="menuBtn">☰</button>
+    </div>
+  </header>
+
+  <!-- منوی موبایل -->
+  <div class="overlay" id="overlay"></div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="/" class="brand-logo" style="margin-bottom: 20px;">
+      <img src="/logo.jpg" alt="Mi Music Logo">
+      <div>MiMusic<span>.net</span></div>
+    </a>
+    <a href="/blog/" class="nav-link" style="color: var(--accent); font-weight: 800;">Blog</a>
+    <a href="/about.html" class="nav-link">About App</a>
+    <a href="/install.html" class="nav-link">Installation</a>
+    <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
+    <a href="/#tools" class="nav-link" onclick="toggleMenu()">More Tools</a>
+  </nav>
+
+  <!-- بخش عنوان وبلاگ -->
+  <header class="blog-header">
+    <div class="badge">📚 Audio Tech & Guides</div>
+    <h1>The Mi Music Engineering Journal</h1>
+    <p>In-depth technical guides, acoustic frequency analyses, and practical tutorials on getting studio-quality sound from your mobile hardware and modern browsers.</p>
+  </header>
+
+  <!-- شبکه کارت‌های مقالات تخصصی -->
+  <main class="blog-container">
+    <div class="articles-grid">
+
+      <!-- مقاله اول -->
+      <article class="article-card">
+        <div>
+          <span class="article-tag">Speaker Hardware</span>
+          <h2>Acoustic Water Ejection: How Low Frequencies Clear Smartphone Grilles</h2>
+          <p>Explore the physical mechanics of using alternating 165Hz and 440Hz soundwaves to break liquid surface tension without causing mechanical membrane fatigue.</p>
+        </div>
+        <div class="article-footer">
+          <span class="read-time">⏱️ 6 min read</span>
+          <a href="/speaker-cleaner/" class="read-more-btn">Read Article &rarr;</a>
+        </div>
+      </article>
+
+      <!-- مقاله دوم -->
+      <article class="article-card">
+        <div>
+          <span class="article-tag">Audio DSP</span>
+          <h2>The Psychoacoustics of 8D Spatial Audio: How Moving Phase Tricking the Brain</h2>
+          <p>How dynamic stereo panning combined with Low-Frequency Oscillators mimics real-world interaural time differences to create full 360-degree soundscapes.</p>
+        </div>
+        <div class="article-footer">
+          <span class="read-time">⏱️ 8 min read</span>
+          <a href="/8d-audio/" class="read-more-btn">Read Article &rarr;</a>
+        </div>
+      </article>
+
+      <!-- مقاله سوم -->
+      <article class="article-card">
+        <div>
+          <span class="article-tag">Privacy & Tech</span>
+          <h2>In-Memory Audio Processing: Why Client-Side Web Audio Matters in 2026</h2>
+          <p>A deep dive into zero-cloud processing pipelines, evaluating how HTML5 and Web Audio API process 32-bit floating point audio strictly within local device RAM.</p>
+        </div>
+        <div class="article-footer">
+          <span class="read-time">⏱️ 5 min read</span>
+          <a href="/about.html" class="read-more-btn">Read Article &rarr;</a>
+        </div>
+      </article>
+
+      <!-- مقاله چهارم -->
+      <article class="article-card">
+        <div>
+          <span class="article-tag">Optimization</span>
+          <h2>Fixing Bluetooth Latency: How Codec Compression Impacts Mobile Gaming</h2>
+          <p>Learn why audio delay occurs on wireless earbuds and how to benchmark lipsync synchronization down to millisecond accuracy with Web Audio diagnostic beeps.</p>
+        </div>
+        <div class="article-footer">
+          <span class="read-time">⏱️ 7 min read</span>
+          <a href="/audio-latency/" class="read-more-btn">Read Article &rarr;</a>
+        </div>
+      </article>
+
+      <!-- مقاله پنجم -->
+      <article class="article-card">
+        <div>
+          <span class="article-tag">Mobile Player</span>
+          <h2>Mastering Mi Music Player: Top Settings for High-Fidelity Playback</h2>
+          <p>Comprehensive walkthrough of mobile equalizer profiles, lossless FLAC decoding options, and seamless offline playlist organization tips.</p>
+        </div>
+        <div class="article-footer">
+          <span class="read-time">⏱️ 4 min read</span>
+          <a href="/guide.html" class="read-more-btn">Read Article &rarr;</a>
+        </div>
+      </article>
+
+      <!-- مقاله ششم -->
+      <article class="article-card">
+        <div>
+          <span class="article-tag">Sound Engineering</span>
+          <h2>Safe Volume Amplification: Boosting Gain Without Introducing Harsh Distortion</h2>
+          <p>Understanding software clipping versus true dynamic range compression when amplifying quiet voice memos, audiobooks, and legacy video tracks.</p>
+        </div>
+        <div class="article-footer">
+          <span class="read-time">⏱️ 6 min read</span>
+          <a href="/volume-booster/" class="read-more-btn">Read Article &rarr;</a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- فوتر کریستالی یکپارچه -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="brand-logo" style="margin-bottom: 16px;">
+          <img src="/logo.jpg" alt="Mi Music Logo">
+          <div>MiMusic<span>.net</span></div>
+        </a>
+        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent educational guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
+        <p style="font-weight: 600; color: var(--text-dark);">Contact: info@mimusic.net</p>
+      </div>
+      <div class="footer-col">
+        <h5>Popular Tools</h5>
+        <ul>
+          <li><a href="/volume-booster/">Volume Booster</a></li>
+          <li><a href="/speaker-cleaner/">Speaker Cleaner</a></li>
+          <li><a href="/8d-audio/">8D Spatial Audio</a></li>
+          <li><a href="/pitch-shifter/">Pitch & Tempo</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Analysis & Fixes</h5>
+        <ul>
+          <li><a href="/vocal-clarity/">Vocal Clarity</a></li>
+          <li><a href="/video-to-audio/">Video to Audio</a></li>
+          <li><a href="/voice-transformer/">Voice Transformer</a></li>
+          <li><a href="/audio-latency/">Latency Test</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Explore & Legal</h5>
+        <ul>
+          <li><a href="/blog/" style="color: var(--accent); font-weight: 700;">Blog Articles</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MiMusic.net. Independent audio guides and web tools.</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('overlay');
+
+    function toggleMenu() {
+      mobileMenu.classList.toggle('open');
+      overlay.classList.toggle('active');
+    }
+
+    menuBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+  </script>
+</body>
+</html>
