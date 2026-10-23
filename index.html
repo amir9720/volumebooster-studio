@@ -89,7 +89,7 @@
     .hero h1 { font-size: 2.85rem; font-weight: 900; color: var(--text-dark); margin-bottom: 18px; letter-spacing: -0.035em; line-height: 1.25; }
     .hero p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 28px; line-height: 1.8; }
     
-    /* دکمه‌های دانلود استورها بالای تصویر */
+    /* دکمه‌های دانلود استورها */
     .store-downloads-wrapper {
       display: flex;
       justify-content: center;
@@ -121,7 +121,7 @@
     .store-btn-text span { display: block; font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; font-weight: 600; }
     .store-btn-text strong { display: block; font-size: 1.05rem; font-weight: 800; color: #ffffff; }
 
-    /* کانتینر بنر تک‌عکس اختصاصی */
+    /* بنر هیرو */
     .hero-image-wrapper { max-width: 880px; margin: 0 auto 35px; padding: 0 24px; text-align: center; }
     .feature-image { 
       width: 100%; 
@@ -206,7 +206,6 @@
     .content-hero-card h2 { font-size: 2.1rem; font-weight: 900; color: var(--text-dark); margin-bottom: 16px; letter-spacing: -0.02em; }
     .content-hero-card p { font-size: 1.08rem; color: var(--text-main); line-height: 1.9; }
 
-    /* گرید دو ستونه مباحث تخصصی */
     .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 24px; margin-bottom: 30px; }
     .topic-card {
       background: rgba(255, 255, 255, 0.8);
@@ -220,7 +219,6 @@
     .topic-card h3 { font-size: 1.35rem; font-weight: 800; color: var(--text-dark); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
     .topic-card p { font-size: 1rem; color: var(--text-main); line-height: 1.85; }
 
-    /* باکس مقایسه‌ای امنیتی */
     .callout-box {
       background: linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
       border: 1.5px solid rgba(99, 102, 241, 0.3);
@@ -234,7 +232,7 @@
     .callout-box ul { padding-left: 22px; }
     .callout-box li { font-size: 1rem; color: var(--text-main); margin-bottom: 8px; }
 
-    /* آکاردئون سوالات متداول */
+    /* سوالات متداول */
     .faq-container { margin-top: 25px; display: flex; flex-direction: column; gap: 14px; }
     .faq-item { 
       background: rgba(255, 255, 255, 0.85); 
@@ -274,7 +272,7 @@
     .faq-item.active .faq-answer { max-height: 250px; padding: 0 26px 24px 26px; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
 
-    /* بخش ابزارها در انتهای صفحه با عنوان More Tools */
+    /* بخش ابزارها */
     .tools-section { max-width: 1200px; margin: 40px auto 70px; padding: 20px 24px; }
     .section-title { font-size: 2.3rem; font-weight: 900; color: var(--text-dark); margin-bottom: 35px; text-align: center; letter-spacing: -0.02em; }
     .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
@@ -318,7 +316,7 @@
     .tool-card p { font-size: 0.96rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.65; }
     .tool-link-text { color: var(--accent); font-weight: 800; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px; }
 
-    /* فوتر کریستالی */
+    /* فوتر کریستالی و استایل آیکون شبکه‌های اجتماعی */
     footer { 
       border-top: 1px solid var(--glass-border); 
       background: rgba(255, 255, 255, 0.75); 
@@ -335,6 +333,31 @@
     .footer-col li { margin-bottom: 12px; }
     .footer-col a { color: var(--text-muted); text-decoration: none; transition: 0.2s; }
     .footer-col a:hover { color: var(--accent); }
+
+    /* استایل دکمه‌های سوشال */
+    .footer-socials { display: flex; gap: 12px; margin-top: 18px; align-items: center; }
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--glass-border);
+      color: var(--text-dark);
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+      transition: all 0.25s ease;
+    }
+    .social-btn:hover {
+      background: #000000;
+      color: #ffffff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+    }
+    .social-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
     .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
 
     @media (max-width: 900px) {
@@ -461,14 +484,12 @@
 
   <!-- مقاله جامع سئو -->
   <section class="content-container">
-    
     <div class="content-hero-card">
       <h2>Democratizing Audio Engineering: The Web Audio Revolution</h2>
       <p>For decades, manipulating sound required specialized desktop hardware, costly digital audio workstations (DAWs), or bloated mobile apps bundled with trackers and subscriptions. If a casual listener simply needed to boost a barely audible voice memo, eject moisture from an accidental phone splash, or create an immersive headphone demo, they had to navigate cumbersome installers and severe privacy risks.</p>
       <p style="margin-top: 14px;">The maturation of the modern browser has rendered those hurdles obsolete. With native support for the Web Audio API across Chrome, Firefox, and Safari, browsers possess the raw computational horsepower to execute complex digital signal processing (DSP) pipelines right on your personal device without external plugins.</p>
     </div>
 
-    <!-- گرید موضوعی تفکیک‌شده -->
     <div class="topics-grid">
       <div class="topic-card">
         <h3>💧 Kinetic Acoustic Maintenance</h3>
@@ -491,7 +512,6 @@
       </div>
     </div>
 
-    <!-- باکس هایلایت امنیتی -->
     <div class="callout-box">
       <h3>🔒 Architectural Philosophy: Why 100% Client-Side Processing Matters</h3>
       <p>Standard cloud-based media converters require users to transmit personal voice notes, home recordings, and sensitive media to third-party data centers. Beyond bandwidth consumption and waiting in server queues, storing user media on remote servers creates undeniable data privacy and compliance liabilities.</p>
@@ -502,7 +522,7 @@
       </ul>
     </div>
 
-    <!-- بخش سوالات متداول آکاردئونی تعاملی -->
+    <!-- سوالات متداول -->
     <div class="content-hero-card">
       <h2 style="font-size: 1.8rem; margin-bottom: 20px;">Frequently Asked Questions</h2>
       <div class="faq-container">
@@ -547,10 +567,9 @@
         </div>
       </div>
     </div>
-
   </section>
 
-  <!-- بخش ابزارها در انتهای صفحه با عنوان More Tools -->
+  <!-- بخش ابزارها -->
   <section class="tools-section" id="tools">
     <h2 class="section-title">More Tools</h2>
     <div class="tools-grid">
@@ -664,7 +683,7 @@
     </div>
   </section>
 
-  <!-- فوتر کریستالی -->
+  <!-- فوتر کریستالی همراه با آیکون توییتر (X) -->
   <footer>
     <div class="footer-grid">
       <div class="footer-col">
@@ -674,7 +693,15 @@
         </a>
         <p style="margin-bottom: 16px; line-height: 1.6;">Your independent educational guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
         <p style="font-weight: 600; color: var(--text-dark);">Contact: info@mimusic.net</p>
+        
+        <!-- آیکون رسمی توییتر (X) -->
+        <div class="footer-socials">
+          <a href="https://x.com/Mimusicwebtool" target="_blank" rel="noopener noreferrer" class="social-btn" title="Follow Mi Music on X">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
       </div>
+
       <div class="footer-col">
         <h5>Popular Tools</h5>
         <ul>
@@ -684,6 +711,7 @@
           <li><a href="/pitch-shifter/">Pitch & Tempo</a></li>
         </ul>
       </div>
+
       <div class="footer-col">
         <h5>Analysis & Fixes</h5>
         <ul>
@@ -693,6 +721,7 @@
           <li><a href="/audio-latency/">Latency Test</a></li>
         </ul>
       </div>
+
       <div class="footer-col">
         <h5>Explore & Legal</h5>
         <ul>
@@ -703,6 +732,7 @@
         </ul>
       </div>
     </div>
+    
     <div class="footer-bottom">
       <p>&copy; 2026 MiMusic.net. Independent audio guides and web tools.</p>
     </div>
