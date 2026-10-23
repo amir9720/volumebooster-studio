@@ -120,7 +120,7 @@
     .store-btn-text span { display: block; font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; font-weight: 600; }
     .store-btn-text strong { display: block; font-size: 1.05rem; font-weight: 800; color: #ffffff; }
 
-    /* تصویر بنر */
+    /* کانتینر تصاویر بنر */
     .hero-image-wrapper { max-width: 880px; margin: 0 auto 35px; padding: 0 24px; text-align: center; }
     .feature-image { 
       width: 100%; 
@@ -129,7 +129,7 @@
       display: block; 
     }
 
-    .cta-container { text-align: center; margin: 30px auto 40px; }
+    .cta-container { text-align: center; margin: 35px auto 40px; }
     .cta-button { 
       display: inline-flex; 
       align-items: center; 
@@ -406,9 +406,16 @@
     </div>
   </main>
 
-  <!-- تصویر بنر متصل به mimusic-hero.jpg موجود در گیت‌هاب -->
+  <!-- کانتینر تصاویر: تصویر هوش مصنوعی + اسکرین‌شات اپلیکیشن دقیقاً زیر آن -->
   <div class="hero-image-wrapper">
-    <img src="mimusic-hero.jpg" alt="Mi Music application interface and sound tools" class="feature-image">
+    <!-- عکس اول: عکس هوش مصنوعی -->
+    <img src="mimusic-hero.jpg" alt="Mi Music futuristic audio workstation" class="feature-image">
+    
+    <!-- عکس دوم: اسکرین‌شات محیط برنامه در زیر عکس اول -->
+    <div style="margin-top: 25px;">
+      <img src="app-screenshot.jpg" alt="Mi Music mobile application interface and player screenshot" class="feature-image">
+    </div>
+
     <div class="cta-container">
       <a href="#tools" class="cta-button">
         Explore More Tools <span>↓</span>
