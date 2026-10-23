@@ -27,7 +27,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.8; min-height: 100vh; overflow-x: hidden; }
 
-    /* هدر شیشه‌ای */
+    /* هدر شفاف و بلور شده */
     .header-nav { 
       width: 100%; 
       background: rgba(255, 255, 255, 0.75); 
@@ -120,7 +120,7 @@
     .store-btn-text span { display: block; font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; font-weight: 600; }
     .store-btn-text strong { display: block; font-size: 1.05rem; font-weight: 800; color: #ffffff; }
 
-    /* کانتینر تصاویر بنر */
+    /* کانتینر بنر تک‌عکس اختصاصی */
     .hero-image-wrapper { max-width: 880px; margin: 0 auto 35px; padding: 0 24px; text-align: center; }
     .feature-image { 
       width: 100%; 
@@ -161,7 +161,7 @@
     }
     .feature-box { 
       background: var(--surface-glass); 
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px); 
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--glass-border); 
       border-radius: 22px; 
@@ -194,7 +194,7 @@
     
     .content-hero-card {
       background: var(--surface-glass);
-      backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px); 
       -webkit-backdrop-filter: blur(18px);
       border: 1px solid var(--glass-border);
       border-radius: 28px;
@@ -273,7 +273,7 @@
     .faq-item.active .faq-answer { max-height: 250px; padding: 0 26px 24px 26px; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
 
-    /* بخش ابزارها در انتهای صفحه (More Tools) */
+    /* بخش ابزارها در انتهای صفحه با عنوان More Tools */
     .tools-section { max-width: 1200px; margin: 40px auto 70px; padding: 20px 24px; }
     .section-title { font-size: 2.3rem; font-weight: 900; color: var(--text-dark); margin-bottom: 35px; text-align: center; letter-spacing: -0.02em; }
     .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
@@ -380,7 +380,7 @@
     <a href="#tools" class="nav-link" style="color: var(--accent); font-weight: 800;" onclick="toggleMenu()">More Tools</a>
   </nav>
 
-  <!-- بخش هیرو -->
+  <!-- بخش هیرو و تایتل سئو -->
   <main class="hero">
     <div class="hero-badge">⚡ Official Mi Music Player & Audio Suite</div>
     <h1>Mi Music - Free and unlimited Music app!</h1>
@@ -406,16 +406,10 @@
     </div>
   </main>
 
-  <!-- کانتینر تصاویر: تصویر هوش مصنوعی + اسکرین‌شات اپلیکیشن دقیقاً زیر آن -->
+  <!-- تک‌بنر اختصاصی بازطراحی‌شده -->
   <div class="hero-image-wrapper">
-    <!-- عکس اول: عکس هوش مصنوعی -->
-    <img src="mimusic-hero.jpg" alt="Mi Music futuristic audio workstation" class="feature-image">
+    <img src="mimusic-banner.jpg" alt="Mi Music mobile application interface and digital audio tools" class="feature-image">
     
-    <!-- عکس دوم: اسکرین‌شات محیط برنامه در زیر عکس اول -->
-    <div style="margin-top: 25px;">
-      <img src="app-screenshot.jpg" alt="Mi Music mobile application interface and player screenshot" class="feature-image">
-    </div>
-
     <div class="cta-container">
       <a href="#tools" class="cta-button">
         Explore More Tools <span>↓</span>
