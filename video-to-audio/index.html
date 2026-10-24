@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video to Audio Converter - Extract MP3 from MP4 Online | MiMusic.net</title>
-  <meta name="description" content="Extract audio tracks from video files instantly in your browser. Free, secure, and fast MP4, MOV, and WebM video to audio converter with zero data leaks.">
+  <title>Video to Audio Converter - Extract MP3 & WAV from MP4 Online | MiMusic.net</title>
+  <meta name="description" content="Extract audio tracks from video files instantly in your browser. Free, secure, and fast MP4, MOV, and WebM video to audio converter with zero data leaks and instant download.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
     /* تم یخی کریستالی و شیشه‌ای منطبق با صفحه اصلی */
@@ -71,7 +71,7 @@
     /* فضای تعاملی ابزار */
     .workspace { padding: 60px 24px 35px; text-align: center; }
     .tool-container { 
-      max-width: 720px; 
+      max-width: 760px; 
       margin: 0 auto; 
       background: var(--surface-glass); 
       backdrop-filter: blur(20px);
@@ -83,7 +83,7 @@
       position: relative;
     }
     .tool-title { font-size: 2.3rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.03em; }
-    .tool-desc { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 30px; line-height: 1.7; max-width: 580px; margin-left: auto; margin-right: auto; }
+    .tool-desc { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 30px; line-height: 1.7; max-width: 600px; margin-left: auto; margin-right: auto; }
     
     .status-ring { 
       width: 110px; 
@@ -111,7 +111,7 @@
     }
 
     /* کنترل‌های آپلود شیشه‌ای */
-    .file-upload-wrapper { margin-bottom: 30px; }
+    .file-upload-wrapper { margin-bottom: 25px; }
     .file-upload-label { 
       display: inline-block; 
       background: rgba(255, 255, 255, 0.85); 
@@ -123,7 +123,7 @@
       color: var(--text-dark); 
       transition: all 0.3s ease; 
       width: 100%; 
-      max-width: 440px; 
+      max-width: 460px; 
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
     }
     .file-upload-label:hover { 
@@ -134,19 +134,30 @@
     }
     input[type="file"] { display: none; }
 
+    /* دکمه‌های کنترلی شیشه‌ای و هماهنگ */
+    .controls-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+    }
+
     .btn-main { 
       background: var(--accent-gradient); 
       color: #fff; 
       border: none; 
-      padding: 16px 42px; 
+      padding: 16px 36px; 
       border-radius: 50px; 
-      font-size: 1.1rem; 
+      font-size: 1.05rem; 
       font-weight: 800; 
       cursor: pointer; 
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
       box-shadow: 0 10px 25px -4px rgba(79, 70, 229, 0.4); 
-      width: 100%; 
-      max-width: 320px; 
+      flex: 1;
+      min-width: 230px;
+      max-width: 290px;
     }
     .btn-main:hover:not(:disabled) { 
       transform: translateY(-3px) scale(1.02); 
@@ -164,7 +175,61 @@
       box-shadow: 0 10px 25px -4px rgba(239, 68, 68, 0.4); 
     }
 
-    /* باکس‌های ویژگی کلیدی دقیقاً زیر کادر ابزار (Feature Boxes مدنظر استاد) */
+    /* دکمه شیشه‌ای دانلود */
+    .btn-download {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+      padding: 16px 36px;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.12);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex: 1;
+      min-width: 230px;
+      max-width: 290px;
+    }
+    .btn-download:hover:not(:disabled) {
+      background: var(--accent-gradient);
+      color: #ffffff;
+      border-color: transparent;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 32px -4px rgba(79, 70, 229, 0.45);
+    }
+    .btn-download:disabled {
+      background: rgba(255, 255, 255, 0.45);
+      color: #94a3b8;
+      border-color: #cbd5e1;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* کادر وضعیت شیشه‌ای دانلود */
+    .status-box {
+      margin-top: 20px;
+      padding: 14px 20px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* باکس‌های ویژگی کلیدی */
     .features-row { 
       max-width: 1000px; 
       margin: 10px auto 50px; 
@@ -203,7 +268,7 @@
     .feature-box h4 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
     .feature-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
 
-    /* کادر عکس هوش مصنوعی */
+    /* کادر عکس */
     .feature-wrapper { max-width: 880px; margin: 10px auto 50px; padding: 0 24px; text-align: center; }
     .feature-image { 
       width: 100%; 
@@ -212,7 +277,7 @@
       display: block; 
     }
 
-    /* ساختار بصری، کارت‌محور و خردشده مقاله سئو (جلوگیری از دیوار متنی) */
+    /* مقاله سئو */
     .content-container { max-width: 1000px; margin: 0 auto 70px; padding: 0 24px; }
     
     .content-hero-card {
@@ -228,7 +293,7 @@
     .content-hero-card h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.02em; }
     .content-hero-card p { font-size: 1.05rem; color: var(--text-main); line-height: 1.9; }
 
-    /* کارت‌های گام‌به‌گام مراحل */
+    /* مراحل گام‌به‌گام */
     .steps-container {
       background: var(--surface-glass);
       border: 1px solid var(--glass-border);
@@ -273,7 +338,7 @@
     }
     .image-caption { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; font-style: italic; }
 
-    /* گرید دو ستونه مباحث تخصصی */
+    /* گرید موضوعی تخصصی دو ستونه */
     .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 22px; margin-bottom: 26px; }
     .topic-card {
       background: rgba(255, 255, 255, 0.82);
@@ -287,7 +352,7 @@
     .topic-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
     .topic-card p { font-size: 0.98rem; color: var(--text-main); line-height: 1.85; }
 
-    /* باکس هایلایت تحلیلی */
+    /* باکس هایلایت کلاینت‌ساید */
     .callout-box {
       background: linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
       border: 1.5px solid rgba(99, 102, 241, 0.3);
@@ -378,6 +443,8 @@
     @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; }
       .features-row { grid-template-columns: 1fr; }
+      .controls-wrapper { flex-direction: column; }
+      .btn-main, .btn-download { width: 100%; max-width: 100%; }
     }
   </style>
 </head>
@@ -422,11 +489,20 @@
         <input type="file" id="videoFile" accept="video/*" onchange="handleFileSelect(event)">
       </div>
       
-      <button class="btn-main" id="playBtn" onclick="togglePlayback()" disabled>Play Extracted Audio</button>
+      <!-- کلیدهای پخش و دانلود -->
+      <div class="controls-wrapper">
+        <button class="btn-main" id="playBtn" onclick="togglePlayback()" disabled>Play Extracted Audio</button>
+        <button class="btn-download" id="downloadBtn" onclick="extractAndDownloadAudio()" disabled>
+          <span>⬇️</span> Download Audio (.WAV)
+        </button>
+      </div>
+
+      <!-- کادر وضعیت فرایند استخراج -->
+      <div class="status-box" id="statusMessage" style="display: none;"></div>
     </div>
   </main>
 
-  <!-- ردیف باکس‌های ویژگی کلیدی ابزار (Feature Boxes مدنظر استاد) -->
+  <!-- ردیف باکس‌های ویژگی کلیدی ابزار -->
   <section class="features-row">
     <div class="feature-box">
       <span class="f-icon">🎬</span>
@@ -447,8 +523,8 @@
     <div class="feature-box">
       <span class="f-icon">⚡</span>
       <div>
-        <h4>Zero Conversion Lag</h4>
-        <p>Decodes media locally in RAM with instant playback and zero server queues.</p>
+        <h4>Instant Local Download</h4>
+        <p>Decodes media locally in RAM with instant lossless WAV download and zero server queues.</p>
       </div>
     </div>
 
@@ -473,7 +549,7 @@
     <div class="content-hero-card">
       <h2>Demuxing Digital Media: How Video-to-Audio Extraction Works in the Browser</h2>
       <p>Modern multimedia containers like MP4, MOV, and WebM are not monolithic files; they are multiplexed digital envelopes that bundle distinct video, audio, and subtitle streams together into a synchronized packet structure. When you record a live concert on your phone, download a tutorial webinar, or receive a video interview memo, the video frames (usually encoded in H.264, HEVC, or VP9) consume upwards of 85% to 90% of the total file size. The underlying soundtrack, typically encoded in AAC or Opus, requires only a fraction of that data footprint.</p>
-      <p style="margin-top: 12px;">Playing video files solely to listen to spoken lectures or music tracks leads to unnecessary battery consumption on mobile devices. Smartphone displays and GPU video decoders require substantial wattage, while keeping the screen awake in your pocket risks accidental screen taps. The <strong>MiMusic Video to Audio Extractor</strong> demuxes the media container natively within your web browser, decoupling the high-bandwidth video feed from the audio stream so you can listen with peak efficiency.</p>
+      <p style="margin-top: 12px;">Playing video files solely to listen to spoken lectures or music tracks leads to unnecessary battery consumption on mobile devices. Smartphone displays and GPU video decoders require substantial wattage, while keeping the screen awake in your pocket risks accidental screen taps. The <strong>MiMusic Video to Audio Extractor</strong> demuxes the media container natively within your web browser, decoupling the high-bandwidth video feed from the audio stream so you can listen and download with peak efficiency.</p>
     </div>
 
     <!-- کارت راهنمای گام‌به‌گام همراه تصویر -->
@@ -482,7 +558,7 @@
       <p style="color: var(--text-muted); font-size: 1.02rem;">Extracting the soundtrack from your video clips takes only seconds:</p>
 
       <img src="video-guide.jpg" alt="Step by step video to audio converter guide" class="tutorial-image">
-      <p class="image-caption">Select your video recording, let the browser extract the audio stream, and click play.</p>
+      <p class="image-caption">Select your video recording, listen instantly, or download the clean WAV audio track.</p>
 
       <div class="step-cards-grid">
         <div class="step-card">
@@ -494,13 +570,13 @@
         <div class="step-card">
           <span class="step-badge">Step 2</span>
           <h4>Instant Stream Isolation</h4>
-          <p>Your browser inspects container metadata in memory, isolating the underlying AAC/Opus audio track instantly.</p>
+          <p>Your browser inspects container metadata in memory, isolating the underlying audio track instantly.</p>
         </div>
 
         <div class="step-card">
           <span class="step-badge">Step 3</span>
-          <h4>Play and Enjoy Audio</h4>
-          <p>Click "Play Extracted Audio" to listen immediately through headphones or external speakers without rendering video frames.</p>
+          <h4>Play or Download Audio</h4>
+          <p>Click "Play Extracted Audio" for immediate listening, or tap "Download Audio (.WAV)" to save the crystal-clear soundtrack locally.</p>
         </div>
       </div>
     </div>
@@ -525,7 +601,7 @@
       <ul>
         <li><strong>Zero Upload Latency:</strong> Audio is decoded directly from local memory without waiting for cloud transfer queues.</li>
         <li><strong>Complete Confidentiality:</strong> No third-party server ever receives, logs, or stores your private video media.</li>
-        <li><strong>No File Size Restrictions:</strong> Processes high-definition recordings smoothly without artificial cloud upload ceilings.</li>
+        <li><strong>Direct Offline Downloads:</strong> Generates standard master-quality WAV files locally on your phone or desktop.</li>
       </ul>
     </div>
 
@@ -549,7 +625,7 @@
             <span class="faq-icon">▼</span>
           </button>
           <div class="faq-answer">
-            <p>Never. All demuxing and audio playback processes occur locally within your web browser memory using HTML5. Your video clips are never uploaded, stored, or transmitted across the internet.</p>
+            <p>Never. All demuxing and audio playback processes occur locally within your web browser memory using HTML5 and the Web Audio API. Your video clips are never uploaded, stored, or transmitted across the internet.</p>
           </div>
         </div>
 
@@ -569,7 +645,7 @@
             <span class="faq-icon">▼</span>
           </button>
           <div class="faq-answer">
-            <p>Yes. The tool is fully optimized for mobile browsers like Chrome and Safari. You can directly select camera recordings or saved video downloads from your smartphone gallery.</p>
+            <p>Yes. The tool is fully optimized for mobile browsers like Chrome and Safari. You can directly select camera recordings or saved video downloads from your smartphone gallery and download the extracted WAV track.</p>
           </div>
         </div>
       </div>
@@ -618,7 +694,7 @@
     </div>
   </footer>
 
-  <!-- اسکریپت‌های منو و اکسترکتور صوتی -->
+  <!-- اسکریپت‌های منو و استخراج‌کننده صوتی -->
   <script>
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -639,13 +715,23 @@
 
     let videoElement = document.createElement('video');
     let isPlaying = false;
+    let selectedFile = null;
+    let cachedAudioBlob = null;
+    let isProcessing = false;
 
     function handleFileSelect(event) {
       const file = event.target.files[0];
       if (file) {
+        selectedFile = file;
+        cachedAudioBlob = null;
+        
         document.getElementById('fileNameDisplay').textContent = "🎬 " + file.name;
         document.getElementById('playBtn').disabled = false;
+        document.getElementById('downloadBtn').disabled = false;
         
+        const statusBox = document.getElementById('statusMessage');
+        statusBox.style.display = 'none';
+
         const fileURL = URL.createObjectURL(file);
         videoElement.src = fileURL;
       }
@@ -683,6 +769,127 @@
       document.getElementById('statusIcon').classList.remove('active');
       document.getElementById('statusIcon').textContent = "🎬";
     });
+
+    // استخراج صدا و ساخت فایل دانلودی WAV به صورت ۱۰۰٪ کلاینت‌ساید
+    async function extractAndDownloadAudio() {
+      if (!selectedFile || isProcessing) return;
+
+      const downloadBtn = document.getElementById('downloadBtn');
+      const statusBox = document.getElementById('statusMessage');
+      const icon = document.getElementById('statusIcon');
+
+      if (cachedAudioBlob) {
+        downloadBlob(cachedAudioBlob, getCleanAudioName(selectedFile.name));
+        return;
+      }
+
+      try {
+        isProcessing = true;
+        downloadBtn.disabled = true;
+        downloadBtn.innerHTML = "<span>⏳</span> Extracting...";
+        statusBox.style.display = "block";
+        statusBox.textContent = "Decoding audio track inside browser memory...";
+        icon.classList.add('active');
+        icon.textContent = "⚙️";
+
+        const arrayBuffer = await selectedFile.arrayBuffer();
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+        
+        statusBox.textContent = "Generating clean WAV file...";
+        cachedAudioBlob = audioBufferToWav(audioBuffer);
+        
+        downloadBlob(cachedAudioBlob, getCleanAudioName(selectedFile.name));
+        
+        statusBox.textContent = "✅ Audio extraction complete! Download started.";
+        downloadBtn.innerHTML = "<span>⬇️</span> Download Audio (.WAV)";
+        downloadBtn.disabled = false;
+        icon.classList.remove('active');
+        icon.textContent = "🎵";
+        audioCtx.close();
+      } catch (err) {
+        console.error("Audio extraction failed:", err);
+        statusBox.textContent = "⚠️ Could not extract audio stream directly. Make sure the video contains an active audio track.";
+        downloadBtn.innerHTML = "<span>⬇️</span> Download Audio (.WAV)";
+        downloadBtn.disabled = false;
+        icon.classList.remove('active');
+        icon.textContent = "🎬";
+      } finally {
+        isProcessing = false;
+      }
+    }
+
+    function getCleanAudioName(filename) {
+      const base = filename.substring(0, filename.lastIndexOf('.')) || filename;
+      return base + "-audio.wav";
+    }
+
+    function downloadBlob(blob, name) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 1000);
+    }
+
+    // مبدل استاندارد بافر صوتی مرورگر به فایل بدون افت کیفیت WAV
+    function audioBufferToWav(buffer) {
+      const numOfChan = buffer.numberOfChannels;
+      const sampleRate = buffer.sampleRate;
+      const bitDepth = 16;
+      const byteRate = sampleRate * numOfChan * (bitDepth / 8);
+      const blockAlign = numOfChan * (bitDepth / 8);
+      const dataSize = buffer.length * blockAlign;
+      const bufferLength = 44 + dataSize;
+      
+      const arrayBuffer = new ArrayBuffer(bufferLength);
+      const view = new DataView(arrayBuffer);
+      
+      function writeString(offset, string) {
+        for (let i = 0; i < string.length; i++) {
+          view.setUint8(offset + i, string.charCodeAt(i));
+        }
+      }
+
+      writeString(0, 'RIFF');
+      view.setUint32(4, 36 + dataSize, true);
+      writeString(8, 'WAVE');
+      writeString(12, 'fmt ');
+      view.setUint32(16, 16, true);
+      view.setUint16(20, 1, true); // PCM format
+      view.setUint16(22, numOfChan, true);
+      view.setUint32(24, sampleRate, true);
+      view.setUint32(28, byteRate, true);
+      view.setUint16(32, blockAlign, true);
+      view.setUint16(34, bitDepth, true);
+      writeString(36, 'data');
+      view.setUint32(40, dataSize, true);
+
+      const channels = [];
+      for (let c = 0; c < numOfChan; c++) {
+        channels.push(buffer.getChannelData(c));
+      }
+
+      let offset = 44;
+      for (let i = 0; i < buffer.length; i++) {
+        for (let c = 0; c < numOfChan; c++) {
+          let sample = channels[c][i];
+          sample = Math.max(-1, Math.min(1, sample));
+          const intSample = sample < 0 ? sample * 32768 : sample * 32767;
+          view.setInt16(offset, intSample, true);
+          offset += 2;
+        }
+      }
+
+      return new Blob([view], { type: 'audio/wav' });
+    }
   </script>
 </body>
 </html>
