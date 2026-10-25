@@ -4,50 +4,82 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Online Subwoofer Bass Test (20Hz - 20kHz) | Free Tone Generator & Download</title>
-  <meta name="description" content="Test your subwoofer, car speakers, and headphones online with our real-time 20Hz-20,000Hz frequency tone generator. Download high-quality bass test tones instantly.">
+  <meta name="description" content="Test your subwoofer, car audio, and headphones with an online 20Hz-20,000Hz frequency tone generator. Download studio-grade bass test tones in pure WAV format.">
   <link rel="canonical" href="https://mimusic.net/subwoofer-test/">
   <style>
     :root {
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --primary: #2563eb;
-      --primary-hover: #1d4ed8;
-      --text: #0f172a;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      --bg: #060913;
+      --card-bg: rgba(13, 20, 36, 0.65);
+      --card-border: rgba(56, 189, 248, 0.22);
+      --ice-primary: #38bdf8;
+      --ice-bright: #7dd3fc;
+      --ice-glow: rgba(56, 189, 248, 0.45);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    body { background: var(--bg); color: var(--text); line-height: 1.6; padding: 30px 15px; }
-    .container { max-width: 820px; margin: 0 auto; }
-    header { text-align: center; margin-bottom: 30px; }
-    h1 { font-size: 2.2rem; color: var(--text); margin-bottom: 8px; font-weight: 800; }
-    header p { color: var(--text-muted); font-size: 1.05rem; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     
-    /* Tool Interface */
-    .tool-box {
+    body {
+      background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.18), transparent 45%),
+                  radial-gradient(circle at 100% 70%, rgba(99, 102, 241, 0.12), transparent 50%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 30px 15px;
+      min-height: 100vh;
+    }
+
+    .container { max-width: 820px; margin: 0 auto; }
+
+    header { text-align: center; margin-bottom: 35px; }
+    h1 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 20px var(--ice-glow);
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    header p { color: var(--text-muted); font-size: 1.05rem; }
+
+    /* Glassmorphism Card Style */
+    .glass-box {
       background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
       padding: 35px 25px;
-      box-shadow: var(--card-shadow);
-      text-align: center;
       margin-bottom: 35px;
     }
+
+    /* Subwoofer Tool Box */
+    .tool-box { text-align: center; }
     .freq-display {
-      font-size: 3.8rem;
+      font-size: 4.2rem;
       font-weight: 900;
-      color: var(--primary);
+      color: var(--ice-bright);
+      text-shadow: 0 0 30px var(--ice-glow), 0 0 60px rgba(56, 189, 248, 0.25);
       letter-spacing: -1px;
       margin-bottom: 4px;
     }
-    .freq-label { color: var(--text-muted); font-size: 0.95rem; font-weight: 600; text-transform: uppercase; margin-bottom: 25px; }
+    .freq-label {
+      color: var(--ice-primary);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 25px;
+      opacity: 0.9;
+    }
+
     .slider-group { margin-bottom: 25px; padding: 0 10px; }
     input[type=range] {
       width: 100%;
       height: 8px;
       border-radius: 4px;
-      background: #e2e8f0;
+      background: #1e293b;
       outline: none;
       -webkit-appearance: none;
       cursor: pointer;
@@ -57,66 +89,95 @@
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      background: var(--primary);
+      background: #fff;
+      border: 3px solid var(--ice-primary);
+      box-shadow: 0 0 18px var(--ice-primary);
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
-      transition: transform 0.1s;
+      transition: transform 0.15s ease;
     }
-    input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.1); }
+    input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+
     .presets { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 30px; }
     .preset-btn {
-      background: #f1f5f9;
-      border: 1px solid var(--border);
-      color: #334155;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: #e2e8f0;
       padding: 8px 16px;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 0.9rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.25s ease;
     }
-    .preset-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .preset-btn:hover {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: var(--ice-bright);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.35);
+    }
+
     .actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
     .btn {
-      padding: 13px 28px;
-      border-radius: 10px;
+      padding: 14px 30px;
+      border-radius: 12px;
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       border: none;
-      transition: all 0.2s;
+      transition: all 0.25s ease;
     }
-    .btn-play { background: var(--primary); color: #fff; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25); }
-    .btn-play:hover { background: var(--primary-hover); }
-    .btn-download { background: #ffffff; color: #334155; border: 1px solid #cbd5e1; }
-    .btn-download:hover { background: #f8fafc; border-color: #94a3b8; }
+    .btn-play {
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      color: #fff;
+      box-shadow: 0 0 25px var(--ice-glow);
+    }
+    .btn-play:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 35px rgba(56, 189, 248, 0.7);
+    }
+    .btn-download {
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--ice-bright);
+      border: 1px solid var(--card-border);
+    }
+    .btn-download:hover {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: var(--ice-bright);
+    }
 
-    /* SEO Article */
-    article {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 35px 30px;
-      margin-bottom: 35px;
-      box-shadow: var(--card-shadow);
+    /* Article Content */
+    article h2 {
+      font-size: 1.55rem;
+      color: #fff;
+      margin: 25px 0 12px 0;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
     }
-    article h2 { font-size: 1.55rem; color: var(--text); margin: 25px 0 12px 0; font-weight: 700; }
     article h2:first-of-type { margin-top: 0; }
-    article p { margin-bottom: 16px; color: #334155; line-height: 1.8; font-size: 1rem; }
-    article ul { margin-left: 20px; margin-bottom: 18px; color: #334155; }
-    article li { margin-bottom: 8px; line-height: 1.7; }
+    article p { margin-bottom: 16px; color: #cbd5e1; font-size: 1rem; }
+    article ul { margin-left: 20px; margin-bottom: 18px; color: #cbd5e1; }
+    article li { margin-bottom: 8px; }
+    article strong { color: var(--ice-bright); }
 
-    /* Accordion FAQ */
-    .faq-section { margin-bottom: 40px; }
-    .faq-section h2 { font-size: 1.55rem; margin-bottom: 20px; color: var(--text); text-align: center; }
+    /* FAQ Accordion */
+    .faq-section h2 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      color: #fff;
+      text-align: center;
+      text-shadow: 0 0 15px var(--ice-glow);
+    }
     details {
       background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
       margin-bottom: 12px;
       overflow: hidden;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      transition: all 0.2s ease;
     }
+    details[open] { border-color: var(--ice-bright); }
     summary {
       padding: 16px 20px;
       font-weight: 600;
@@ -125,13 +186,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: var(--text);
+      color: #f1f5f9;
     }
     summary::-webkit-details-marker { display: none; }
-    summary::after { content: '+'; font-size: 1.3rem; color: var(--primary); font-weight: bold; }
+    summary::after { content: '+'; font-size: 1.3rem; color: var(--ice-bright); font-weight: bold; }
     details[open] summary::after { content: '−'; }
-    .faq-content { padding: 0 20px 18px 20px; color: var(--text-muted); font-size: 0.98rem; line-height: 1.7; }
-    footer { text-align: center; color: var(--text-muted); font-size: 0.85rem; padding-bottom: 15px; }
+    .faq-content { padding: 0 20px 18px 20px; color: var(--text-muted); font-size: 0.96rem; line-height: 1.7; }
+
+    footer { text-align: center; color: var(--text-muted); font-size: 0.85rem; padding-bottom: 20px; }
   </style>
 </head>
 <body>
@@ -139,12 +201,12 @@
 <div class="container">
   <header>
     <h1>Online Subwoofer Bass Test</h1>
-    <p>Real-time low frequency tone generator & sound test utility (20Hz - 20,000Hz)</p>
+    <p>Pure sine wave generator & frequency sweep tool (20Hz - 20,000Hz)</p>
   </header>
 
-  <div class="tool-box">
+  <div class="glass-box tool-box">
     <div class="freq-display" id="freqVal">40 Hz</div>
-    <div class="freq-label" id="freqType">Sub-Bass Range</div>
+    <div class="freq-label" id="freqType">Sub-Bass Range (Vibration)</div>
 
     <div class="slider-group">
       <input type="range" id="freqSlider" min="20" max="20000" value="40" step="1">
@@ -168,7 +230,7 @@
     </div>
   </div>
 
-  <article>
+  <article class="glass-box">
     <h2>What Is a Subwoofer Bass Test and Why Is It Essential?</h2>
     <p>A subwoofer bass test evaluates the acoustic performance, physical excursion, and frequency cutoffs of low-frequency sound drivers. Subwoofers are specifically engineered to reproduce the lowest octave notes that standard full-range speakers cannot physically emit. Running a targeted frequency sweep reveals whether your audio gear accurately reproduces clean sub-bass tones or suffers from physical rattles, enclosure turbulence, and audio distortion.</p>
 
@@ -254,7 +316,8 @@
       if (osc) { osc.stop(); osc.disconnect(); osc = null; }
       isPlaying = false;
       playBtn.innerText = 'Play Sound';
-      playBtn.style.background = 'var(--primary)';
+      playBtn.style.background = 'linear-gradient(135deg, #0284c7, #38bdf8)';
+      playBtn.style.boxShadow = '0 0 25px var(--ice-glow)';
     } else {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -272,7 +335,8 @@
       osc.start();
       isPlaying = true;
       playBtn.innerText = 'Stop Tone';
-      playBtn.style.background = '#dc2626';
+      playBtn.style.background = '#ef4444';
+      playBtn.style.boxShadow = '0 0 25px rgba(239, 68, 68, 0.5)';
     }
   }
 
