@@ -82,7 +82,7 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    /* هیرو و عنوان ابزار */
+    /* هیرو */
     .hero { padding: 45px 24px 15px; text-align: center; max-width: 900px; margin: 0 auto; }
     .hero-badge { 
       display: inline-flex; 
@@ -101,8 +101,8 @@
     .hero h1 { font-size: 2.6rem; font-weight: 900; color: var(--text-dark); margin-bottom: 12px; letter-spacing: -0.03em; line-height: 1.25; }
     .hero p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 25px; }
 
-    /* باکس تعاملی تولید فرکانس (شیشه‌ای یخی) */
-    .tool-wrapper { max-width: 760px; margin: 0 auto 40px; padding: 0 20px; }
+    /* باکس تعاملی تولید فرکانس */
+    .tool-wrapper { max-width: 760px; margin: 0 auto 35px; padding: 0 20px; }
     .tool-glass-card {
       background: var(--surface-glass);
       backdrop-filter: blur(20px);
@@ -209,13 +209,44 @@
       transform: translateY(-3px);
     }
 
-    /* جایگاه اختصاصی تصویر هوش مصنوعی */
-    .image-slot-wrapper { max-width: 880px; margin: 15px auto 40px; padding: 0 24px; text-align: center; }
-    .ai-banner-image { 
-      width: 100%; 
-      border-radius: 28px; 
-      box-shadow: 0 20px 45px -10px rgba(79, 70, 229, 0.2), 0 0 0 1.5px var(--glass-border); 
-      display: block; 
+    /* جایگاه مشخص و شیشه‌ای بنر تصویر هوش مصنوعی */
+    .image-slot-wrapper { max-width: 820px; margin: 0 auto 35px; padding: 0 20px; }
+    .banner-placeholder-frame {
+      width: 100%;
+      min-height: 220px;
+      background: var(--surface-glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 2px dashed rgba(99, 102, 241, 0.4);
+      border-radius: 26px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--glass-shadow);
+      overflow: hidden;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .banner-placeholder-frame img {
+      width: 100%;
+      height: auto;
+      display: none;
+      border-radius: 24px;
+    }
+    .banner-placeholder-frame .placeholder-text {
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 0.98rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 35px 20px;
+      text-align: center;
+    }
+    .banner-placeholder-frame .placeholder-icon {
+      font-size: 2.4rem;
     }
 
     /* کارت‌های کوچک شیشه‌ای مقاله سئو */
@@ -422,9 +453,15 @@
     </div>
   </section>
 
-  <!-- جایگاه اختصاصی تصویر تولیدی با هوش مصنوعی -->
+  <!-- جایگاه اختصاصی و مشخص بنر تصویر هوش مصنوعی -->
   <div class="image-slot-wrapper">
-    <img src="/subwoofer-banner.jpg" alt="Online Subwoofer Bass Frequency Test and Acoustic Spectrum Analyzer" class="ai-banner-image" onerror="this.style.display='none'">
+    <div class="banner-placeholder-frame" id="bannerFrame">
+      <img src="/subwoofer-banner.jpg" alt="Subwoofer Bass Test Banner" id="subBannerImg" onerror="this.style.display='none'; document.getElementById('placeholderNotice').style.display='flex';" onload="document.getElementById('placeholderNotice').style.display='none'; this.style.display='block'; document.getElementById('bannerFrame').style.border='1px solid var(--glass-border)';">
+      <div id="placeholderNotice" class="placeholder-text">
+        <span class="placeholder-icon">🖼️</span>
+        <span>AI Banner Image Slot (/subwoofer-banner.jpg)</span>
+      </div>
+    </div>
   </div>
 
   <!-- کارت‌های کوچک و تفکیک‌شده شیشه‌ای مقاله سئو -->
@@ -577,7 +614,7 @@
     </div>
   </footer>
 
-  <!-- اسکریپت‌های منو، آکاردئون و موتور تولید فرکانس و دانلود WAV -->
+  <!-- اسکریپت‌ها -->
   <script>
     // منوی موبایل
     const menuBtn = document.getElementById('menuBtn');
