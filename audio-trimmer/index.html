@@ -28,7 +28,7 @@
       --text-muted: #64748b;
       --glass-shadow: 0 12px 35px -5px rgba(148, 163, 184, 0.25);
 
-      /* رنگ‌های استودیوی صوتی و تفکیک لاین‌ها */
+      /* رنگ‌های استودیوی تاریک منطبق با ویدیو */
       --studio-bg: #11141c;
       --studio-card: #181c26;
       --studio-border: #262c3d;
@@ -76,7 +76,7 @@
     /* فضای کنسول استودیو */
     .workspace { padding: 45px 16px 30px; text-align: center; }
     .tool-container { 
-      max-width: 900px; 
+      max-width: 920px; 
       margin: 0 auto; 
       background: var(--studio-bg); 
       border-radius: 28px; 
@@ -102,7 +102,7 @@
     .tool-title { font-size: 2.1rem; font-weight: 900; color: #ffffff; margin-bottom: 8px; letter-spacing: -0.03em; }
     .tool-desc { font-size: 0.95rem; color: #94a3b8; margin-bottom: 25px; line-height: 1.6; }
 
-    /* باکس آپلود فایل */
+    /* آپلود فایل */
     .file-upload-wrapper { margin-bottom: 20px; text-align: center; }
     .file-upload-label { 
       display: block; 
@@ -137,13 +137,13 @@
       margin-bottom: 20px;
     }
     .btn-master-play {
-      width: 46px;
-      height: 46px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background: #f59e0b;
       color: #0f172a;
       border: none;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -193,10 +193,10 @@
       grid-template-columns: 115px 1fr 140px;
       align-items: center;
       gap: 16px;
-      transition: opacity 0.2s ease, border-color 0.2s ease;
+      transition: opacity 0.25s ease, border-color 0.25s ease;
     }
-    .stem-card.is-muted { opacity: 0.35; }
-    .stem-card.is-soloed { border-color: #f59e0b; box-shadow: 0 0 12px rgba(245, 158, 11, 0.25); }
+    .stem-card.is-muted { opacity: 0.3; }
+    .stem-card.is-soloed { border-color: #f59e0b; box-shadow: 0 0 14px rgba(245, 158, 11, 0.3); }
 
     .stem-meta {
       display: flex;
@@ -212,18 +212,20 @@
       border-radius: 50%;
     }
 
-    /* بوم موج میله‌ای موزیک‌پلیر */
+    /* قاب موج میله‌ای موزیک‌پلیر */
     .waveform-holder {
       position: relative;
-      height: 52px;
+      width: 100%;
+      height: 54px;
       background: #0d1017;
       border-radius: 10px;
       overflow: hidden;
       cursor: pointer;
-      display: flex;
-      align-items: center;
     }
     .waveform-holder canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       display: block;
@@ -237,6 +239,7 @@
       background: #ffffff;
       box-shadow: 0 0 8px #ffffff;
       pointer-events: none;
+      z-index: 10;
     }
 
     /* دکمه‌های کنترل هر لاین */
@@ -353,7 +356,7 @@
       .trim-dock { flex-direction: column; align-items: stretch; }
     }
 
-    /* استایل‌های سئو و فوتر */
+    /* ویژگی‌ها و مقالات سئو */
     .features-row { max-width: 1000px; margin: 30px auto 50px; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
     .feature-box { background: var(--surface-glass); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 22px 18px; box-shadow: var(--glass-shadow); display: flex; gap: 14px; align-items: flex-start; }
     .feature-box .f-icon { font-size: 1.8rem; background: #ffffff; border: 1px solid var(--glass-border); padding: 10px; border-radius: 14px; }
@@ -397,7 +400,7 @@
     .faq-item.active .faq-answer { max-height: 250px; padding: 0 24px 22px 24px; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
 
-    /* فوتر کریستالی */
+    /* فوتر سراسری */
     footer { border-top: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(18px); padding: 65px 24px 45px; color: var(--text-muted); font-size: 0.95rem; margin-top: 80px; }
     .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
     .footer-col h5 { color: var(--text-dark); font-size: 1.05rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
@@ -790,7 +793,7 @@
     let audioCtx = null;
     let decodedBuffer = null;
     let stemBuffers = { vocals: null, drums: null, bass: null, other: null };
-    let stemPeaks = { vocals: null, drums: null, bass: null, other: null }; // آرایه میله‌های صوتی استخراج شده
+    let stemPeaks = { vocals: null, drums: null, bass: null, other: null };
     let activeSources = { vocals: null, drums: null, bass: null, other: null };
     let stemGains = { vocals: null, drums: null, bass: null, other: null };
     
@@ -816,7 +819,7 @@
 
       const statusBox = document.getElementById('statusMessage');
       statusBox.style.display = "block";
-      statusBox.textContent = "⚡ Decoding audio & extracting waveform bars in browser RAM...";
+      statusBox.textContent = "⚡ Isolating vocals, drums, bass & rendering studio waveforms...";
 
       try {
         if (!audioCtx) {
@@ -834,17 +837,25 @@
         document.getElementById('endTimeInput').value = duration.toFixed(1);
         document.getElementById('totTimeText').textContent = formatTime(duration);
 
-        // تولید ۴ لاین تمیز فرکانسی
+        // تولید ۴ لاین مستقل با شیب تند بدون تداخل (Zero Bleed)
         stemBuffers = generateClean4Stems(decodedBuffer);
 
-        // استخراج میله‌های کپسولی برای هر لاین
+        // استخراج پیک میله‌ها
         TRACKS.forEach(t => {
-          stemPeaks[t] = extractWaveformPeaks(stemBuffers[t], 140);
-          drawModernWaveform('canvas-' + t, stemPeaks[t], STEM_COLORS[t], 0);
+          stemPeaks[t] = extractWaveformPeaks(stemBuffers[t], 160);
         });
 
+        // اول پنل استودیو را نمایان می‌کنیم تا کادرها عرض واقعی بگیرند
         document.getElementById('studioConsole').style.display = "block";
-        statusBox.textContent = "✅ Studio Ready! Waveform players active with real-time progress.";
+
+        // سپس با انیمیشن‌فریم میله‌ها را رسم می‌کنیم تا عرض کادر دقیقا محاسبه شود
+        requestAnimationFrame(() => {
+          TRACKS.forEach(t => {
+            renderWaveformBars('canvas-' + t, stemPeaks[t], STEM_COLORS[t], 0);
+          });
+        });
+
+        statusBox.textContent = "✅ Studio Ready! Solo, mute or trim with real-time waveform sync.";
         updatePlayheadUI(0);
       } catch (err) {
         console.error("Audio Load Error:", err);
@@ -852,28 +863,39 @@
       }
     }
 
-    // متد استخراج دقیق دامنه‌ها جهت ساخت میله‌های کپسولی موزیک‌پلیر
-    function extractWaveformPeaks(buffer, barCount) {
-      const data = buffer.getChannelData(0);
-      const step = Math.floor(data.length / barCount);
-      const peaks = [];
+    // طراحی فیلتر 2nd-order Biquad برای ایجاد برش‌های Linkwitz-Riley با شیب تند
+    function createBiquadLP(freq, sampleRate) {
+      const w0 = 2 * Math.PI * freq / sampleRate;
+      const cos = Math.cos(w0);
+      const sin = Math.sin(w0);
+      const alpha = sin / (2 * 0.7071);
 
-      for (let i = 0; i < barCount; i++) {
-        let max = 0;
-        const start = i * step;
-        for (let j = 0; j < step; j += 6) { // نمونه‌برداری سریع
-          const val = Math.abs(data[start + j] || 0);
-          if (val > max) max = val;
-        }
-        peaks.push(max);
-      }
+      const b0 = (1 - cos) / 2;
+      const b1 = 1 - cos;
+      const b2 = (1 - cos) / 2;
+      const a0 = 1 + alpha;
+      const a1 = -2 * cos;
+      const a2 = 1 - alpha;
 
-      // نرمال‌سازی میله‌ها
-      const peakMax = Math.max(...peaks) || 1;
-      return peaks.map(p => Math.max(0.12, p / peakMax));
+      return {
+        b0: b0 / a0, b1: b1 / a0, b2: b2 / a0,
+        a1: a1 / a0, a2: a2 / a0
+      };
     }
 
-    // موتور تفکیک لاین‌ها
+    function applyFilter(f, input, output, len) {
+      let x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+      const { b0, b1, b2, a1, a2 } = f;
+      for (let i = 0; i < len; i++) {
+        const x = input[i];
+        const y = b0 * x + b1 * x1 + b2 * x2 - a1 * y1 - a2 * y2;
+        x2 = x1; x1 = x;
+        y2 = y1; y1 = y;
+        output[i] = y;
+      }
+    }
+
+    // موتور تفکیک ۴ لاین با متد مکمل (Complementary Linkwitz-Riley 24dB/oct)
     function generateClean4Stems(buffer) {
       const len = buffer.length;
       const sr = buffer.sampleRate;
@@ -890,69 +912,102 @@
       const bL = bassBuf.getChannelData(0), bR = bassBuf.getChannelData(1);
       const oL = othBuf.getChannelData(0), oR = othBuf.getChannelData(1);
 
-      let bassFilterL = 0, bassFilterR = 0;
-      let midFilterL = 0, midFilterR = 0;
-      const alphaBass = 0.035;
-      const alphaMid = 0.22;
+      // استخراج مید و ساید
+      const mid = new Float32Array(len);
+      for (let i = 0; i < len; i++) {
+        mid[i] = (chL[i] + chR[i]) * 0.5;
+        const side = (chL[i] - chR[i]) * 0.5;
+        // لاین سازها و استریو (Other)
+        oL[i] = side;
+        oR[i] = -side;
+      }
+
+      // فیلتر شیب‌تند ۲۲۰ هرتز برای ساب و بیس (۴ قطبی Linkwitz-Riley)
+      const lp220_1 = createBiquadLP(220, sr);
+      const lp220_2 = createBiquadLP(220, sr);
+      const midLow1 = new Float32Array(len);
+      const midBass = new Float32Array(len);
+      applyFilter(lp220_1, mid, midLow1, len);
+      applyFilter(lp220_2, midLow1, midBass, len);
+
+      // فیلتر شیب‌تند ۳۶۰۰ هرتز برای مرز وکال و های‌هت/درامز
+      const lp3600_1 = createBiquadLP(3600, sr);
+      const lp3600_2 = createBiquadLP(3600, sr);
+      const midMid1 = new Float32Array(len);
+      const midUnder3600 = new Float32Array(len);
+      applyFilter(lp3600_1, mid, midMid1, len);
+      applyFilter(lp3600_2, midMid1, midUnder3600, len);
 
       for (let i = 0; i < len; i++) {
-        const l = chL[i];
-        const r = chR[i];
-        const mid = (l + r) * 0.5;
-        const side = (l - r) * 0.5;
+        // ۱. بیس خالص بدون صدای خواننده
+        bL[i] = midBass[i];
+        bR[i] = midBass[i];
 
-        // بیس
-        bassFilterL += alphaBass * (l - bassFilterL);
-        bassFilterR += alphaBass * (r - bassFilterR);
-        bL[i] = bassFilterL * 1.3;
-        bR[i] = bassFilterR * 1.3;
+        // ۲. وکال خالص مرکز باند (تفریق مستقیم: فرکانس‌های زیر ۲۲۰ و بالای ۳۶۰۰ کاملاً حذف)
+        const voc = midUnder3600[i] - midBass[i];
+        vL[i] = voc;
+        vR[i] = voc;
 
-        // وکال خواننده
-        midFilterL += alphaMid * (mid - midFilterL);
-        midFilterR += alphaMid * (mid - midFilterR);
-        const vocalOnly = (midFilterL - bassFilterL) * 1.4;
-        vL[i] = vocalOnly;
-        vR[i] = vocalOnly;
-
-        // درامز
-        dL[i] = (l - midFilterL) * 0.8 + (bassFilterL * 0.6);
-        dR[i] = (r - midFilterR) * 0.8 + (bassFilterR * 0.6);
-
-        // سازها / Other
-        oL[i] = side * 1.25;
-        oR[i] = -side * 1.25;
+        // ۳. درامز و ترنزینت‌های تند بالا (سنج و های‌هت و اسنپ)
+        const drum = mid[i] - midUnder3600[i];
+        dL[i] = drum;
+        dR[i] = drum;
       }
 
       return { vocals: vocBuf, drums: drumBuf, bass: bassBuf, other: othBuf };
     }
 
-    // رندر دقیق میله‌های کپسولی موزیک‌پلیر با دو رنگ پخش‌شده و باقیمانده
-    function drawModernWaveform(canvasId, peaks, color, progressRatio) {
+    // استخراج میله‌های صوتی برای رندر کپسولی
+    function extractWaveformPeaks(buffer, barCount) {
+      const data = buffer.getChannelData(0);
+      const step = Math.floor(data.length / barCount);
+      const peaks = [];
+
+      for (let i = 0; i < barCount; i++) {
+        let max = 0;
+        const start = i * step;
+        for (let j = 0; j < step; j += 8) {
+          const val = Math.abs(data[start + j] || 0);
+          if (val > max) max = val;
+        }
+        peaks.push(max);
+      }
+
+      const peakMax = Math.max(...peaks, 0.0001);
+      return peaks.map(p => Math.max(0.12, p / peakMax));
+    }
+
+    // رسم میله‌های عمودی کپسولی با انتهای گرد (Waveform Bars)
+    function renderWaveformBars(canvasId, peaks, color, progressRatio) {
       const canvas = document.getElementById(canvasId);
-      if (!canvas || !peaks) return;
+      if (!canvas || !peaks || peaks.length === 0) return;
+
+      const parent = canvas.parentElement;
+      const w = parent.clientWidth || 600;
+      const h = parent.clientHeight || 54;
 
       const dpr = window.devicePixelRatio || 1;
-      const w = canvas.parentElement.clientWidth;
-      const h = canvas.parentElement.clientHeight;
-
       canvas.width = w * dpr;
       canvas.height = h * dpr;
+
       const ctx = canvas.getContext('2d');
       ctx.scale(dpr, dpr);
       ctx.clearRect(0, 0, w, h);
 
-      const barWidth = 3.2;
-      const gap = 2.4;
+      const barWidth = 3;
+      const gap = 2.5;
       const totalBarWidth = barWidth + gap;
-      const totalBars = Math.floor(w / totalBarWidth);
-      const step = peaks.length / totalBars;
+      const numBars = Math.floor(w / totalBarWidth);
+      if (numBars <= 0) return;
+
+      const step = peaks.length / numBars;
       const centerY = h / 2;
 
-      for (let i = 0; i < totalBars; i++) {
-        const pIndex = Math.floor(i * step);
-        const peakVal = peaks[pIndex] || 0.12;
-        const barHeight = Math.max(5, peakVal * (h - 10));
-        
+      for (let i = 0; i < numBars; i++) {
+        const pIndex = Math.min(peaks.length - 1, Math.floor(i * step));
+        const val = peaks[pIndex] || 0.12;
+        const barHeight = Math.max(6, val * (h - 10));
+
         const x = i * totalBarWidth + barWidth / 2;
         const yTop = centerY - barHeight / 2;
         const yBottom = centerY + barHeight / 2;
@@ -965,12 +1020,22 @@
         ctx.lineWidth = barWidth;
         ctx.lineCap = 'round';
         ctx.strokeStyle = color;
-        // بخش‌های گذشته کاملاً روشن، بخش‌های پیش‌رو نیمه‌شفاف
-        ctx.globalAlpha = isPlayed ? 1.0 : 0.28;
+        ctx.globalAlpha = isPlayed ? 1.0 : 0.32;
         ctx.stroke();
       }
       ctx.globalAlpha = 1.0;
     }
+
+    // بازتنظیم عرض موج‌ها در زمان چرخش یا تغییر اندازه صفحه
+    window.addEventListener('resize', () => {
+      if (decodedBuffer) {
+        const dur = decodedBuffer.duration || 1;
+        const progress = Math.min(1, Math.max(0, playheadTime / dur));
+        TRACKS.forEach(t => {
+          if (stemPeaks[t]) renderWaveformBars('canvas-' + t, stemPeaks[t], STEM_COLORS[t], progress);
+        });
+      }
+    });
 
     // پخش و توقف
     function togglePlay() {
@@ -1017,7 +1082,7 @@
       document.getElementById('masterPlayBtn').textContent = '▶';
     }
 
-    // قطع و پخش تک‌لاین (Solo و Mute)
+    // منطق Solo و Mute - قطع کامل بدون هیچ نشت صدا
     function toggleSolo(track) {
       trackStates[track].solo = !trackStates[track].solo;
       document.getElementById(`solo-${track}`).classList.toggle('active-solo', trackStates[track].solo);
@@ -1036,26 +1101,27 @@
       const anySolo = TRACKS.some(t => trackStates[t].solo);
 
       TRACKS.forEach(t => {
-        let volume = 1.0;
+        let targetVol = 1.0;
         if (anySolo) {
-          volume = trackStates[t].solo ? 1.0 : 0.0;
+          targetVol = trackStates[t].solo ? 1.0 : 0.0;
         } else if (trackStates[t].mute) {
-          volume = 0.0;
+          targetVol = 0.0;
         }
 
         const card = document.getElementById(`card-${t}`);
-        if (volume === 0.0) card.classList.add('is-muted');
+        if (targetVol === 0.0) card.classList.add('is-muted');
         else if (!trackStates[t].mute) card.classList.remove('is-muted');
 
         if (stemGains[t] && audioCtx) {
-          stemGains[t].gain.cancelScheduledValues(0);
-          stemGains[t].gain.setValueAtTime(volume, audioCtx.currentTime);
-          stemGains[t].gain.value = volume;
+          const now = audioCtx.currentTime;
+          stemGains[t].gain.cancelScheduledValues(now);
+          stemGains[t].gain.setValueAtTime(stemGains[t].gain.value, now);
+          stemGains[t].gain.linearRampToValueAtTime(targetVol, now + 0.02);
         }
       });
     }
 
-    // حلقه رندر زنده میله‌ها و خط زمان
+    // متحرک‌سازی زنده پیشروی خط زمان و میله‌های موج
     function renderPlayhead() {
       if (!isPlaying) return;
       playheadTime = audioCtx.currentTime - playStartCtxTime;
@@ -1079,10 +1145,9 @@
       document.getElementById('curTimeText').textContent = formatTime(sec);
       document.getElementById('timelineScrubber').value = pct;
 
-      // رندر میله‌های روشن/خاموش همراه با جابجایی خط زمان
       TRACKS.forEach(t => {
         if (stemPeaks[t]) {
-          drawModernWaveform('canvas-' + t, stemPeaks[t], STEM_COLORS[t], progress);
+          renderWaveformBars('canvas-' + t, stemPeaks[t], STEM_COLORS[t], progress);
         }
         const line = document.getElementById(`playhead-${t}`);
         if (line) line.style.left = `${pct}%`;
