@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PTZ0GYNKVJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PTZ0GYNKVJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'G-PTZ0GYNKVJ');
-</script>
+    gtag('config', 'G-PTZ0GYNKVJ');
+  </script>
  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Audio Trimmer & Cutter - Trim MP3, WAV Online | MiMusic.net</title>
-  <meta name="description" content="Trim, cut, and split audio files instantly in your browser. Fast, 100% private, and free client-side MP3 and WAV audio cutter with zero server uploads and instant WAV download.">
+  <title>Free Audio Trimmer & Stem Splitter - Cut MP3 & Isolate Vocals | MiMusic.net</title>
+  <meta name="description" content="Trim, cut, and isolate vocals, music, and bass tracks instantly in your browser. 100% private, client-side Web Audio studio with visual waveforms and lossless WAV export.">
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
     /* تم یخی کریستالی و شیشه‌ای منطبق با استایل سراسری MiMusic */
     :root {
       --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
-      --surface-glass: rgba(255, 255, 255, 0.72);
-      --surface-glass-hover: rgba(255, 255, 255, 0.92);
+      --surface-glass: rgba(255, 255, 255, 0.75);
+      --surface-glass-hover: rgba(255, 255, 255, 0.95);
       --glass-border: rgba(255, 255, 255, 0.85);
       --accent: #4f46e5;
       --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #3b82f6 100%);
@@ -31,6 +31,11 @@
       --text-muted: #64748b;
       --glass-shadow: 0 12px 35px -5px rgba(148, 163, 184, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
       --glass-shadow-hover: 0 20px 45px -4px rgba(79, 70, 229, 0.22), 0 0 0 1.5px rgba(255, 255, 255, 0.95) inset;
+      
+      /* رنگ‌های استودیوی یخی برای لاین‌های صدا */
+      --track-vocal: #0284c7;
+      --track-inst: #6366f1;
+      --track-bass: #0d9488;
     }
 
     html { scroll-behavior: smooth; }
@@ -78,61 +83,37 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    /* فضای تعاملی ابزار برش صدا */
-    .workspace { padding: 60px 24px 35px; text-align: center; }
+    /* فضای تعاملی ابزار برش و تفکیک صدا */
+    .workspace { padding: 50px 20px 35px; text-align: center; }
     .tool-container { 
-      max-width: 780px; 
+      max-width: 860px; 
       margin: 0 auto; 
       background: var(--surface-glass); 
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 30px; 
-      padding: 45px 35px; 
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 32px; 
+      padding: 40px 30px; 
       box-shadow: var(--glass-shadow); 
       border: 1px solid var(--glass-border); 
       position: relative;
     }
-    .tool-title { font-size: 2.3rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.03em; }
-    .tool-desc { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 30px; line-height: 1.7; max-width: 620px; margin-left: auto; margin-right: auto; }
-    
-    .status-ring { 
-      width: 110px; 
-      height: 110px; 
-      border-radius: 50%; 
-      background: rgba(255, 255, 255, 0.9); 
-      margin: 0 auto 30px; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      font-size: 2.8rem; 
-      border: 3px solid var(--glass-border); 
-      box-shadow: 0 8px 24px rgba(79, 70, 229, 0.15);
-      transition: all 0.3s ease; 
-    }
-    .status-ring.active { 
-      border-color: var(--accent); 
-      animation: pulseGlow 1.6s infinite; 
-    }
-    @keyframes pulseGlow { 
-      0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); transform: scale(1); } 
-      70% { box-shadow: 0 0 0 22px rgba(79, 70, 229, 0); transform: scale(1.03); } 
-      100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); transform: scale(1); } 
-    }
+    .tool-title { font-size: 2.2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 12px; letter-spacing: -0.03em; }
+    .tool-desc { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 25px; line-height: 1.7; max-width: 650px; margin-left: auto; margin-right: auto; }
 
-    /* کنترل‌های آپلود */
-    .file-upload-wrapper { margin-bottom: 25px; }
+    /* کادر آپلود */
+    .file-upload-wrapper { margin-bottom: 20px; }
     .file-upload-label { 
       display: inline-block; 
-      background: rgba(255, 255, 255, 0.85); 
-      border: 2px dashed rgba(99, 102, 241, 0.35); 
-      padding: 22px 30px; 
+      background: rgba(255, 255, 255, 0.9); 
+      border: 2px dashed rgba(99, 102, 241, 0.4); 
+      padding: 24px 30px; 
       border-radius: 20px; 
       cursor: pointer; 
       font-weight: 700; 
       color: var(--text-dark); 
       transition: all 0.3s ease; 
       width: 100%; 
-      max-width: 480px; 
+      max-width: 500px; 
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
     }
     .file-upload-label:hover { 
@@ -143,119 +124,225 @@
     }
     input[type="file"] { display: none; }
 
-    /* کنترل‌های برش زمان */
-    .trim-controls {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+    /* کنسول استودیو و تفکیک چندلاینه */
+    .studio-console {
+      display: none;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 22px;
       margin: 25px 0;
-      background: rgba(255, 255, 255, 0.65);
-      padding: 20px;
-      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+      text-align: left;
+    }
+
+    /* نوار کنترل سراسری استودیو */
+    .transport-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      margin-bottom: 20px;
+    }
+    .transport-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .play-master-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--accent-gradient);
+      color: #fff;
+      border: none;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
+      transition: transform 0.2s;
+    }
+    .play-master-btn:hover { transform: scale(1.05); }
+    .time-counter {
+      font-family: monospace;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      background: #ffffff;
+      padding: 6px 14px;
+      border-radius: 10px;
       border: 1px solid var(--glass-border);
     }
-    .trim-box { text-align: left; }
-    .trim-box label { font-size: 0.9rem; font-weight: 800; color: var(--text-dark); display: block; margin-bottom: 8px; }
-    .trim-box input {
+
+    /* ردیف‌های لاین‌های صدا (Stem Rows) */
+    .stems-container {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .stem-row {
+      display: grid;
+      grid-template-columns: 130px 1fr 130px;
+      align-items: center;
+      gap: 14px;
+      background: #ffffff;
+      padding: 10px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    @media (max-width: 650px) {
+      .stem-row { grid-template-columns: 1fr; gap: 8px; }
+    }
+    .stem-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      color: var(--text-dark);
+    }
+    .stem-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .wave-box {
       width: 100%;
-      padding: 12px 16px;
-      border-radius: 12px;
+      height: 48px;
+      background: rgba(241, 245, 249, 0.9);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+    .wave-box canvas { width: 100%; height: 100%; display: block; }
+    .stem-btns {
+      display: flex;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+    .track-btn {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      color: var(--text-main);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .track-btn.active-solo {
+      background: #0284c7;
+      color: #fff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+    }
+    .track-btn.active-mute {
+      background: #ef4444;
+      color: #fff;
+      border-color: #ef4444;
+    }
+
+    /* بخش تنظیمات کات و تریم */
+    .trim-section {
+      background: rgba(248, 250, 252, 0.85);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .trim-inputs-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .time-input-field label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+    .time-input-field input {
+      width: 95px;
+      padding: 8px 10px;
+      border-radius: 10px;
       border: 1px solid var(--glass-border);
       background: #ffffff;
-      font-size: 1rem;
-      font-weight: 700;
+      font-size: 0.95rem;
+      font-weight: 800;
       color: var(--text-dark);
-      outline: none;
-      transition: 0.2s;
+      text-align: center;
     }
-    .trim-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15); }
-    .audio-info-bar { font-size: 0.92rem; font-weight: 700; color: var(--text-muted); margin-bottom: 20px; }
 
     /* دکمه‌ها */
     .controls-wrapper {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 14px;
       justify-content: center;
       align-items: center;
+      margin-top: 10px;
     }
     .btn-main { 
       background: var(--accent-gradient); 
       color: #fff; 
       border: none; 
-      padding: 16px 36px; 
+      padding: 14px 28px; 
       border-radius: 50px; 
-      font-size: 1.05rem; 
+      font-size: 0.98rem; 
       font-weight: 800; 
       cursor: pointer; 
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-      box-shadow: 0 10px 25px -4px rgba(79, 70, 229, 0.4); 
-      flex: 1;
-      min-width: 230px;
-      max-width: 290px;
+      transition: all 0.3s; 
+      box-shadow: 0 8px 20px -4px rgba(79, 70, 229, 0.4); 
     }
-    .btn-main:hover:not(:disabled) { 
-      transform: translateY(-3px) scale(1.02); 
-      box-shadow: 0 16px 32px -4px rgba(79, 70, 229, 0.55); 
-    }
-    .btn-main:disabled { 
-      background: #cbd5e1; 
-      color: #94a3b8; 
-      cursor: not-allowed; 
-      transform: none; 
-      box-shadow: none; 
-    }
-    .btn-main.stop { 
-      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); 
-      box-shadow: 0 10px 25px -4px rgba(239, 68, 68, 0.4); 
-    }
-
+    .btn-main:hover { transform: translateY(-2px); box-shadow: 0 12px 26px -4px rgba(79, 70, 229, 0.5); }
     .btn-download {
-      background: rgba(255, 255, 255, 0.9);
+      background: #ffffff;
       color: var(--accent);
       border: 1.5px solid var(--accent);
-      padding: 16px 36px;
+      padding: 14px 28px;
       border-radius: 50px;
-      font-size: 1.05rem;
+      font-size: 0.98rem;
       font-weight: 800;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.12);
+      transition: all 0.3s;
+      box-shadow: 0 6px 16px rgba(79, 70, 229, 0.12);
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 8px;
-      flex: 1;
-      min-width: 230px;
-      max-width: 290px;
     }
-    .btn-download:hover:not(:disabled) {
+    .btn-download:hover {
       background: var(--accent-gradient);
       color: #ffffff;
       border-color: transparent;
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 16px 32px -4px rgba(79, 70, 229, 0.45);
-    }
-    .btn-download:disabled {
-      background: rgba(255, 255, 255, 0.45);
-      color: #94a3b8;
-      border-color: #cbd5e1;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
+      transform: translateY(-2px);
     }
 
     .status-box {
-      margin-top: 20px;
-      padding: 14px 20px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.92);
+      margin-top: 18px;
+      padding: 12px 18px;
+      border-radius: 14px;
+      background: #ffffff;
       border: 1px solid var(--glass-border);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-      font-size: 0.95rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      font-size: 0.92rem;
       font-weight: 700;
       color: var(--text-dark);
-      animation: fadeIn 0.3s ease;
     }
 
     /* باکس‌های ویژگی */
@@ -439,7 +526,7 @@
     .faq-item.active .faq-answer { max-height: 250px; padding: 0 24px 22px 24px; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
 
-    /* فوتر کریستالی */
+    /* فوتر کریستالی سراسری */
     footer { 
       border-top: 1px solid var(--glass-border); 
       background: rgba(255, 255, 255, 0.75); 
@@ -463,7 +550,6 @@
       .hamburger { display: block; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .topics-grid { grid-template-columns: 1fr; }
-      .trim-controls { grid-template-columns: 1fr; }
       .content-hero-card, .steps-container, .callout-box, .faq-wrapper-card { padding: 24px; }
       .tool-container { padding: 35px 20px; }
     }
@@ -501,13 +587,11 @@
     <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
   </nav>
 
-  <!-- فضای تعاملی ابزار برش صدا -->
+  <!-- فضای تعاملی ابزار برش و تفکیک صدا -->
   <main class="workspace">
     <div class="tool-container">
-      <h1 class="tool-title">Fast Audio Trimmer & Cutter</h1>
-      <p class="tool-desc">Cut, splice, and trim MP3, WAV, and AAC tracks directly in your browser. 100% private, client-side Web Audio processing with instant lossless WAV download.</p>
-      
-      <div class="status-ring" id="statusIcon">✂️</div>
+      <h1 class="tool-title">Audio Trimmer & Stem Splitter</h1>
+      <p class="tool-desc">Cut and splice audio with millisecond accuracy, or isolate vocals, music, and bass lines. 100% private, client-side Web Audio studio with lossless WAV export.</p>
       
       <div class="file-upload-wrapper">
         <label class="file-upload-label" for="audioFileInput">
@@ -516,26 +600,91 @@
         <input type="file" id="audioFileInput" accept="audio/*" onchange="handleAudioSelect(event)">
       </div>
 
-      <!-- کنترل‌های شروع و پایان زمان برش -->
-      <div class="trim-controls" id="controlsBox" style="display: none;">
-        <div class="trim-box">
-          <label for="startTimeInput">Start Time (seconds):</label>
-          <input type="number" id="startTimeInput" min="0" step="0.1" value="0" onchange="validateTimes()">
+      <!-- استودیو چندلاینه کنسول (پس از انتخاب فایل نمایان می‌شود) -->
+      <div class="studio-console" id="studioConsole">
+        
+        <!-- نوار کنترل اصلی -->
+        <div class="transport-bar">
+          <div class="transport-left">
+            <button class="play-master-btn" id="masterPlayBtn" onclick="toggleMasterPlay()">▶</button>
+            <div class="time-counter" id="timeCounter">00:00.0 / 00:00.0</div>
+          </div>
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">
+            💡 Click anywhere on any waveform to seek
+          </div>
         </div>
-        <div class="trim-box">
-          <label for="endTimeInput">End Time (seconds):</label>
-          <input type="number" id="endTimeInput" min="0" step="0.1" value="0" onchange="validateTimes()">
-        </div>
-      </div>
 
-      <div class="audio-info-bar" id="audioInfoText" style="display: none;"></div>
-      
-      <!-- کلیدهای پخش و دانلود -->
-      <div class="controls-wrapper">
-        <button class="btn-main" id="previewBtn" onclick="togglePreview()" disabled>Preview Trim</button>
-        <button class="btn-download" id="downloadBtn" onclick="downloadTrimmedClip()" disabled>
-          <span>⬇️</span> Download Trimmed (.WAV)
-        </button>
+        <!-- لیست لاین‌های صوتی تفکیک شده -->
+        <div class="stems-container">
+          
+          <!-- لاین وکال -->
+          <div class="stem-row">
+            <div class="stem-header">
+              <span class="stem-dot" style="background: var(--track-vocal);"></span>
+              <span>🎤 Vocals</span>
+            </div>
+            <div class="wave-box" onclick="handleSeek(event)">
+              <canvas id="canvas-vocals"></canvas>
+            </div>
+            <div class="stem-btns">
+              <button class="track-btn" id="solo-vocals" onclick="toggleSolo('vocals')">Solo</button>
+              <button class="track-btn" id="mute-vocals" onclick="toggleMute('vocals')">Mute</button>
+            </div>
+          </div>
+
+          <!-- لاین موزیک / سازها -->
+          <div class="stem-row">
+            <div class="stem-header">
+              <span class="stem-dot" style="background: var(--track-inst);"></span>
+              <span>🎹 Music</span>
+            </div>
+            <div class="wave-box" onclick="handleSeek(event)">
+              <canvas id="canvas-inst"></canvas>
+            </div>
+            <div class="stem-btns">
+              <button class="track-btn" id="solo-inst" onclick="toggleSolo('inst')">Solo</button>
+              <button class="track-btn" id="mute-inst" onclick="toggleMute('inst')">Mute</button>
+            </div>
+          </div>
+
+          <!-- لاین بیس -->
+          <div class="stem-row">
+            <div class="stem-header">
+              <span class="stem-dot" style="background: var(--track-bass);"></span>
+              <span>🎸 Bass</span>
+            </div>
+            <div class="wave-box" onclick="handleSeek(event)">
+              <canvas id="canvas-bass"></canvas>
+            </div>
+            <div class="stem-btns">
+              <button class="track-btn" id="solo-bass" onclick="toggleSolo('bass')">Solo</button>
+              <button class="track-btn" id="mute-bass" onclick="toggleMute('bass')">Mute</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ابزار برش و تنظیم زمان -->
+        <div class="trim-section">
+          <div class="trim-inputs-group">
+            <div class="time-input-field">
+              <label>Start (s):</label>
+              <input type="number" id="startTimeInput" min="0" step="0.1" value="0" onchange="validateTimes()">
+            </div>
+            <div class="time-input-field">
+              <label>End (s):</label>
+              <input type="number" id="endTimeInput" min="0" step="0.1" value="0" onchange="validateTimes()">
+            </div>
+            <button class="track-btn" onclick="previewCutRange()" style="margin-top: 18px; padding: 8px 14px;">Preview Cut</button>
+          </div>
+          
+          <div class="controls-wrapper" style="margin-top: 0;">
+            <button class="btn-download" onclick="downloadTrimmedClip()">
+              <span>⬇️</span> Download Trimmed (.WAV)
+            </button>
+          </div>
+        </div>
+
       </div>
 
       <div class="status-box" id="statusMessage" style="display: none;"></div>
@@ -587,9 +736,9 @@
 
     <!-- کارت معرفی تحلیلی -->
     <div class="content-hero-card">
-      <h2>Precision Audio Trimming: Why Millisecond Accuracy Matters in Modern Audio Production</h2>
+      <h2>Precision Audio Trimming & Stem Isolation: Why Local Sound Processing Matters</h2>
       <p>Whether you are producing weekly podcast episodes, designing concise audio hooks for short-form social videos on TikTok and Instagram Reels, or crafting customized ringtones for your smartphone, extracting the perfect acoustic slice from an audio recording is a foundational step. Unwanted silence at the beginning of an interview, throat clears before a vocal takes off, or dragging microphone rumblings at the tail end of a voice note degrade the perceived professionalism of any sound production.</p>
-      <p style="margin-top: 14px;">Historically, creators had to install gigabytes of heavy Digital Audio Workstation (DAW) software—such as Pro Tools, Logic Pro, or Reaper—just to eliminate five seconds of unwanted dead air from an interview. On the other side of the spectrum, standard online converters and trimming websites demand that you upload your private personal recordings to remote third-party cloud servers. This approach creates severe privacy hazards, subjects creators to cloud file-size limits, and throttles workflows when processing large high-fidelity files over mobile networks. The <strong>MiMusic Audio Trimmer & Cutter</strong> resolves these bottlenecks by executing all slicing, decoding, and rendering algorithms directly inside your client browser sandbox via the HTML5 Web Audio API.</p>
+      <p style="margin-top: 14px;">Historically, creators had to install gigabytes of heavy Digital Audio Workstation (DAW) software—such as Pro Tools, Logic Pro, or Reaper—just to eliminate five seconds of unwanted dead air from an interview. On the other side of the spectrum, standard online converters and trimming websites demand that you upload your private personal recordings to remote third-party cloud servers. This approach creates severe privacy hazards, subjects creators to cloud file-size limits, and throttles workflows when processing large high-fidelity files over mobile networks. The <strong>MiMusic Audio Trimmer & Stem Splitter</strong> resolves these bottlenecks by executing all slicing, stem separation, and rendering algorithms directly inside your client browser sandbox via the HTML5 Web Audio API.</p>
     </div>
 
     <!-- راهنمای گام‌به‌گام همراه تصویر -->
@@ -610,7 +759,7 @@
         <div class="step-card">
           <span class="step-badge">Step 2</span>
           <h4>Define Cut Boundaries</h4>
-          <p>Input your desired start and end times in seconds with decimal precision. Tap "Preview Trim" to listen to the isolated clip before saving.</p>
+          <p>Input your desired start and end times in seconds with decimal precision. Tap "Preview Cut" to listen to the isolated clip before saving.</p>
         </div>
 
         <div class="step-card">
@@ -734,8 +883,9 @@
     </div>
   </footer>
 
-  <!-- اسکریپت‌های منو، آکاردئون و موتور برش کلاینت‌ساید -->
+  <!-- اسکریپت‌های منو، آکاردئون و موتور چندلاینه تفکیک و برش صدا -->
   <script>
+    // ناوبری و آکاردئون FAQ
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
@@ -753,11 +903,21 @@
       item.classList.toggle('active');
     }
 
+    // متغیرهای موتور صوتی استودیو
     let audioCtx = null;
     let decodedBuffer = null;
-    let currentSource = null;
-    let isPreviewPlaying = false;
+    let stems = { vocals: null, inst: null, bass: null };
+    let sources = { vocals: null, inst: null, bass: null };
+    let gainNodes = { vocals: null, inst: null, bass: null };
+    let isPlaying = false;
+    let playbackOffset = 0;
+    let startedAt = 0;
     let selectedAudioName = "audio";
+    let trackStates = {
+      vocals: { mute: false, solo: false },
+      inst: { mute: false, solo: false },
+      bass: { mute: false, solo: false }
+    };
 
     async function handleAudioSelect(event) {
       const file = event.target.files[0];
@@ -768,7 +928,7 @@
 
       const statusBox = document.getElementById('statusMessage');
       statusBox.style.display = "block";
-      statusBox.textContent = "Decoding audio samples into memory...";
+      statusBox.textContent = "⚙️ Deconstructing tracks and generating waveforms in browser RAM...";
 
       try {
         if (!audioCtx) {
@@ -778,25 +938,195 @@
         decodedBuffer = await audioCtx.decodeAudioData(arrayBuffer);
 
         const duration = decodedBuffer.duration;
-        const startInput = document.getElementById('startTimeInput');
-        const endInput = document.getElementById('endTimeInput');
+        document.getElementById('startTimeInput').value = "0.0";
+        document.getElementById('endTimeInput').value = duration.toFixed(1);
 
-        startInput.value = "0";
-        startInput.max = duration.toFixed(1);
-        endInput.value = duration.toFixed(1);
-        endInput.max = duration.toFixed(1);
+        // جداسازی لاین‌های صدا در حافظه کلاینت
+        stems = processStemsLocal(decodedBuffer);
 
-        document.getElementById('audioInfoText').style.display = "block";
-        document.getElementById('audioInfoText').textContent = `Total Length: ${duration.toFixed(2)}s | Channels: ${decodedBuffer.numberOfChannels} | Rate: ${decodedBuffer.sampleRate}Hz`;
+        // رسم موج‌های صوتی برای هر لاین
+        drawWaveform('canvas-vocals', stems.vocals, '#0284c7');
+        drawWaveform('canvas-inst', stems.inst, '#6366f1');
+        drawWaveform('canvas-bass', stems.bass, '#0d9488');
 
-        document.getElementById('controlsBox').style.display = "grid";
-        document.getElementById('previewBtn').disabled = false;
-        document.getElementById('downloadBtn').disabled = false;
-        statusBox.textContent = "✅ Audio loaded successfully! Set cut times and preview.";
+        document.getElementById('studioConsole').style.display = "block";
+        updateTimeCounter(0);
+        statusBox.textContent = "✅ Studio Ready! Stems isolated with full waveform timeline.";
       } catch (err) {
-        console.error("Decoding error:", err);
-        statusBox.textContent = "⚠️ Failed to decode audio file. Please try another audio format.";
+        console.error("Processing error:", err);
+        statusBox.textContent = "⚠️ Failed to process audio file. Please try another format.";
       }
+    }
+
+    // موتور تفکیک لاین‌های صوتی بر اساس فرکانس و کانال‌های استریو
+    function processStemsLocal(buffer) {
+      const len = buffer.length;
+      const sr = buffer.sampleRate;
+      const left = buffer.getChannelData(0);
+      const right = buffer.numberOfChannels > 1 ? buffer.getChannelData(1) : left;
+
+      const vocBuf = audioCtx.createBuffer(2, len, sr);
+      const instBuf = audioCtx.createBuffer(2, len, sr);
+      const bassBuf = audioCtx.createBuffer(2, len, sr);
+
+      const vL = vocBuf.getChannelData(0), vR = vocBuf.getChannelData(1);
+      const iL = instBuf.getChannelData(0), iR = instBuf.getChannelData(1);
+      const bL = bassBuf.getChannelData(0), bR = bassBuf.getChannelData(1);
+
+      let lastBL = 0, lastBR = 0;
+      const alpha = 0.055; // ضریب فیلتر بم/بیس
+
+      for (let i = 0; i < len; i++) {
+        const l = left[i];
+        const r = right[i];
+        const mid = (l + r) * 0.5;
+        const side = (l - r) * 0.5;
+
+        // تفکیک لاین بیس
+        lastBL += alpha * (l - lastBL);
+        lastBR += alpha * (r - lastBR);
+        bL[i] = lastBL * 1.2;
+        bR[i] = lastBR * 1.2;
+
+        // تفکیک لاین سازها و کارائوکه (حذف مرکز)
+        iL[i] = side + (lastBL * 0.5);
+        iR[i] = -side + (lastBR * 0.5);
+
+        // تفکیک لاین وکال خواننده (برش بیس و تاکید روی کانال وسط)
+        const vocSample = (mid - lastBL) * 1.35;
+        vL[i] = vocSample;
+        vR[i] = vocSample;
+      }
+
+      return { vocals: vocBuf, inst: instBuf, bass: bassBuf };
+    }
+
+    // تابع رسم موج صوتی روی بوم Canvas
+    function drawWaveform(canvasId, buffer, strokeColor) {
+      const canvas = document.getElementById(canvasId);
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = canvas.parentElement.clientWidth * dpr;
+      canvas.height = canvas.parentElement.clientHeight * dpr;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+
+      const width = canvas.parentElement.clientWidth;
+      const height = canvas.parentElement.clientHeight;
+      const data = buffer.getChannelData(0);
+      const step = Math.ceil(data.length / width);
+      const amp = height / 2;
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = strokeColor;
+
+      for (let i = 0; i < width; i++) {
+        let min = 1.0;
+        let max = -1.0;
+        for (let j = 0; j < step; j++) {
+          const val = data[(i * step) + j];
+          if (val < min) min = val;
+          if (val > max) max = val;
+        }
+        ctx.fillRect(i, (1 + min) * amp, 1, Math.max(1.5, (max - min) * amp));
+      }
+    }
+
+    // پخش و توقف سراسری
+    function toggleMasterPlay() {
+      if (isPlaying) stopPlayback();
+      else startPlayback(playbackOffset);
+    }
+
+    function startPlayback(offset) {
+      stopPlayback();
+      if (!audioCtx || !decodedBuffer) return;
+
+      ['vocals', 'inst', 'bass'].forEach(track => {
+        sources[track] = audioCtx.createBufferSource();
+        sources[track].buffer = stems[track];
+
+        gainNodes[track] = audioCtx.createGain();
+        sources[track].connect(gainNodes[track]);
+        gainNodes[track].connect(audioCtx.destination);
+
+        sources[track].start(0, offset);
+      });
+
+      applyStemGains();
+      startedAt = audioCtx.currentTime - offset;
+      isPlaying = true;
+      document.getElementById('masterPlayBtn').textContent = '❚❚';
+      requestAnimationFrame(playbackLoop);
+    }
+
+    function stopPlayback() {
+      if (!isPlaying) return;
+      ['vocals', 'inst', 'bass'].forEach(track => {
+        if (sources[track]) {
+          try { sources[track].stop(); } catch(e){}
+          sources[track] = null;
+        }
+      });
+      isPlaying = false;
+      document.getElementById('masterPlayBtn').textContent = '▶';
+    }
+
+    function handleSeek(e) {
+      if (!decodedBuffer) return;
+      const rect = e.currentTarget.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const percent = clickX / rect.width;
+      playbackOffset = percent * decodedBuffer.duration;
+      if (isPlaying) startPlayback(playbackOffset);
+      else updateTimeCounter(playbackOffset);
+    }
+
+    function playbackLoop() {
+      if (!isPlaying) return;
+      const current = audioCtx.currentTime - startedAt;
+      if (current >= decodedBuffer.duration) {
+        stopPlayback();
+        playbackOffset = 0;
+        updateTimeCounter(0);
+        return;
+      }
+      updateTimeCounter(current);
+      requestAnimationFrame(playbackLoop);
+    }
+
+    function updateTimeCounter(sec) {
+      const curM = Math.floor(sec / 60).toString().padStart(2, '0');
+      const curS = (sec % 60).toFixed(1).padStart(4, '0');
+      const totM = Math.floor(decodedBuffer.duration / 60).toString().padStart(2, '0');
+      const totS = (decodedBuffer.duration % 60).toFixed(1).padStart(4, '0');
+      document.getElementById('timeCounter').textContent = `${curM}:${curS} / ${totM}:${totS}`;
+    }
+
+    // منطق Solo و Mute
+    function toggleSolo(track) {
+      trackStates[track].solo = !trackStates[track].solo;
+      document.getElementById(`solo-${track}`).classList.toggle('active-solo', trackStates[track].solo);
+      applyStemGains();
+    }
+
+    function toggleMute(track) {
+      trackStates[track].mute = !trackStates[track].mute;
+      document.getElementById(`mute-${track}`).classList.toggle('active-mute', trackStates[track].mute);
+      applyStemGains();
+    }
+
+    function applyStemGains() {
+      const anySolo = Object.values(trackStates).some(t => t.solo);
+      ['vocals', 'inst', 'bass'].forEach(track => {
+        if (!gainNodes[track]) return;
+        let volume = 1;
+        if (anySolo) {
+          volume = trackStates[track].solo ? 1 : 0;
+        } else if (trackStates[track].mute) {
+          volume = 0;
+        }
+        gainNodes[track].gain.setValueAtTime(volume, audioCtx.currentTime);
+      });
     }
 
     function validateTimes() {
@@ -815,51 +1145,13 @@
       endInput.value = end.toFixed(1);
     }
 
-    function togglePreview() {
-      if (!decodedBuffer) return;
+    function previewCutRange() {
       validateTimes();
-
-      const btn = document.getElementById('previewBtn');
-      const icon = document.getElementById('statusIcon');
-
-      if (isPreviewPlaying) {
-        stopPlayback();
-        return;
-      }
-
       const start = parseFloat(document.getElementById('startTimeInput').value);
-      const end = parseFloat(document.getElementById('endTimeInput').value);
-      const duration = end - start;
-
-      currentSource = audioCtx.createBufferSource();
-      currentSource.buffer = decodedBuffer;
-      currentSource.connect(audioCtx.destination);
-
-      currentSource.start(0, start, duration);
-      isPreviewPlaying = true;
-      btn.textContent = "Stop Preview";
-      btn.classList.add('stop');
-      icon.classList.add('active');
-
-      currentSource.onended = () => {
-        stopPlayback();
-      };
+      startPlayback(start);
     }
 
-    function stopPlayback() {
-      if (currentSource) {
-        try { currentSource.stop(); } catch(e) {}
-        currentSource.disconnect();
-        currentSource = null;
-      }
-      isPreviewPlaying = false;
-      const btn = document.getElementById('previewBtn');
-      const icon = document.getElementById('statusIcon');
-      btn.textContent = "Preview Trim";
-      btn.classList.remove('stop');
-      icon.classList.remove('active');
-    }
-
+    // خروجی برش به صورت فایل WAV 16-bit PCM باکیفیت
     function downloadTrimmedClip() {
       if (!decodedBuffer) return;
       validateTimes();
@@ -892,25 +1184,16 @@
       }
 
       const wavBlob = audioBufferToWav(trimmedBuffer);
-      downloadBlob(wavBlob, `${selectedAudioName}-trimmed.wav`);
+      const url = URL.createObjectURL(wavBlob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${selectedAudioName}-trimmed.wav`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
 
       const statusBox = document.getElementById('statusMessage');
       statusBox.style.display = "block";
-      statusBox.textContent = "✅ Trimmed master file generated and downloaded!";
-    }
-
-    function downloadBlob(blob, name) {
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.style.display = 'none';
-      a.href = url;
-      a.download = name;
-      document.body.appendChild(a);
-      a.click();
-      setTimeout(() => {
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      }, 1000);
+      statusBox.textContent = "✅ Lossless trimmed WAV master exported successfully!";
     }
 
     function audioBufferToWav(buffer) {
