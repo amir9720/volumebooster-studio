@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BPM Tapper: Find Song Tempo & Beat Per Minute | MiMusic.net</title>
+  <meta name="description" content="Find the exact Tempo and Beats Per Minute (BPM) of any song. Just tap along with the rhythm using your mouse or spacebar with our free BPM Tapper tool.">
+  <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
+  <style>
+    /* متغیرهای رنگ و سایه تم سایت */
+    :root {
+      --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
+      --surface-glass: rgba(255, 255, 255, 0.72);
+      --surface-glass-hover: rgba(255, 255, 255, 0.92);
+      --glass-border: rgba(255, 255, 255, 0.85);
+      --accent: #4f46e5;
+      --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #3b82f6 100%);
+      --text-dark: #0f172a;
+      --text-main: #334155;
+      --text-muted: #64748b;
+      --glass-shadow: 0 12px 35px -5px rgba(148, 163, 184, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+      --glass-shadow-hover: 0 20px 45px -4px rgba(79, 70, 229, 0.22), 0 0 0 1.5px rgba(255, 255, 255, 0.95) inset;
+    }
+
+    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.8; min-height: 100vh; overflow-x: hidden; }
+
+    /* هدر ناوبری */
+    .header-nav { width: 100%; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 1000; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .brand-logo { color: var(--text-dark); font-size: 1.45rem; font-weight: 900; text-decoration: none; display: flex; align-items: center; gap: 8px; letter-spacing: -0.02em; }
+    .brand-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-link { color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .nav-link:hover { color: var(--accent); }
+
+    .hamburger { display: none; background: none; border: none; font-size: 1.8rem; color: var(--text-dark); cursor: pointer; z-index: 1001; }
+    .mobile-menu { position: fixed; top: 0; right: -100%; width: 290px; height: 100vh; background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(25px); box-shadow: -15px 0 35px rgba(0, 0, 0, 0.1); transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 80px 24px 24px; display: flex; flex-direction: column; gap: 20px; z-index: 999; }
+    .mobile-menu.open { right: 0; }
+    .mobile-menu .nav-link { font-size: 1.1rem; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 12px; }
+    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
+    .overlay.active { opacity: 1; visibility: visible; }
+
+    /* فضای تعاملی ابزار */
+    .workspace { padding: 60px 24px 35px; text-align: center; }
+    .tool-container { max-width: 720px; margin: 0 auto; background: var(--surface-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 30px; padding: 45px 35px; box-shadow: var(--glass-shadow); border: 1px solid var(--glass-border); position: relative; }
+    .tool-title { font-size: 2.3rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.03em; }
+    .tool-desc { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 30px; line-height: 1.7; max-width: 580px; margin-left: auto; margin-right: auto; }
+    
+    .bpm-display { font-size: 5rem; font-weight: 900; color: var(--accent); line-height: 1; margin: 10px 0; font-variant-numeric: tabular-nums; transition: transform 0.1s; }
+    .bpm-display.pulse { transform: scale(1.05); }
+    .bpm-label { font-size: 1.2rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
+    
+    .tap-btn { 
+      background: var(--surface-glass-hover); 
+      border: 2px dashed #94a3b8; 
+      width: 100%; 
+      max-width: 400px; 
+      height: 180px; 
+      margin: 30px auto; 
+      border-radius: 24px; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      justify-content: center; 
+      cursor: pointer; 
+      transition: all 0.1s; 
+      user-select: none;
+    }
+    .tap-btn:active, .tap-btn.active-key { 
+      transform: scale(0.96); 
+      background: rgba(99, 102, 241, 0.1); 
+      border-color: var(--accent); 
+    }
+    .tap-icon { font-size: 3rem; margin-bottom: 10px; pointer-events: none; }
+    .tap-text { font-size: 1.4rem; font-weight: 800; color: var(--text-dark); pointer-events: none; }
+    .tap-hint { font-size: 0.95rem; color: var(--text-muted); margin-top: 5px; pointer-events: none; }
+
+    .controls-row { display: flex; justify-content: center; gap: 15px; margin-top: 10px; }
+    .btn-reset { background: #f1f5f9; color: var(--text-main); border: 1px solid var(--glass-border); padding: 12px 30px; border-radius: 50px; font-weight: 700; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+    .btn-reset:hover { background: #e2e8f0; }
+
+    /* ویژگی‌های کلیدی */
+    .features-row { max-width: 1000px; margin: 10px auto 50px; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+    .feature-box { background: var(--surface-glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 22px 18px; box-shadow: var(--glass-shadow); transition: all 0.3s ease; display: flex; gap: 14px; align-items: flex-start; }
+    .feature-box:hover { transform: translateY(-4px); background: var(--surface-glass-hover); box-shadow: var(--glass-shadow-hover); }
+    .feature-box .f-icon { font-size: 1.8rem; line-height: 1; background: #ffffff; border: 1px solid var(--glass-border); padding: 10px; border-radius: 14px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); }
+    .feature-box h4 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+    .feature-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* تصویر بنر مقاله */
+    .feature-wrapper { max-width: 880px; margin: 10px auto 50px; padding: 0 24px; text-align: center; }
+    .feature-image { width: 100%; border-radius: 28px; box-shadow: 0 22px 45px -10px rgba(79, 70, 229, 0.18), 0 0 0 1.5px var(--glass-border); display: block; }
+
+    /* محتوای مقاله */
+    .content-container { max-width: 1000px; margin: 0 auto 70px; padding: 0 24px; }
+    .content-hero-card { background: var(--surface-glass); backdrop-filter: blur(18px); border: 1px solid var(--glass-border); border-radius: 26px; padding: 38px; box-shadow: var(--glass-shadow); margin-bottom: 26px; }
+    .content-hero-card h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.02em; }
+    .content-hero-card p { font-size: 1.05rem; color: var(--text-main); line-height: 1.9; margin-bottom: 12px; }
+
+    .steps-container { background: var(--surface-glass); border: 1px solid var(--glass-border); border-radius: 26px; padding: 38px; margin-bottom: 26px; box-shadow: var(--glass-shadow); }
+    .steps-container h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 20px; }
+    .step-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 24px; }
+    .step-card { background: rgba(255, 255, 255, 0.85); border: 1px solid var(--glass-border); border-radius: 18px; padding: 22px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); transition: 0.3s; }
+    .step-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .step-badge { display: inline-block; background: var(--accent); color: #ffffff; padding: 4px 10px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; margin-bottom: 10px; }
+    .step-card h4 { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+    .step-card p { font-size: 0.95rem; color: var(--text-main); line-height: 1.65; }
+
+    .tutorial-image { width: 100%; max-width: 620px; height: auto; border-radius: 20px; border: 1px solid var(--glass-border); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06); margin: 15px auto; display: block; }
+    .image-caption { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; font-style: italic; }
+
+    .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 22px; margin-bottom: 26px; }
+    .topic-card { background: rgba(255, 255, 255, 0.82); border: 1px solid var(--glass-border); border-radius: 22px; padding: 30px; box-shadow: var(--glass-shadow); transition: 0.3s; }
+    .topic-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .topic-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .topic-card p { font-size: 0.98rem; color: var(--text-main); line-height: 1.85; }
+
+    .callout-box { background: linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%); border: 1.5px solid rgba(99, 102, 241, 0.3); border-radius: 22px; padding: 30px; margin-bottom: 26px; box-shadow: var(--glass-shadow); }
+    .callout-box h3 { font-size: 1.35rem; font-weight: 900; color: var(--text-dark); margin-bottom: 12px; }
+    .callout-box p { font-size: 1rem; color: var(--text-main); line-height: 1.85; margin-bottom: 14px; }
+    .callout-box ul { padding-left: 20px; }
+    .callout-box li { font-size: 0.96rem; color: var(--text-main); margin-bottom: 6px; }
+
+    .faq-wrapper-card { background: var(--surface-glass); border: 1px solid var(--glass-border); border-radius: 26px; padding: 38px; box-shadow: var(--glass-shadow); }
+    .faq-container { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item { background: rgba(255, 255, 255, 0.85); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); transition: all 0.2s ease; }
+    .faq-item:hover { border-color: rgba(99, 102, 241, 0.4); }
+    .faq-question { width: 100%; background: none; border: none; padding: 20px 24px; text-align: left; font-size: 1.05rem; font-weight: 800; color: var(--text-dark); display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon { font-size: 0.85rem; transition: transform 0.3s ease; color: var(--accent); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; padding: 0 24px; color: var(--text-main); font-size: 0.98rem; line-height: 1.8; }
+    .faq-item.active .faq-answer { max-height: 250px; padding: 0 24px 22px 24px; }
+    .faq-item.active .faq-icon { transform: rotate(180deg); }
+
+    /* فوتر */
+    footer { border-top: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(18px); padding: 65px 24px 45px; color: var(--text-muted); font-size: 0.95rem; margin-top: 80px; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
+    .footer-col h5 { color: var(--text-dark); font-size: 1.05rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; padding: 0; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a { color: var(--text-muted); text-decoration: none; transition: 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .content-hero-card, .steps-container, .callout-box, .faq-wrapper-card { padding: 24px; }
+      .tool-container { padding: 35px 20px; }
+    }
+    @media (max-width: 600px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .features-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- هدر ناوبری -->
+  <header class="header-nav">
+    <div class="nav-inner">
+      <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
+      <nav class="nav-links">
+        <a href="/about.html" class="nav-link">About App</a>
+        <a href="/install.html" class="nav-link">Installation</a>
+        <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
+        <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+      </nav>
+      <button class="hamburger" id="menuBtn">☰</button>
+    </div>
+  </header>
+
+  <!-- منوی موبایل -->
+  <div class="overlay" id="overlay"></div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="/" class="brand-logo" style="margin-bottom: 20px;">🎵 MiMusic<span>.net</span></a>
+    <a href="/about.html" class="nav-link">About App</a>
+    <a href="/install.html" class="nav-link">Installation</a>
+    <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
+    <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+  </nav>
+
+  <!-- فضای تعاملی ابزار -->
+  <main class="workspace">
+    <div class="tool-container">
+      <h1 class="tool-title">BPM Tapper</h1>
+      <p class="tool-desc">Find the exact tempo of any song in seconds. Tap the button or hit your spacebar to the beat of the music to calculate the Beats Per Minute.</p>
+      
+      <div class="bpm-display" id="bpmValue">000</div>
+      <div class="bpm-label">BPM (Beats Per Minute)</div>
+      
+      <div class="tap-btn" id="tapPad">
+        <div class="tap-icon">👆</div>
+        <div class="tap-text">Tap Here</div>
+        <div class="tap-hint">(or press Spacebar)</div>
+      </div>
+      
+      <div class="controls-row">
+        <button class="btn-reset" id="resetBtn">Reset Counter</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ویژگی‌های کلیدی -->
+  <section class="features-row">
+    <div class="feature-box">
+      <span class="f-icon">⌨️</span>
+      <div>
+        <h4>Keyboard Support</h4>
+        <p>Use your mouse on mobile or just tap the Spacebar on your desktop for highly accurate tempo tracking.</p>
+      </div>
+    </div>
+    <div class="feature-box">
+      <span class="f-icon">⏱️</span>
+      <div>
+        <h4>Instant Calculation</h4>
+        <p>Averaged algorithm calculates the BPM instantly after just three consecutive taps on the beat.</p>
+      </div>
+    </div>
+    <div class="feature-box">
+      <span class="f-icon">🔌</span>
+      <div>
+        <h4>Works Offline</h4>
+        <p>Like a real metronome, our BPM counter works entirely in your browser without requiring an internet connection.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- تصویر بنر مقاله -->
+  <div class="feature-wrapper">
+    <img src="bpm-tapper.jpg" alt="Digital BPM Tapper and metronome visualizer" class="feature-image">
+  </div>
+
+  <!-- محتوای مقاله (SEO Optimized) -->
+  <section class="content-container">
+
+    <!-- کارت معرفی تحلیلی -->
+    <div class="content-hero-card">
+      <h2>How to Find the BPM of Any Song Instantly</h2>
+      <p>Whether you are a DJ planning a seamless transition, a music producer matching loops in your DAW, or a runner creating the perfect workout playlist, knowing the exact <strong>Beats Per Minute (BPM)</strong> of a track is essential. While many modern software platforms auto-analyze audio files, they often miscalculate complex rhythms or require you to upload the file to a server. Our free <strong>BPM Tapper</strong> offers a fast, analog-style solution: you become the algorithm.</p>
+      <p>By simply listening to the music and tapping along to the rhythm using your mouse, touchscreen, or spacebar, this <strong>tap tempo</strong> tool calculates the average time between your strikes to provide an incredibly accurate BPM reading in real-time. Because it relies on human rhythm rather than machine analysis, it is exceptionally good at finding the true tempo of live recordings, acoustic sessions, or tracks with shifting time signatures that confuse digital analyzers.</p>
+    </div>
+
+    <!-- راهنمای مراحل -->
+    <div class="steps-container">
+      <h3>Step-by-Step Guide: How to Use the Tap Tempo Tool</h3>
+      <p style="color: var(--text-muted); font-size: 1.02rem;">Follow these instructions to accurately measure the beat of any audio track:</p>
+
+      <img src="bpm-guide.jpg" alt="How to tap tempo and calculate beats per minute" class="tutorial-image">
+      <p class="image-caption">Focus on the bass drum or the snare to find the core pulse of the song.</p>
+
+      <div class="step-cards-grid">
+        <div class="step-card">
+          <span class="step-badge">Step 1</span>
+          <h4>Find the Pulse</h4>
+          <p>Play your song and nod your head or tap your foot to the core rhythm. This is usually driven by the kick drum or bassline.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">Step 2</span>
+          <h4>Start Tapping</h4>
+          <p>Click the large "Tap Here" box or press the Spacebar on your keyboard consistently in time with the beat you identified.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">Step 3</span>
+          <h4>Keep a Steady Rhythm</h4>
+          <p>Continue tapping for at least 5 to 10 seconds. The tool averages your taps; the longer you tap, the more accurate the <strong>BPM counter</strong> becomes.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">Step 4</span>
+          <h4>Read & Reset</h4>
+          <p>Note the large number displayed on the screen. If the song changes tempo or you want to measure a new track, click "Reset Counter".</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- گرید تخصصی -->
+    <div class="topics-grid">
+      <div class="topic-card">
+        <h3>🏃 BPM for Workout Playlists</h3>
+        <p>Fitness enthusiasts use a <strong>BPM calculator</strong> to pace their workouts. For instance, a brisk walk pairs well with songs around 100-120 BPM. Jogging requires a tempo of 120-140 BPM, while intense sprinting or cycling often matches tracks hitting 150-170 BPM. Curating your playlist by tempo prevents you from unintentionally slowing down or burning out too quickly.</p>
+      </div>
+
+      <div class="topic-card">
+        <h3>🎛️ Half-Time vs. Double-Time</h3>
+        <p>If you tap to a hip-hop track and get 70 BPM, but your DJ software says it's 140 BPM, neither is wrong. This is the difference between half-time and double-time counting. Electronic genres like Dubstep and Trap are often produced at 140-150 BPM but are felt and danced to at half that speed (70-75 BPM).</p>
+      </div>
+    </div>
+
+    <!-- باکس پرو تیپ -->
+    <div class="callout-box">
+      <h3>💡 Pro Tip: Improving Your Tapping Accuracy</h3>
+      <p>To get the most precise reading from our <strong>find song tempo</strong> tool, keep these acoustic principles in mind:</p>
+      <ul>
+        <li><strong>Don't tap to the vocals:</strong> Singers often drag or rush their words (syncopation). Always tap to the drums or the bass.</li>
+        <li><strong>Use the Spacebar:</strong> If you are on a desktop, using the Spacebar provides tactile feedback and is generally much more rhythmically accurate than clicking a mouse button.</li>
+        <li><strong>Watch for auto-reset:</strong> If you stop tapping for more than 2.5 seconds, our algorithm automatically assumes you are starting a new measurement and will reset the average.</li>
+      </ul>
+    </div>
+
+    <!-- آکاردئون پرسش‌های متداول -->
+    <div class="faq-wrapper-card">
+      <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin-bottom: 10px;">Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What does BPM stand for in music?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>BPM stands for Beats Per Minute. It is the universal standard used by musicians, DJs, and producers to measure the tempo (speed) of a piece of music. A song with 60 BPM has exactly one beat per second, similar to a ticking clock.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How does this Tap Tempo tool calculate the BPM?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Our tool records the precise millisecond timestamp of each tap. It then calculates the time difference between your recent taps, averages those intervals to eliminate human error, and converts that average into a Beats Per Minute value.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Why does the BPM number jump around while I tap?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Humans are not perfect metronomes. Your first few taps might be slightly off-beat, causing the initial number to fluctuate. As you continue tapping (usually after 4 or 5 taps), the algorithm averages the inputs, and the number will stabilize to the true tempo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- فوتر -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="brand-logo" style="margin-bottom: 16px;">🎵 MiMusic<span>.net</span></a>
+        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent educational guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
+        <p style="font-weight: 600; color: var(--text-dark);">Contact: Sobl5910@gmail.com</p>
+      </div>
+      <div class="footer-col">
+        <h5>Popular Tools</h5>
+        <ul>
+          <li><a href="/volume-booster/">Volume Booster</a></li>
+          <li><a href="/speaker-cleaner/">Speaker Cleaner</a></li>
+          <li><a href="/8d-audio/">8D Spatial Audio</a></li>
+          <li><a href="/pitch-shifter/">Pitch & Tempo</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Analysis & Fixes</h5>
+        <ul>
+          <li><a href="/vocal-clarity/">Vocal Clarity</a></li>
+          <li><a href="/video-to-audio/">Video to Audio</a></li>
+          <li><a href="/decibel-meter/">Decibel Meter</a></li>
+          <li><a href="/audio-latency/">Latency Test</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal & Resources</h5>
+        <ul>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+          <li><a href="/about.html">About Mi Music</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MiMusic.net. Independent audio guides and web tools.</p>
+    </div>
+  </footer>
+
+  <!-- اسکریپت محاسبه BPM -->
+  <script>
+    // منوی موبایل
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('overlay');
+    function toggleMenu() { mobileMenu.classList.toggle('open'); overlay.classList.toggle('active'); }
+    menuBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+
+    // آکاردئون
+    function toggleFaq(button) {
+      const item = button.parentElement;
+      item.classList.toggle('active');
+    }
+
+    // منطق ابزار BPM
+    let taps = [];
+    const bpmDisplay = document.getElementById('bpmValue');
+    const tapPad = document.getElementById('tapPad');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function calculateBPM() {
+      const currentTime = Date.now();
+      
+      // اگر از آخرین تب بیش از 2.5 ثانیه گذشته باشد، آرایه را ریست کن
+      if (taps.length > 0 && currentTime - taps[taps.length - 1] > 2500) {
+        taps = [];
+      }
+
+      taps.push(currentTime);
+
+      // انیمیشن پالس برای عدد
+      bpmDisplay.classList.add('pulse');
+      setTimeout(() => bpmDisplay.classList.remove('pulse'), 100);
+
+      // محاسبه میانگین زمان بین تب ها
+      if (taps.length > 1) {
+        // نگهداری فقط 10 تب آخر برای واکنش‌پذیری بهتر
+        if (taps.length > 10) {
+          taps.shift();
+        }
+
+        let intervals = [];
+        for (let i = 1; i < taps.length; i++) {
+          intervals.push(taps[i] - taps[i - 1]);
+        }
+
+        const averageInterval = intervals.reduce((a, b) => a + b) / intervals.length;
+        const bpm = Math.round(60000 / averageInterval);
+        
+        bpmDisplay.textContent = bpm;
+      } else {
+        bpmDisplay.textContent = "---";
+      }
+    }
+
+    function resetBPM() {
+      taps = [];
+      bpmDisplay.textContent = "000";
+    }
+
+    // ایونت کلیک ماوس روی پد
+    tapPad.addEventListener('mousedown', calculateBPM);
+    
+    // ایونت تاچ برای جلوگیری از زوم شدن در موبایل
+    tapPad.addEventListener('touchstart', (e) => {
+      e.preventDefault(); 
+      calculateBPM();
+      tapPad.classList.add('active-key');
+    });
+    tapPad.addEventListener('touchend', () => {
+      tapPad.classList.remove('active-key');
+    });
+
+    // دکمه ریست
+    resetBtn.addEventListener('click', resetBPM);
+
+    // ایونت کیبورد (دکمه اسپیس)
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault(); 
+        calculateBPM();
+        tapPad.classList.add('active-key');
+      }
+    });
+
+    document.addEventListener('keyup', (e) => {
+      if (e.code === 'Space') {
+        tapPad.classList.remove('active-key');
+      }
+    });
+  </script>
+</body>
+</html>
