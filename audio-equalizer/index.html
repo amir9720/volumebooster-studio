@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Equalizer Online: Boost Bass & Treble | MiMusic.net</title>
+  <meta name="description" content="Free online audio equalizer. Adjust bass, treble, and mid frequencies of any MP3 or WAV file directly in your browser. 100% private, no software required.">
+  <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
+  <style>
+    /* متغیرهای رنگ و سایه تم سایت */
+    :root {
+      --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
+      --surface-glass: rgba(255, 255, 255, 0.72);
+      --surface-glass-hover: rgba(255, 255, 255, 0.92);
+      --glass-border: rgba(255, 255, 255, 0.85);
+      --accent: #4f46e5;
+      --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #3b82f6 100%);
+      --text-dark: #0f172a;
+      --text-main: #334155;
+      --text-muted: #64748b;
+      --glass-shadow: 0 12px 35px -5px rgba(148, 163, 184, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+      --glass-shadow-hover: 0 20px 45px -4px rgba(79, 70, 229, 0.22), 0 0 0 1.5px rgba(255, 255, 255, 0.95) inset;
+    }
+
+    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.8; min-height: 100vh; overflow-x: hidden; }
+
+    /* هدر ناوبری */
+    .header-nav { width: 100%; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 1000; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .brand-logo { color: var(--text-dark); font-size: 1.45rem; font-weight: 900; text-decoration: none; display: flex; align-items: center; gap: 8px; letter-spacing: -0.02em; }
+    .brand-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-link { color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .nav-link:hover { color: var(--accent); }
+
+    .hamburger { display: none; background: none; border: none; font-size: 1.8rem; color: var(--text-dark); cursor: pointer; z-index: 1001; }
+    .mobile-menu { position: fixed; top: 0; right: -100%; width: 290px; height: 100vh; background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(25px); box-shadow: -15px 0 35px rgba(0, 0, 0, 0.1); transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 80px 24px 24px; display: flex; flex-direction: column; gap: 20px; z-index: 999; }
+    .mobile-menu.open { right: 0; }
+    .mobile-menu .nav-link { font-size: 1.1rem; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 12px; }
+    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
+    .overlay.active { opacity: 1; visibility: visible; }
+
+    /* فضای تعاملی ابزار */
+    .workspace { padding: 60px 24px 35px; text-align: center; }
+    .tool-container { max-width: 800px; margin: 0 auto; background: var(--surface-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 30px; padding: 45px 35px; box-shadow: var(--glass-shadow); border: 1px solid var(--glass-border); position: relative; }
+    .tool-title { font-size: 2.3rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.03em; }
+    .tool-desc { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 30px; line-height: 1.7; max-width: 650px; margin-left: auto; margin-right: auto; }
+    
+    .file-upload-box { border: 2px dashed #94a3b8; background: rgba(255,255,255,0.6); padding: 30px; border-radius: 20px; cursor: pointer; transition: 0.2s; margin-bottom: 25px; }
+    .file-upload-box:hover { border-color: var(--accent); background: rgba(99, 102, 241, 0.05); }
+    .file-upload-box input[type="file"] { display: none; }
+    .upload-icon { font-size: 2.5rem; margin-bottom: 10px; pointer-events: none; }
+    .upload-text { font-size: 1.1rem; font-weight: 700; color: var(--text-dark); pointer-events: none; }
+    
+    #audioPlayer { width: 100%; margin-bottom: 25px; display: none; outline: none; border-radius: 50px; }
+
+    /* استایل اکولایزر */
+    .eq-container { display: none; background: rgba(255,255,255,0.8); border: 1px solid var(--glass-border); border-radius: 20px; padding: 25px 20px 10px; margin-bottom: 25px; }
+    .eq-grid { display: flex; justify-content: space-around; align-items: flex-end; gap: 10px; height: 180px; }
+    .eq-band { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    
+    /* استایل اسلایدرهای عمودی */
+    input[type=range] { -webkit-appearance: none; width: 140px; height: 6px; background: #cbd5e1; border-radius: 5px; transform: rotate(-90deg); margin: 60px 0; outline: none; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+    
+    .band-label { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-align: center; width: 45px; }
+    .band-val { font-size: 0.75rem; color: var(--text-main); font-weight: 600; margin-bottom: 5px; }
+
+    /* ویژگی‌های کلیدی */
+    .features-row { max-width: 1000px; margin: 10px auto 50px; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+    .feature-box { background: var(--surface-glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 22px 18px; box-shadow: var(--glass-shadow); transition: all 0.3s ease; display: flex; gap: 14px; align-items: flex-start; }
+    .feature-box:hover { transform: translateY(-4px); background: var(--surface-glass-hover); box-shadow: var(--glass-shadow-hover); }
+    .feature-box .f-icon { font-size: 1.8rem; line-height: 1; background: #ffffff; border: 1px solid var(--glass-border); padding: 10px; border-radius: 14px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); }
+    .feature-box h4 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+    .feature-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* تصویر بنر مقاله */
+    .feature-wrapper { max-width: 880px; margin: 10px auto 50px; padding: 0 24px; text-align: center; }
+    .feature-image { width: 100%; border-radius: 28px; box-shadow: 0 22px 45px -10px rgba(79, 70, 229, 0.18), 0 0 0 1.5px var(--glass-border); display: block; }
+
+    /* محتوای مقاله */
+    .content-container { max-width: 1000px; margin: 0 auto 70px; padding: 0 24px; }
+    .content-hero-card { background: var(--surface-glass); backdrop-filter: blur(18px); border: 1px solid var(--glass-border); border-radius: 26px; padding: 38px; box-shadow: var(--glass-shadow); margin-bottom: 26px; }
+    .content-hero-card h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.02em; }
+    .content-hero-card p { font-size: 1.05rem; color: var(--text-main); line-height: 1.9; margin-bottom: 12px; }
+
+    .steps-container { background: var(--surface-glass); border: 1px solid var(--glass-border); border-radius: 26px; padding: 38px; margin-bottom: 26px; box-shadow: var(--glass-shadow); }
+    .steps-container h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 20px; }
+    .step-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 24px; }
+    .step-card { background: rgba(255, 255, 255, 0.85); border: 1px solid var(--glass-border); border-radius: 18px; padding: 22px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); transition: 0.3s; }
+    .step-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .step-badge { display: inline-block; background: var(--accent); color: #ffffff; padding: 4px 10px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; margin-bottom: 10px; }
+    .step-card h4 { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+    .step-card p { font-size: 0.95rem; color: var(--text-main); line-height: 1.65; }
+
+    .tutorial-image { width: 100%; max-width: 620px; height: auto; border-radius: 20px; border: 1px solid var(--glass-border); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06); margin: 15px auto; display: block; }
+    .image-caption { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; font-style: italic; }
+
+    .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 22px; margin-bottom: 26px; }
+    .topic-card { background: rgba(255, 255, 255, 0.82); border: 1px solid var(--glass-border); border-radius: 22px; padding: 30px; box-shadow: var(--glass-shadow); transition: 0.3s; }
+    .topic-card:hover { transform: translateY(-3px); background: #ffffff; }
+    .topic-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .topic-card p { font-size: 0.98rem; color: var(--text-main); line-height: 1.85; }
+
+    .callout-box { background: linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%); border: 1.5px solid rgba(99, 102, 241, 0.3); border-radius: 22px; padding: 30px; margin-bottom: 26px; box-shadow: var(--glass-shadow); }
+    .callout-box h3 { font-size: 1.35rem; font-weight: 900; color: var(--text-dark); margin-bottom: 12px; }
+    .callout-box p { font-size: 1rem; color: var(--text-main); line-height: 1.85; margin-bottom: 14px; }
+    .callout-box ul { padding-left: 20px; }
+    .callout-box li { font-size: 0.96rem; color: var(--text-main); margin-bottom: 6px; }
+
+    .faq-wrapper-card { background: var(--surface-glass); border: 1px solid var(--glass-border); border-radius: 26px; padding: 38px; box-shadow: var(--glass-shadow); }
+    .faq-container { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item { background: rgba(255, 255, 255, 0.85); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); transition: all 0.2s ease; }
+    .faq-item:hover { border-color: rgba(99, 102, 241, 0.4); }
+    .faq-question { width: 100%; background: none; border: none; padding: 20px 24px; text-align: left; font-size: 1.05rem; font-weight: 800; color: var(--text-dark); display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon { font-size: 0.85rem; transition: transform 0.3s ease; color: var(--accent); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; padding: 0 24px; color: var(--text-main); font-size: 0.98rem; line-height: 1.8; }
+    .faq-item.active .faq-answer { max-height: 250px; padding: 0 24px 22px 24px; }
+    .faq-item.active .faq-icon { transform: rotate(180deg); }
+
+    /* فوتر */
+    footer { border-top: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(18px); padding: 65px 24px 45px; color: var(--text-muted); font-size: 0.95rem; margin-top: 80px; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
+    .footer-col h5 { color: var(--text-dark); font-size: 1.05rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; padding: 0; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a { color: var(--text-muted); text-decoration: none; transition: 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .content-hero-card, .steps-container, .callout-box, .faq-wrapper-card { padding: 24px; }
+      .tool-container { padding: 35px 20px; }
+      .eq-band input[type=range] { height: 4px; width: 100px; margin: 45px 0; }
+    }
+    @media (max-width: 600px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .features-row { grid-template-columns: 1fr; }
+      .band-label { font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- هدر ناوبری -->
+  <header class="header-nav">
+    <div class="nav-inner">
+      <a href="/" class="brand-logo">🎵 MiMusic<span>.net</span></a>
+      <nav class="nav-links">
+        <a href="/about.html" class="nav-link">About App</a>
+        <a href="/install.html" class="nav-link">Installation</a>
+        <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
+        <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+      </nav>
+      <button class="hamburger" id="menuBtn">☰</button>
+    </div>
+  </header>
+
+  <!-- منوی موبایل -->
+  <div class="overlay" id="overlay"></div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="/" class="brand-logo" style="margin-bottom: 20px;">🎵 MiMusic<span>.net</span></a>
+    <a href="/about.html" class="nav-link">About App</a>
+    <a href="/install.html" class="nav-link">Installation</a>
+    <a href="/troubleshooting.html" class="nav-link">Troubleshooting</a>
+    <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
+  </nav>
+
+  <!-- فضای تعاملی ابزار -->
+  <main class="workspace">
+    <div class="tool-container">
+      <h1 class="tool-title">Audio Equalizer Online</h1>
+      <p class="tool-desc">Fine-tune your music directly in the browser. Upload an audio file and adjust the bass, mid, and treble frequencies to create your perfect mix.</p>
+      
+      <!-- باکس آپلود فایل -->
+      <label class="file-upload-box" id="uploadBox">
+        <div class="upload-icon">📂</div>
+        <div class="upload-text" id="uploadText">Click to select an audio file</div>
+        <div style="font-size:0.85rem; color:#64748b; margin-top:5px;">(MP3, WAV, OGG) - Zero Cloud Uploads</div>
+        <input type="file" id="audioInput" accept="audio/*">
+      </label>
+
+      <!-- پلیر صدا -->
+      <audio id="audioPlayer" controls></audio>
+
+      <!-- پنل اکولایزر -->
+      <div class="eq-container" id="eqPanel">
+        <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 20px;">5-Band Equalizer</h3>
+        <div class="eq-grid">
+          
+          <div class="eq-band">
+            <span class="band-val" id="val-60">0dB</span>
+            <input type="range" id="eq-60" min="-12" max="12" value="0" step="0.5" oninput="updateEq(60, this.value)">
+            <span class="band-label">60Hz<br><small>(Bass)</small></span>
+          </div>
+
+          <div class="eq-band">
+            <span class="band-val" id="val-230">0dB</span>
+            <input type="range" id="eq-230" min="-12" max="12" value="0" step="0.5" oninput="updateEq(230, this.value)">
+            <span class="band-label">230Hz<br><small>(Low)</small></span>
+          </div>
+
+          <div class="eq-band">
+            <span class="band-val" id="val-910">0dB</span>
+            <input type="range" id="eq-910" min="-12" max="12" value="0" step="0.5" oninput="updateEq(910, this.value)">
+            <span class="band-label">910Hz<br><small>(Mid)</small></span>
+          </div>
+
+          <div class="eq-band">
+            <span class="band-val" id="val-3600">0dB</span>
+            <input type="range" id="eq-3600" min="-12" max="12" value="0" step="0.5" oninput="updateEq(3600, this.value)">
+            <span class="band-label">3.6kHz<br><small>(High)</small></span>
+          </div>
+
+          <div class="eq-band">
+            <span class="band-val" id="val-14000">0dB</span>
+            <input type="range" id="eq-14000" min="-12" max="12" value="0" step="0.5" oninput="updateEq(14000, this.value)">
+            <span class="band-label">14kHz<br><small>(Treble)</small></span>
+          </div>
+          
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ویژگی‌های کلیدی -->
+  <section class="features-row">
+    <div class="feature-box">
+      <span class="f-icon">🎛️</span>
+      <div>
+        <h4>Real-Time Adjustments</h4>
+        <p>Tweak the sliders and hear the changes immediately as the track plays.</p>
+      </div>
+    </div>
+    <div class="feature-box">
+      <span class="f-icon">🔒</span>
+      <div>
+        <h4>100% Private</h4>
+        <p>The audio file is processed entirely within your browser's RAM. No files are uploaded.</p>
+      </div>
+    </div>
+    <div class="feature-box">
+      <span class="f-icon">🔊</span>
+      <div>
+        <h4>Custom Soundscapes</h4>
+        <p>Boost the bass for workout tracks or enhance the treble for clear podcast vocals.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- تصویر بنر مقاله -->
+  <div class="feature-wrapper">
+    <img src="audio-equalizer.jpg" alt="Digital 5-band audio equalizer and bass booster interface" class="feature-image">
+  </div>
+
+  <!-- محتوای مقاله (SEO Optimized) -->
+  <section class="content-container">
+
+    <!-- کارت معرفی تحلیلی -->
+    <div class="content-hero-card">
+      <h2>Master Your Sound: The Ultimate Online Audio Equalizer</h2>
+      <p>Not all audio files are created equal. Sometimes you download a podcast where the vocals are too muddy, or an older MP3 track that lacks that deep, modern bass punch. Traditionally, fixing these issues required downloading complex DAW software like Audacity or Logic Pro. Our free <strong>online audio equalizer</strong> changes that, allowing you to manipulate the frequency spectrum of any audio file directly within your web browser.</p>
+      <p>Using the power of HTML5 and the Web Audio API, this tool provides a professional-grade 5-band EQ interface. Whether you need to <strong>boost bass</strong> for your car stereo, enhance the high-end treble for clearer dialogue, or scoop the mids for a classic rock sound, you can make real-time adjustments with zero latency. Best of all, because the processing happens locally on your device, your private recordings and copyrighted music files never leave your computer.</p>
+    </div>
+
+    <!-- راهنمای مراحل -->
+    <div class="steps-container">
+      <h3>Step-by-Step Guide: How to Equalize Audio Online</h3>
+      <p style="color: var(--text-muted); font-size: 1.02rem;">Follow these instructions to tailor your audio exactly to your liking:</p>
+
+      <img src="eq-guide.jpg" alt="How to adjust bass and treble using online equalizer" class="tutorial-image">
+      <p class="image-caption">Slide the left bands up for Bass, and the right bands up for Treble.</p>
+
+      <div class="step-cards-grid">
+        <div class="step-card">
+          <span class="step-badge">Step 1</span>
+          <h4>Select Your File</h4>
+          <p>Click the upload box to choose an audio file (MP3, WAV, etc.) from your device. The file loads instantly since there is no server upload.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">Step 2</span>
+          <h4>Start Playback</h4>
+          <p>Hit the play button on the audio player. Put on a good pair of headphones so you can accurately hear the changes in the mix.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">Step 3</span>
+          <h4>Adjust Frequencies</h4>
+          <p>Move the 5 sliders up to boost a frequency, or down to cut it. The changes apply in real-time. (See the Pro Tips section for EQ mixing advice).</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">Step 4</span>
+          <h4>Find Your Sweet Spot</h4>
+          <p>Experiment until the audio sounds perfect. Avoid pushing all sliders to the maximum, as this will cause digital distortion (clipping).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- گرید تخصصی -->
+    <div class="topics-grid">
+      <div class="topic-card">
+        <h3>🎸 How to Boost Bass Safely</h3>
+        <p>If you want a heavier low-end, focus on the <strong>60Hz</strong> and <strong>230Hz</strong> sliders. Moving the 60Hz slider up adds deep, subwoofer-style rumble. The 230Hz slider adds warmth and body to bass guitars. However, pushing these past +6dB can muffle the rest of the song. A better trick? Cut the mid frequencies (910Hz) slightly instead of just boosting the bass.</p>
+      </div>
+
+      <div class="topic-card">
+        <h3>🎙️ Improving Vocal Clarity</h3>
+        <p>If you are listening to an interview, lecture, or podcast where the voices sound muffled or distant, you need to adjust the higher frequencies. Slightly boosting the <strong>3.6kHz</strong> slider improves the presence and intelligibility of human speech, while the <strong>14kHz (Treble)</strong> slider adds "air" and crispness to the consonants.</p>
+      </div>
+    </div>
+
+    <!-- باکس پرو تیپ -->
+    <div class="callout-box">
+      <h3>💡 Pro Tip: Subtractive EQ over Additive EQ</h3>
+      <p>Audio engineers live by a simple rule: It is usually better to <em>cut</em> the frequencies you don't like, rather than <em>boosting</em> the ones you do.</p>
+      <ul>
+        <li><strong>Avoid Distortion:</strong> Boosting sliders (Additive EQ) increases the overall volume of the track, which can push the audio past its digital ceiling, causing a harsh, crackling sound known as clipping.</li>
+        <li><strong>Subtractive EQ:</strong> If a song lacks bass, try lowering the Treble (14kHz) and Mid (910Hz) sliders by -3dB first, and then turn up the main volume. You'll get a bass-heavy mix without any distortion.</li>
+      </ul>
+    </div>
+
+    <!-- آکاردئون پرسش‌های متداول -->
+    <div class="faq-wrapper-card">
+      <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin-bottom: 10px;">Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Does this tool work on mobile phones?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. The MiMusic Equalizer is built with responsive HTML5, meaning it works perfectly on iOS Safari and Android Chrome. You can select audio files directly from your phone's storage or file manager.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Why does the audio sound crackly when I raise the bass?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>This is called digital clipping. When you push the bass slider to the maximum (+12dB), the audio signal exceeds the maximum volume limit of your device's soundcard. To fix this, lower the bass slider slightly, or lower all other sliders instead.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Are my audio files saved on your server?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. We prioritize your privacy. The audio file is loaded into the temporary memory (RAM) of your own browser via JavaScript. We do not have servers to upload files to, ensuring your music and recordings remain strictly confidential.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- فوتر -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="brand-logo" style="margin-bottom: 16px;">🎵 MiMusic<span>.net</span></a>
+        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent educational guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
+        <p style="font-weight: 600; color: var(--text-dark);">Contact: Sobl5910@gmail.com</p>
+      </div>
+      <div class="footer-col">
+        <h5>Popular Tools</h5>
+        <ul>
+          <li><a href="/volume-booster/">Volume Booster</a></li>
+          <li><a href="/speaker-cleaner/">Speaker Cleaner</a></li>
+          <li><a href="/8d-audio/">8D Spatial Audio</a></li>
+          <li><a href="/pitch-shifter/">Pitch & Tempo</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Analysis & Fixes</h5>
+        <ul>
+          <li><a href="/vocal-clarity/">Vocal Clarity</a></li>
+          <li><a href="/video-to-audio/">Video to Audio</a></li>
+          <li><a href="/decibel-meter/">Decibel Meter</a></li>
+          <li><a href="/audio-latency/">Latency Test</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal & Resources</h5>
+        <ul>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+          <li><a href="/about.html">About Mi Music</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MiMusic.net. Independent audio guides and web tools.</p>
+    </div>
+  </footer>
+
+  <!-- اسکریپت Web Audio API برای اکولایزر -->
+  <script>
+    // منوی موبایل
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('overlay');
+    function toggleMenu() { mobileMenu.classList.toggle('open'); overlay.classList.toggle('active'); }
+    menuBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+
+    // آکاردئون
+    function toggleFaq(button) {
+      const item = button.parentElement;
+      item.classList.toggle('active');
+    }
+
+    // منطق اکولایزر
+    const audioInput = document.getElementById('audioInput');
+    const uploadText = document.getElementById('uploadText');
+    const audioPlayer = document.getElementById('audioPlayer');
+    const eqPanel = document.getElementById('eqPanel');
+    
+    let audioCtx, track, filters = {};
+    let isInitialized = false;
+
+    // فرکانس های استاندارد 5 باند
+    const bandFrequencies = [60, 230, 910, 3600, 14000];
+
+    audioInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        uploadText.innerText = file.name;
+        const objectUrl = URL.createObjectURL(file);
+        audioPlayer.src = objectUrl;
+        audioPlayer.style.display = 'block';
+        eqPanel.style.display = 'block';
+        initAudio();
+      }
+    });
+
+    function initAudio() {
+      if (isInitialized) return;
+      
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      track = audioCtx.createMediaElementSource(audioPlayer);
+
+      // ساخت فیلترها (BiquadFilterNode)
+      let prevFilter = track;
+      
+      bandFrequencies.forEach(freq => {
+        let filter = audioCtx.createBiquadFilter();
+        
+        // تنظیم نوع فیلتر
+        if (freq === 60) filter.type = 'lowshelf';
+        else if (freq === 14000) filter.type = 'highshelf';
+        else filter.type = 'peaking';
+
+        filter.frequency.value = freq;
+        filter.gain.value = 0;
+        
+        filters[freq] = filter;
+
+        // اتصال زنجیره‌ای فیلترها
+        prevFilter.connect(filter);
+        prevFilter = filter;
+      });
+
+      // اتصال فیلتر آخر به خروجی سیستم
+      prevFilter.connect(audioCtx.destination);
+      isInitialized = true;
+    }
+
+    // تابع آپدیت مقادیر توسط اسلایدرها
+    window.updateEq = function(freq, value) {
+      document.getElementById('val-' + freq).innerText = (value > 0 ? '+' : '') + value + 'dB';
+      if (filters[freq]) {
+        filters[freq].gain.value = value;
+      }
+    };
+
+    // برای جلوگیری از مسدود شدن AudioContext در مرورگرها
+    audioPlayer.addEventListener('play', () => {
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    });
+  </script>
+</body>
+</html>
