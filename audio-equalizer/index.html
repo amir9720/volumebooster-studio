@@ -82,7 +82,7 @@
 
     /* محتوای مقاله */
     .content-container { max-width: 1000px; margin: 0 auto 70px; padding: 0 24px; }
-    .content-hero-card { background: var(--surface-glass); backdrop-filter: blur(18px); border: 1px solid var(--glass-border); border-radius: 26px; padding: 38px; box-shadow: var(--glass-shadow); margin-bottom: 26px; }
+    .content-hero-card { background: var(--surface-glass); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid var(--glass-border); border-radius: 26px; padding: 38px; box-shadow: var(--glass-shadow); margin-bottom: 26px; }
     .content-hero-card h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.02em; }
     .content-hero-card p { font-size: 1.05rem; color: var(--text-main); line-height: 1.9; margin-bottom: 12px; }
 
@@ -267,41 +267,41 @@
     <!-- کارت معرفی تحلیلی -->
     <div class="content-hero-card">
       <h2>Master Your Sound: The Ultimate Online Audio Equalizer</h2>
-      <p>Not all audio files are created equal. Sometimes you download a podcast where the vocals are too muddy, or an older MP3 track that lacks that deep, modern bass punch. Traditionally, fixing these issues required downloading complex DAW software like Audacity or Logic Pro. Our free <strong>online audio equalizer</strong> changes that, allowing you to manipulate the frequency spectrum of any audio file directly within your web browser.</p>
-      <p>Using the power of HTML5 and the Web Audio API, this tool provides a professional-grade 5-band EQ interface. Whether you need to <strong>boost bass</strong> for your car stereo, enhance the high-end treble for clearer dialogue, or scoop the mids for a classic rock sound, you can make real-time adjustments with zero latency. Best of all, because the processing happens locally on your device, your private recordings and copyrighted music files never leave your computer.</p>
+      <p>Not all audio files are created equal. Sometimes you download an interview podcast where the vocals are far too muddy, or an older MP3 music track that desperately lacks that deep, modern bass punch. Traditionally, fixing these glaring sonic issues required downloading complex Digital Audio Workstation (DAW) software like Audacity, Logic Pro, or FL Studio. Our free <strong>online audio equalizer</strong> completely changes that dynamic, allowing you to intuitively manipulate the frequency spectrum of any audio file directly within your web browser.</p>
+      <p>Using the immense computational power of HTML5 and the native Web Audio API, this tool provides a highly responsive, professional-grade 5-band EQ interface. Whether you need to aggressively <strong>boost bass</strong> for your car stereo subwoofer, enhance the high-end treble for significantly clearer vocal dialogue, or scoop out the muddy mid-range frequencies to achieve a classic rock sound, you can make dynamic, real-time adjustments with zero audio latency. Best of all, because the entire digital signal processing (DSP) happens locally on your personal device, your private voice recordings and copyrighted music files never leave your computer.</p>
     </div>
 
     <!-- راهنمای مراحل -->
     <div class="steps-container">
       <h3>Step-by-Step Guide: How to Equalize Audio Online</h3>
-      <p style="color: var(--text-muted); font-size: 1.02rem;">Follow these instructions to tailor your audio exactly to your liking:</p>
+      <p style="color: var(--text-muted); font-size: 1.02rem;">Follow these detailed instructions to tailor your audio files exactly to your personal acoustic liking:</p>
 
-      <img src="eq-guide.jpg" alt="How to adjust bass and treble using online equalizer" class="tutorial-image">
-      <p class="image-caption">Slide the left bands up for Bass, and the right bands up for Treble.</p>
+      <img src="eq-guide.jpg" alt="How to adjust bass and treble using online equalizer tools" class="tutorial-image">
+      <p class="image-caption">Slide the two left bands upward for heavier Bass, and the rightmost bands upward for sharper Treble.</p>
 
       <div class="step-cards-grid">
         <div class="step-card">
           <span class="step-badge">Step 1</span>
-          <h4>Select Your File</h4>
-          <p>Click the upload box to choose an audio file (MP3, WAV, etc.) from your device. The file loads instantly since there is no server upload.</p>
+          <h4>Select Your Audio File</h4>
+          <p>Click the large upload box to securely choose an audio file (supporting MP3, WAV, OGG, etc.) directly from your device. The file loads instantly since there is absolutely no server upload required.</p>
         </div>
 
         <div class="step-card">
           <span class="step-badge">Step 2</span>
-          <h4>Start Playback</h4>
-          <p>Hit the play button on the audio player. Put on a good pair of headphones so you can accurately hear the changes in the mix.</p>
+          <h4>Start Audio Playback</h4>
+          <p>Hit the play button on the embedded audio player. It is highly recommended to put on a good pair of stereo headphones so you can accurately monitor the subtle changes in the mix.</p>
         </div>
 
         <div class="step-card">
           <span class="step-badge">Step 3</span>
           <h4>Adjust Frequencies</h4>
-          <p>Move the 5 sliders up to boost a frequency, or down to cut it. The changes apply in real-time. (See the Pro Tips section for EQ mixing advice).</p>
+          <p>Smoothly move the 5 vertical sliders up to boost a specific frequency range, or pull them down to cut it. The acoustic changes apply in real-time without buffering.</p>
         </div>
 
         <div class="step-card">
           <span class="step-badge">Step 4</span>
           <h4>Find Your Sweet Spot</h4>
-          <p>Experiment until the audio sounds perfect. Avoid pushing all sliders to the maximum, as this will cause digital distortion (clipping).</p>
+          <p>Experiment until the audio sounds flawless. Avoid pushing all 5 sliders to their maximum +12dB limit simultaneously, as this will immediately cause harsh digital distortion (clipping).</p>
         </div>
       </div>
     </div>
@@ -310,22 +310,32 @@
     <div class="topics-grid">
       <div class="topic-card">
         <h3>🎸 How to Boost Bass Safely</h3>
-        <p>If you want a heavier low-end, focus on the <strong>60Hz</strong> and <strong>230Hz</strong> sliders. Moving the 60Hz slider up adds deep, subwoofer-style rumble. The 230Hz slider adds warmth and body to bass guitars. However, pushing these past +6dB can muffle the rest of the song. A better trick? Cut the mid frequencies (910Hz) slightly instead of just boosting the bass.</p>
+        <p>If you desire a much heavier low-end presence, focus your attention entirely on the <strong>60Hz</strong> and <strong>230Hz</strong> equalizer sliders. Moving the 60Hz slider up adds that deep, physical, subwoofer-style cinematic rumble. The 230Hz slider adds rich warmth and acoustic body to bass guitars and cellos. However, pushing these past +6dB can quickly muffle the rest of the song. A better studio trick? Cut the mid frequencies (910Hz) slightly instead of just boosting the bass.</p>
       </div>
 
       <div class="topic-card">
-        <h3>🎙️ Improving Vocal Clarity</h3>
-        <p>If you are listening to an interview, lecture, or podcast where the voices sound muffled or distant, you need to adjust the higher frequencies. Slightly boosting the <strong>3.6kHz</strong> slider improves the presence and intelligibility of human speech, while the <strong>14kHz (Treble)</strong> slider adds "air" and crispness to the consonants.</p>
+        <h3>🎙️ Improving Vocal Clarity on Podcasts</h3>
+        <p>If you are listening to a recorded interview, university lecture, or amateur podcast where the recorded voices sound muffled, boxed in, or distant, you need to aggressively adjust the higher frequencies. Slightly boosting the <strong>3.6kHz</strong> slider dramatically improves the presence, bite, and intelligibility of human speech, while the <strong>14kHz (Treble)</strong> slider adds "air" and crispness to the consonants.</p>
+      </div>
+      
+      <div class="topic-card">
+        <h3>🎧 The "Scooped Mids" Rock Sound</h3>
+        <p>If you are listening to heavy metal or hard rock, a very popular EQ curve is the "V-Shape" or "Scooped Mids". To achieve this aggressive tone, gently boost the 60Hz (Bass) and 14kHz (Treble) sliders by about +3dB to +5dB, while pulling the center <strong>910Hz (Mid)</strong> slider down by -4dB. This pushes the vocals slightly back while making the kick drums and cymbals sound massive.</p>
+      </div>
+
+      <div class="topic-card">
+        <h3>📱 Is there an EQ app for iPhone and Android?</h3>
+        <p>While there are many equalizer apps available on the App Store and Google Play, they often run in the background, consuming valuable battery life and collecting user data. Using a browser-based <strong>audio equalizer tool</strong> like MiMusic allows you to quickly fix a specific MP3 file on the fly, without installing persistent system-level software that alters the sound of your entire phone.</p>
       </div>
     </div>
 
     <!-- باکس پرو تیپ -->
     <div class="callout-box">
-      <h3>💡 Pro Tip: Subtractive EQ over Additive EQ</h3>
-      <p>Audio engineers live by a simple rule: It is usually better to <em>cut</em> the frequencies you don't like, rather than <em>boosting</em> the ones you do.</p>
+      <h3>💡 Professional Audio Tip: Subtractive EQ over Additive EQ</h3>
+      <p>Professional audio mixing engineers live by a very simple, yet crucial rule: It is almost always better to <em>cut</em> the bad frequencies you don't like, rather than <em>boosting</em> the good ones you do.</p>
       <ul>
-        <li><strong>Avoid Distortion:</strong> Boosting sliders (Additive EQ) increases the overall volume of the track, which can push the audio past its digital ceiling, causing a harsh, crackling sound known as clipping.</li>
-        <li><strong>Subtractive EQ:</strong> If a song lacks bass, try lowering the Treble (14kHz) and Mid (910Hz) sliders by -3dB first, and then turn up the main volume. You'll get a bass-heavy mix without any distortion.</li>
+        <li><strong>Avoiding Digital Distortion:</strong> Boosting sliders (a process known as Additive EQ) increases the overall volume gain of the track. If a song is already loud, this will push the audio signal past its digital ceiling (0dBFS), causing a harsh, crackling sound known as clipping.</li>
+        <li><strong>The Subtractive EQ Method:</strong> If a song lacks bass, do not touch the bass sliders. Instead, try lowering the Treble (14kHz) and Mid (910Hz) sliders by -3dB first, and then turn up the main volume on your speakers. You will get a deep, bass-heavy mix without any risk of distortion.</li>
       </ul>
     </div>
 
@@ -335,31 +345,31 @@
       <div class="faq-container">
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            <span>Does this tool work on mobile phones?</span>
+            <span>Does this equalizer tool work on mobile phones and tablets?</span>
             <span class="faq-icon">▼</span>
           </button>
           <div class="faq-answer">
-            <p>Yes. The MiMusic Equalizer is built with responsive HTML5, meaning it works perfectly on iOS Safari and Android Chrome. You can select audio files directly from your phone's storage or file manager.</p>
+            <p>Yes, absolutely. The MiMusic Equalizer is built from the ground up with responsive HTML5, meaning it works perfectly on mobile browsers like iOS Safari and Android Chrome. You can easily select local audio files directly from your phone's internal storage or cloud file manager.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            <span>Why does the audio sound crackly when I raise the bass?</span>
+            <span>Why does the audio sound crackly and distorted when I raise the bass slider?</span>
             <span class="faq-icon">▼</span>
           </button>
           <div class="faq-answer">
-            <p>This is called digital clipping. When you push the bass slider to the maximum (+12dB), the audio signal exceeds the maximum volume limit of your device's soundcard. To fix this, lower the bass slider slightly, or lower all other sliders instead.</p>
+            <p>This unwanted audio artifact is called "digital clipping." When you push the bass slider to the absolute maximum (+12dB), the total audio signal exceeds the maximum volume limit capable of being processed by your device's soundcard. To fix this, lower the bass slider slightly, or utilize Subtractive EQ by lowering all other sliders instead.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            <span>Are my audio files saved on your server?</span>
+            <span>Are my personal audio files saved or uploaded to your server?</span>
             <span class="faq-icon">▼</span>
           </button>
           <div class="faq-answer">
-            <p>No. We prioritize your privacy. The audio file is loaded into the temporary memory (RAM) of your own browser via JavaScript. We do not have servers to upload files to, ensuring your music and recordings remain strictly confidential.</p>
+            <p>No. We fiercely prioritize your data privacy. The selected audio file is loaded strictly into the temporary memory (RAM) of your own local web browser via secure JavaScript. We do not even possess the backend servers to upload files to, ensuring your private music and sensitive voice recordings remain strictly confidential on your hardware.</p>
           </div>
         </div>
       </div>
@@ -373,7 +383,7 @@
       <div class="footer-col">
         <a href="/" class="brand-logo" style="margin-bottom: 16px;">🎵 MiMusic<span>.net</span></a>
         <p style="margin-bottom: 16px; line-height: 1.6;">Your independent educational guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
-        <p style="font-weight: 600; color: var(--text-dark);">Contact: Sobl5910@gmail.com</p>
+        <p style="font-weight: 600; color: var(--text-dark);">Contact: info@mimusic.net</p>
       </div>
       <div class="footer-col">
         <h5>Popular Tools</h5>
