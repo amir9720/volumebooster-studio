@@ -7,7 +7,6 @@
   <meta name="description" content="Stop using rice to dry your phone. Learn the physics of acoustic water ejection and how 165Hz sounds safely push water out of your smartphone speakers.">
   <link rel="icon" type="image/jpeg" href="/logo.jpg">
   
-  <!-- اسکیما مارک‌آپ برای سئو -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -35,16 +34,13 @@
     :root {
       --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
       --surface-glass: rgba(255, 255, 255, 0.72);
-      --surface-glass-hover: rgba(255, 255, 255, 0.95);
       --glass-border: rgba(255, 255, 255, 0.85);
       --accent: #4f46e5;
-      --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #3b82f6 100%);
       --text-dark: #0f172a;
       --text-main: #334155;
       --text-muted: #64748b;
       --glass-shadow: 0 12px 35px -5px rgba(148, 163, 184, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.8; overflow-x: hidden; }
 
@@ -55,20 +51,15 @@
     .brand-logo img { width: 35px; height: 35px; border-radius: 8px; }
     .nav-links a { color: var(--text-main); text-decoration: none; font-weight: 600; margin-left: 20px; }
 
-    /* لی‌اوت اصلی (گرید شامل محتوا و سایدبار) */
+    /* لی‌اوت اصلی */
     .layout-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: 2.5fr 1fr; gap: 40px; align-items: start; }
-
-    /* بردکرامپ */
     .breadcrumbs { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; }
     .breadcrumbs a { color: var(--accent); text-decoration: none; font-weight: 600; }
 
     /* محتوای مقاله */
     .article-main { background: var(--surface-glass); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 40px; box-shadow: var(--glass-shadow); }
-    
     .article-header h1 { font-size: 2.4rem; font-weight: 900; color: var(--text-dark); line-height: 1.2; margin-bottom: 15px; }
     .article-meta { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 30px; display: flex; gap: 15px; }
-    
-    /* تصویر شاخص */
     .featured-image { width: 100%; height: auto; border-radius: 16px; margin-bottom: 30px; border: 1px solid var(--glass-border); }
     .image-caption { text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-top: -20px; margin-bottom: 30px; font-style: italic; }
 
@@ -78,23 +69,20 @@
     .article-content ul, .article-content ol { margin-bottom: 20px; padding-left: 25px; }
     .article-content li { margin-bottom: 10px; font-size: 1.05rem; }
     
-    /* جدول مقایسه‌ای سئوشده */
     .seo-table { width: 100%; border-collapse: collapse; margin: 30px 0; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
     .seo-table th, .seo-table td { padding: 15px; text-align: left; border-bottom: 1px solid #e2e8f0; }
     .seo-table th { background: var(--accent); color: #fff; font-weight: 700; }
     .seo-table tr:last-child td { border-bottom: none; }
 
-    /* باکس نویسنده */
     .author-box { display: flex; gap: 20px; background: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 16px; margin-top: 50px; border: 1px solid var(--glass-border); }
     .author-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold; }
     .author-info h4 { font-size: 1.2rem; color: var(--text-dark); margin-bottom: 8px; }
     .author-info p { font-size: 0.95rem; color: var(--text-muted); margin: 0; }
 
-    /* بخش کامنت‌ها (محل قرارگیری سیستم واقعی) */
     .comments-section { margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--glass-border); }
     .comments-section h3 { font-size: 1.5rem; color: var(--text-dark); margin-bottom: 25px; }
 
-    /* سایدبار حرفه‌ای */
+    /* سایدبار */
     .sidebar { display: flex; flex-direction: column; gap: 30px; }
     .sidebar-widget { background: var(--surface-glass); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 25px; box-shadow: var(--glass-shadow); }
     .sidebar-widget h4 { font-size: 1.1rem; color: var(--text-dark); margin-bottom: 20px; border-left: 4px solid var(--accent); padding-left: 10px; }
@@ -104,13 +92,11 @@
     .sidebar-list a { color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; display: block; line-height: 1.4; transition: 0.2s; }
     .sidebar-list a:hover { color: var(--accent); }
     
-    /* ویجت ابزار در سایدبار */
     .tool-promo { text-align: center; background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%); color: white; padding: 30px 20px; border-radius: 20px; }
     .tool-promo h4 { border: none; color: white; font-size: 1.4rem; margin-bottom: 10px; padding: 0; }
     .tool-promo p { font-size: 0.9rem; margin-bottom: 20px; opacity: 0.9; }
     .tool-promo a { display: inline-block; background: white; color: var(--accent); padding: 10px 20px; border-radius: 50px; font-weight: bold; text-decoration: none; }
 
-    /* ریسپانسیو */
     @media (max-width: 900px) {
       .layout-container { grid-template-columns: 1fr; }
     }
@@ -118,7 +104,6 @@
 </head>
 <body>
 
-  <!-- هدر سایت -->
   <header class="header-nav">
     <div class="nav-inner">
       <a href="/" class="brand-logo">
@@ -133,11 +118,7 @@
   </header>
 
   <div class="layout-container">
-    
-    <!-- بخش محتوای اصلی -->
     <main class="article-main">
-      
-      <!-- بردکرامپ -->
       <div class="breadcrumbs">
         <a href="/">Home</a> &raquo; <a href="/blog/">Blog</a> &raquo; Hardware Maintenance
       </div>
@@ -151,27 +132,22 @@
         </div>
       </header>
 
-      <!-- تصویر شاخص -->
       <img src="https://via.placeholder.com/800x400/4f46e5/ffffff?text=Water+Droplets+on+Speaker+Mesh" alt="Macro view of water droplets trapped by surface tension on a smartphone speaker grille" class="featured-image">
       <p class="image-caption">Surface tension holds water droplets tightly against the micro-mesh of mobile speakers.</p>
 
       <article class="article-content">
         <p>You dropped your phone in the sink. You quickly wiped it off, and thankfully, the screen still works. But the moment you try to play a voice note, the audio is terribly muffled, distorted, and quiet. The immediate instinct for most people is to run to the kitchen and bury the device in a bag of uncooked rice.</p>
-        
         <p>As audio technicians, we strongly advise against this. Modern IP68 water resistance protects the motherboard, but the shallow cavity of the speaker grille remains highly vulnerable to trapped liquid. Today, we're diving into the mechanics of <strong>acoustic water ejection</strong>—the safest, science-backed method to restore your audio hardware.</p>
 
         <h2>The Problem: Surface Tension vs. Speaker Excursion</h2>
         <p>To understand the solution, you must understand the problem. The tiny mesh covering your smartphone speaker is designed to keep dust out while letting air pressure (sound) escape. When water enters this cavity, it creates a tight seal across the microscopic holes due to surface tension.</p>
-        
         <p>The speaker diaphragm (the moving part that generates sound) now has a heavy wall of water sitting directly above it. It struggles to vibrate correctly, which causes the muffled sound. High-frequency sounds (like a whistle) vibrate very fast but barely move the diaphragm physically. To break the water's surface tension, you need brute physical force.</p>
 
-        <!-- تصویر بین متن -->
         <img src="https://via.placeholder.com/800x300/3b82f6/ffffff?text=165Hz+Waveform+Displacement" alt="Graph comparing the physical membrane displacement of 165Hz low frequency vs 10kHz high frequency" class="featured-image" style="margin-top: 20px;">
 
         <h2>Why The "Rice Trick" is a Dangerous Myth</h2>
         <p>Apple and Samsung have officially updated their support documents to warn users against using rice. Here is a practical comparison of why acoustic ejection is superior to traditional methods:</p>
 
-        <!-- جدول مقایسه ای -->
         <table class="seo-table">
           <thead>
             <tr>
@@ -205,7 +181,6 @@
 
         <h2>How the 165Hz Frequency Works</h2>
         <p>Sound engineers have identified that low-frequency sine waves, particularly around the <strong>165Hz mark</strong>, are the "sweet spot" for mobile devices. At this exact frequency, the speaker diaphragm achieves maximum safe physical displacement (known as *excursion*).</p>
-        
         <p>When you play a 165Hz tone at maximum volume, the speaker acts like a miniature trampoline. It violently pushes air outward, breaking the capillary action holding the water. The sheer kinetic energy physically kicks the water droplets out of the grille.</p>
 
         <h3>Step-by-Step Guide to Clearing Your Speaker</h3>
@@ -216,11 +191,9 @@
           <li>Open a client-side sound generator, such as the <a href="/speaker-cleaner/" style="color: var(--accent); font-weight: bold;">Mi Music Speaker Cleaner</a> tool.</li>
           <li>Run the pulse sequence for 2 to 3 minutes. You may actually see tiny droplets spraying onto your hand.</li>
         </ol>
-
         <p>Relying on digital signal processing (DSP) directly in your browser ensures you don't need to download suspicious apps loaded with intrusive ads. By leveraging pure physics, you can safely restore your high-fidelity audio in minutes.</p>
       </article>
 
-      <!-- باکس نویسنده -->
       <div class="author-box">
         <div class="author-avatar">M</div>
         <div class="author-info">
@@ -229,28 +202,35 @@
         </div>
       </div>
 
-      <!-- بخش نظرات (محل قرارگیری دیسکاس) -->
+      <!-- فرم نظرات Giscus -->
       <section class="comments-section">
         <h3>Discussion</h3>
-        <!-- کد دیسکاس اینجا قرار میگیرد -->
-        <div id="disqus_thread">
-           <p style="color: var(--text-muted); font-size: 0.9rem;">Comments are loading...</p>
-        </div>
+        <script src="https://giscus.app/client.js"
+                data-repo="amir9720/volumebooster-studio"
+                data-repo-id="R_kgDOU-wnMg"
+                data-category="General"
+                data-category-id="DIC_kwDOU-wnMs4DKdBS"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
       </section>
 
     </main>
 
-    <!-- سایدبار حرفه‌ای -->
     <aside class="sidebar">
-      
-      <!-- ویجت ابزار تبلیغاتی -->
       <div class="tool-promo">
         <h4>Fix Your Speaker Now</h4>
         <p>Water in your phone? Use our free browser-based 165Hz tone generator to eject liquid instantly.</p>
         <a href="/speaker-cleaner/">Launch Web Tool</a>
       </div>
 
-      <!-- مقالات مرتبط -->
       <div class="sidebar-widget">
         <h4>Popular Guides</h4>
         <ul class="sidebar-list">
@@ -261,17 +241,14 @@
         </ul>
       </div>
 
-      <!-- اطلاعات تکمیلی -->
       <div class="sidebar-widget">
         <h4>About Mi Music</h4>
         <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
-          MiMusic.net provides 100% free, client-side web audio tools. We process files strictly in your device's RAM for maximum privacy.
+          MiMusic.net provides 100% free, client-side web audio tools. We process files strictly in your device's RAM for maximum privacy. For inquiries, you can reach us at Sobl5910@gmail.com.
         </p>
       </div>
-
     </aside>
 
   </div>
-
 </body>
 </html>
