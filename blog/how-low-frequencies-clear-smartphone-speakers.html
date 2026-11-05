@@ -7,7 +7,7 @@
   <meta name="description" content="Stop using rice to dry your phone. Learn the physics of acoustic water ejection and how 165Hz sounds safely push water out of your smartphone speakers.">
   <link rel="icon" type="image/jpeg" href="/logo.jpg">
   
-  <!-- اسکیما مارک‌آپ برای سئو (طبق مرحله 6 چک‌لیست) -->
+  <!-- اسکیما مارک‌آپ برای سئو -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -90,17 +90,9 @@
     .author-info h4 { font-size: 1.2rem; color: var(--text-dark); margin-bottom: 8px; }
     .author-info p { font-size: 0.95rem; color: var(--text-muted); margin: 0; }
 
-    /* بخش کامنت‌ها (ظاهر کامل و حرفه‌ای) */
-    .comments-section { margin-top: 50px; }
+    /* بخش کامنت‌ها (محل قرارگیری سیستم واقعی) */
+    .comments-section { margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--glass-border); }
     .comments-section h3 { font-size: 1.5rem; color: var(--text-dark); margin-bottom: 25px; }
-    .comment-card { background: rgba(255,255,255,0.6); padding: 20px; border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--glass-border); }
-    .comment-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; }
-    .comment-header strong { color: var(--text-dark); }
-    .comment-header span { color: var(--text-muted); }
-    .comment-form { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
-    .comment-form input, .comment-form textarea { padding: 12px 15px; border: 1px solid #cbd5e1; border-radius: 8px; font-family: inherit; }
-    .comment-form button { background: var(--accent); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-    .comment-form button:hover { background: var(--accent-hover); }
 
     /* سایدبار حرفه‌ای */
     .sidebar { display: flex; flex-direction: column; gap: 30px; }
@@ -142,7 +134,7 @@
 
   <div class="layout-container">
     
-    <!-- بخش محتوای اصلی (متن انسانی، تیتربندی استاندارد، جدول) -->
+    <!-- بخش محتوای اصلی -->
     <main class="article-main">
       
       <!-- بردکرامپ -->
@@ -159,7 +151,7 @@
         </div>
       </header>
 
-      <!-- تصویر شاخص با Alt توصیفی (محل قرارگیری عکس اول) -->
+      <!-- تصویر شاخص -->
       <img src="https://via.placeholder.com/800x400/4f46e5/ffffff?text=Water+Droplets+on+Speaker+Mesh" alt="Macro view of water droplets trapped by surface tension on a smartphone speaker grille" class="featured-image">
       <p class="image-caption">Surface tension holds water droplets tightly against the micro-mesh of mobile speakers.</p>
 
@@ -173,13 +165,13 @@
         
         <p>The speaker diaphragm (the moving part that generates sound) now has a heavy wall of water sitting directly above it. It struggles to vibrate correctly, which causes the muffled sound. High-frequency sounds (like a whistle) vibrate very fast but barely move the diaphragm physically. To break the water's surface tension, you need brute physical force.</p>
 
-        <!-- تصویر بین متن (محل قرارگیری عکس دوم) -->
+        <!-- تصویر بین متن -->
         <img src="https://via.placeholder.com/800x300/3b82f6/ffffff?text=165Hz+Waveform+Displacement" alt="Graph comparing the physical membrane displacement of 165Hz low frequency vs 10kHz high frequency" class="featured-image" style="margin-top: 20px;">
 
         <h2>Why The "Rice Trick" is a Dangerous Myth</h2>
         <p>Apple and Samsung have officially updated their support documents to warn users against using rice. Here is a practical comparison of why acoustic ejection is superior to traditional methods:</p>
 
-        <!-- جدول مقایسه ای سئوشده -->
+        <!-- جدول مقایسه ای -->
         <table class="seo-table">
           <thead>
             <tr>
@@ -237,33 +229,13 @@
         </div>
       </div>
 
-      <!-- بخش نظرات (کامنت‌ها) -->
+      <!-- بخش نظرات (محل قرارگیری دیسکاس) -->
       <section class="comments-section">
-        <h3>Reader Comments (2)</h3>
-        
-        <div class="comment-card">
-          <div class="comment-header">
-            <strong>Jason T.</strong>
-            <span>November 2, 2026</span>
-          </div>
-          <p>I can't believe the rice thing is actually bad for the phone. I used the 165Hz tool you linked on my iPhone 14 Pro and literally saw the water mist shoot out. Audio is crystal clear again. Thanks!</p>
+        <h3>Discussion</h3>
+        <!-- کد دیسکاس اینجا قرار میگیرد -->
+        <div id="disqus_thread">
+           <p style="color: var(--text-muted); font-size: 0.9rem;">Comments are loading...</p>
         </div>
-
-        <div class="comment-card">
-          <div class="comment-header">
-            <strong>Sarah M.</strong>
-            <span>November 4, 2026</span>
-          </div>
-          <p>Does this frequency trick work for fine dust too, or is it strictly for breaking water tension?</p>
-        </div>
-
-        <form class="comment-form">
-          <h4 style="margin-bottom: 5px;">Leave a Comment</h4>
-          <input type="text" placeholder="Your Name" required>
-          <input type="email" placeholder="Your Email (will not be published)" required>
-          <textarea rows="4" placeholder="Share your experience or ask a question..." required></textarea>
-          <button type="submit">Post Comment</button>
-        </form>
       </section>
 
     </main>
@@ -271,14 +243,14 @@
     <!-- سایدبار حرفه‌ای -->
     <aside class="sidebar">
       
-      <!-- ویجت ابزار تبلیغاتی در سایدبار -->
+      <!-- ویجت ابزار تبلیغاتی -->
       <div class="tool-promo">
         <h4>Fix Your Speaker Now</h4>
         <p>Water in your phone? Use our free browser-based 165Hz tone generator to eject liquid instantly.</p>
         <a href="/speaker-cleaner/">Launch Web Tool</a>
       </div>
 
-      <!-- مقالات مرتبط / محبوب -->
+      <!-- مقالات مرتبط -->
       <div class="sidebar-widget">
         <h4>Popular Guides</h4>
         <ul class="sidebar-list">
