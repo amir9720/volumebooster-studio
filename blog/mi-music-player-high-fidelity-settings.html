@@ -14,16 +14,76 @@
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f2f4f7; color: #333; line-height: 1.6; }
     a { text-decoration: none; color: #333; }
-    a:hover { color: #4285f4; }
+    a:hover { color: #4f46e5; }
     img { max-width: 100%; height: auto; display: block; border-radius: 8px; }
     
-    .top-bar { background-color: #4285f4; color: white; padding: 8px 20px; font-size: 13px; display: flex; gap: 15px; }
+    .top-bar { background-color: #4f46e5; color: white; padding: 8px 20px; font-size: 13px; display: flex; gap: 15px; }
     .top-bar a { color: white; }
 
     .site-header { background: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eaeaea; }
-    .logo { display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: 900; color: #111; text-decoration: none; }
-    .logo img { width: 40px; height: 40px; border-radius: 8px; }
-    .main-nav { display: flex; gap: 20px; font-weight: 600; font-size: 15px; }
+    
+    /* استایل لوگو تایپ مدرن همراه با موج صوتی متحرک CSS */
+    .brand-logotype {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 6px 0;
+    }
+    .brand-logotype:hover {
+      transform: translateY(-2px);
+    }
+    .logo-wave {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 3px;
+      margin-right: 10px;
+      height: 24px;
+    }
+    .logo-wave span {
+      display: block;
+      width: 5px;
+      border-radius: 6px;
+      background: linear-gradient(to top, #4f46e5, #3b82f6);
+      transition: height 0.3s ease;
+      box-shadow: 0 2px 6px rgba(79, 70, 229, 0.3);
+    }
+    .logo-wave span:nth-child(1) { height: 12px; }
+    .logo-wave span:nth-child(2) { height: 24px; }
+    .logo-wave span:nth-child(3) { height: 16px; }
+    
+    .brand-logotype:hover .logo-wave span:nth-child(1) { height: 22px; }
+    .brand-logotype:hover .logo-wave span:nth-child(2) { height: 14px; }
+    .brand-logotype:hover .logo-wave span:nth-child(3) { height: 24px; }
+
+    .brand-logotype .text-mi {
+      font-size: 30px;
+      font-weight: 900;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -1px;
+      filter: drop-shadow(0 2px 4px rgba(79, 70, 229, 0.15));
+    }
+    .brand-logotype .text-music {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0f172a; 
+      letter-spacing: -0.5px;
+      margin-left: 2px;
+    }
+    .brand-logotype .text-dot {
+      font-size: 16px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-left: 3px;
+    }
+    
+    .main-nav { display: flex; gap: 20px; font-weight: 600; font-size: 15px; align-items: center; }
 
     .container { max-width: 1140px; margin: 30px auto; display: flex; gap: 30px; padding: 0 15px; }
     .main-content { flex: 1; background: #fff; padding: 40px; border: 1px solid #e0e0e0; border-radius: 8px; }
@@ -33,7 +93,7 @@
     
     .post-meta { display: flex; align-items: center; gap: 15px; font-size: 14px; color: #666; margin-bottom: 25px; border-bottom: 1px solid #eaeaea; padding-bottom: 20px; }
     .post-meta img { width: 40px; height: 40px; border-radius: 50%; }
-    .category-badge { background: #4285f4; color: #fff; padding: 4px 12px; border-radius: 4px; font-weight: bold; margin-left: auto; font-size: 12px; letter-spacing: 0.5px; }
+    .category-badge { background: #4f46e5; color: #fff; padding: 4px 12px; border-radius: 4px; font-weight: bold; margin-left: auto; font-size: 12px; letter-spacing: 0.5px; }
 
     .social-share { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
     .share-label { font-weight: bold; font-size: 14px; display: flex; align-items: center; gap: 5px; }
@@ -46,7 +106,7 @@
     .entry-content ul, .entry-content ol { margin-bottom: 22px; padding-left: 25px; }
     .entry-content li { margin-bottom: 12px; }
     
-    .faq-box { background: #f8fafc; border-left: 4px solid #4285f4; padding: 20px; margin: 30px 0; border-radius: 0 8px 8px 0; }
+    .faq-box { background: #f8fafc; border-left: 4px solid #4f46e5; padding: 20px; margin: 30px 0; border-radius: 0 8px 8px 0; }
     .faq-box h4 { margin: 0 0 10px 0; font-size: 18px; color: #1e293b; }
     .faq-box p { margin: 0; font-size: 16px; color: #475569; }
 
@@ -87,32 +147,33 @@
 <body>
 
   <div class="top-bar">
-    <a href="#">About</a>
-    <a href="mailto:Sobl5910@gmail.com">Contact Us</a>
-    <a href="#">Privacy Policy</a>
+    <a href="/">About</a>
+    <a href="mailto:info@mimusic.net">Contact Us</a>
+    <a href="/privacy.html">Privacy Policy</a>
   </div>
 
   <header class="site-header">
-    <a href="/" class="logo">
-      <img src="/logo.jpg" alt="Mi Music Logo">
-      MiMusic.net
+    <a href="/" class="brand-logotype">
+      <div class="logo-wave">
+        <span></span><span></span><span></span>
+      </div>
+      <span class="text-mi">Mi</span><span class="text-music">Music</span><span class="text-dot">.net</span>
     </a>
     <nav class="main-nav">
       <a href="/">Home</a>
       <a href="/blog/">Guides</a>
       <a href="/#tools">Audio Tools</a>
-      <a href="#">Tricks</a>
     </nav>
   </header>
 
   <div class="container">
     <main class="main-content">
-      <div class="breadcrumbs">Home &raquo; Guides &raquo; High-Fidelity Audio</div>
+      <div class="breadcrumbs"><a href="/">Home</a> &raquo; <a href="/blog/">Guides</a> &raquo; High-Fidelity Audio</div>
 
       <h1 class="post-title">How to Optimize Your Phone for High-Fidelity (Hi-Fi) Audio Playback</h1>
       
       <div class="post-meta">
-        <img src="/logo.jpg" alt="Author">
+        <img src="/logo.jpg" alt="Mi Music Author">
         <span>By <strong>Mi Music Team</strong></span>
         <span>- Last updated Nov 7, 2026</span>
         <span class="category-badge">AUDIO QUALITY</span>
