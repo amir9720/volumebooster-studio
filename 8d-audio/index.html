@@ -4,14 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- تایتل، کیووردز جامع و دسکریپشن غنی‌شده مخصوص ابزار 8D Audio -->
+  <!-- Canonical Tag for Google Search Console -->
+  <link rel="canonical" href="https://mimusic.net/8d-audio/" />
+  
+  <!-- SEO Title, Keywords, and Description for 8D Audio Tool -->
   <title>8D Audio Converter - Spatial Sound Maker | MiMusic.net</title>
   <meta name="keywords" content="8d audio converter, spatial sound maker, 8d audio maker, binaural spatialization, stereo panning, interaural time difference, psychoacoustic illusion, 360-degree spatial audio, 8d surround sound, dynamic stereo panning, acoustic crosstalk, web audio api">
   <meta name="description" content="Use our free 8D audio converter and spatial sound maker to create 8D surround sound. Experience 360-degree spatial audio, binaural spatialization, and dynamic stereo panning directly in your browser.">
   
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
-    /* تم یخی کریستالی و شیشه‌ای منطبق با صفحه اصلی */
+    /* Frosted Crystal Glassmorphism Theme */
     :root {
       --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
       --surface-glass: rgba(255, 255, 255, 0.72);
@@ -31,7 +34,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.8; min-height: 100vh; overflow-x: hidden; }
 
-    /* هدر ناوبری شیشه‌ای */
+    /* Glass Header Navigation */
     .header-nav { 
       width: 100%; 
       background: rgba(255, 255, 255, 0.75); 
@@ -44,7 +47,7 @@
     }
     .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
     
-    /* استایل لوگو تایپ مدرن همراه با موج صوتی متحرک CSS */
+    /* Modern Logotype with Animated CSS Sound Wave */
     .brand-logotype {
       display: inline-flex;
       align-items: center;
@@ -131,7 +134,7 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    /* فضای تعاملی ابزار */
+    /* Interactive Tool Workspace */
     .workspace { padding: 60px 24px 35px; text-align: center; }
     .tool-container { 
       max-width: 720px; 
@@ -173,7 +176,7 @@
       100% { transform: rotate(360deg) scale(1); box-shadow: -10px 0 25px rgba(139, 92, 246, 0.3); } 
     }
 
-    /* کنترل‌های آپلود شیشه‌ای */
+    /* Glass Upload Controls */
     .file-upload-wrapper { margin-bottom: 26px; }
     .file-upload-label { 
       display: inline-block; 
@@ -244,7 +247,7 @@
       box-shadow: 0 4px 12px rgba(245, 158, 11, 0.08);
     }
 
-    /* باکس‌های ویژگی کلیدی دقیقاً زیر کادر ابزار */
+    /* Key Feature Boxes */
     .features-row { 
       max-width: 1000px; 
       margin: 10px auto 50px; 
@@ -283,7 +286,7 @@
     .feature-box h4 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
     .feature-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
 
-    /* کادر عکس هوش مصنوعی */
+    /* Feature Banner Wrapper */
     .feature-wrapper { max-width: 880px; margin: 10px auto 50px; padding: 0 24px; text-align: center; }
     .feature-image { 
       width: 100%; 
@@ -292,7 +295,7 @@
       display: block; 
     }
 
-    /* ساختار بصری، کارت‌محور و خردشده مقاله سئو */
+    /* Card-based SEO Content Structure */
     .content-container { max-width: 1000px; margin: 0 auto 70px; padding: 0 24px; }
     
     .content-hero-card {
@@ -308,7 +311,7 @@
     .content-hero-card h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.02em; }
     .content-hero-card p { font-size: 1.05rem; color: var(--text-main); line-height: 1.9; }
 
-    /* کارت‌های گام‌به‌گام مراحل */
+    /* Step-by-Step Guide Cards */
     .steps-container {
       background: var(--surface-glass);
       border: 1px solid var(--glass-border);
@@ -353,7 +356,7 @@
     }
     .image-caption { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; font-style: italic; }
 
-    /* گرید دو ستونه مباحث تخصصی */
+    /* Two-Column Technical Topics Grid */
     .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 22px; margin-bottom: 26px; }
     .topic-card {
       background: rgba(255, 255, 255, 0.82);
@@ -367,7 +370,7 @@
     .topic-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
     .topic-card p { font-size: 0.98rem; color: var(--text-main); line-height: 1.85; }
 
-    /* باکس هایلایت تحلیلی الزام هدفون */
+    /* Analytical Callout Box */
     .callout-box {
       background: linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
       border: 1.5px solid rgba(99, 102, 241, 0.3);
@@ -381,7 +384,7 @@
     .callout-box ul { padding-left: 20px; }
     .callout-box li { font-size: 0.96rem; color: var(--text-main); margin-bottom: 6px; }
 
-    /* آکاردئون سوالات متداول */
+    /* FAQ Accordion */
     .faq-wrapper-card {
       background: var(--surface-glass);
       border: 1px solid var(--glass-border);
@@ -428,7 +431,7 @@
     .faq-item.active .faq-answer { max-height: 250px; padding: 0 24px 22px 24px; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
 
-    /* فوتر کریستالی */
+    /* Crystal Footer */
     footer { 
       border-top: 1px solid var(--glass-border); 
       background: rgba(255, 255, 255, 0.75); 
@@ -463,10 +466,10 @@
 </head>
 <body>
 
-  <!-- ناوبری شیشه‌ای -->
+  <!-- Glass Navigation -->
   <header class="header-nav">
     <div class="nav-inner">
-      <!-- لوگو تایپ متحرک -->
+      <!-- Animated Logotype -->
       <a href="/" class="brand-logotype">
         <div class="logo-wave">
           <span></span><span></span><span></span>
@@ -483,10 +486,10 @@
     </div>
   </header>
 
-  <!-- منوی موبایل -->
+  <!-- Mobile Menu -->
   <div class="overlay" id="overlay"></div>
   <nav class="mobile-menu" id="mobileMenu">
-    <!-- لوگو تایپ متحرک -->
+    <!-- Animated Logotype -->
     <a href="/" class="brand-logotype" style="margin-bottom: 20px;">
       <div class="logo-wave">
         <span></span><span></span><span></span>
@@ -499,7 +502,7 @@
     <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;" onclick="toggleMenu()">Free Audio Tools</a>
   </nav>
 
-  <!-- فضای تعاملی ابزار -->
+  <!-- Interactive Tool Workspace -->
   <main class="workspace">
     <div class="tool-container">
       <h1 class="tool-title">8D Spatial Audio Maker</h1>
@@ -522,7 +525,7 @@
     </div>
   </main>
 
-  <!-- ردیف باکس‌های ویژگی کلیدی ابزار (Feature Boxes مدنظر استاد) -->
+  <!-- Key Feature Boxes Row -->
   <section class="features-row">
     <div class="feature-box">
       <span class="f-icon">🎧</span>
@@ -557,22 +560,22 @@
     </div>
   </section>
 
-  <!-- تصویر هوش مصنوعی با نام 8d-audio.jpg -->
+  <!-- Feature Banner Image -->
   <div class="feature-wrapper">
     <img src="8d-audio.jpg" alt="Glowing headphones showing sound waves circling around a head" class="feature-image">
   </div>
 
-  <!-- محتوای سئو و آموزشی به صورت بلوک‌ها و کارت‌های تفکیک‌شده بصری -->
+  <!-- Educational and SEO Content Blocks -->
   <section class="content-container">
 
-    <!-- کارت معرفی تحلیلی -->
+    <!-- Analytical Introduction Card -->
     <div class="content-hero-card">
       <h2>The Psychoacoustic Illusion: How 8D Audio Tricks Human Spatial Perception</h2>
       <p>Despite its futuristic moniker, "8D Audio" does not operate in eight physical geometric dimensions. Instead, it refers to an advanced psychoacoustic illusion known in acoustic engineering as dynamic <strong>binaural spatialization</strong>. When listening to ordinary music tracks mixed in conventional stereo, audio is anchored between two static poles: the hard-left channel and the hard-right channel. When experienced through headphones, this static separation creates an artificial "in-head" sensation, where the soundstage feels confined directly between your ears.</p>
-      <p style="margin-top: 12px;">In physical acoustic reality, however, the human brain determines the 3D position of an environmental sound through two vital biological mechanisms: <strong>Interaural Time Difference (ITD)</strong> and <strong>Interaural Level Difference (ILD)</strong>. If a sound originates from your left side, the pressure wave arrives at your left ear roughly $0.6\text{ ms}$ earlier than it reaches your right ear (ITD), while your head acts as an acoustic shadow that absorbs high frequencies, reducing the sound's volume at the far ear (ILD). The <strong>MiMusic 8D Audio Maker</strong> replicates these spatial cues algorithmically inside your web browser using native Web Audio API digital signal processing (DSP), making it sound as if the music is physically rotating in a continuous 360-degree orbit around your head.</p>
+      <p style="margin-top: 12px;">In physical acoustic reality, however, the human brain determines the 3D position of an environmental sound through two vital biological mechanisms: <strong>Interaural Time Difference (ITD)</strong> and <strong>Interaural Level Difference (ILD)</strong>. If a sound originates from your left side, the pressure wave arrives at your left ear roughly 0.6 ms earlier than it reaches your right ear (ITD), while your head acts as an acoustic shadow that absorbs high frequencies, reducing the sound's volume at the far ear (ILD). The <strong>MiMusic 8D Audio Maker</strong> replicates these spatial cues algorithmically inside your web browser using native Web Audio API digital signal processing (DSP), making it sound as if the music is physically rotating in a continuous 360-degree orbit around your head.</p>
     </div>
 
-    <!-- کارت راهنمای گام‌به‌گام همراه تصویر -->
+    <!-- Step-by-Step Guide Card with Image -->
     <div class="steps-container">
       <h3>Step-by-Step Guide: How to Turn Any Song into an 8D Track</h3>
       <p style="color: var(--text-muted); font-size: 1.02rem;">Follow these three straightforward steps to experience 360-degree spatial audio:</p>
@@ -601,7 +604,7 @@
       </div>
     </div>
 
-    <!-- گرید موضوعی تخصصی دو ستونه -->
+    <!-- Two-Column Technical Topics Grid -->
     <div class="topics-grid">
       <div class="topic-card">
         <h3>🎧 Interaural Differences (ITD & ILD)</h3>
@@ -614,7 +617,7 @@
       </div>
     </div>
 
-    <!-- باکس هایلایت تحلیلی الزام هدفون -->
+    <!-- Headphone Requirement Analytical Callout Box -->
     <div class="callout-box">
       <h3>⚠️ Acoustic Crosstalk: Why Room Speakers Cannot Reproduce 8D Audio</h3>
       <p>A frequent question is why 8D effects sound flat when played over phone grilles, Bluetooth soundbars, or car speakers:</p>
@@ -625,7 +628,7 @@
       </ul>
     </div>
 
-    <!-- کارت سوالات متداول آکاردئونی -->
+    <!-- Accordion FAQ Card -->
     <div class="faq-wrapper-card">
       <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin-bottom: 10px;">Frequently Asked Questions</h2>
       <div class="faq-container">
@@ -673,11 +676,11 @@
 
   </section>
 
-  <!-- فوتر کریستالی -->
+  <!-- Crystal Footer -->
   <footer>
     <div class="footer-grid">
       <div class="footer-col">
-        <!-- لوگو تایپ متحرک -->
+        <!-- Animated Logotype -->
         <a href="/" class="brand-logotype" style="margin-bottom: 16px;">
           <div class="logo-wave">
             <span></span><span></span><span></span>
@@ -720,7 +723,7 @@
     </div>
   </footer>
 
-  <!-- اسکریپت‌های منو و پردازش صوتی 8D -->
+  <!-- Menu and 8D Audio Processing Scripts -->
   <script>
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
