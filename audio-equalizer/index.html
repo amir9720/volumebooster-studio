@@ -4,14 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- تایتل، کیووردز جامع و دسکریپشن غنی‌شده مخصوص ابزار اکولایزر صوتی -->
+  <!-- Canonical Tag for Google Search Console -->
+  <link rel="canonical" href="https://mimusic.net/audio-equalizer/" />
+  
+  <!-- SEO Title, Keywords, and Description for Audio Equalizer Tool -->
   <title>Audio Equalizer Online: Boost Bass & Treble | MiMusic.net</title>
   <meta name="keywords" content="audio equalizer online, boost bass, adjust treble, online audio equalizer, 5-band eq interface, enhance vocal dialogue, scooped mids rock sound, subtractive eq, real-time frequency adjustment, client-side audio dsp, fix muffled podcast, bass booster online">
   <meta name="description" content="Use our free audio equalizer online to boost bass and adjust treble. A powerful 5-band EQ to enhance vocal dialogue and customize your sound perfectly.">
   
   <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32/4f46e5/ffffff?text=M">
   <style>
-    /* متغیرهای رنگ و سایه تم سایت */
+    /* Theme color and shadow variables */
     :root {
       --bg-gradient: radial-gradient(circle at 15% 15%, #e0e7ff 0%, #f8fafc 45%, #dbeafe 85%, #eff6ff 100%);
       --surface-glass: rgba(255, 255, 255, 0.72);
@@ -30,11 +33,11 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.8; min-height: 100vh; overflow-x: hidden; }
 
-    /* هدر ناوبری */
+    /* Glass Navigation Header */
     .header-nav { width: 100%; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 1000; }
     .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
     
-    /* استایل لوگو تایپ مدرن همراه با موج صوتی متحرک CSS */
+    /* Modern Logotype with Animated CSS Sound Wave */
     .brand-logotype {
       display: inline-flex;
       align-items: center;
@@ -106,7 +109,7 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.35); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 998; }
     .overlay.active { opacity: 1; visibility: visible; }
 
-    /* فضای تعاملی ابزار */
+    /* Interactive Workspace */
     .workspace { padding: 60px 24px 35px; text-align: center; }
     .tool-container { max-width: 800px; margin: 0 auto; background: var(--surface-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 30px; padding: 45px 35px; box-shadow: var(--glass-shadow); border: 1px solid var(--glass-border); position: relative; }
     .tool-title { font-size: 2.3rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.03em; }
@@ -120,19 +123,19 @@
     
     #audioPlayer { width: 100%; margin-bottom: 25px; display: none; outline: none; border-radius: 50px; }
 
-    /* استایل اکولایزر */
+    /* Equalizer Styles */
     .eq-container { display: none; background: rgba(255,255,255,0.8); border: 1px solid var(--glass-border); border-radius: 20px; padding: 25px 20px 10px; margin-bottom: 25px; }
     .eq-grid { display: flex; justify-content: space-around; align-items: flex-end; gap: 10px; height: 180px; }
     .eq-band { display: flex; flex-direction: column; align-items: center; gap: 10px; }
     
-    /* استایل اسلایدرهای عمودی */
+    /* Vertical Sliders */
     input[type=range] { -webkit-appearance: none; width: 140px; height: 6px; background: #cbd5e1; border-radius: 5px; transform: rotate(-90deg); margin: 60px 0; outline: none; }
     input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
     
     .band-label { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-align: center; width: 45px; }
     .band-val { font-size: 0.75rem; color: var(--text-main); font-weight: 600; margin-bottom: 5px; }
 
-    /* ویژگی‌های کلیدی */
+    /* Key Features Row */
     .features-row { max-width: 1000px; margin: 10px auto 50px; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
     .feature-box { background: var(--surface-glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 22px 18px; box-shadow: var(--glass-shadow); transition: all 0.3s ease; display: flex; gap: 14px; align-items: flex-start; }
     .feature-box:hover { transform: translateY(-4px); background: var(--surface-glass-hover); box-shadow: var(--glass-shadow-hover); }
@@ -140,11 +143,11 @@
     .feature-box h4 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
     .feature-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
 
-    /* تصویر بنر مقاله */
+    /* Feature Banner Image */
     .feature-wrapper { max-width: 880px; margin: 10px auto 50px; padding: 0 24px; text-align: center; }
     .feature-image { width: 100%; border-radius: 28px; box-shadow: 0 22px 45px -10px rgba(79, 70, 229, 0.18), 0 0 0 1.5px var(--glass-border); display: block; }
 
-    /* محتوای مقاله */
+    /* Content Container */
     .content-container { max-width: 1000px; margin: 0 auto 70px; padding: 0 24px; }
     .content-hero-card { background: var(--surface-glass); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid var(--glass-border); border-radius: 26px; padding: 38px; box-shadow: var(--glass-shadow); margin-bottom: 26px; }
     .content-hero-card h2 { font-size: 2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.02em; }
@@ -185,7 +188,7 @@
     .faq-item.active .faq-answer { max-height: 250px; padding: 0 24px 22px 24px; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
 
-    /* فوتر */
+    /* Footer */
     footer { border-top: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); padding: 65px 24px 45px; color: var(--text-muted); font-size: 0.95rem; margin-top: 80px; }
     .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
     .footer-col h5 { color: var(--text-dark); font-size: 1.05rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
@@ -213,7 +216,7 @@
 </head>
 <body>
 
-  <!-- هدر ناوبری با لوگو تایپ متحرک -->
+  <!-- Glass Navigation Header -->
   <header class="header-nav">
     <div class="nav-inner">
       <a href="/" class="brand-logotype">
@@ -232,7 +235,7 @@
     </div>
   </header>
 
-  <!-- منوی موبایل با لوگو تایپ متحرک -->
+  <!-- Mobile Menu -->
   <div class="overlay" id="overlay"></div>
   <nav class="mobile-menu" id="mobileMenu">
     <a href="/" class="brand-logotype" style="margin-bottom: 20px;">
@@ -247,13 +250,13 @@
     <a href="/#tools" class="nav-link" style="color: var(--accent); font-weight: 800;">Free Audio Tools</a>
   </nav>
 
-  <!-- فضای تعاملی ابزار -->
+  <!-- Interactive Workspace -->
   <main class="workspace">
     <div class="tool-container">
       <h1 class="tool-title">Audio Equalizer Online</h1>
       <p class="tool-desc">Fine-tune your music directly in the browser. Upload an audio file and adjust the bass, mid, and treble frequencies to create your perfect mix.</p>
       
-      <!-- باکس آپلود فایل -->
+      <!-- Upload Box -->
       <label class="file-upload-box" id="uploadBox">
         <div class="upload-icon">📂</div>
         <div class="upload-text" id="uploadText">Click to select an audio file</div>
@@ -261,10 +264,10 @@
         <input type="file" id="audioInput" accept="audio/*">
       </label>
 
-      <!-- پلیر صدا -->
+      <!-- Audio Player -->
       <audio id="audioPlayer" controls></audio>
 
-      <!-- پنل اکولایزر -->
+      <!-- Equalizer Panel -->
       <div class="eq-container" id="eqPanel">
         <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 20px;">5-Band Equalizer</h3>
         <div class="eq-grid">
@@ -305,7 +308,7 @@
     </div>
   </main>
 
-  <!-- ویژگی‌های کلیدی -->
+  <!-- Key Features Row -->
   <section class="features-row">
     <div class="feature-box">
       <span class="f-icon">🎛️</span>
@@ -330,22 +333,22 @@
     </div>
   </section>
 
-  <!-- تصویر بنر مقاله -->
+  <!-- Feature Banner Image -->
   <div class="feature-wrapper">
     <img src="audio-equalizer.jpg" alt="Digital 5-band audio equalizer and bass booster interface" class="feature-image">
   </div>
 
-  <!-- محتوای مقاله (SEO Optimized) -->
+  <!-- SEO Optimized Content Container -->
   <section class="content-container">
 
-    <!-- کارت معرفی تحلیلی -->
+    <!-- Analytical Intro Card -->
     <div class="content-hero-card">
       <h2>Master Your Sound: The Ultimate Online Audio Equalizer</h2>
       <p>Not all audio files are created equal. Sometimes you download an interview podcast where the vocals are far too muddy, or an older MP3 music track that desperately lacks that deep, modern bass punch. Traditionally, fixing these glaring sonic issues required downloading complex Digital Audio Workstation (DAW) software like Audacity, Logic Pro, or FL Studio. Our free <strong>online audio equalizer</strong> completely changes that dynamic, allowing you to intuitively manipulate the frequency spectrum of any audio file directly within your web browser.</p>
       <p>Using the immense computational power of HTML5 and the native Web Audio API, this tool provides a highly responsive, professional-grade 5-band EQ interface. Whether you need to aggressively <strong>boost bass</strong> for your car stereo subwoofer, enhance the high-end treble for significantly clearer vocal dialogue, or scoop out the muddy mid-range frequencies to achieve a classic rock sound, you can make dynamic, real-time adjustments with zero audio latency. Best of all, because the entire digital signal processing (DSP) happens locally on your personal device, your private voice recordings and copyrighted music files never leave your computer.</p>
     </div>
 
-    <!-- راهنمای مراحل -->
+    <!-- Step-by-Step Guide -->
     <div class="steps-container">
       <h3>Step-by-Step Guide: How to Equalize Audio Online</h3>
       <p style="color: var(--text-muted); font-size: 1.02rem;">Follow these detailed instructions to tailor your audio files exactly to your personal acoustic liking:</p>
@@ -380,7 +383,7 @@
       </div>
     </div>
 
-    <!-- گرید تخصصی -->
+    <!-- Specialized Topics Grid -->
     <div class="topics-grid">
       <div class="topic-card">
         <h3>🎸 How to Boost Bass Safely</h3>
@@ -403,7 +406,7 @@
       </div>
     </div>
 
-    <!-- باکس پرو تیپ -->
+    <!-- Professional Callout Box -->
     <div class="callout-box">
       <h3>💡 Professional Audio Tip: Subtractive EQ over Additive EQ</h3>
       <p>Professional audio mixing engineers live by a very simple, yet crucial rule: It is almost always better to <em>cut</em> the bad frequencies you don't like, rather than <em>boosting</em> the good ones you do.</p>
@@ -413,7 +416,7 @@
       </ul>
     </div>
 
-    <!-- آکاردئون پرسش‌های متداول -->
+    <!-- FAQ Accordion Card -->
     <div class="faq-wrapper-card">
       <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin-bottom: 10px;">Frequently Asked Questions</h2>
       <div class="faq-container">
@@ -451,7 +454,7 @@
 
   </section>
 
-  <!-- فوتر با لوگو تایپ متحرک -->
+  <!-- Footer -->
   <footer>
     <div class="footer-grid">
       <div class="footer-col">
@@ -497,9 +500,9 @@
     </div>
   </footer>
 
-  <!-- اسکریپت Web Audio API برای اکولایزر -->
+  <!-- Web Audio API Script for Equalizer -->
   <script>
-    // منوی موبایل
+    // Mobile menu toggle
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
@@ -507,13 +510,13 @@
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    // آکاردئون
+    // Accordion FAQ toggle
     function toggleFaq(button) {
       const item = button.parentElement;
       item.classList.toggle('active');
     }
 
-    // منطق اکولایزر
+    // Equalizer Logic
     const audioInput = document.getElementById('audioInput');
     const uploadText = document.getElementById('uploadText');
     const audioPlayer = document.getElementById('audioPlayer');
@@ -522,7 +525,7 @@
     let audioCtx, track, filters = {};
     let isInitialized = false;
 
-    // فرکانس های استاندارد 5 باند
+    // Standard 5-band frequencies
     const bandFrequencies = [60, 230, 910, 3600, 14000];
 
     audioInput.addEventListener('change', function(e) {
@@ -543,13 +546,13 @@
       audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       track = audioCtx.createMediaElementSource(audioPlayer);
 
-      // ساخت فیلترها (BiquadFilterNode)
+      // Create BiquadFilterNodes
       let prevFilter = track;
       
       bandFrequencies.forEach(freq => {
         let filter = audioCtx.createBiquadFilter();
         
-        // تنظیم نوع فیلتر
+        // Configure filter type
         if (freq === 60) filter.type = 'lowshelf';
         else if (freq === 14000) filter.type = 'highshelf';
         else filter.type = 'peaking';
@@ -559,17 +562,17 @@
         
         filters[freq] = filter;
 
-        // اتصال زنجیره‌ای فیلترها
+        // Chain filters together
         prevFilter.connect(filter);
         prevFilter = filter;
       });
 
-      // اتصال فیلتر آخر به خروجی سیستم
+      // Connect last filter to audio destination
       prevFilter.connect(audioCtx.destination);
       isInitialized = true;
     }
 
-    // تابع آپدیت مقادیر توسط اسلایدرها
+    // Update filter gain values from sliders
     window.updateEq = function(freq, value) {
       document.getElementById('val-' + freq).innerText = (value > 0 ? '+' : '') + value + 'dB';
       if (filters[freq]) {
@@ -577,7 +580,7 @@
       }
     };
 
-    // برای جلوگیری از مسدود شدن AudioContext در مرورگرها
+    // Resume AudioContext on playback to comply with browser autoplay policies
     audioPlayer.addEventListener('play', () => {
       if (audioCtx && audioCtx.state === 'suspended') {
         audioCtx.resume();
