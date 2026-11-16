@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://mimusic.net/privacy.html" />
+  <title>Privacy Policy | MiMusic.net</title>
+  <meta name="description" content="Read the Privacy Policy for MiMusic.net. Learn how our browser-based audio utilities protect your files with 100% local processing, plus cookie and Google AdSense disclosures.">
+  <link rel="icon" type="image/jpeg" href="/logo.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Privacy Policy - MiMusic.net",
+    "url": "https://mimusic.net/privacy.html",
+    "description": "Privacy Policy and data protection disclosures for MiMusic.net browser-based audio utilities and educational guides.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MiMusic.net",
+      "email": "info@mimusic.net",
+      "url": "https://mimusic.net/"
+    }
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
+      --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca;
+      --accent-light: #e0e7ff; --text-dark: #0f172a; --text: #334155;
+      --muted: #64748b; --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); line-height: 1.7; }
+
+    /* Navigation */
+    .header-nav { width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+
+    .brand-logotype { display: inline-flex; align-items: center; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 6px 0; }
+    .brand-logotype:hover { transform: translateY(-2px); }
+    .logo-wave { display: inline-flex; align-items: flex-end; gap: 3px; margin-right: 10px; height: 24px; }
+    .logo-wave span { display: block; width: 5px; border-radius: 6px; background: linear-gradient(to top, #4f46e5, #3b82f6); transition: height 0.3s ease; box-shadow: 0 2px 6px rgba(79, 70, 229, 0.3); }
+    .logo-wave span:nth-child(1) { height: 12px; }
+    .logo-wave span:nth-child(2) { height: 24px; }
+    .logo-wave span:nth-child(3) { height: 16px; }
+    .brand-logotype:hover .logo-wave span:nth-child(1) { height: 22px; }
+    .brand-logotype:hover .logo-wave span:nth-child(2) { height: 14px; }
+    .brand-logotype:hover .logo-wave span:nth-child(3) { height: 24px; }
+
+    .brand-logotype .text-mi { font-size: 30px; font-weight: 900; text-transform: uppercase; background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -1px; }
+    .brand-logotype .text-music { font-size: 28px; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; margin-left: 2px; }
+    .brand-logotype .text-dot { font-size: 16px; font-weight: 800; background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-left: 3px; }
+
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .nav-link:hover { color: var(--accent); }
+
+    /* Hero Header */
+    .article-header { background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); padding: 60px 24px 40px; text-align: center; border-bottom: 1px solid var(--border); }
+    .article-header h1 { font-size: 2.5rem; font-weight: 900; color: var(--text-dark); margin-bottom: 12px; letter-spacing: -0.02em; }
+    .article-header p { font-size: 1.05rem; color: var(--muted); max-width: 700px; margin: 0 auto; }
+
+    /* Main Content */
+    .content-container { max-width: 820px; margin: 40px auto 80px; padding: 0 24px; }
+    .policy-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 38px; box-shadow: var(--shadow-sm); }
+    .content-container h2 { font-size: 1.45rem; font-weight: 800; color: var(--text-dark); margin: 32px 0 14px; border-bottom: 2px solid var(--surface-alt); padding-bottom: 8px; }
+    .content-container h2:first-child { margin-top: 0; }
+    .content-container p { margin-bottom: 16px; font-size: 1.02rem; }
+    .content-container ul { margin: 0 0 20px 24px; }
+    .content-container li { margin-bottom: 10px; }
+    .content-container a { color: var(--accent); text-decoration: underline; }
+
+    .highlight-box { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 18px 20px; border-radius: 0 10px 10px 0; margin: 24px 0; color: #1e3a8a; }
+    .highlight-box strong { color: #1d4ed8; }
+
+    .contact-callout { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-top: 24px; }
+    .contact-callout p { margin-bottom: 8px; }
+    .contact-callout p:last-child { margin-bottom: 0; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
+    .footer-col h5 { color: var(--text-dark); font-size: 1rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; padding: 0; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a { color: var(--muted); text-decoration: none; transition: 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .policy-card { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header-nav">
+    <div class="nav-inner">
+      <a href="/" class="brand-logotype">
+        <div class="logo-wave"><span></span><span></span><span></span></div>
+        <span class="text-mi">Mi</span><span class="text-music">Music</span><span class="text-dot">.net</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/about.html" class="nav-link">App Features</a>
+        <a href="/install.html" class="nav-link">Installation</a>
+        <a href="/blog/" class="nav-link">Guides</a>
+        <a href="/tools.html" class="nav-link">Free Audio Tools</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="article-header">
+    <h1>Privacy Policy</h1>
+    <p>Effective Date: November 16, 2026 &bull; How MiMusic.net protects your audio files, browser permissions, and personal data</p>
+  </div>
+
+  <main class="content-container">
+    <div class="policy-card">
+      <h2>1. Introduction</h2>
+      <p>Welcome to <strong>MiMusic.net</strong> (<code>https://mimusic.net/</code>). Protecting your privacy while you use our browser-based audio utilities and read our mobile playback guides is a core priority. This Privacy Policy explains what information is collected when you visit our site, how it is used, and the choices available to you.</p>
+
+      <div class="highlight-box">
+        <strong>100% Client-Side Audio &amp; Video Processing:</strong> Every audio utility on MiMusic.net—including our Volume Booster, Audio Trimmer, Pitch Shifter, and Video-to-Audio Converter—runs locally inside your web browser using the Web Audio API. Your media files are never uploaded to, stored on, or viewed by our servers.
+      </div>
+
+      <h2>2. Microphone &amp; Hardware Access</h2>
+      <p>Certain diagnostic tools on our platform, such as the <strong>Microphone Tester</strong> and <strong>Decibel Meter</strong>, require temporary access to your device's microphone to visualize live sound levels. Your web browser explicitly asks for your permission before enabling the microphone. All audio input is analyzed strictly in real-time local memory and is never recorded, saved, or transmitted over the Internet.</p>
+
+      <h2>3. Log Files &amp; Website Analytics</h2>
+      <p>Like most modern websites, MiMusic.net uses standard server log files and privacy-conscious analytics tools (such as Google Analytics) to understand how visitors interact with our pages and to improve tool performance. The technical data collected may include:</p>
+      <ul>
+        <li>Browser type, device category, and operating system</li>
+        <li>Referring and exit pages, date/time stamps, and aggregate page views</li>
+        <li>Internet Service Provider (ISP) and anonymized IP address metrics</li>
+      </ul>
+      <p>This information is used solely for analyzing trends, diagnosing technical issues, and optimizing site speed. It is never linked to personally identifiable information.</p>
+
+      <h2>4. Cookies &amp; Local Preferences</h2>
+      <p>MiMusic.net uses cookies and standard browser storage to remember basic interface preferences and ensure smooth performance across visits. You can disable, block, or clear cookies at any time through your individual browser settings without losing access to our free audio tools.</p>
+
+      <h2>5. Google AdSense &amp; Third-Party Advertising</h2>
+      <p>To keep all audio tools and guides free for everyone, MiMusic.net partners with third-party advertising networks, including <strong>Google AdSense</strong>, to display advertisements:</p>
+      <ul>
+        <li>Third-party vendors, including Google, use cookies (such as the DoubleClick advertising cookie) to serve relevant ads based on a user's prior visits to MiMusic.net or other websites across the Internet.</li>
+        <li>You may opt out of personalized advertising at any time by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">Google Ads Settings</a> or by managing your preferences at <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a>.</li>
+      </ul>
+
+      <h2>6. GDPR &amp; CCPA Privacy Rights</h2>
+      <p>Depending on your location—including residents of the European Economic Area (EEA), the United Kingdom under GDPR, and California under CCPA—you have specific data protection rights:</p>
+      <ul>
+        <li>The right to request details about any personal data we may hold about you.</li>
+        <li>The right to request correction or deletion of personal information you have voluntarily shared with us (such as via email).</li>
+        <li>The right to opt out of personalized advertising cookies.</li>
+      </ul>
+      <p>To exercise any of these rights, please reach out to us directly at <a href="mailto:info@mimusic.net">info@mimusic.net</a>.</p>
+
+      <h2>7. Children's Privacy</h2>
+      <p>MiMusic.net does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you believe that a child has provided personal information to us, please contact us immediately at <a href="mailto:info@mimusic.net">info@mimusic.net</a> so we can promptly remove it from our records.</p>
+
+      <h2>8. Changes to This Privacy Policy</h2>
+      <p>We may update this Privacy Policy from time to time to reflect new audio utilities, legal requirements, or advertising disclosures. Any updates will be published on this page with a revised effective date.</p>
+
+      <h2>9. Contact Us</h2>
+      <div class="contact-callout">
+        <p>If you have any questions, privacy requests, or suggestions regarding this Privacy Policy, please contact our team:</p>
+        <p><strong>Email:</strong> <a href="mailto:info@mimusic.net">info@mimusic.net</a></p>
+        <p><strong>Contact Page:</strong> <a href="/contact.html">https://mimusic.net/contact.html</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="brand-logotype" style="margin-bottom: 16px;">
+          <div class="logo-wave"><span></span><span></span><span></span></div>
+          <span class="text-mi">Mi</span><span class="text-music">Music</span><span class="text-dot">.net</span>
+        </a>
+        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
+        <p style="font-weight: 600; color: var(--text-dark);">Contact: info@mimusic.net</p>
+      </div>
+      <div class="footer-col">
+        <h5>Popular Tools</h5>
+        <ul>
+          <li><a href="/volume-booster/">Volume Booster</a></li>
+          <li><a href="/speaker-cleaner/">Speaker Cleaner</a></li>
+          <li><a href="/8d-audio/">8D Spatial Audio</a></li>
+          <li><a href="/pitch-shifter/">Pitch &amp; Tempo</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal &amp; Info</h5>
+        <ul>
+          <li><a href="/privacy.html" style="color: var(--accent);">Privacy Policy</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+          <li><a href="/about.html">About Mi Music</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="/install.html">Installation Guide</a></li>
+          <li><a href="/troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="/guide.html">User Guide</a></li>
+          <li><a href="/tools.html">All Audio Tools</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MiMusic.net. Independent audio guides and web tools.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
