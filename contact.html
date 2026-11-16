@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://mimusic.net/contact.html" />
+  <title>Contact Us | MiMusic.net Support &amp; Inquiries</title>
+  <meta name="description" content="Have a question, bug report, or tool suggestion for MiMusic.net? Reach out directly to our team at info@mimusic.net for fast support.">
+  <link rel="icon" type="image/jpeg" href="/logo.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact MiMusic.net",
+    "url": "https://mimusic.net/contact.html",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "MiMusic.net",
+      "email": "info@mimusic.net",
+      "url": "https://mimusic.net/"
+    }
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
+      --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca;
+      --accent-light: #e0e7ff; --text-dark: #0f172a; --text: #334155;
+      --muted: #64748b; --success: #10b981;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05); --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); line-height: 1.7; }
+
+    /* Navigation */
+    .header-nav { width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+
+    .brand-logotype { display: inline-flex; align-items: center; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 6px 0; }
+    .brand-logotype:hover { transform: translateY(-2px); }
+    .logo-wave { display: inline-flex; align-items: flex-end; gap: 3px; margin-right: 10px; height: 24px; }
+    .logo-wave span { display: block; width: 5px; border-radius: 6px; background: linear-gradient(to top, #4f46e5, #3b82f6); transition: height 0.3s ease; box-shadow: 0 2px 6px rgba(79, 70, 229, 0.3); }
+    .logo-wave span:nth-child(1) { height: 12px; }
+    .logo-wave span:nth-child(2) { height: 24px; }
+    .logo-wave span:nth-child(3) { height: 16px; }
+    .brand-logotype:hover .logo-wave span:nth-child(1) { height: 22px; }
+    .brand-logotype:hover .logo-wave span:nth-child(2) { height: 14px; }
+    .brand-logotype:hover .logo-wave span:nth-child(3) { height: 24px; }
+
+    .brand-logotype .text-mi { font-size: 30px; font-weight: 900; text-transform: uppercase; background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -1px; }
+    .brand-logotype .text-music { font-size: 28px; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; margin-left: 2px; }
+    .brand-logotype .text-dot { font-size: 16px; font-weight: 800; background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-left: 3px; }
+
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .nav-link:hover { color: var(--accent); }
+
+    /* Hero Header */
+    .article-header { background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); padding: 60px 24px 40px; text-align: center; border-bottom: 1px solid var(--border); }
+    .article-header h1 { font-size: 2.5rem; font-weight: 900; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.02em; }
+    .article-header p { font-size: 1.08rem; color: var(--muted); max-width: 680px; margin: 0 auto; }
+
+    /* Main Content */
+    .content-container { max-width: 960px; margin: 40px auto 80px; padding: 0 24px; }
+
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: 28px; align-items: start; }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 30px; box-shadow: var(--shadow-sm); }
+    .card h2 { font-size: 1.35rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; }
+    .card p { font-size: 0.98rem; color: var(--text); margin-bottom: 18px; }
+
+    .email-box { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 10px; padding: 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+    .email-address { font-weight: 800; font-size: 1.05rem; color: var(--accent); text-decoration: none; word-break: break-all; }
+    .copy-btn { background: var(--surface); border: 1px solid var(--border); color: var(--text-dark); padding: 8px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: 0.2s; }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    .topic-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+    .topic-item { padding-left: 14px; border-left: 3px solid var(--accent); }
+    .topic-item strong { display: block; color: var(--text-dark); font-size: 0.96rem; }
+    .topic-item span { font-size: 0.9rem; color: var(--muted); }
+
+    /* Form Elements */
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 0.92rem; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+    .form-control { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; font-size: 0.96rem; color: var(--text-dark); background: var(--bg); transition: 0.2s; }
+    .form-control:focus { outline: none; border-color: var(--accent); background: var(--surface); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12); }
+    textarea.form-control { min-height: 130px; resize: vertical; }
+
+    .submit-btn { width: 100%; background: var(--accent); color: #ffffff; border: none; padding: 14px 24px; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.2s; }
+    .submit-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .form-note { font-size: 0.85rem; color: var(--muted); margin-top: 12px; text-align: center; }
+
+    /* FAQ */
+    .faq-section { margin-top: 48px; }
+    .faq-section h2 { font-size: 1.6rem; font-weight: 800; color: var(--text-dark); margin-bottom: 20px; text-align: center; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
+    .faq-item h3 { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .faq-item p { font-size: 0.95rem; color: var(--muted); margin: 0; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
+    .footer-col h5 { color: var(--text-dark); font-size: 1rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; padding: 0; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a { color: var(--muted); text-decoration: none; transition: 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+
+    @media (max-width: 820px) {
+      .nav-links { display: none; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header-nav">
+    <div class="nav-inner">
+      <a href="/" class="brand-logotype">
+        <div class="logo-wave"><span></span><span></span><span></span></div>
+        <span class="text-mi">Mi</span><span class="text-music">Music</span><span class="text-dot">.net</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/about.html" class="nav-link">App Features</a>
+        <a href="/install.html" class="nav-link">Installation</a>
+        <a href="/blog/" class="nav-link">Guides</a>
+        <a href="/tools.html" class="nav-link">Free Audio Tools</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="article-header">
+    <h1>Contact MiMusic.net</h1>
+    <p>Questions about our browser-based audio utilities, feedback on mobile playback guides, or partnership inquiries? We read every message.</p>
+  </div>
+
+  <main class="content-container">
+    <div class="contact-grid">
+
+      <!-- Direct Contact Card -->
+      <div class="card">
+        <h2>Direct Email Support</h2>
+        <p>The fastest way to reach our editorial and engineering team is via email. We typically respond within <strong>24 to 48 business hours</strong>.</p>
+
+        <div class="email-box">
+          <a href="mailto:info@mimusic.net" class="email-address" id="supportEmail">info@mimusic.net</a>
+          <button type="button" class="copy-btn" onclick="copySupportEmail(this)">Copy Email</button>
+        </div>
+
+        <ul class="topic-list">
+          <li class="topic-item">
+            <strong>Technical &amp; Browser Feedback</strong>
+            <span>Let us know your device model and browser if any DSP audio tool behaves unexpectedly.</span>
+          </li>
+          <li class="topic-item">
+            <strong>New Audio Tool Ideas</strong>
+            <span>Have a specific sound test, frequency generator, or converter you would like us to build? Tell us.</span>
+          </li>
+          <li class="topic-item">
+            <strong>Privacy, Legal &amp; Press</strong>
+            <span>For GDPR/CCPA requests, copyright notices, or media inquiries, write directly to info@mimusic.net.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Message Composer Card -->
+      <div class="card">
+        <h2>Send a Quick Message</h2>
+        <p>Fill out the details below to prepare your message in your default email app addressed to <strong>info@mimusic.net</strong>.</p>
+
+        <form onsubmit="sendMailtoInquiry(event)">
+          <div class="form-group">
+            <label for="senderName">Your Name</label>
+            <input type="text" id="senderName" class="form-control" placeholder="e.g., Alex Morgan" required>
+          </div>
+
+          <div class="form-group">
+            <label for="inquiryTopic">Topic</label>
+            <select id="inquiryTopic" class="form-control">
+              <option value="Audio Tool Support">Audio Tool Support / Bug Report</option>
+              <option value="Feature Suggestion">New Tool Suggestion</option>
+              <option value="Guide & Editorial Feedback">Guide &amp; Editorial Feedback</option>
+              <option value="Advertising & Partnerships">Advertising &amp; Partnerships</option>
+              <option value="Privacy or Legal Inquiry">Privacy or Legal Inquiry</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="senderMessage">Message</label>
+            <textarea id="senderMessage" class="form-control" placeholder="Describe your question, feedback, or device details..." required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Open in Email App (info@mimusic.net)</button>
+          <p class="form-note">Prefer webmail? Email us directly at <a href="mailto:info@mimusic.net" style="color: var(--accent); font-weight: 600;">info@mimusic.net</a>.</p>
+        </form>
+      </div>
+
+    </div>
+
+    <section class="faq-section">
+      <h2>Common Questions Before You Write</h2>
+
+      <div class="faq-item">
+        <h3>Can you recover an audio file I edited on MiMusic.net?</h3>
+        <p>No. Because all audio tools run 100% locally inside your browser's memory, your files are never uploaded to our servers. Once you close or refresh the tab, the processed audio is cleared from your browser.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Are you the official Xiaomi support desk?</h3>
+        <p>No. MiMusic.net is an independent educational resource and web audio toolkit. We are not affiliated with Xiaomi Inc. For official hardware warranty claims, please visit Xiaomi's official support portal.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>A tool isn't producing sound on my phone—what should I check?</h3>
+        <p>Make sure your device is not in Silent/Mute mode (especially on iOS), disconnect background Bluetooth devices if testing phone speakers, and check our <a href="/troubleshooting.html" style="color: var(--accent);">Troubleshooting Guide</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="brand-logotype" style="margin-bottom: 16px;">
+          <div class="logo-wave"><span></span><span></span><span></span></div>
+          <span class="text-mi">Mi</span><span class="text-music">Music</span><span class="text-dot">.net</span>
+        </a>
+        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
+        <p style="font-weight: 600; color: var(--text-dark);">Contact: info@mimusic.net</p>
+      </div>
+      <div class="footer-col">
+        <h5>Popular Tools</h5>
+        <ul>
+          <li><a href="/volume-booster/">Volume Booster</a></li>
+          <li><a href="/speaker-cleaner/">Speaker Cleaner</a></li>
+          <li><a href="/8d-audio/">8D Spatial Audio</a></li>
+          <li><a href="/pitch-shifter/">Pitch &amp; Tempo</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal &amp; Info</h5>
+        <ul>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/contact.html" style="color: var(--accent);">Contact Us</a></li>
+          <li><a href="/about.html">About Mi Music</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="/install.html">Installation Guide</a></li>
+          <li><a href="/troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="/guide.html">User Guide</a></li>
+          <li><a href="/tools.html">All Audio Tools</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MiMusic.net. Independent audio guides and web tools.</p>
+    </div>
+  </footer>
+
+  <script>
+    function copySupportEmail(btn) {
+      navigator.clipboard.writeText('info@mimusic.net').then(function() {
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.style.borderColor = '#10b981';
+        btn.style.color = '#10b981';
+        setTimeout(function() {
+          btn.textContent = originalText;
+          btn.style.borderColor = '';
+          btn.style.color = '';
+        }, 2000);
+      });
+    }
+
+    function sendMailtoInquiry(e) {
+      e.preventDefault();
+      const name = document.getElementById('senderName').value.trim();
+      const topic = document.getElementById('inquiryTopic').value;
+      const message = document.getElementById('senderMessage').value.trim();
+      const subject = encodeURIComponent('[MiMusic.net] ' + topic + ' - ' + name);
+      const body = encodeURIComponent('Name: ' + name + '\nTopic: ' + topic + '\n\nMessage:\n' + message);
+      window.location.href = 'mailto:info@mimusic.net?subject=' + subject + '&body=' + body;
+    }
+  </script>
+</body>
+</html>
