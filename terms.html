@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://mimusic.net/terms.html" />
+  <title>Terms of Service | MiMusic.net</title>
+  <meta name="description" content="Read the Terms of Service for MiMusic.net. Understand the usage guidelines, safe listening disclaimers, and intellectual property policies for our free browser audio tools.">
+  <link rel="icon" type="image/jpeg" href="/logo.jpg">
+  <style>
+    :root {
+      --bg: #f8fafc; --surface: #ffffff; --surface-alt: #f1f5f9;
+      --border: #e2e8f0; --accent: #4f46e5; --accent-hover: #4338ca;
+      --accent-light: #e0e7ff; --text-dark: #0f172a; --text: #334155;
+      --muted: #64748b; --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); line-height: 1.7; }
+
+    /* Navigation */
+    .header-nav { width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+
+    .brand-logotype { display: inline-flex; align-items: center; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 6px 0; }
+    .brand-logotype:hover { transform: translateY(-2px); }
+    .logo-wave { display: inline-flex; align-items: flex-end; gap: 3px; margin-right: 10px; height: 24px; }
+    .logo-wave span { display: block; width: 5px; border-radius: 6px; background: linear-gradient(to top, #4f46e5, #3b82f6); transition: height 0.3s ease; box-shadow: 0 2px 6px rgba(79, 70, 229, 0.3); }
+    .logo-wave span:nth-child(1) { height: 12px; }
+    .logo-wave span:nth-child(2) { height: 24px; }
+    .logo-wave span:nth-child(3) { height: 16px; }
+    .brand-logotype:hover .logo-wave span:nth-child(1) { height: 22px; }
+    .brand-logotype:hover .logo-wave span:nth-child(2) { height: 14px; }
+    .brand-logotype:hover .logo-wave span:nth-child(3) { height: 24px; }
+
+    .brand-logotype .text-mi { font-size: 30px; font-weight: 900; text-transform: uppercase; background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -1px; }
+    .brand-logotype .text-music { font-size: 28px; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; margin-left: 2px; }
+    .brand-logotype .text-dot { font-size: 16px; font-weight: 800; background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-left: 3px; }
+
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.2s; }
+    .nav-link:hover { color: var(--accent); }
+
+    /* Hero Header */
+    .article-header { background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 100%); padding: 60px 24px 40px; text-align: center; border-bottom: 1px solid var(--border); }
+    .article-header h1 { font-size: 2.5rem; font-weight: 900; color: var(--text-dark); margin-bottom: 12px; letter-spacing: -0.02em; }
+    .article-header p { font-size: 1.05rem; color: var(--muted); max-width: 700px; margin: 0 auto; }
+
+    /* Main Content */
+    .content-container { max-width: 820px; margin: 40px auto 80px; padding: 0 24px; }
+    .terms-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 38px; box-shadow: var(--shadow-sm); }
+    .content-container h2 { font-size: 1.45rem; font-weight: 800; color: var(--text-dark); margin: 32px 0 14px; border-bottom: 2px solid var(--surface-alt); padding-bottom: 8px; }
+    .content-container h2:first-child { margin-top: 0; }
+    .content-container p { margin-bottom: 16px; font-size: 1.02rem; }
+    .content-container ul { margin: 0 0 20px 24px; }
+    .content-container li { margin-bottom: 10px; }
+    .content-container a { color: var(--accent); text-decoration: underline; }
+
+    .warning-box { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 18px 20px; border-radius: 0 10px 10px 0; margin: 24px 0; color: #92400e; }
+    .warning-box strong { color: #b45309; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); background: var(--surface); padding: 60px 24px 40px; color: var(--muted); font-size: 0.95rem; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
+    .footer-col h5 { color: var(--text-dark); font-size: 1rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; padding: 0; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a { color: var(--muted); text-decoration: none; transition: 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .terms-card { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header-nav">
+    <div class="nav-inner">
+      <a href="/" class="brand-logotype">
+        <div class="logo-wave"><span></span><span></span><span></span></div>
+        <span class="text-mi">Mi</span><span class="text-music">Music</span><span class="text-dot">.net</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/about.html" class="nav-link">App Features</a>
+        <a href="/install.html" class="nav-link">Installation</a>
+        <a href="/blog/" class="nav-link">Guides</a>
+        <a href="/tools.html" class="nav-link">Free Audio Tools</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="article-header">
+    <h1>Terms of Service</h1>
+    <p>Effective Date: November 16, 2026 &bull; Guidelines for using MiMusic.net tools and educational resources</p>
+  </div>
+
+  <main class="content-container">
+    <div class="terms-card">
+      <h2>1. Acceptance of Terms</h2>
+      <p>By accessing and using <strong>MiMusic.net</strong> (<code>https://mimusic.net/</code>), you agree to comply with and be bound by these Terms of Service. If you do not agree with any part of these terms, please discontinue use of the website.</p>
+
+      <h2>2. Description of Services &amp; Independence</h2>
+      <p>MiMusic.net provides free, browser-based Digital Signal Processing (DSP) audio utilities—such as volume boosters, frequency generators, audio trimmers, and diagnostic testers—alongside educational guides about mobile audio playback.</p>
+      <p><strong>Disclaimer of Affiliation:</strong> MiMusic.net is an independent web platform. We are not affiliated with, endorsed by, or officially connected to Xiaomi Inc. or any of its subsidiaries. All product names and trademarks belong to their respective owners.</p>
+
+      <h2>3. User Content &amp; Client-Side Processing</h2>
+      <p>All audio and video files loaded into our web tools are processed strictly locally inside your device's browser memory using the Web Audio API. We do not host, store, or distribute user-uploaded media. By using our editing or conversion tools, you confirm that you own the copyright to the media files you process or have obtained explicit permission from the rights holder.</p>
+
+      <div class="warning-box">
+        <strong>Hearing &amp; Hardware Safety Notice:</strong> Utilities such as the Volume Booster, Speaker Cleaner, Subwoofer Test, and Hearing Test generate high-gain audio signals and specific acoustic frequencies. Prolonged listening at high volumes can cause permanent hearing damage or hardware speaker distortion. Always start at a low volume level and use these tools responsibly at your own risk.
+      </div>
+
+      <h2>4. Acceptable Use</h2>
+      <p>When using MiMusic.net, you agree not to:</p>
+      <ul>
+        <li>Use automated scrapers, bots, or scripts to overload or disrupt website availability.</li>
+        <li>Attempt to reverse-engineer, bypass security controls, or interfere with advertising delivery on the site.</li>
+        <li>Use our tools for any unlawful purpose or infringement of third-party intellectual property rights.</li>
+      </ul>
+
+      <h2>5. Intellectual Property Rights</h2>
+      <p>Unless otherwise stated, the original articles, user interface designs, graphics, and custom JavaScript audio engines on MiMusic.net are the intellectual property of MiMusic.net. You may link to our pages or quote brief excerpts with clear attribution, but republishing full articles or cloning our tools without permission is prohibited.</p>
+
+      <h2>6. Third-Party Links &amp; Advertisements</h2>
+      <p>MiMusic.net displays advertisements served by third-party networks (such as Google AdSense) and includes links to external resources like the Google Play Store. We are not responsible for the content, privacy practices, or availability of external websites.</p>
+
+      <h2>7. Disclaimer of Warranties &amp; Limitation of Liability</h2>
+      <p>All tools and informational guides on MiMusic.net are provided on an <strong>"as is"</strong> and <strong>"as available"</strong> basis without warranties of any kind. Our diagnostic utilities (including the Hearing Test and Decibel Meter) are intended for general informational and testing purposes only and do not constitute certified medical or acoustic calibration instruments. MiMusic.net shall not be liable for any direct or indirect damages resulting from the use of this website.</p>
+
+      <h2>8. Changes to These Terms</h2>
+      <p>We reserve the right to update or revise these Terms of Service at any time. Any changes will take effect immediately upon posting to this page with an updated effective date.</p>
+
+      <h2>9. Contact Information</h2>
+      <p>If you have any questions regarding these Terms of Service, please contact us at <strong>info@mimusic.net</strong> or visit our <a href="/contact.html">Contact Page</a>.</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="brand-logotype" style="margin-bottom: 16px;">
+          <div class="logo-wave"><span></span><span></span><span></span></div>
+          <span class="text-mi">Mi</span><span class="text-music">Music</span><span class="text-dot">.net</span>
+        </a>
+        <p style="margin-bottom: 16px; line-height: 1.6;">Your independent guide to mobile audio playback and a suite of privacy-first, browser-based DSP utilities.</p>
+        <p style="font-weight: 600; color: var(--text-dark);">Contact: info@mimusic.net</p>
+      </div>
+      <div class="footer-col">
+        <h5>Popular Tools</h5>
+        <ul>
+          <li><a href="/volume-booster/">Volume Booster</a></li>
+          <li><a href="/speaker-cleaner/">Speaker Cleaner</a></li>
+          <li><a href="/8d-audio/">8D Spatial Audio</a></li>
+          <li><a href="/pitch-shifter/">Pitch &amp; Tempo</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal &amp; Info</h5>
+        <ul>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/terms.html" style="color: var(--accent);">Terms of Service</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+          <li><a href="/about.html">About Mi Music</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="/install.html">Installation Guide</a></li>
+          <li><a href="/troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="/guide.html">User Guide</a></li>
+          <li><a href="/tools.html">All Audio Tools</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MiMusic.net. Independent audio guides and web tools.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
